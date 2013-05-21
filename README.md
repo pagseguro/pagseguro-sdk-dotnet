@@ -90,6 +90,6 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
   [transações por intervalo de datas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-intervalo-de-datas.html
   [transações abandonadas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-abandonadas.html
   [Dúvidas?]: https://pagseguro.uol.com.br/desenvolvedor/comunidade.jhtml
-  [.NET]: http://www.microsoft.com/net
+  [.NET Framework]: http://www.microsoft.com/net
   [GitHub]: https://github.com/pagseguro/netframework
   [documentação oficial]: https://pagseguro.uol.com.br/v2/guia-de-integracao/documentacao-da-biblioteca-pagseguro-netframework.html
