@@ -41,7 +41,7 @@ Mais informações estão disponíveis na [documentação oficial].
 Changelog
 ---------
 ---
-2.0.0 - 2.0.2
+2.0.0 - 2.0.1
 
  - Classes de domínios que representam pagamentos, notificações e transações.
  - Criação de checkouts via API.
