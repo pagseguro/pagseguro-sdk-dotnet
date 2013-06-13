@@ -1,5 +1,5 @@
-Biblioteca de integração PagSeguro para .NET
-============================================
+Biblioteca de integração PagSeguro em .NET
+==========================================
 ---
 Descrição
 ---------
@@ -24,7 +24,7 @@ Instalação
 ---
  - Baixe o repositório como arquivo zip ou faça um clone;
  - Descompacte os arquivos em seu computador;
- - Dentro do diretório *source* existem dois diretórios, o *Uol.PagSeguro* e o *Examples*. O diretório *Examples* contém exemplos de chamadas utilizando a API e o diretório *Uol.PagSeguro* contém a biblioteca propriamente dita.
+ - Dentro do diretório *source* existem dois diretórios, o *Uol.PagSeguro* e o *Examples*. O diretório *Examples* contém exemplos de chamadas utilizando a API e o diretório *Uol.PagSeguro* contém a biblioteca propriamente dita;
  - Inclua o projeto Uol.PagSeguro.csproj dentro de sua solução;
  - Adicione uma referência ao projeto Uol.PagSeguro.csproj em seu projeto.
 
@@ -33,7 +33,7 @@ Configuração
 ---
 Visando garantir a segurança dos seus dados no PagSeguro, é necessário que você informe suas credenciais de acesso ao executar funções da biblioteca que realizam chamadas via API. As credenciais de acesso são formadas pelo e-mail de cadastro no PagSeguro e um token, que funciona como uma senha.
 
-As chamadas via API exigem que você passe uma instancia da classe AccountCredentials que é responsável por encapsular suas credenciais.
+As chamadas via API exigem que você passe uma instância da classe AccountCredentials que é responsável por encapsular suas credenciais.
 
 Mais informações estão disponíveis na [documentação oficial].
 
