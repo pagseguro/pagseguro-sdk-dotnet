@@ -13,10 +13,10 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Web;
-using Uol.PagSeguro;
+using Uol.PagSeguro.Constants;
+using Uol.PagSeguro.Domain;
+using Uol.PagSeguro.Service;
 
 namespace DocExamples
 {
@@ -184,6 +184,7 @@ namespace DocExamples
                     "1384",
                     "5o. Andar");
         }
+
         static void Addres2sExample()
         {
             Address address = new Address();
@@ -372,7 +373,6 @@ namespace DocExamples
             // Tipo de meio de pagamento
             PaymentMethod paymentMethod = transactionSummary.PaymentMethod;
         }
-
         static void Main(string[] args)
         {
 

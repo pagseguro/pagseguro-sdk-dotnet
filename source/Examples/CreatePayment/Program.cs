@@ -13,10 +13,11 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Uol.PagSeguro;
 using System.Net;
+using Uol.PagSeguro.Constants;
+using Uol.PagSeguro.Domain;
+using Uol.PagSeguro.Exception;
+using Uol.PagSeguro.Resources;
 
 namespace CreatePayment
 {
@@ -25,25 +26,73 @@ namespace CreatePayment
         static void Main(string[] args)
         {
             // TODO: Substitute the parameters below with your credentials
-            AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+
+            // AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+            AccountCredentials credentials = PagSeguroConfiguration.Credentials;
 
             try
             {
+
+                // Instantiate a new payment request
                 PaymentRequest payment = new PaymentRequest();
+
+                // Sets the currency
                 payment.Currency = Currency.Brl;
 
-                payment.Items.Add(new Item("0001", "Notebook Prata", 1, 2430, 1000, 0));
-                payment.Items.Add(new Item("0002", "Notebook Rosa", 2, 2560, 750, 0));
+                // Add an item for this payment request
+                payment.Items.Add(new Item("0001", "Notebook Prata", 1, 2430.00m));
+                
+                
+                // Add another item for this payment request
+                payment.Items.Add(new Item("0002", "Notebook Rosa", 2, 150.99m));
 
+                // Sets a reference code for this payment request, it is useful to identify this payment in future notifications.
                 payment.Reference = "REF1234";
+
+                // Sets shipping information for this payment request
                 payment.Shipping = new Shipping();
                 payment.Shipping.ShippingType = ShippingType.Sedex;
-                payment.Shipping.Address = new Address("BRA", "SP", "Sao Paulo", "Jardim Paulistano", "01452002", "Av. Brig. Faria Lima", "1384", "5o andar");
-                payment.Sender = new Sender("Joao Comprador", "comprador@uol.com.br", new Phone("11", "56273440"));
-                
-                Uri paymentRedirectUri = PaymentService.Register(credentials, payment);
 
-                Console.WriteLine(paymentRedirectUri);
+                payment.Shipping.Address = new Address(
+                    "BRA", 
+                    "SP", 
+                    "Sao Paulo", 
+                    "Jardim Paulistano", 
+                    "01452002", 
+                    "Av. Brig. Faria Lima", 
+                    "1384", 
+                    "5o andar"
+                );
+                
+                // Sets your customer information.
+                payment.Sender = new Sender(
+                    "Joao Comprador", 
+                    "comprador@uol.com.br", 
+                    new Phone("11", "56273440")
+                );
+
+                // Sets the url used by PagSeguro for redirect user after ends checkout process
+                payment.RedirectUri = new Uri("http://www.lojamodelo.com.br");
+                
+                // Add checkout metadata information
+                payment.AddMetaData(MetaDataItemKeys.GetItemKeyByDescription("CPF do passageiro"), "123.456.789-09", 1);
+                payment.AddMetaData("PASSENGER_PASSPORT", "23456", 1);
+
+                // Another way to set checkout parameters
+                payment.AddParameter("senderBirthday", "07/05/1980");
+                payment.AddIndexedParameter("itemColor", "verde", 1);
+                payment.AddIndexedParameter("itemId", "0003", 3);
+                payment.AddIndexedParameter("itemDescription", "Mouse", 3);
+                payment.AddIndexedParameter("itemQuantity", "1", 3);
+                payment.AddIndexedParameter("itemValue", "30.25", 3);
+
+                SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909"); 
+                payment.Sender.Documents.Add(senderCPF);
+
+                Uri paymentRedirectUri = payment.Register(credentials);
+
+                Console.WriteLine("URL do pagamento : " + paymentRedirectUri);
+                Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)
             {
@@ -51,8 +100,7 @@ namespace CreatePayment
                 {
                     Console.WriteLine("Unauthorized: please verify if the credentials used in the web service call are correct.\n");
                 }
-
-                Console.WriteLine(exception);
+                Console.ReadKey();
             }
         }
     }

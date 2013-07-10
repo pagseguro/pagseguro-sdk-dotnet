@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BABC5658-6AFD-4F8E-81F1-434553663D99}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -46,53 +46,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="CredentialsNameValuePair.cs" />
-    <Compile Include="PagSeguroTrace.cs" />
-    <Compile Include="PaymentRequest.cs" />
-    <Compile Include="PaymentRequestResponse.cs" />
-    <Compile Include="Serialization\TransactionSummaryListSerializer.cs" />
-    <Compile Include="Serialization\TransactionSearchResultSerializer.cs" />
-    <Compile Include="Serialization\TransactionSummarySerializer.cs" />
-    <Compile Include="Serialization\TransactionSerializerHelper.cs" />
-    <Compile Include="Transaction.cs" />
-    <Compile Include="QueryStringBuilder.cs" />
-    <Compile Include="TransactionSearchResult.cs" />
-    <Compile Include="TransactionSearchService.cs" />
-    <Compile Include="ServiceHelper.cs" />
-    <Compile Include="PagSeguroServiceError.cs" />
-    <Compile Include="PagSeguroServiceException.cs" />
-    <Compile Include="PaymentService.cs" />
-    <Compile Include="Credentials.cs" />
-    <Compile Include="Currency.cs" />
-    <Compile Include="NotificationService.cs" />
-    <Compile Include="Serialization\AddressSerializer.cs" />
-    <Compile Include="Serialization\PagSeguroErrorsSerializer.cs" />
-    <Compile Include="Serialization\PagSeguroErrorSerializer.cs" />
-    <Compile Include="Serialization\PaymentRequestResponseSerializer.cs" />
-    <Compile Include="Serialization\PaymentRequestSerializer.cs" />
-    <Compile Include="Serialization\TransactionSerializer.cs" />
-    <Compile Include="Serialization\PaymentMethodSerializer.cs" />
-    <Compile Include="Serialization\SenderSerializer.cs" />
-    <Compile Include="Serialization\PhoneSerializer.cs" />
-    <Compile Include="Serialization\ItemListSerializer.cs" />
-    <Compile Include="Serialization\ItemSerializer.cs" />
-    <Compile Include="Serialization\ShippingSerializer.cs" />
-    <Compile Include="Serialization\SerializationHelper.cs" />
-    <Compile Include="PagSeguroConfiguration.cs" />
-    <Compile Include="TransactionType.cs" />
-    <Compile Include="TransactionSummary.cs" />
-    <Compile Include="TransactionStatus.cs" />
-    <Compile Include="AccountCredentials.cs" />
-    <Compile Include="PaymentMethod.cs" />
-    <Compile Include="PaymentMethodType.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="PaymentMethodCode.cs" />
-    <Compile Include="Phone.cs" />
+    <Compile Include="Domain\Address.cs" />
+    <Compile Include="Domain\Documents.cs" />
+    <Compile Include="Domain\MetaData.cs" />
+    <Compile Include="Domain\MetaDataItem.cs" />
+    <Compile Include="Domain\MetaDataItemKeys.cs" />
+    <Compile Include="Domain\Parameter.cs" />
+    <Compile Include="Domain\ParameterItem.cs" />
+    <Compile Include="Domain\SenderDocument.cs" />
+    <Compile Include="Parse\PaymentParse.cs" />
+    <Compile Include="Domain\CredentialsNameValuePair.cs" />
+    <Compile Include="Log\PagSeguroTrace.cs" />
+    <Compile Include="Domain\PaymentRequest.cs" />
+    <Compile Include="Util\PagSeguroUtil.cs" />
+    <Compile Include="Domain\PaymentRequestResponse.cs" />
+    <Compile Include="Domain\Transaction.cs" />
+    <Compile Include="Util\QueryStringBuilder.cs" />
+    <Compile Include="Domain\TransactionSearchResult.cs" />
+    <Compile Include="Service\TransactionSearchService.cs" />
+    <Compile Include="Util\HttpURLConnectionUtil.cs" />
+    <Compile Include="Domain\ServiceError.cs" />
+    <Compile Include="Exception\PagSeguroServiceException.cs" />
+    <Compile Include="Service\PaymentService.cs" />
+    <Compile Include="Domain\Credentials.cs" />
+    <Compile Include="Constants\Currency.cs" />
+    <Compile Include="Service\NotificationService.cs" />
+    <Compile Include="Resources\PagSeguroConfiguration.cs" />
+    <Compile Include="Constants\TransactionType.cs" />
+    <Compile Include="Domain\TransactionSummary.cs" />
+    <Compile Include="Constants\TransactionStatus.cs" />
+    <Compile Include="Domain\AccountCredentials.cs" />
+    <Compile Include="Domain\PaymentMethod.cs" />
+    <Compile Include="Constants\PaymentMethodType.cs" />
+    <Compile Include="Domain\Item.cs" />
+    <Compile Include="Constants\PaymentMethodCode.cs" />
+    <Compile Include="Domain\Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sender.cs" />
-    <Compile Include="Shipping.cs" />
-    <Compile Include="ShippingType.cs" />
+    <Compile Include="Domain\Sender.cs" />
+    <Compile Include="Domain\Shipping.cs" />
+    <Compile Include="Constants\ShippingType.cs" />
+    <Compile Include="XmlParse\AddressSerializer.cs" />
+    <Compile Include="XmlParse\ItemListSerializer.cs" />
+    <Compile Include="XmlParse\ItemSerializer.cs" />
+    <Compile Include="XmlParse\ErrorSerializer.cs" />
+    <Compile Include="XmlParse\ErrorsSerializer.cs" />
+    <Compile Include="XmlParse\PagSeguroConfigSerializer.cs" />
+    <Compile Include="XmlParse\PaymentMethodSerializer.cs" />
+    <Compile Include="XmlParse\PaymentSerializer.cs" />
+    <Compile Include="XmlParse\PaymentRequestResponseSerializer.cs" />
+    <Compile Include="XmlParse\PhoneSerializer.cs" />
+    <Compile Include="XmlParse\SenderSerializer.cs" />
+    <Compile Include="XmlParse\ShippingSerializer.cs" />
+    <Compile Include="XmlParse\TransactionSearchResultSerializer.cs" />
+    <Compile Include="XmlParse\TransactionSerializer.cs" />
+    <Compile Include="Constants\TransactionSerializerHelper.cs" />
+    <Compile Include="XmlParse\TransactionSummaryListSerializer.cs" />
+    <Compile Include="XmlParse\TransactionSummarySerializer.cs" />
+    <Compile Include="XmlParse\XMLParserUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Uol.PagSeguro.FxCop" />

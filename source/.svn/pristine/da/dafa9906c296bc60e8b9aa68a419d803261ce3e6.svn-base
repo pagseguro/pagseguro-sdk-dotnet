@@ -1,0 +1,1966 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Uol.PagSeguro</name>
+    </assembly>
+    <members>
+        <member name="T:Uol.PagSeguro.Constants.TransactionSerializerHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.PaymentMethodSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.PaymentMethodSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.PaymentMethod)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="paymentMethod"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.ItemSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.ItemSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.Item)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="item"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.AddressSerializer">
+            <summary>
+            Class which deserialize request address xml
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.AddressSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.Address)">
+            <summary>
+            Converts xml into a Address class
+            </summary>
+            <param name="reader"></param>
+            <param name="address"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.PaymentMethodType">
+            <summary>
+            Defines a list of known payment method types.
+            </summary>
+            <remarks>
+            This class is not an enum to enable the introduction of new shipping types
+            without breaking this version of the library.
+            </remarks>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodType.CreditCard">
+            <summary>
+            Credit card
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodType.Boleto">
+            <summary>
+            Boleto is a form of invoicing in Brazil
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodType.OnlineTransfer">
+            <summary>
+            Online transfer
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodType.Balance">
+            <summary>
+            PagSeguro account balance
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodType.OiPaggo">
+            <summary>
+            OiPaggo
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.ServiceError">
+            <summary>
+            Represents a PagSeguro web service error
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.ServiceError.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the PagSeguroServiceError class
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.ServiceError.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates a SerializationInfo with the data needed to serialize the target object
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.ServiceError.ToString">
+            <summary>
+            Returns a textual representation of this object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.ServiceError.Code">
+            <summary>
+            Error code
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.ServiceError.Message">
+            <summary>
+            Error description
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.PaymentSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.PaymentSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.PaymentRequestResponse)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="paymentResponse"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.PaymentRequestResponse">
+            <summary>
+            Represents the response from the web service after a payment request was registered
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.PaymentRequestResponse.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the PaymentRequestResponse class
+            </summary>
+            <param name="paymentRedirectBaseUri"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.PaymentRequestResponse.ToString">
+            <summary>
+            Returns a string that represents the current object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequestResponse.Code">
+            <summary>
+            Payment request code
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequestResponse.RegistrationDate">
+            <summary>
+            Registration date
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequestResponse.PaymentRedirectUri">
+            <summary>
+            Uri for the payment page in the PagSeguro web site for this payment request
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.CredentialsNameValuePair">
+            <summary>
+            Represents a name value pair that composes a credential
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.CredentialsNameValuePair.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the CredentialsNameValuePair class
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.CredentialsNameValuePair.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.CredentialsNameValuePair.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.Parameter">
+            <summary>
+            Represents a parameter
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Parameter.Items">
+            <summary>
+             List of available parameter item for send in checkout
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.PhoneSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.PhoneSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.Phone)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="phone"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.ItemListSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.ItemListSerializer.Read(System.Xml.XmlReader,System.Collections.Generic.IList{Uol.PagSeguro.Domain.Item})">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="items"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.Constants.TransactionStatus">
+            <summary>
+            Defines a list of known transaction statuses.
+            </summary>
+            <remarks>
+            This class is not an enum to enable the introduction of new shipping types
+            without breaking this version of the library.
+            </remarks>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionStatus.Initiated">
+            <summary>
+            Initiated
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionStatus.WaitingPayment">
+            <summary>
+            Waiting payment
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionStatus.InAnalysis">
+            <summary>
+            In analysis
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionStatus.Paid">
+            <summary>
+            Paid
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionStatus.Available">
+            <summary>
+            Available
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionStatus.InDispute">
+            <summary>
+            In dispute
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionStatus.Refunded">
+            <summary>
+            Refunded
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Util.QueryStringBuilder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="queryString"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.AppendCore(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="parameterName"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.Append(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="parameterName"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.Append(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="parameterName"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.Append(System.String,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="parameterName"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.Append(System.String,System.Decimal)">
+            <summary>
+            
+            </summary>
+            <param name="parameterName"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.Append(System.String,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="parameterName"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.AppendToQuery(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.EncodeCredentialsAsQueryString(Uol.PagSeguro.Domain.Credentials)">
+            <summary>
+            
+            </summary>
+            <param name="credentials"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.ReplaceValue(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.QueryStringBuilder.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.TransactionSummarySerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.TransactionSummarySerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.TransactionSummary)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.TransactionSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.TransactionSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.Transaction)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.SenderSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.SenderSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.Sender)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="sender"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.PaymentRequestResponseSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.PaymentRequestResponseSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.PaymentRequestResponse)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="paymentResponse"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.Shipping">
+            <summary>
+            Shipping information
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Shipping.#ctor">
+            <summary>
+            Initializes a new instance of the Shipping class
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Shipping.Address">
+            <summary>
+            Shipping address
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Shipping.ShippingType">
+            <summary>
+            Shipping type. See the ShippingType helper class for a list of known shipping
+            types.
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Shipping.Cost">
+            <summary>
+            Total shipping cost. This is a read-only property and it is calculated by PagSeguro 
+            based on the shipping information provided with the payment request.
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.PaymentMethodCode">
+            <summary>
+            Defines a list of known payment method codes.
+            </summary>
+            <remarks>
+            This class is not an enum to enable the introduction of new shipping types
+            without breaking this version of the library.
+            </remarks>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.Visa">
+            <summary>
+            VISA
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.Mastercard">
+            <summary>
+            Mastercard
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.Amex">
+            <summary>
+            American Express
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.Diners">
+            <summary>
+            Diners
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.Hipercard">
+            <summary>
+            Hipercard
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.Aura">
+            <summary>
+            Aura
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.Elo">
+            <summary>
+            Elo
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.BradescoBoleto">
+            <summary>
+            Bradesco boleto
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.SantanderBoleto">
+            <summary>
+            Santander boleto
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.BradescoOnlineTransfer">
+            <summary>
+            Bradesco online transfer
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.ItauOnlineTransfer">
+            <summary>
+            Itau online transfer
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.UnibancoOnlineTransfer">
+            <summary>
+            Unibanco online transfer
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.BancoBrasilOnlineTransfer">
+            <summary>
+            Banco do Brasil online transfer
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.RealOnlineTransfer">
+            <summary>
+            Banco Real online transfer
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.BanrisulOnlineTransfer">
+            <summary>
+            Banrisul online transfer
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.PagSeguroBalance">
+            <summary>
+            PagSeguro account balance
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.PaymentMethodCode.OiPaggo">
+            <summary>
+            OiPaggo
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.TransactionSummary">
+            <summary>
+            Represents a summary of a PagSeguro transaction, typically returned by search services.
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.TransactionSummary.ToString">
+            <summary>
+            Returns a string that represents the current object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.Date">
+            <summary>
+            Transaction date
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.Code">
+            <summary>
+            Transaction code
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.Reference">
+            <summary>
+            Reference code
+            </summary>
+            <remarks>
+            You can use the reference code to store an identifier so you can 
+            associate the PagSeguro transaction to a transaction in your system.
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.TransactionType">
+            <summary>
+            Transaction type
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.TransactionStatus">
+            <summary>
+            Transaction status
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.PaymentMethod">
+            <summary>
+            Payment method
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.GrossAmount">
+            <summary>
+            Gross amount of the transaction
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.DiscountAmount">
+            <summary>
+            Discount amount
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.FeeAmount">
+            <summary>
+            Fee amount
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.NetAmount">
+            <summary>
+            Net amount
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.ExtraAmount">
+            <summary>
+            Extra amount
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSummary.LastEventDate">
+            <summary>
+            Last event date
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Parse.PaymentParse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Parse.PaymentParse.GetData(Uol.PagSeguro.Domain.PaymentRequest)">
+            <summary>
+            
+            </summary>
+            <param name="payment"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.TransactionSearchResultSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.TransactionSearchResultSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.TransactionSearchResult)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="result"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.Item">
+            <summary>
+            Represents a product/item in a transaction
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Item.#ctor(System.String,System.String,System.Int32,System.Decimal)">
+            <summary>
+            Initializes a new instance of the Item class
+            </summary>
+            <param name="id"></param>
+            <param name="description"></param>
+            <param name="quantity"></param>
+            <param name="amount"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Item.#ctor(System.String,System.String,System.Int32,System.Decimal,System.Int64)">
+            <summary>
+            Initializes a new instance of the Item class
+            </summary>
+            <param name="id"></param>
+            <param name="description"></param>
+            <param name="quantity"></param>
+            <param name="amount"></param>
+            <param name="weight"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Item.#ctor(System.String,System.String,System.Int32,System.Decimal,System.Decimal)">
+            <summary>
+            Initializes a new instance of the Item class
+            </summary>
+            <param name="id"></param>
+            <param name="description"></param>
+            <param name="quantity"></param>
+            <param name="amount"></param>
+            <param name="shippingCost"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Item.#ctor(System.String,System.String,System.Int32,System.Decimal,System.Nullable{System.Int64},System.Nullable{System.Decimal})">
+            <summary>
+            Initializes a new instance of the Item class
+            </summary>
+            <param name="id"></param>
+            <param name="description"></param>
+            <param name="quantity"></param>
+            <param name="amount"></param>
+            <param name="weight"></param>
+            <param name="shippingCost"></param>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Item.Id">
+            <summary>
+            Product identifier, such as SKU
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Item.Description">
+            <summary>
+            Product description
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Item.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Item.Amount">
+            <summary>
+            Product unit price 
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Item.Weight">
+            <summary>
+            Single unit weight, in grams
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Item.ShippingCost">
+            <summary>
+            Single unit shipping cost
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.AccountCredentials">
+            <summary>
+            Identifies a PagSeguro account
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.Credentials">
+            <summary>
+            Abstract class that represents a PagSeguro credential
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Credentials.AttributeDictionary">
+            <summary>
+            Derived classes should add all of the credential "parts" as name value pairs
+            in this dictionary. 
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Credentials.Attributes">
+            <summary>
+            Returns a collection of name value pairs that compose this set of credentials
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.AccountCredentials.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the AccountCredentials class
+            </summary>
+            <param name="email"></param>
+            <param name="token"></param>
+            <remarks>
+            A PagSeguro account is identified by an email and a security token
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.AccountCredentials.Email">
+            <summary>
+            Primary email associated with this account
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.AccountCredentials.Token">
+            <summary>
+            PagSeguro token
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Resources.PagSeguroConfiguration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Resources.PagSeguroConfiguration.GetUrlValue(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Resources.PagSeguroConfiguration.GetDataConfiguration(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Resources.PagSeguroConfiguration.LoadXmlConfig">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.Credentials">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.ModuleVersion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.CmsVersion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.NotificationUri">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.PaymentUri">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.PaymentRedirectUri">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.SearchUri">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.RequestTimeout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.FormUrlEncoded">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.Encoding">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Resources.PagSeguroConfiguration.LibVersion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Service.PaymentService">
+            <summary>
+            Encapsulates web service calls regarding PagSeguro payment requests
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.PaymentService.CreateCheckoutRequest(Uol.PagSeguro.Domain.Credentials,Uol.PagSeguro.Domain.PaymentRequest)">
+            <summary>
+            createCheckoutRequest is the actual implementation of the Register method
+            This separation serves as test hook to validate the Uri
+            against the code returned by the service
+            </summary>
+            <param name="credentials">PagSeguro credentials</param>
+            <param name="payment">Payment request information</param>
+            <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.PaymentService.BuildCheckoutUrl(Uol.PagSeguro.Domain.Credentials,Uol.PagSeguro.Domain.PaymentRequest)">
+            <summary>
+            
+            </summary>
+            <param name="credentials"></param>
+            <param name="payment"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.SenderDocument">
+            <summary>
+            Represents a senderDocument
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.SenderDocument.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.SenderDocument.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the SenderDocumet class
+            </summary>
+            <param name="type"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.SenderDocument.ToString">
+            <summary>
+            Gets toString class
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.SenderDocument.Type">
+            <summary>
+            Sender document type
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.SenderDocument.Value">
+            <summary>
+            Sender document value
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.TransactionSummaryListSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.TransactionSummaryListSerializer.Read(System.Xml.XmlReader,System.Collections.Generic.IList{Uol.PagSeguro.Domain.TransactionSummary})">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="transactions"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.Constants.TransactionType">
+            <summary>
+            Defines a list of known transaction types.
+            </summary>
+            <remarks>
+            This class is not an enum to enable the introduction of new shipping types
+            without breaking this version of the library.
+            </remarks>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.Payment">
+            <summary>
+            Payment
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.Transfer">
+            <summary>
+            Transfer
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.FundAddition">
+            <summary>
+            Fund addition
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.Withdraw">
+            <summary>
+            Withdraw
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.Charge">
+            <summary>
+            Charge
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.Donation">
+            <summary>
+            Donation
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.Bonus">
+            <summary>
+            Bonus
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.BonusRepass">
+            <summary>
+            Bonus repass
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.Operational">
+            <summary>
+            Operational
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.TransactionType.PoliticalDonation">
+            <summary>
+            Political donation
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Constants.Currency">
+            <summary>
+            Helper class to represent valid currencies
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.Currency.Brl">
+            <summary>
+            Brazilian Real
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Service.TransactionSearchService">
+            <summary>
+            Encapsulates web service calls to search for PagSeguro transactions
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.SearchByCode(Uol.PagSeguro.Domain.Credentials,System.String)">
+            <summary>
+            Finds a transaction with a matching transaction code
+            </summary>
+            <param name="credentials">PagSeguro credentials</param>
+            <param name="transactionCode">Transaction code</param>
+            <returns cref="T:Uol.PagSeguro.Transaction"><c>Transaction</c></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.SearchByDate(Uol.PagSeguro.Domain.Credentials,System.DateTime)">
+            <summary>
+            Search transactions associated with this set of credentials within a date range
+            </summary>
+            <param name="credentials"></param>
+            <param name="initialDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.SearchByDate(Uol.PagSeguro.Domain.Credentials,System.DateTime,System.Int32)">
+            <summary>
+            Search transactions associated with this set of credentials within a date range
+            </summary>
+            <param name="credentials"></param>
+            <param name="initialDate"></param>
+            <param name="pageNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.SearchByDate(Uol.PagSeguro.Domain.Credentials,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            Search transactions associated with this set of credentials within a date range
+            </summary>
+            <param name="credentials"></param>
+            <param name="initialDate"></param>
+            <param name="pageNumber"></param>
+            <param name="resultsPerPage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.SearchByDate(Uol.PagSeguro.Domain.Credentials,System.DateTime,System.DateTime)">
+            <summary>
+            Search transactions associated with this set of credentials within a date range
+            </summary>
+            <param name="credentials"></param>
+            <param name="initialDate"></param>
+            <param name="finalDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.SearchByDate(Uol.PagSeguro.Domain.Credentials,System.DateTime,System.DateTime,System.Int32)">
+            <summary>
+            Search transactions associated with this set of credentials within a date range
+            </summary>
+            <param name="credentials"></param>
+            <param name="initialDate"></param>
+            <param name="finalDate"></param>
+            <param name="pageNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.SearchByDate(Uol.PagSeguro.Domain.Credentials,System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            Search transactions associated with this set of credentials within a date range
+            </summary>
+            <param name="credentials"></param>
+            <param name="initialDate"></param>
+            <param name="finalDate"></param>
+            <param name="pageNumber"></param>
+            <param name="resultsPerPage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.SearchByDateCore(Uol.PagSeguro.Domain.Credentials,System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            Common implmentation of all SearchByDate methods
+            </summary>
+            <param name="credentials">PagSeguro credentials. Required.</param>
+            <param name="initialDate"></param>
+            <param name="finalDate">End of date range. Use DateTime.MaxValue to search without an upper boundary.</param>
+            <param name="pageNumber">Page number, starting with 1. If passed as 0, it will call the web service to get the default page, also page number 1.</param>
+            <param name="resultsPerPage">Results per page, optional.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.BuildSearchUrlByCode(Uol.PagSeguro.Domain.Credentials,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="credentials"></param>
+            <param name="transactionCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.TransactionSearchService.BuildSearchUrlByDate(Uol.PagSeguro.Domain.Credentials,System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="credentials"></param>
+            <param name="initialDate"></param>
+            <param name="finalDate"></param>
+            <param name="pageNumber"></param>
+            <param name="resultsPerPage"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.MetaData">
+            <summary>
+            Represents a metadata
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.MetaData.Items">
+            <summary>
+             List of available metadata itens for send in checkout
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.Address">
+            <summary>
+            Represents an address location, typically for shipping or charging purposes.
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Address.#ctor">
+            <summary>
+            Initializes a new instance of the Address class
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Address.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the Address class
+            </summary>
+            <param name="country"></param>
+            <param name="state"></param>
+            <param name="city"></param>
+            <param name="district"></param>
+            <param name="postalCode"></param>
+            <param name="street"></param>
+            <param name="number"></param>
+            <param name="complement"></param>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Address.Country">
+            <summary>
+            Country
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Address.State">
+            <summary>
+            State or province
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Address.City">
+            <summary>
+            City
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Address.District">
+            <summary>
+            District, county or neighborhood, if applicable
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Address.PostalCode">
+            <summary>
+            Postal/Zip code
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Address.Street">
+            <summary>
+            Street name
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Address.Number">
+            <summary>
+            Number
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Address.Complement">
+            <summary>
+            Apartment, suite number or any other qualifier after the street/number pair.
+            </summary>
+            <example>
+            Apt 274, building A. 
+            </example>
+        </member>
+        <member name="T:Uol.PagSeguro.Util.HttpURLConnectionUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.HttpURLConnectionUtil.CreatePagSeguroServiceException(System.Net.HttpWebResponse)">
+            <summary>
+            
+            </summary>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.HttpURLConnectionUtil.GetHttpPostConnection(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="urlPath"></param>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.HttpURLConnectionUtil.GetHttpGetConnection(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="urlPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.HttpURLConnectionUtil.GetHttpURLConnection(System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="method"></param>
+            <param name="contentType"></param>
+            <param name="urlPath"></param>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.PagSeguroConfigSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.PagSeguroConfigSerializer.GetWebserviceUrl(System.Xml.XmlDocument,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="urlToSearch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.PagSeguroConfigSerializer.GetDataConfiguration(System.Xml.XmlDocument,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.PagSeguroConfigSerializer.GetAccountCredentials(System.Xml.XmlDocument)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.Phone">
+            <summary>
+            Represents a phone number
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Phone.#ctor">
+            <summary>
+            Initializes a new instance of the Phone class
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Phone.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the Phone class
+            </summary>
+            <param name="areaCode"></param>
+            <param name="number"></param>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Phone.AreaCode">
+            <summary>
+            Area code
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Phone.Number">
+            <summary>
+            Phone number
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Exception.PagSeguroServiceException">
+            <summary>
+            Encapsulates a problem that occurred calling a PagSeguro web service
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Exception.PagSeguroServiceException.#ctor">
+            <summary>
+            Initializes a new instance of the PagSeguroServiceException class
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Exception.PagSeguroServiceException.#ctor(System.Net.HttpStatusCode)">
+            <summary>
+            Initializes a new instance of the PagSeguroServiceException class
+            </summary>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Exception.PagSeguroServiceException.#ctor(System.Net.HttpStatusCode,System.Collections.Generic.IEnumerable{Uol.PagSeguro.Domain.ServiceError})">
+            <summary>
+            Initializes a new instance of the PagSeguroServiceException class
+            </summary>
+            <param name="statusCode"></param>
+            <param name="errors"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Exception.PagSeguroServiceException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the PagSeguroServiceException class
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Exception.PagSeguroServiceException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the PagSeguroServiceException class
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Exception.PagSeguroServiceException.#ctor(System.Net.HttpStatusCode,System.Exception)">
+            <summary>
+            Initializes a new instance of the PagSeguroServiceException class
+            </summary>
+            <param name="statusCode"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Exception.PagSeguroServiceException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates a SerializationInfo with the data needed to serialize the target object
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Exception.PagSeguroServiceException.ToString">
+            <summary>
+            Returns a textual representation of this object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Exception.PagSeguroServiceException.Errors">
+            <summary>
+            List of errors returned by the PagSeguro web service
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Exception.PagSeguroServiceException.StatusCode">
+            <summary>
+            Http status code
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.PaymentRequest">
+            <summary>
+            Represents a payment request
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.PaymentRequest.#ctor">
+            <summary>
+            Initializes a new instance of the PaymentRequest class
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.PaymentRequest.Register(Uol.PagSeguro.Domain.Credentials)">
+            <summary>
+            Calls the PagSeguro web service and register this request for payment
+            </summary>
+            <param name="credentials">PagSeguro credentials</param>
+            <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.PaymentRequest.AddMetaData(System.String,System.String)">
+            <summary>
+            Add a parameter for PagSeguro metadata checkout request 
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.PaymentRequest.AddMetaData(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Add a parameter for PagSeguro metadata checkout request 
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="group"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.PaymentRequest.AddParameter(System.String,System.String)">
+            <summary>
+            Add a parameter for PagSeguro checkout request
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.PaymentRequest.AddIndexedParameter(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Add a parameter for PagSeguro checkout request
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="group"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.PaymentRequest.ToString">
+            <summary>
+            Returns a string that represents the current object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.Sender">
+            <summary>
+            Party that will be sending the money
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.Currency">
+            <summary>
+            Payment currency. 
+            </summary>
+            <remarks>
+            The expected currency values are defined in the <c cref="T:Uol.PagSeguro.Domain.Currency">Currencty</c> class.
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.Items">
+            <summary>
+            Products/items in this payment request
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.RedirectUri">
+            <summary>
+            Uri to where the PagSeguro payment page should redirect the user after the payment information is processed.
+            </summary>
+            <remarks>
+            Typically this is a confirmation page on your web site.
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.ExtraAmount">
+            <summary>
+            Extra amount to be added to the transaction total
+            </summary>
+            <remarks>
+            This value can be used to add an extra charge to the transaction 
+            or provide a discount in the case <c>ExtraAmount</c> is a negative value.
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.Reference">
+            <summary>
+            Reference code
+            </summary>
+            <remarks>
+            Optional. You can use the reference code to store an identifier so you can 
+            associate the PagSeguro transaction to a transaction in your system.
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.Shipping">
+            <summary>
+            Shipping information associated with this payment request
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.MaxAge">
+            <summary>
+            How long this payment request will remain valid, in seconds.
+            </summary>
+            <remarks>
+            Optional. After this payment request is submitted, the payment code returned
+            will remain valid for the period specified here. 
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.MaxUses">
+            <summary>
+            How many times the payment redirect uri returned by the payment web service can be accessed.
+            </summary>
+            <remarks>
+            Optional. After this payment request is submitted, the payment redirect uri returned by
+            the payment web service will remain valid for the number of uses specified here. 
+            
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.NotificationURL">
+            <summary>
+            Determines for which url PagSeguro will send the order related notifications codes.
+            <remarks>
+            Optional. Any change happens in the transaction status, a new notification request will be send
+            to this url. You can use that for update the related order.
+            </remarks>    
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.MetaData">
+            <summary>
+            Meta Data reference
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentRequest.Parameter">
+            <summary>
+            Parameter reference
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Log.PagSeguroTrace">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Log.PagSeguroTrace.FormatMessage(Uol.PagSeguro.Log.PagSeguroTrace.Level,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="level"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Log.PagSeguroTrace.Info(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Log.PagSeguroTrace.Warn(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Log.PagSeguroTrace.Error(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.MetaDataItemKeys">
+            <summary>
+            Represents available keys for MetaData item use in checkout transactions
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.MetaDataItemKeys.AvailableItemKeysList">
+            <summary>
+            List of available keys and values for MetaData item
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.MetaDataItemKeys.GetAvailableItemKeysList">
+            <summary>
+            Get available  keys and values list for metadata item
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.MetaDataItemKeys.IsItemKeyAvailable(System.String)">
+            <summary>
+            Check if key is available for PagSeguro
+            </summary>
+            <param name="itemKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.MetaDataItemKeys.GetItemDescriptionByKey(System.String)">
+            <summary>
+            Gets key description by key
+            </summary>
+            <param name="itemKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.MetaDataItemKeys.GetItemKeyByDescription(System.String)">
+            <summary>
+            Gets key type by description
+            </summary>
+            <param name="itemDescription"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.ErrorSerializer">
+            <summary>
+            Class which deserialize request error xml
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.ErrorSerializer.Read(System.Xml.XmlReader)">
+            <summary>
+            Converts xml into a ServiceError class
+            </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.ParameterItem">
+            <summary>
+            Represents a ParameterItem
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.ParameterItem.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the ParameterItem class
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.ParameterItem.#ctor(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the ParameterItem class
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="group"></param>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.ParameterItem.Key">
+            <summary>
+            key wich represents a ParameterItem
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.ParameterItem.Value">
+            <summary>
+            Value of a ParameterItem
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.ParameterItem.Group">
+            <summary>
+            group wich ParameterItem is inserted
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.MetaDataItem">
+            <summary>
+            Represents a metadata item
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.MetaDataItem.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the MetaDataItem class
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.MetaDataItem.#ctor(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the MetaDataItem class
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="group"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.MetaDataItem.NormalizeParameter(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="parameterValue"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.MetaDataItem.Key">
+            <summary>
+            key wich represents a metadata item
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.MetaDataItem.Value">
+            <summary>
+            Value of a metadata item
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.MetaDataItem.Group">
+            <summary>
+            group wich metadata item is inserted
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.TransactionSearchResult">
+            <summary>
+            Represents a page of transactions returned by the transaction search service
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.TransactionSearchResult.ToString">
+            <summary>
+            Returns a string that represents the current object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSearchResult.Date">
+            <summary>
+            Date/time when this search was executed
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSearchResult.CurrentPage">
+            <summary>
+            Current page
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSearchResult.TotalPages">
+            <summary>
+            Total number of pages
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.TransactionSearchResult.Transactions">
+            <summary>
+            Transactions in this page
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.ShippingSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.ShippingSerializer.Read(System.Xml.XmlReader,Uol.PagSeguro.Domain.Shipping)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="shipping"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.XMLParserUtils">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.XMLParserUtils.SkipNode(System.Xml.XmlReader)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.XMLParserUtils.IsEndElement(System.Xml.XmlReader,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.XMLParserUtils.SkipElement(System.Xml.XmlReader)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.XmlParse.ErrorsSerializer">
+            <summary>
+            Class which deserialize request Errors xml
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.XmlParse.ErrorsSerializer.Read(System.Xml.XmlReader,System.Collections.Generic.IList{Uol.PagSeguro.Domain.ServiceError})">
+            <summary>
+            Converts xml into a list of ServiceError class
+            </summary>
+            <param name="reader"></param>
+            <param name="errors"></param>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.PaymentMethod">
+            <summary>
+            Payment method
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentMethod.PaymentMethodCode">
+            <summary>
+            Payment method code
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.PaymentMethod.PaymentMethodType">
+            <summary>
+            Payment method type
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Service.NotificationService">
+            <summary>
+            Encapsulates web service calls regarding PagSeguro notifications
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.NotificationService.CheckTransaction(Uol.PagSeguro.Domain.Credentials,System.String)">
+            <summary>
+            Returns a transaction from a notification code
+            </summary>
+            <param name="credentials">PagSeguro credentials</param>
+            <param name="notificationCode">Transaction notification code</param>
+            <returns><c cref="T:Uol.PagSeguro.Transaction">Transaction</c></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Service.NotificationService.BuildTransactionNotificationUrl(Uol.PagSeguro.Domain.Credentials,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="credentials"></param>
+            <param name="notificationCode"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Uol.PagSeguro.Constants.ShippingType">
+            <summary>
+            Defines a list of known shipping types.
+            </summary>
+            <remarks>
+            This class is not an enum to enable the introduction of new shipping types
+            without breaking this version of the library.
+            </remarks>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.ShippingType.Pac">
+            <summary>
+            PAC
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.ShippingType.Sedex">
+            <summary>
+            SEDEX
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Constants.ShippingType.NotSpecified">
+            <summary>
+            Unknown shipping type
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.Documents">
+            <summary>
+             Represents available documents for Sender use in checkout transactions
+            </summary>
+        </member>
+        <member name="F:Uol.PagSeguro.Domain.Documents.AvailableDocumentList">
+            <summary>
+            List of available documents for Sender use in PagSeguro transactions
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Documents.GetAvailableDocumentList">
+            <summary>
+            Get available document list for Sender use in PagSeguro transactions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Documents.IsDocumentTypeAvailable(System.String)">
+            <summary>
+            Check if document type is available for PagSeguro
+            </summary>
+            <param name="itemKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Documents.GetDocumentByType(System.String)">
+            <summary>
+            Gets document description by type
+            </summary>
+            <param name="itemKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Documents.GetDocumentByDescription(System.String)">
+            <summary>
+            Gets document type by description
+            </summary>
+            <param name="itemDescription"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.Sender">
+            <summary>
+            Represents the party on the transaction that is sending the money
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Sender.#ctor(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the Sender class
+            </summary>
+            <param name="name"></param>
+            <param name="email"></param>
+            <param name="areaCode"></param>
+            <param name="number"></param>
+            <param name="type"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Sender.#ctor(System.String,System.String,Uol.PagSeguro.Domain.Phone)">
+            <summary>
+            Initializes a new instance of the Sender class
+            </summary>
+            <param name="name"></param>
+            <param name="email"></param>
+            <param name="phone"></param>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Sender.ToString">
+            <summary>
+            Gets toString class
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Sender.Name">
+            <summary>
+            Sender name
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Sender.Email">
+            <summary>
+            Sender email
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Sender.Phone">
+            <summary>
+            Sender phone number
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Sender.Documents">
+            <summary>
+            Sender documents
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Domain.Transaction">
+            <summary>
+            Represents a PagSeguro transaction
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Domain.Transaction.ToString">
+            <summary>
+            Returns a string that represents the current object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.Date">
+            <summary>
+            Transaction date
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.Code">
+            <summary>
+            Transaction code
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.Reference">
+            <summary>
+            Reference code
+            </summary>
+            <remarks>
+            You can use the reference code to store an identifier so you can 
+            associate the PagSeguro transaction to a transaction in your system.
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.TransactionType">
+            <summary>
+            Transaction type
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.TransactionStatus">
+            <summary>
+            Transaction status
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.PaymentMethod">
+            <summary>
+            Payment method
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.GrossAmount">
+            <summary>
+            Gross amount of the transaction
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.DiscountAmount">
+            <summary>
+            Discount amount
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.FeeAmount">
+            <summary>
+            Fee amount
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.NetAmount">
+            <summary>
+            Net amount
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.ExtraAmount">
+            <summary>
+            Extra amount
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.LastEventDate">
+            <summary>
+            Last event date
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.InstallmentCount">
+            <summary>
+            Installment count
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.Sender">
+            <summary>
+            Payer information
+            </summary>
+            <remarks>
+            Who is sending the money
+            </remarks>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.Items">
+            <summary>
+            Products/items in this transaction
+            </summary>
+        </member>
+        <member name="P:Uol.PagSeguro.Domain.Transaction.Shipping">
+            <summary>
+            Shipping information
+            </summary>
+        </member>
+        <member name="T:Uol.PagSeguro.Util.PagSeguroUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.PagSeguroUtil.TruncateValue(System.String,System.Int32,System.String)">
+            <summary>
+            Truncate a String and add final end chars to them
+            </summary>
+            <param name="value"></param>
+            <param name="limit"></param>
+            <param name="endChars"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.PagSeguroUtil.RemoveExtraSpaces(System.String)">
+            <summary>
+            Remove extra spaces from String
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.PagSeguroUtil.FormatString(System.String,System.Int32,System.String)">
+            <summary>
+            Format a String dropping extra spaces and truncate value
+            </summary>
+            <param name="value"></param>
+            <param name="limit"></param>
+            <param name="endChars"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.PagSeguroUtil.GetOnlyNumbers(System.String)">
+            <summary>
+            Get only numbers from a string value
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.PagSeguroUtil.DecimalFormat(System.Decimal)">
+            <summary>
+            Format a decimal number, just two decimal places
+            </summary>
+            <param name="numeric"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.PagSeguroUtil.IsEmpty(System.String)">
+            <summary>
+            Check if var is empty
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Uol.PagSeguro.Util.PagSeguroUtil.FormatDateXml(System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

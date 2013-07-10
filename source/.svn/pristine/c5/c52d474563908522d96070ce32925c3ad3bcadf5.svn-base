@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BABC5658-6AFD-4F8E-81F1-434553663D99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Uol.PagSeguro</RootNamespace>
+    <AssemblyName>Uol.PagSeguro</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Uol.PagSeguro.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\Address.cs" />
+    <Compile Include="Domain\Documents.cs" />
+    <Compile Include="Domain\MetaData.cs" />
+    <Compile Include="Domain\MetaDataItem.cs" />
+    <Compile Include="Domain\MetaDataItemKeys.cs" />
+    <Compile Include="Domain\Parameter.cs" />
+    <Compile Include="Domain\ParameterItem.cs" />
+    <Compile Include="Domain\SenderDocument.cs" />
+    <Compile Include="Parse\PaymentParse.cs" />
+    <Compile Include="Domain\CredentialsNameValuePair.cs" />
+    <Compile Include="Log\PagSeguroTrace.cs" />
+    <Compile Include="Domain\PaymentRequest.cs" />
+    <Compile Include="Util\PagSeguroUtil.cs" />
+    <Compile Include="Domain\PaymentRequestResponse.cs" />
+    <Compile Include="Domain\Transaction.cs" />
+    <Compile Include="Util\QueryStringBuilder.cs" />
+    <Compile Include="Domain\TransactionSearchResult.cs" />
+    <Compile Include="Service\TransactionSearchService.cs" />
+    <Compile Include="Util\HttpURLConnectionUtil.cs" />
+    <Compile Include="Domain\ServiceError.cs" />
+    <Compile Include="Exception\PagSeguroServiceException.cs" />
+    <Compile Include="Service\PaymentService.cs" />
+    <Compile Include="Domain\Credentials.cs" />
+    <Compile Include="Constants\Currency.cs" />
+    <Compile Include="Service\NotificationService.cs" />
+    <Compile Include="Resources\PagSeguroConfiguration.cs" />
+    <Compile Include="Constants\TransactionType.cs" />
+    <Compile Include="Domain\TransactionSummary.cs" />
+    <Compile Include="Constants\TransactionStatus.cs" />
+    <Compile Include="Domain\AccountCredentials.cs" />
+    <Compile Include="Domain\PaymentMethod.cs" />
+    <Compile Include="Constants\PaymentMethodType.cs" />
+    <Compile Include="Domain\Item.cs" />
+    <Compile Include="Constants\PaymentMethodCode.cs" />
+    <Compile Include="Domain\Phone.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Domain\Sender.cs" />
+    <Compile Include="Domain\Shipping.cs" />
+    <Compile Include="Constants\ShippingType.cs" />
+    <Compile Include="XmlParse\AddressSerializer.cs" />
+    <Compile Include="XmlParse\ItemListSerializer.cs" />
+    <Compile Include="XmlParse\ItemSerializer.cs" />
+    <Compile Include="XmlParse\ErrorSerializer.cs" />
+    <Compile Include="XmlParse\ErrorsSerializer.cs" />
+    <Compile Include="XmlParse\PagSeguroConfigSerializer.cs" />
+    <Compile Include="XmlParse\PaymentMethodSerializer.cs" />
+    <Compile Include="XmlParse\PaymentSerializer.cs" />
+    <Compile Include="XmlParse\PaymentRequestResponseSerializer.cs" />
+    <Compile Include="XmlParse\PhoneSerializer.cs" />
+    <Compile Include="XmlParse\SenderSerializer.cs" />
+    <Compile Include="XmlParse\ShippingSerializer.cs" />
+    <Compile Include="XmlParse\TransactionSearchResultSerializer.cs" />
+    <Compile Include="XmlParse\TransactionSerializer.cs" />
+    <Compile Include="Constants\TransactionSerializerHelper.cs" />
+    <Compile Include="XmlParse\TransactionSummaryListSerializer.cs" />
+    <Compile Include="XmlParse\TransactionSummarySerializer.cs" />
+    <Compile Include="XmlParse\XMLParserUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Uol.PagSeguro.FxCop" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

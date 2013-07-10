@@ -13,10 +13,11 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Uol.PagSeguro;
 using System.Net;
+using Uol.PagSeguro.Domain;
+using Uol.PagSeguro.Exception;
+using Uol.PagSeguro.Resources;
+using Uol.PagSeguro.Service;
 
 namespace SearchTransactionByCode
 {
@@ -25,14 +26,16 @@ namespace SearchTransactionByCode
         static void Main(string[] args)
         {
             // TODO: Substitute the parameters below with your credentials
-            AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+            // AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+             AccountCredentials credentials = PagSeguroConfiguration.Credentials;
 
             try
             {
                 // TODO: Substitute the code below with a valid transaction code for your transaction
-                Transaction transaction = TransactionSearchService.SearchByCode(credentials, "7FC75C3D-0551-42B6-A258-F6FA76412D7E");
+                Transaction transaction = TransactionSearchService.SearchByCode(credentials, "59A13D84-52DA-4AB8-B365-1E7D893052B0");
 
                 Console.WriteLine(transaction);
+                Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)
             {
@@ -40,8 +43,7 @@ namespace SearchTransactionByCode
                 {
                     Console.WriteLine("Unauthorized: please verify if the credentials used in the web service call are correct.\n");
                 }
-
-                Console.WriteLine(exception);
+                Console.ReadKey();
             }
         }
     }

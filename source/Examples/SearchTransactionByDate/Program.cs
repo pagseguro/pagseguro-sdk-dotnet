@@ -13,10 +13,11 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Uol.PagSeguro;
 using System.Net;
+using Uol.PagSeguro.Domain;
+using Uol.PagSeguro.Exception;
+using Uol.PagSeguro.Resources;
+using Uol.PagSeguro.Service;
 
 namespace SearchTransactionByCode
 {
@@ -25,18 +26,19 @@ namespace SearchTransactionByCode
         static void Main(string[] args)
         {
             // TODO: Substitute the parameters below with your credentials
-            AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+            //AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+            AccountCredentials credentials = PagSeguroConfiguration.Credentials;
 
             try
             {
                 // Definindo a data de ínicio da consulta 
-                DateTime initialDate = DateTime.Now.AddMonths(-3);
+                DateTime initialDate = new DateTime(2013, 05, 01, 08, 50, 0);
 
                 // Definindo a data de término da consulta
-                DateTime finalDate = DateTime.Now;
+                DateTime finalDate = new DateTime(2013, 05, 30, 10, 30, 0);
 
                 // Definindo o número máximo de resultados por página
-                int maxPageResults = 20;
+                int maxPageResults = 10;
 
                 // Definindo o número da página
                 int pageNumber = 1;
@@ -50,10 +52,20 @@ namespace SearchTransactionByCode
                         pageNumber,
                         maxPageResults);
 
+                if (result.Transactions.Count <= 0)
+                {
+                    Console.WriteLine("Nenhuma transação");
+                }
+
                 foreach (TransactionSummary transaction in result.Transactions)
                 {
+                    Console.WriteLine("Começando listagem de transações - \n");
                     Console.WriteLine(transaction.ToString());
+                    Console.WriteLine(" - Terminando listagem de transações ");
                 }
+
+                Console.ReadKey();
+
             }
             catch (PagSeguroServiceException exception)
             {
@@ -63,6 +75,7 @@ namespace SearchTransactionByCode
                 }
 
                 Console.WriteLine(exception);
+                Console.ReadKey();
             }
         }
     }

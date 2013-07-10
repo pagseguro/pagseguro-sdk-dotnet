@@ -13,10 +13,11 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Uol.PagSeguro;
 using System.Net;
+using Uol.PagSeguro.Domain;
+using Uol.PagSeguro.Exception;
+using Uol.PagSeguro.Resources;
+using Uol.PagSeguro.Service;
 
 namespace ReceiveNotification
 {
@@ -25,27 +26,27 @@ namespace ReceiveNotification
         static void Main(string[] args)
         {
             // TODO: Substitute the parameters below with your credentials
-            AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+            // AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+            AccountCredentials credentials = PagSeguroConfiguration.Credentials;
 
             try
             {
                 // TODO: Substitute the code below with a notification code for your transaction. 
                 // You receive this notification code through a post on the URL that you specify in 
                 // this page: https://pagseguro.uol.com.br/integracao/notificacao-de-transacoes.jhtml
-                Transaction transaction = NotificationService.CheckTransaction(credentials, "45FDA1-ED1181118196-0334CF2FB2BA-EB54DE");
+                Transaction transaction = NotificationService.CheckTransaction(credentials ,"766B9C-AD4B044B04DA-77742F5FA653-E1AB24");
 
                 Console.WriteLine(transaction);
+                Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)
             {
                 if (exception.StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    Console.WriteLine("Unauthorized: please verify if the credentials used in the web service call are correct.\n");
+                    Console.WriteLine("Unauthorized: please verify if the credentials used in the web service call are correct. ");
                 }
-
-                Console.WriteLine(exception);
+                Console.ReadKey();
             }
-
         }
     }
 }
