@@ -73,8 +73,6 @@ namespace SearchTransactionByCode
                 {
                     Console.WriteLine("Unauthorized: please verify if the credentials used in the web service call are correct.\n");
                 }
-
-                Console.WriteLine(exception);
                 Console.ReadKey();
             }
         }

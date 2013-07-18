@@ -26,8 +26,7 @@ namespace CreatePayment
         static void Main(string[] args)
         {
             // TODO: Substitute the parameters below with your credentials
-
-            // AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+            //AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
             AccountCredentials credentials = PagSeguroConfiguration.Credentials;
 
             try
@@ -52,6 +51,9 @@ namespace CreatePayment
                 // Sets shipping information for this payment request
                 payment.Shipping = new Shipping();
                 payment.Shipping.ShippingType = ShippingType.Sedex;
+
+                //Passando valor para ShippingCost
+                //payment.Shipping.Cost = 123.00m;
 
                 payment.Shipping.Address = new Address(
                     "BRA", 
@@ -84,7 +86,7 @@ namespace CreatePayment
                 payment.AddIndexedParameter("itemId", "0003", 3);
                 payment.AddIndexedParameter("itemDescription", "Mouse", 3);
                 payment.AddIndexedParameter("itemQuantity", "1", 3);
-                payment.AddIndexedParameter("itemValue", "30.25", 3);
+                payment.AddIndexedParameter("itemAmount", "200.00", 3);
 
                 SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909"); 
                 payment.Sender.Documents.Add(senderCPF);

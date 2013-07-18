@@ -26,7 +26,7 @@ namespace ReceiveNotification
         static void Main(string[] args)
         {
             // TODO: Substitute the parameters below with your credentials
-            // AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
+            //AccountCredentials credentials = new AccountCredentials("your@email.com", "your_token_here");
             AccountCredentials credentials = PagSeguroConfiguration.Credentials;
 
             try
