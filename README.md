@@ -41,7 +41,13 @@ Mais informações estão disponíveis na [documentação oficial].
 Changelog
 ---------
 ---
-2.0.0 - 2.0.1
+2.0.3
+
+ - Atualização da arquitetura em diretorios.
+ - Alterado método de envio para HTTP.
+ - Adicionado possibilidade de envio de SenderCPF, MetaData e Parameter Generics.
+
+2.0.0 - 2.0.2
 
  - Classes de domínios que representam pagamentos, notificações e transações.
  - Criação de checkouts via API.

@@ -113,7 +113,7 @@ namespace Uol.PagSeguro.Util
                 request.ContentType = contentType;
                 request.Method = method;
                 request.Timeout = PagSeguroConfiguration.RequestTimeout;
-                request.Headers.Add("lib-description", ".net_csharp:" + PagSeguroConfiguration.LibVersion);
+                request.Headers.Add("lib-description", ".net:" + PagSeguroConfiguration.LibVersion);
     
                 //TODO: retirar quando for para teste
                 request.Credentials = CredentialCache.DefaultCredentials;
