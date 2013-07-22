@@ -1,45 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <PagSeguroConfiguration>
-
-  <!-- Urls defaults for call services PagSeguro -->
-  <Urls>
-    <!-- url for payment service -->
-    <Payment>
-      <Link>https://ws.pagseguro.uol.com.br/v2/checkout</Link>
-    </Payment>
-    <!-- url for payment service -->
-    <PaymentRedirect>
-      <Link>https://pagseguro.uol.com.br/v2/checkout/payment.html</Link>
-    </PaymentRedirect>
-    <!-- url for payment service -->
-    <Notification>
-      <Link>https://ws.pagseguro.uol.com.br/v2/transactions/notifications</Link>
-    </Notification>
-    <!-- url for payment service -->
-    <Search>
-      <Link>https://ws.pagseguro.uol.com.br/v2/transactions</Link>
-    </Search>
-  </Urls>
-
-  <!-- user's credential -->
-  <Credential>
-    <!-- your email here -->
-    <Email></Email>
-    <!-- your token here -->
-    <Token></Token>
-  </Credential>
-
-  <!-- configuration default for PagSeguro API-->
-  <Configuration>
-    <!-- version library API PagSeguro .NET C# -->
-    <LibVersion>2.0.3</LibVersion>
-    <!-- content type -->
-    <FormUrlEncoded>application/x-www-form-urlencoded</FormUrlEncoded>
-    <!-- encoding of the outcoming/incoming communication to/from PagSeguro API -->
-    <Encoding>ISO-8859-1</Encoding>
-    <!-- default request timeout for call service -->
-    <RequestTimeout>10000</RequestTimeout>
-  </Configuration>
-  
+	<!-- Urls defaults for call services PagSeguro -->
+	<Urls>
+		<!-- url for payment service -->
+		<Payment>
+			<Link>https://ws.pagseguro.uol.com.br/v2/checkout</Link>
+		</Payment>
+		<!-- url for payment service -->
+		<PaymentRedirect>
+			<Link>https://pagseguro.uol.com.br/v2/checkout/payment.html</Link>
+		</PaymentRedirect>
+		<!-- url for payment service -->
+		<Notification>
+			<Link>https://ws.pagseguro.uol.com.br/v2/transactions/notifications</Link>
+		</Notification>
+		<!-- url for payment service -->
+		<Search>
+			<Link>https://ws.pagseguro.uol.com.br/v2/transactions</Link>
+		</Search>
+	</Urls>
+	<!-- user's credential -->
+	<Credential>
+		<!-- your email here -->
+		<Email />
+		<!-- your token here -->
+		<Token />
+	</Credential>
+	<!-- configuration default for PagSeguro API-->
+	<Configuration>
+		<!-- version library API PagSeguro .NET C# -->
+		<LibVersion>2.0.3</LibVersion>
+		<!-- content type -->
+		<FormUrlEncoded>application/x-www-form-urlencoded</FormUrlEncoded>
+		<!-- encoding of the outcoming/incoming communication to/from PagSeguro API -->
+		<Encoding>ISO-8859-1</Encoding>
+		<!-- default request timeout for call service -->
+		<RequestTimeout>10000</RequestTimeout>
+	</Configuration>
 </PagSeguroConfiguration>
