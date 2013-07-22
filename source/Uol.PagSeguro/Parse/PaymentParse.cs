@@ -142,7 +142,7 @@ namespace Uol.PagSeguro.Parse
 
                 if (payment.Shipping.Cost != null)
                 {
-                    data["shippingCost"] = payment.Shipping.Cost.ToString();
+                    data["shippingCost"] = PagSeguroUtil.DecimalFormat((decimal)payment.Shipping.Cost);
                 }
 
                 // address

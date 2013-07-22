@@ -24,6 +24,7 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.XmlParse;
+using System.Collections.Specialized;
 
 namespace Uol.PagSeguro.Util
 {
@@ -114,8 +115,9 @@ namespace Uol.PagSeguro.Util
                 request.Method = method;
                 request.Timeout = PagSeguroConfiguration.RequestTimeout;
                 request.Headers.Add("lib-description", ".net:" + PagSeguroConfiguration.LibVersion);
+                request.Headers.Add("language-engine-description", ".net:" + PagSeguroConfiguration.LanguageEngineDescription);
     
-                //TODO: retirar quando for para teste
+                //TODO: retirar quando for para produção
                 request.Credentials = CredentialCache.DefaultCredentials;
 
                 // adding module version to header request 
@@ -135,6 +137,7 @@ namespace Uol.PagSeguro.Util
 
                 if (HttpURLConnectionUtil.PostMethod.Equals(method))
                 {
+
                     using (Stream requestStream = request.GetRequestStream())
                     {
                         byte[] byteArray = Encoding.UTF8.GetBytes(query);

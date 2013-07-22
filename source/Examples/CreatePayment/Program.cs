@@ -53,7 +53,7 @@ namespace CreatePayment
                 payment.Shipping.ShippingType = ShippingType.Sedex;
 
                 //Passando valor para ShippingCost
-                //payment.Shipping.Cost = 123.00m;
+                payment.Shipping.Cost = 10.00m;
 
                 payment.Shipping.Address = new Address(
                     "BRA", 

@@ -16,6 +16,8 @@ using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.XmlParse;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace Uol.PagSeguro.Resources
 {
@@ -70,6 +72,17 @@ namespace Uol.PagSeguro.Resources
             set
             {
                 _cmsVersion = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string LanguageEngineDescription
+        {
+            get
+            {
+                return Environment.Version.ToString();
             }
         }
 
