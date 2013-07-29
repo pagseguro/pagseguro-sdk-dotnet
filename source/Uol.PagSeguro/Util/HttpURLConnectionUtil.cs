@@ -116,9 +116,6 @@ namespace Uol.PagSeguro.Util
                 request.Timeout = PagSeguroConfiguration.RequestTimeout;
                 request.Headers.Add("lib-description", ".net:" + PagSeguroConfiguration.LibVersion);
                 request.Headers.Add("language-engine-description", ".net:" + PagSeguroConfiguration.LanguageEngineDescription);
-    
-                //TODO: retirar quando for para produção
-                request.Credentials = CredentialCache.DefaultCredentials;
 
                 // adding module version to header request 
                 if (!string.IsNullOrEmpty(PagSeguroConfiguration.ModuleVersion))
@@ -131,9 +128,6 @@ namespace Uol.PagSeguro.Util
                 {
                     request.Headers.Add("cms-description", PagSeguroConfiguration.CmsVersion);
                 }
-
-                //TODO: retirar quando for para produção
-                ServicePointManager.ServerCertificateValidationCallback += new System.Net.Security.RemoteCertificateValidationCallback(ValidateServerCertificate);
 
                 if (HttpURLConnectionUtil.PostMethod.Equals(method))
                 {
@@ -151,12 +145,6 @@ namespace Uol.PagSeguro.Util
             {
                 throw exception;
             }
-        }
-
-        //TODO: retirar quando for para produção
-        public static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-        {
-            return true;
         }
 
     }
