@@ -19,7 +19,7 @@ namespace Uol.PagSeguro.Constants
     /// Defines a list of known transaction statuses.
     /// </summary>
     /// <remarks>
-    /// This class is not an enum to enable the introduction of new shipping types
+    /// This class is not an enum to enable the introduction of new transaction statuses
     /// without breaking this version of the library.
     /// </remarks>
     public static class TransactionStatus

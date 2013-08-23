@@ -19,7 +19,7 @@ namespace Uol.PagSeguro.Domain
     /// Defines a list of known payment method codes.
     /// </summary>
     /// <remarks>
-    /// This class is not an enum to enable the introduction of new shipping types
+    /// This class is not an enum to enable the introduction of new payment method codes
     /// without breaking this version of the library.
     /// </remarks>
     public static class PaymentMethodCode
@@ -58,6 +58,66 @@ namespace Uol.PagSeguro.Domain
         /// Elo
         /// </summary>
         public const int Elo = 107;
+
+        /// <summary>
+        /// PLENOCard
+        /// </summary>
+        public const int PlenoCard = 108;
+
+        /// <summary>
+        /// PersonalCard
+        /// </summary>
+        public const int PersonalCard = 109;
+
+        /// <summary>
+        /// JCB
+        /// </summary>
+        public const int Jcb = 110;
+
+        /// <summary>
+        /// Discover
+        /// </summary>
+        public const int Discover = 111;
+
+        /// <summary>
+        /// BrasilCard
+        /// </summary>
+        public const int BrasilCard = 112;
+
+        /// <summary>
+        /// FORTBRASIL
+        /// </summary>
+        public const int FortBrasil = 113;
+
+        /// <summary>
+        /// CARDBAN
+        /// </summary>
+        public const int CardBan = 114;
+
+        /// <summary>
+        /// VALECARD
+        /// </summary>
+        public const int ValeCard = 115;
+
+        /// <summary>
+        /// Cabal
+        /// </summary>
+        public const int Cabal = 116;
+
+        /// <summary>
+        /// Mais!
+        /// </summary>
+        public const int Mais = 117;
+
+        /// <summary>
+        /// Avista
+        /// </summary>
+        public const int Avista = 118;
+
+        /// <summary>
+        /// GranCard
+        /// </summary>
+        public const int GranCard = 119;
 
         /// <summary>
         /// Bradesco boleto
@@ -100,6 +160,11 @@ namespace Uol.PagSeguro.Domain
         public const int BanrisulOnlineTransfer = 306;
 
         /// <summary>
+        /// HSBC online transfer
+        /// </summary>
+        public const int HsbcOnlineTransfer = 307;
+
+        /// <summary>
         /// PagSeguro account balance
         /// </summary>
         public const int PagSeguroBalance = 401;
@@ -108,5 +173,10 @@ namespace Uol.PagSeguro.Domain
         /// OiPaggo
         /// </summary>
         public const int OiPaggo = 501;
+
+        /// <summary>
+        /// Banco do Brasil direct deposit
+        /// </summary>
+        public const int BancoBrasilDirectDeposit = 701;
     }
 }

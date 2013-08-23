@@ -18,7 +18,7 @@ namespace Uol.PagSeguro.Domain
     /// Defines a list of known payment method types.
     /// </summary>
     /// <remarks>
-    /// This class is not an enum to enable the introduction of new shipping types
+    /// This class is not an enum to enable the introduction of new payment method types
     /// without breaking this version of the library.
     /// </remarks>
     public static class PaymentMethodType
@@ -47,5 +47,10 @@ namespace Uol.PagSeguro.Domain
         /// OiPaggo
         /// </summary>
         public const int OiPaggo = 5;
+
+        /// <summary>
+        /// Direct Deposit
+        /// </summary>
+        public const int DirectDeposit = 7;
     }
 }
