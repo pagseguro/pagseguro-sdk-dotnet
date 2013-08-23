@@ -29,7 +29,7 @@
 	<!-- configuration default for PagSeguro API-->
 	<Configuration>
 		<!-- version library API PagSeguro .NET C# -->
-		<LibVersion>2.0.1</LibVersion>
+		<LibVersion>2.0.4</LibVersion>
 		<!-- content type -->
 		<FormUrlEncoded>application/x-www-form-urlencoded</FormUrlEncoded>
 		<!-- encoding of the outcoming/incoming communication to/from PagSeguro API -->
