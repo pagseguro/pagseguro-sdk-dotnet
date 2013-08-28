@@ -115,9 +115,9 @@ namespace Uol.PagSeguro.Domain
         public const int Avista = 118;
 
         /// <summary>
-        /// GranCard
+        /// GrandCard
         /// </summary>
-        public const int GranCard = 119;
+        public const int GrandCard = 119;
 
         /// <summary>
         /// Bradesco boleto
