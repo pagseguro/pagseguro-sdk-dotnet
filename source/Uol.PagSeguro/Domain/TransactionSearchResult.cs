@@ -56,11 +56,11 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Transactions in this page
         /// </summary>
-        public ReadOnlyCollection<TransactionSummary> Transactions
+        public IList<TransactionSummary> Transactions
         {
             get
             {
-                return this.items.AsReadOnly();
+                return this.items;
             }
         }
 

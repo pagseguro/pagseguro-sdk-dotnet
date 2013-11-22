@@ -41,6 +41,10 @@ Mais informações estão disponíveis na [documentação oficial].
 Changelog
 ---------
 ---
+2.0.5
+
+ - Correção no TransactionSearchResult.
+
 2.0.4
 
  - Atualização dos códigos de meios de pagamento.
