@@ -152,3 +152,9 @@ $RECYCLE.BIN/
 ## SVN
 ############
 .svn/
+
+#################
+## Sonar
+#################
+.sonar/
+sonar-project.properties
