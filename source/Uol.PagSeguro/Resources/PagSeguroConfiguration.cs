@@ -40,7 +40,10 @@ namespace Uol.PagSeguro.Resources
         {
             get
             {
-                return PagSeguroConfigSerializer.GetAccountCredentials(LoadXmlConfig());
+                if (XmlConfigFileExist())
+                    return PagSeguroConfigSerializer.GetAccountCredentials(LoadXmlConfig());
+                else
+                    return new AccountCredentials("your@email.com", "your_token_here");
             }
         }
 
@@ -182,7 +185,24 @@ namespace Uol.PagSeguro.Resources
         /// <returns></returns>
         private static string GetUrlValue(string url)
         {
-            return PagSeguroConfigSerializer.GetWebserviceUrl(LoadXmlConfig(), url);
+            if (XmlConfigFileExist())
+                return PagSeguroConfigSerializer.GetWebserviceUrl(LoadXmlConfig(), url);
+            else
+            {
+                switch(url)
+                {
+                    case PagSeguroConfigSerializer.Notification:
+                        return "https://ws.pagseguro.uol.com.br/v2/transactions/notifications";
+                    case PagSeguroConfigSerializer.Payment:
+                        return "https://ws.pagseguro.uol.com.br/v2/checkout";
+                    case PagSeguroConfigSerializer.PaymentRedirect:
+                        return "https://pagseguro.uol.com.br/v2/checkout/payment.html";
+                    case PagSeguroConfigSerializer.Search:
+                        return "https://ws.pagseguro.uol.com.br/v2/transactions";
+                    default:
+                        throw new ApplicationException("Não foi possível encontrar a configuração para " + url);
+                }
+            }
         }
 
         /// <summary>
@@ -192,7 +212,24 @@ namespace Uol.PagSeguro.Resources
         /// <returns></returns>
         private static string GetDataConfiguration(string data)
         {
-            return PagSeguroConfigSerializer.GetDataConfiguration(LoadXmlConfig(), data);
+            if (XmlConfigFileExist())
+                return PagSeguroConfigSerializer.GetDataConfiguration(LoadXmlConfig(), data);
+            else
+            {
+                switch (data)
+                {
+                    case PagSeguroConfigSerializer.LibVersion:
+                        return "2.0.4";
+                    case PagSeguroConfigSerializer.FormUrlEncoded:
+                        return "application/x-www-form-urlencoded";
+                    case PagSeguroConfigSerializer.Encoding:
+                        return "ISO-8859-1";
+                    case PagSeguroConfigSerializer.RequestTimeout:
+                        return "10000";
+                    default:
+                        throw new ApplicationException("Não foi possível encontrar a configuração para " + data);
+                }
+            }
         }
 
         /// <summary>
@@ -207,6 +244,15 @@ namespace Uol.PagSeguro.Resources
                 xml.Load(Path.Combine(caminho, urlXmlConfiguration));
             }
             return xml;
+        }
+
+        /// <summary>
+        /// Identifica se há um arquivo de configuração
+        /// </summary>
+        /// <returns>True se o arquivo xml de configuração existe, caso contrário False.</returns>
+        private static bool XmlConfigFileExist()
+        {
+            return File.Exists(Path.Combine(caminho, urlXmlConfiguration));
         }
     }
 }
