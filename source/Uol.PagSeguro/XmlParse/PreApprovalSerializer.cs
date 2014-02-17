@@ -21,18 +21,18 @@ namespace Uol.PagSeguro.XmlParse
     /// <summary>
     /// 
     /// </summary>
-    internal static class PaymentSerializer
+    internal static class PreApprovalSerializer
     {
         private const string Code = "code";
+        private const string Status = "status";
         private const string Date = "date";
-        private const string TransactionCode = "transactionCode";
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>
-        /// <param name="paymentResponse"></param>
-        internal static void Read(XmlReader reader, PaymentRequestResponse paymentResponse)
+        /// <param name="preApprovalResponse"></param>
+        internal static void Read(XmlReader reader, PreApprovalRequestResponse preApprovalResponse)
         {
 
             if (reader.IsEmptyElement)
@@ -57,14 +57,14 @@ namespace Uol.PagSeguro.XmlParse
                 {
                     switch (reader.Name)
                     {
-                        case PaymentSerializer.Date:
-                            paymentResponse.RegistrationDate = reader.ReadElementContentAsDateTime();
+                        case PreApprovalSerializer.Date:
+                            preApprovalResponse.RegistrationDate = reader.ReadElementContentAsDateTime();
                             break;
-                        case PaymentSerializer.Code:
-                            paymentResponse.Code = reader.ReadElementContentAsString();
+                        case PreApprovalSerializer.Code:
+                            preApprovalResponse.Code = reader.ReadElementContentAsString();
                             break;
-                        case PaymentSerializer.TransactionCode:
-                            paymentResponse.TransactionCode = reader.ReadElementContentAsString();
+                        case PreApprovalSerializer.Status:
+                            preApprovalResponse.Status = reader.ReadElementContentAsString();
                             break;
                         default:
                             XMLParserUtils.SkipElement(reader);

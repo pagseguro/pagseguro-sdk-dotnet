@@ -18,6 +18,7 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
+using System.Collections.Generic;
 
 namespace SearchTransactionByCode
 {
@@ -32,10 +33,10 @@ namespace SearchTransactionByCode
             try
             {
                 // Definindo a data de ínicio da consulta 
-                DateTime initialDate = new DateTime(2013, 05, 01, 08, 50, 0);
+                DateTime initialDate = new DateTime(2014, 02, 10, 08, 50, 0);
 
                 // Definindo a data de término da consulta
-                DateTime finalDate = new DateTime(2013, 05, 30, 10, 30, 0);
+                DateTime finalDate = DateTime.Now.AddHours(-5);
 
                 // Definindo o número máximo de resultados por página
                 int maxPageResults = 10;
@@ -57,11 +58,23 @@ namespace SearchTransactionByCode
                     Console.WriteLine("Nenhuma transação");
                 }
 
+                if (result.PreApprovals.Count <= 0)
+                {
+                    Console.WriteLine("Nenhuma assinatura");
+                }
+
                 foreach (TransactionSummary transaction in result.Transactions)
                 {
                     Console.WriteLine("Começando listagem de transações - \n");
                     Console.WriteLine(transaction.ToString());
                     Console.WriteLine(" - Terminando listagem de transações ");
+                }
+
+                foreach (TransactionSummary transaction in result.PreApprovals)
+                {
+                    Console.WriteLine("Começando listagem de assinaturas - \n");
+                    Console.WriteLine(transaction.ToString());
+                    Console.WriteLine(" - Terminando listagem de assinaturas ");
                 }
 
                 Console.ReadKey();

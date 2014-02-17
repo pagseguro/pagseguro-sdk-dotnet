@@ -187,6 +187,54 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
+        /// Name
+        /// </summary>
+        /// <remarks>
+        /// Name of PreApproval
+        /// </remarks>
+        public string Name
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// Tracker
+        /// </summary>
+        /// <remarks>
+        /// Status of PreApproval
+        /// </remarks>
+        public string Tracker
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// Status
+        /// </summary>
+        /// <remarks>
+        /// PreApproval Status
+        /// </remarks>
+        public string Status
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// charge
+        /// </summary>
+        /// <remarks>
+        /// Manual or Auto
+        /// </remarks>
+        public string Charge
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
         /// Returns a string that represents the current object
         /// </summary>
         /// <returns></returns>

@@ -139,6 +139,54 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
+        /// Name
+        /// </summary>
+        /// <remarks>
+        /// Name of PreApproval
+        /// </remarks>
+        public string Name
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// Tracker
+        /// </summary>
+        /// <remarks>
+        /// Status of PreApproval
+        /// </remarks>
+        public string Tracker
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// Status
+        /// </summary>
+        /// <remarks>
+        /// PreApproval Status
+        /// </remarks>
+        public string Status
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// charge
+        /// </summary>
+        /// <remarks>
+        /// Manual or Auto
+        /// </remarks>
+        public string Charge
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
         /// Returns a string that represents the current object
         /// </summary>
         /// <returns></returns>
@@ -149,7 +197,7 @@ namespace Uol.PagSeguro.Domain
             builder.Append('(');
             builder.Append("Code=").Append(this.Code).Append(", ");
             builder.Append("Date=").Append(this.Date).Append(", ");
-            builder.Append("Reference=").Append(this.Reference.ToString());
+            builder.Append("Reference=").Append(this.Reference);
             builder.Append(')');
             return builder.ToString();
         }

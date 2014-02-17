@@ -38,19 +38,19 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="notificationCode">Transaction notification code</param>
         /// <returns><c cref="T:Uol.PagSeguro.Transaction">Transaction</c></returns>
-        public static Transaction CheckTransaction(Credentials credentials, string notificationCode)
+        public static Transaction CheckTransaction(Credentials credentials, string notificationCode, bool preApproval = false)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "NotificationService.CheckTransaction(notificationCode={0}) - begin", notificationCode));
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildTransactionNotificationUrl(credentials,notificationCode)))
+                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildTransactionNotificationUrl(credentials,notificationCode, preApproval)))
                 {
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         Transaction transaction = new Transaction();
-                        TransactionSerializer.Read(reader, transaction);
+                        TransactionSerializer.Read(reader, transaction, preApproval);
 
                         PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "NotificationService.CheckTransaction(notificationCode={0}) - end {1}", notificationCode, transaction));
                         return transaction;
@@ -72,10 +72,13 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials"></param>
         /// <param name="notificationCode"></param>
         /// <returns></returns>
-        private static string BuildTransactionNotificationUrl(Credentials credentials, string notificationCode) 
+        private static string BuildTransactionNotificationUrl(Credentials credentials, string notificationCode, bool preApproval) 
         {
             QueryStringBuilder transactionNotificationUrl = new QueryStringBuilder("{url}/{notificationCode}?{credential}");
-            transactionNotificationUrl.ReplaceValue("{url}", PagSeguroConfiguration.NotificationUri.AbsoluteUri);
+            if (preApproval == true)
+                transactionNotificationUrl.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalNotificationUri.AbsoluteUri);
+            else
+                transactionNotificationUrl.ReplaceValue("{url}", PagSeguroConfiguration.NotificationUri.AbsoluteUri);
             transactionNotificationUrl.ReplaceValue("{notificationCode}", HttpUtility.UrlEncode(notificationCode));
             transactionNotificationUrl.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return transactionNotificationUrl.ToString();

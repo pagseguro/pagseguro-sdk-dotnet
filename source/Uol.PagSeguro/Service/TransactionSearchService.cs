@@ -42,19 +42,19 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="transactionCode">Transaction code</param>
         /// <returns cref="T:Uol.PagSeguro.Transaction"><c>Transaction</c></returns>
-        public static Transaction SearchByCode(Credentials credentials, string transactionCode)
+        public static Transaction SearchByCode(Credentials credentials, string transactionCode, bool preApproval = false)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - begin", transactionCode));
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByCode(credentials, transactionCode)))
+                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByCode(credentials, transactionCode, preApproval)))
                 {
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         Transaction transaction = new Transaction();
-                        TransactionSerializer.Read(reader, transaction);
+                        TransactionSerializer.Read(reader, transaction, preApproval);
                         PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - end {1}", transactionCode, transaction));
                         return transaction;
                     }
@@ -74,9 +74,9 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials"></param>
         /// <param name="initialDate"></param>
         /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate)
+        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, bool preApproval = false)
         {
-            return SearchByDateCore(credentials, initialDate, DateTime.MaxValue, 0, 0);
+            return SearchByDateCore(credentials, initialDate, DateTime.MaxValue, 0, 0, preApproval);
         }
 
         /// <summary>
@@ -86,9 +86,9 @@ namespace Uol.PagSeguro.Service
         /// <param name="initialDate"></param>
         /// <param name="pageNumber"></param>
         /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, int pageNumber)
+        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, int pageNumber, bool preApproval = false)
         {
-            return SearchByDateCore(credentials, initialDate, DateTime.MaxValue, pageNumber, 0);
+            return SearchByDateCore(credentials, initialDate, DateTime.MaxValue, pageNumber, 0, preApproval);
         }
 
         /// <summary>
@@ -96,51 +96,51 @@ namespace Uol.PagSeguro.Service
         /// </summary>
         /// <param name="credentials"></param>
         /// <param name="initialDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <param name="resultsPerPage"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, int pageNumber, int resultsPerPage)
-        {
-            return SearchByDateCore(credentials, initialDate, DateTime.MaxValue, pageNumber, resultsPerPage);
-        }
-
-        /// <summary>
-        /// Search transactions associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="finalDate"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate)
-        {
-            return SearchByDateCore(credentials, initialDate, finalDate, 0, 0);
-        }
-
-        /// <summary>
-        /// Search transactions associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="finalDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber)
-        {
-            return SearchByDateCore(credentials, initialDate, finalDate, pageNumber, 0);
-        }
-
-        /// <summary>
-        /// Search transactions associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="finalDate"></param>
         /// <param name="pageNumber"></param>
         /// <param name="resultsPerPage"></param>
         /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage)
+        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, int pageNumber, int resultsPerPage, bool preApproval = false)
         {
-            return SearchByDateCore(credentials, initialDate, finalDate, pageNumber, resultsPerPage);
+            return SearchByDateCore(credentials, initialDate, DateTime.MaxValue, pageNumber, resultsPerPage, preApproval);
+        }
+
+        /// <summary>
+        /// Search transactions associated with this set of credentials within a date range
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <param name="initialDate"></param>
+        /// <param name="finalDate"></param>
+        /// <returns></returns>
+        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, bool preApproval = false)
+        {
+            return SearchByDateCore(credentials, initialDate, finalDate, 0, 0, preApproval);
+        }
+
+        /// <summary>
+        /// Search transactions associated with this set of credentials within a date range
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <param name="initialDate"></param>
+        /// <param name="finalDate"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
+        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, bool preApproval = false)
+        {
+            return SearchByDateCore(credentials, initialDate, finalDate, pageNumber, 0, preApproval);
+        }
+
+        /// <summary>
+        /// Search transactions associated with this set of credentials within a date range
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <param name="initialDate"></param>
+        /// <param name="finalDate"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="resultsPerPage"></param>
+        /// <returns></returns>
+        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage, bool preApproval = false)
+        {
+            return SearchByDateCore(credentials, initialDate, finalDate, pageNumber, resultsPerPage, preApproval);
         }
 
         /// <summary>
@@ -152,19 +152,19 @@ namespace Uol.PagSeguro.Service
         /// <param name="pageNumber">Page number, starting with 1. If passed as 0, it will call the web service to get the default page, also page number 1.</param>
         /// <param name="resultsPerPage">Results per page, optional.</param>
         /// <returns></returns>
-        private static TransactionSearchResult SearchByDateCore(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage)
+        private static TransactionSearchResult SearchByDateCore(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage, bool preApproval)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - begin", initialDate, finalDate));
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByDate(credentials, initialDate, finalDate, pageNumber, resultsPerPage)))
+                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByDate(credentials, initialDate, finalDate, pageNumber, resultsPerPage, preApproval)))
                 {
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         TransactionSearchResult result = new TransactionSearchResult();
-                        TransactionSearchResultSerializer.Read(reader, result);
+                        TransactionSearchResultSerializer.Read(reader, result, preApproval);
                         PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - end {2}", initialDate, finalDate, result));
                         return result;
                     }
@@ -184,12 +184,23 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials"></param>
         /// <param name="transactionCode"></param>
         /// <returns></returns>
-        private static string BuildSearchUrlByCode(Credentials credentials, string transactionCode)
+        private static string BuildSearchUrlByCode(Credentials credentials, string transactionCode, bool preApproval)
         {
-            QueryStringBuilder searchUrlByCode = new QueryStringBuilder("{url}/{transactionCode}?{credential}");
-            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
-            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
-            searchUrlByCode.ReplaceValue("{transactionCode}", HttpUtility.UrlEncode(transactionCode));
+            QueryStringBuilder searchUrlByCode;
+
+            if (preApproval == true)
+            {
+                searchUrlByCode = new QueryStringBuilder("{url}/{preApprovalCode}?{credential}");
+                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+                searchUrlByCode.ReplaceValue("{preApprovalCode}", HttpUtility.UrlEncode(transactionCode));
+            }
+            else
+            {
+                searchUrlByCode = new QueryStringBuilder("{url}/{transactionCode}?{credential}");
+                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+                searchUrlByCode.ReplaceValue("{transactionCode}", HttpUtility.UrlEncode(transactionCode));
+            }
+
             searchUrlByCode.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return searchUrlByCode.ToString();
         }
@@ -203,10 +214,13 @@ namespace Uol.PagSeguro.Service
         /// <param name="pageNumber"></param>
         /// <param name="resultsPerPage"></param>
         /// <returns></returns>
-        private static string BuildSearchUrlByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage)
+        private static string BuildSearchUrlByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage, bool preApproval)
         {
             QueryStringBuilder searchUrlByCode = new QueryStringBuilder("{url}/?initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
-            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+            if (preApproval == true)
+                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+            else
+                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
             searchUrlByCode.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             searchUrlByCode.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
             searchUrlByCode.ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
