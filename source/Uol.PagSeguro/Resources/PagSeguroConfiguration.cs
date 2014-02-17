@@ -1,4 +1,4 @@
-// Copyright [2011] [PagSeguro Internet Ltda.]
+﻿// Copyright [2011] [PagSeguro Internet Ltda.]
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.XmlParse;
 using System.Reflection;
 using System.Diagnostics;
-using System.IO;
+using System.Web;
 
 namespace Uol.PagSeguro.Resources
 {
@@ -27,9 +27,12 @@ namespace Uol.PagSeguro.Resources
     /// </summary>
     public static class PagSeguroConfiguration
     {
-        //Capturando o caminho do arquivo
-        private static string caminho = Path.GetDirectoryName(Assembly.GetAssembly(typeof(PagSeguroConfiguration)).CodeBase);
-        private const string urlXmlConfiguration = "../Configuration/PagSeguroConfig.xml";
+        //PagSeguro .NET Library Tests
+        private const string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
+
+        //Website
+        //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
+
         private static string _moduleVersion;
         private static string _cmsVersion;
 
@@ -134,6 +137,72 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
+        public static Uri PreApprovalUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApproval));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalRedirectUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalRedirect));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalNotificationUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalNotification));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalSearchUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalSearch));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalCancelUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalCancel));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalPaymentUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalPayment));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static int RequestTimeout
         {
             get 
@@ -204,7 +273,7 @@ namespace Uol.PagSeguro.Resources
             XmlDocument xml = new XmlDocument();
             using (xml as IDisposable)
             {
-                xml.Load(Path.Combine(caminho, urlXmlConfiguration));
+                xml.Load(urlXmlConfiguration);
             }
             return xml;
         }

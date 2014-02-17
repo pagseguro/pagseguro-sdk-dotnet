@@ -21,23 +21,23 @@ namespace Uol.PagSeguro.Domain
     /// <summary>
     /// Represents the response from the web service after a payment request was registered
     /// </summary>
-    internal class PaymentRequestResponse
+    internal class PreApprovalRequestResponse
     {
-        private Uri paymentRedirectBaseUri;
+        private Uri preApprovalRedirectBaseUri;
         private string code = String.Empty;
-        private string transactionCode = String.Empty;
+        private string status = String.Empty;
 
         /// <summary>
         /// Initializes a new instance of the PaymentRequestResponse class
         /// </summary>
-        /// <param name="paymentRedirectBaseUri"></param>
-        internal PaymentRequestResponse(Uri paymentRedirectBaseUri)
+        /// <param name="preApprovalRedirectBaseUri"></param>
+        internal PreApprovalRequestResponse(Uri preApprovalRedirectBaseUri)
         {
-            this.paymentRedirectBaseUri = paymentRedirectBaseUri;
+            this.preApprovalRedirectBaseUri = preApprovalRedirectBaseUri;
         }
 
         /// <summary>
-        /// Payment request code
+        /// PreApproval request code
         /// </summary>
         public string Code
         {
@@ -52,21 +52,6 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// PreApproval payment transaction code
-        /// </summary>
-        public string TransactionCode
-        {
-            get
-            {
-                return this.transactionCode;
-            }
-            set
-            {
-                this.transactionCode = value;
-            }
-        }
-
-        /// <summary>
         /// Registration date
         /// </summary>
         public DateTime RegistrationDate
@@ -76,15 +61,30 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Uri for the payment page in the PagSeguro web site for this payment request
+        /// PreApproval cancel status
         /// </summary>
-        public Uri PaymentRedirectUri
+        public string Status
+        {
+            get
+            {
+                return this.status;
+            }
+            set
+            {
+                this.status = value;
+            }
+        }
+
+        /// <summary>
+        /// Uri for the pre-approval page in the PagSeguro web site for this preApproval request
+        /// </summary>
+        public Uri PreApprovalRedirectUri
         {
             get
             {
                 QueryStringBuilder builder = new QueryStringBuilder();
                 builder.Append("code", this.Code);
-                UriBuilder uriBuilder = new UriBuilder(this.paymentRedirectBaseUri);
+                UriBuilder uriBuilder = new UriBuilder(this.preApprovalRedirectBaseUri);
                 uriBuilder.Query = builder.ToString();
                 return uriBuilder.Uri;
             }
@@ -101,7 +101,7 @@ namespace Uol.PagSeguro.Domain
             builder.Append('(');
             builder.Append("Code=").Append(this.Code).Append(", ");
             builder.Append("RegistrationDate=").Append(this.RegistrationDate).Append(", ");
-            builder.Append("PaymentRedirectUri=").Append(this.PaymentRedirectUri.ToString());
+            builder.Append("PreApprovalRedirectUri=").Append(this.PreApprovalRedirectUri.ToString());
             builder.Append(')');
             return builder.ToString();
         }

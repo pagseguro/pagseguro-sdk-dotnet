@@ -36,6 +36,11 @@ namespace SearchTransactionByCode
 
                 Console.WriteLine(transaction);
                 Console.ReadKey();
+
+                Transaction preApprovalTransaction = TransactionSearchService.SearchByCode(credentials, "C08984179E9EDF3DD4023F87B71DE349", true);
+
+                Console.WriteLine(preApprovalTransaction);
+                Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)
             {

@@ -21,61 +21,12 @@ using Uol.PagSeguro.Service;
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
-    /// Represents a payment request
+    /// Represents a preApproval request
     /// </summary>
-    public class PaymentRequest
+    public class PreApprovalRequest
     {
-        private IList<Item> _items;
         private MetaData _metaData;
         private Parameter _parameter;
-
-        /// <summary>
-        /// Party that will be sending the money
-        /// </summary>
-        public Sender Sender
-        {
-            get;
-            set;
-        }
-
-        public PreApproval PreApproval
-        {
-            get;
-            set;
-        }
-
-        public string PreApprovalCode
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Payment currency. 
-        /// </summary>
-        /// <remarks>
-        /// The expected currency values are defined in the <c cref="T:Uol.PagSeguro.Domain.Currency">Currencty</c> class.
-        /// </remarks>
-        public string Currency
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Products/items in this payment request
-        /// </summary>
-        public IList<Item> Items
-        {
-            get
-            {
-                if (this._items == null)
-                {
-                    this._items = new List<Item>();
-                }
-                return _items;
-            }
-        }
 
         /// <summary>
         /// Uri to where the PagSeguro payment page should redirect the user after the payment information is processed.
@@ -102,19 +53,6 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Extra amount to be added to the transaction total
-        /// </summary>
-        /// <remarks>
-        /// This value can be used to add an extra charge to the transaction 
-        /// or provide a discount in the case <c>ExtraAmount</c> is a negative value.
-        /// </remarks>
-        public decimal? ExtraAmount
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Reference code
         /// </summary>
         /// <remarks>
@@ -128,40 +66,34 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Shipping information associated with this payment request
+        /// Party that will be sending the money
         /// </summary>
-        public Shipping Shipping
+        public Sender Sender
         {
             get;
             set;
         }
 
         /// <summary>
-        /// How long this payment request will remain valid, in seconds.
+        /// PreApproval
         /// </summary>
-        /// <remarks>
-        /// Optional. After this payment request is submitted, the payment code returned
-        /// will remain valid for the period specified here. 
-        /// </remarks>
-        public int? MaxAge
+        public PreApproval PreApproval
         {
             get;
             set;
         }
 
         /// <summary>
-        /// How many times the payment redirect uri returned by the payment web service can be accessed.
+        /// Payment currency. 
         /// </summary>
         /// <remarks>
-        /// Optional. After this payment request is submitted, the payment redirect uri returned by
-        /// the payment web service will remain valid for the number of uses specified here. 
-        /// 
+        /// The expected currency values are defined in the <c cref="T:Uol.PagSeguro.Domain.Currency">Currencty</c> class.
         /// </remarks>
-        public int? MaxUses
+        public string Currency
         {
             get;
             set;
-        }
+        }        
 
         /// <summary>
         /// Determines for which url PagSeguro will send the order related notifications codes.
@@ -170,10 +102,10 @@ namespace Uol.PagSeguro.Domain
         /// to this url. You can use that for update the related order.
         /// </remarks>    
         /// </summary>
-        public string NotificationURL
-        {
-            get;
-            set;
+        public string NotificationURL 
+        { 
+            get; 
+            set; 
         }
 
         /// <summary>
@@ -210,9 +142,9 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Initializes a new instance of the PaymentRequest class
+        /// Initializes a new instance of the PreApprovalRequest class
         /// </summary>
-        public PaymentRequest()
+        public PreApprovalRequest()
         {
             this.Currency = Uol.PagSeguro.Constants.Currency.Brl;
         }
@@ -224,7 +156,7 @@ namespace Uol.PagSeguro.Domain
         /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
         public Uri Register(Credentials credentials)
         {
-            return PaymentService.CreateCheckoutRequest(credentials, this);
+            return PreApprovalService.CreateCheckoutRequest(credentials, this);
         }
 
         /// <summary>

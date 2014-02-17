@@ -33,5 +33,11 @@ namespace Uol.PagSeguro.Constants
         internal const string ExtraAmount = "extraAmount";
         internal const string LastEventDate = "lastEventDate";
         internal const string InstallmentCount = "installmentCount";
+
+        //PreApproval
+        internal const string PreApproval = "preApproval";
+        internal const string Name = "name";
+        internal const string Tracker = "tracker";
+        internal const string Charge = "charge";
     }
 }
