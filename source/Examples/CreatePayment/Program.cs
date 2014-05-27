@@ -91,9 +91,15 @@ namespace CreatePayment
                 SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909"); 
                 payment.Sender.Documents.Add(senderCPF);
 
-                Uri paymentRedirectUri = payment.Register(credentials);
+                bool isCheckoutLightBox = true;
+                String paymentRedirectUri = payment.Register(credentials, isCheckoutLightBox);
 
-                Console.WriteLine("URL do pagamento : " + paymentRedirectUri);
+				if (isCheckoutLightBox) {
+					Console.WriteLine("Code de retorno do pagamento : " + paymentRedirectUri);
+				} else {
+					Console.WriteLine("URL do pagamento : " + paymentRedirectUri);
+				}
+				
                 Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)

@@ -1,16 +1,16 @@
 ﻿// Copyright [2011] [PagSeguro Internet Ltda.]
 //
-//   Licensed under the Apache License, Version 2.0 (the "License");
-//   you may not use this file except in compliance with the License.
-//   You may obtain a copy of the License at
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//       http://www.apache.org/licenses/LICENSE-2.0
+// http://www.apache.org/licenses/LICENSE-2.0
 //
-//   Unless required by applicable law or agreed to in writing, software
-//   distributed under the License is distributed on an "AS IS" BASIS,
-//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//   See the License for the specific language governing permissions and
-//   limitations under the License.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,7 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Payment currency. 
+        /// Payment currency.
         /// </summary>
         /// <remarks>
         /// The expected currency values are defined in the <c cref="T:Uol.PagSeguro.Domain.Currency">Currencty</c> class.
@@ -81,7 +81,7 @@ namespace Uol.PagSeguro.Domain
         /// Extra amount to be added to the transaction total
         /// </summary>
         /// <remarks>
-        /// This value can be used to add an extra charge to the transaction 
+        /// This value can be used to add an extra charge to the transaction
         /// or provide a discount in the case <c>ExtraAmount</c> is a negative value.
         /// </remarks>
         public decimal? ExtraAmount
@@ -94,7 +94,7 @@ namespace Uol.PagSeguro.Domain
         /// Reference code
         /// </summary>
         /// <remarks>
-        /// Optional. You can use the reference code to store an identifier so you can 
+        /// Optional. You can use the reference code to store an identifier so you can
         /// associate the PagSeguro transaction to a transaction in your system.
         /// </remarks>
         public string Reference
@@ -117,7 +117,7 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         /// <remarks>
         /// Optional. After this payment request is submitted, the payment code returned
-        /// will remain valid for the period specified here. 
+        /// will remain valid for the period specified here.
         /// </remarks>
         public int? MaxAge
         {
@@ -130,8 +130,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         /// <remarks>
         /// Optional. After this payment request is submitted, the payment redirect uri returned by
-        /// the payment web service will remain valid for the number of uses specified here. 
-        /// 
+        /// the payment web service will remain valid for the number of uses specified here.
+        ///
         /// </remarks>
         public int? MaxUses
         {
@@ -144,12 +144,12 @@ namespace Uol.PagSeguro.Domain
         /// <remarks>
         /// Optional. Any change happens in the transaction status, a new notification request will be send
         /// to this url. You can use that for update the related order.
-        /// </remarks>    
+        /// </remarks>
         /// </summary>
-        public string NotificationURL 
-        { 
-            get; 
-            set; 
+        public string NotificationURL
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -198,13 +198,24 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
         /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
-        public Uri Register(Credentials credentials)
+        public String Register(Credentials credentials)
         {
-            return PaymentService.CreateCheckoutRequest(credentials, this);
+            return this.Register(credentials, false);
         }
 
         /// <summary>
-        /// Add a parameter for PagSeguro metadata checkout request 
+        /// Calls the PagSeguro web service and register this request for payment
+        /// </summary>
+        /// <param name="credentials">PagSeguro credentials</param>
+        /// <param name="onlyCheckoutCode">is lightbox</param>
+        /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
+        public String Register(Credentials credentials, bool onlyCheckoutCode)
+        {
+            return PaymentService.CreateCheckoutRequest(credentials, this, onlyCheckoutCode);
+        }
+
+        /// <summary>
+        /// Add a parameter for PagSeguro metadata checkout request
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
@@ -214,7 +225,7 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Add a parameter for PagSeguro metadata checkout request 
+        /// Add a parameter for PagSeguro metadata checkout request
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>

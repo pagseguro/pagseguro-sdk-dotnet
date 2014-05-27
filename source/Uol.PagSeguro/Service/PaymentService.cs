@@ -41,8 +41,9 @@ namespace Uol.PagSeguro.Service
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="payment">Payment request information</param>
-        /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
-        public static Uri CreateCheckoutRequest(Credentials credentials, PaymentRequest payment)
+        /// <param name="onlyCheckoutCode">is lightbox</param>
+        /// <returns>The String to where the user needs to be redirected to in order to complete the payment process</returns>
+        public static String CreateCheckoutRequest(Credentials credentials, PaymentRequest payment, bool onlyCheckoutCode) 
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - begin", payment));
@@ -59,8 +60,20 @@ namespace Uol.PagSeguro.Service
                         {
                             PaymentRequestResponse paymentResponse = new PaymentRequestResponse(PagSeguroConfiguration.PaymentRedirectUri);
                             PaymentSerializer.Read(reader, paymentResponse);
+
+                            String paymentReturn = null;
+                            if (onlyCheckoutCode)
+                            {
+                                paymentReturn = paymentResponse.Code;
+                            }
+                            else
+                            {
+                                paymentReturn = paymentResponse.PaymentRedirectUri.ToString();
+                            }
+
                             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - end {1}", payment, paymentResponse.PaymentRedirectUri));
-                            return paymentResponse.PaymentRedirectUri;
+
+                            return paymentReturn;
                         }
                     }
                     else

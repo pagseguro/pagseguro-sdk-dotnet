@@ -41,6 +41,11 @@ Mais informações estão disponíveis na [documentação oficial].
 Changelog
 ---------
 ---
+2.0.6
+
+ - Adicionado Checkout LightBox.
+ - Atualização do exemplo CreatePayment.
+
 2.0.5
 
  - Correção no TransactionSearchResult.
