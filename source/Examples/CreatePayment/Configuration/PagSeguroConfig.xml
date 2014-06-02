@@ -21,10 +21,8 @@
 	</Urls>
 	<!-- user's credential -->
 	<Credential>
-		<!-- your email here -->
-		<Email />
-		<!-- your token here -->
-		<Token />
+		<Email>your email here</Email>
+		<Token>your token here</Token>
 	</Credential>
 	<!-- configuration default for PagSeguro API-->
 	<Configuration>
