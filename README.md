@@ -43,7 +43,7 @@ Changelog
 ---
 2.0.6
 
- - Adicionado Checkout LightBox.
+ - Opção para retornar apenas o código de checkout no método Register.
  - Atualização do exemplo CreatePayment.
 
 2.0.5
