@@ -18,7 +18,6 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.XmlParse;
 using System.Reflection;
 using System.Diagnostics;
-using System.IO;
 
 namespace Uol.PagSeguro.Resources
 {
@@ -28,8 +27,7 @@ namespace Uol.PagSeguro.Resources
     public static class PagSeguroConfiguration
     {
         //Capturando o caminho do arquivo
-        private static string caminho = Path.GetDirectoryName(Assembly.GetAssembly(typeof(PagSeguroConfiguration)).CodeBase);
-        private const string urlXmlConfiguration = "../Configuration/PagSeguroConfig.xml";
+        private const string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
         private static string _moduleVersion;
         private static string _cmsVersion;
 
@@ -204,7 +202,7 @@ namespace Uol.PagSeguro.Resources
             XmlDocument xml = new XmlDocument();
             using (xml as IDisposable)
             {
-                xml.Load(Path.Combine(caminho, urlXmlConfiguration));
+                xml.Load(urlXmlConfiguration);
             }
             return xml;
         }
