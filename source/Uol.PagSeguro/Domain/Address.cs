@@ -46,9 +46,9 @@ namespace Uol.PagSeguro.Domain
             this.State = state;
             this.City = city;
             this.District = district;
-            this.PostalCode = postalCode;
+            this.PostalCode = PagSeguroUtil.GetOnlyNumbers(postalCode);
             this.Street = street;
-            this.Number = number;
+            this.Number = PagSeguroUtil.GetOnlyNumbers(number);
             this.Complement = complement;
         }
 

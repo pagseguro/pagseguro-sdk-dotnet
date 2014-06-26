@@ -25,6 +25,7 @@ namespace Uol.PagSeguro.XmlParse
     {
         private const string Code = "code";
         private const string Date = "date";
+        private const string TransactionCode = "transactionCode";
 
         /// <summary>
         /// 
@@ -61,6 +62,9 @@ namespace Uol.PagSeguro.XmlParse
                             break;
                         case PaymentSerializer.Code:
                             paymentResponse.Code = reader.ReadElementContentAsString();
+                            break;
+                        case PaymentSerializer.TransactionCode:
+                            paymentResponse.TransactionCode = reader.ReadElementContentAsString();
                             break;
                         default:
                             XMLParserUtils.SkipElement(reader);

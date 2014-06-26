@@ -41,6 +41,12 @@ Mais informações estão disponíveis na [documentação oficial].
 Changelog
 ---------
 ---
+2.0.7
+
+- Implementação do ambiente Sandbox
+- Validação da implementação de Assinaturas (PreApproval)
+
+
 2.0.6
 
  - Opção para retornar apenas o código de checkout no método Register.

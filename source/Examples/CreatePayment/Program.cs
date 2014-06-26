@@ -91,18 +91,18 @@ namespace CreatePayment
                 SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909"); 
                 payment.Sender.Documents.Add(senderCPF);
 
-                bool onlyCheckoutCode = false;
-                String paymentRequest = payment.Register(credentials, onlyCheckoutCode);
+                Uri paymentRedirectUri = payment.Register(credentials);
 
-				Console.WriteLine(paymentRequest);
-								
+                Console.WriteLine("URL do pagamento : " + paymentRedirectUri);
                 Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)
             {
-                if (exception.StatusCode == HttpStatusCode.Unauthorized)
+                Console.WriteLine(exception.Message + "\n");
+
+                foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine("Unauthorized: please verify if the credentials used in the web service call are correct.\n");
+                    Console.WriteLine(element + "\n");
                 }
                 Console.ReadKey();
             }

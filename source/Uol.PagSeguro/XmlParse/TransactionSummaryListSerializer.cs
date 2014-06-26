@@ -25,13 +25,14 @@ namespace Uol.PagSeguro.XmlParse
     internal static class TransactionSummaryListSerializer
     {
         internal const string Transactions = "transactions";
+        internal const string PreApprovals = "preApprovals";
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="transactions"></param>
-        internal static void Read(XmlReader reader, IList<TransactionSummary> transactions)
+        internal static void Read(XmlReader reader, IList<TransactionSummary> transactions, bool preApproval)
         {
 
             transactions.Clear();
@@ -41,24 +42,42 @@ namespace Uol.PagSeguro.XmlParse
                 XMLParserUtils.SkipNode(reader);
             }
 
-            reader.ReadStartElement(TransactionSummaryListSerializer.Transactions);
+            if (preApproval == true)
+                reader.ReadStartElement(TransactionSummaryListSerializer.PreApprovals);
+            else
+                reader.ReadStartElement(TransactionSummaryListSerializer.Transactions);
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-                if (XMLParserUtils.IsEndElement(reader, TransactionSummaryListSerializer.Transactions))
+                if (preApproval == true)
                 {
-                    XMLParserUtils.SkipNode(reader);
-                    break;
+                    if (XMLParserUtils.IsEndElement(reader, TransactionSummaryListSerializer.PreApprovals))
+                    {
+                        XMLParserUtils.SkipNode(reader);
+                        break;
+                    }
+                }
+                else
+                {
+                    if (XMLParserUtils.IsEndElement(reader, TransactionSummaryListSerializer.Transactions))
+                    {
+                        XMLParserUtils.SkipNode(reader);
+                        break;
+                    }
                 }
 
                 if (reader.NodeType == XmlNodeType.Element)
                 {
+                    TransactionSummary transaction = new TransactionSummary();
                     switch (reader.Name)
                     {
                         case TransactionSerializerHelper.Transaction:
-                            TransactionSummary transaction = new TransactionSummary();
-                            TransactionSummarySerializer.Read(reader, transaction);
+                            TransactionSummarySerializer.Read(reader, transaction, preApproval);
+                            transactions.Add(transaction);
+                            break;
+                        case TransactionSerializerHelper.PreApproval:
+                            TransactionSummarySerializer.Read(reader, transaction, preApproval);
                             transactions.Add(transaction);
                             break;
                         default:

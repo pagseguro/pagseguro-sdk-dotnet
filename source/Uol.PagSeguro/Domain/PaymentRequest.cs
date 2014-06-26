@@ -38,6 +38,18 @@ namespace Uol.PagSeguro.Domain
             set;
         }
 
+        public PreApproval PreApproval
+        {
+            get;
+            set;
+        }
+
+        public string PreApprovalCode
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Payment currency.
         /// </summary>
@@ -72,6 +84,18 @@ namespace Uol.PagSeguro.Domain
         /// Typically this is a confirmation page on your web site.
         /// </remarks>
         public Uri RedirectUri
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Uri to where the user review the signature or read the rules.
+        /// </summary>
+        /// <remarks>
+        /// Typically this is the signature page on your web site.
+        /// </remarks>
+        public Uri ReviewUri
         {
             get;
             set;
@@ -198,20 +222,9 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
         /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
-        public String Register(Credentials credentials)
+        public Uri Register(Credentials credentials)
         {
-            return this.Register(credentials, false);
-        }
-
-        /// <summary>
-        /// Calls the PagSeguro web service and register this request for payment
-        /// </summary>
-        /// <param name="credentials">PagSeguro credentials</param>
-        /// <param name="onlyCheckoutCode">is lightbox</param>
-        /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
-        public String Register(Credentials credentials, bool onlyCheckoutCode)
-        {
-            return PaymentService.CreateCheckoutRequest(credentials, this, onlyCheckoutCode);
+            return PaymentService.CreateCheckoutRequest(credentials, this);
         }
 
         /// <summary>

@@ -32,16 +32,23 @@ namespace SearchTransactionByCode
             try
             {
                 // TODO: Substitute the code below with a valid transaction code for your transaction
-                Transaction transaction = TransactionSearchService.SearchByCode(credentials, "59A13D84-52DA-4AB8-B365-1E7D893052B0");
+                //Transaction transaction = TransactionSearchService.SearchByCode(credentials, "59A13D84-52DA-4AB8-B365-1E7D893052B0", false);
 
-                Console.WriteLine(transaction);
+                //Console.WriteLine(transaction);
+                //Console.ReadKey();
+
+                Transaction preApprovalTransaction = TransactionSearchService.SearchByCode(credentials, "3DFAD3123412340334A96F9136C38804", true);
+
+                Console.WriteLine(preApprovalTransaction);
                 Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)
             {
-                if (exception.StatusCode == HttpStatusCode.Unauthorized)
+                Console.WriteLine(exception.Message + "\n");
+
+                foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine("Unauthorized: please verify if the credentials used in the web service call are correct.\n");
+                    Console.WriteLine(element + "\n");
                 }
                 Console.ReadKey();
             }
