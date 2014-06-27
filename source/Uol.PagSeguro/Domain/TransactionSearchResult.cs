@@ -24,7 +24,8 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class TransactionSearchResult
     {
-        private List<TransactionSummary> items = new List<TransactionSummary>();
+        private List<TransactionSummary> transactions = new List<TransactionSummary>();
+        private List<TransactionSummary> preApprovals = new List<TransactionSummary>();
 
         /// <summary>
         /// Date/time when this search was executed
@@ -60,7 +61,18 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                return this.items;
+                return this.transactions;
+            }
+        }
+
+        /// <summary>
+        /// PreApprovals in this page
+        /// </summary>
+        public IList<TransactionSummary> PreApprovals
+        {
+            get
+            {
+                return this.preApprovals;
             }
         }
 

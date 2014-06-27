@@ -12,6 +12,21 @@
     <AssemblyName>Uol.PagSeguro</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Uol.PagSeguro.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -46,18 +63,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\PreApproval.cs" />
     <Compile Include="Domain\Address.cs" />
+    <Compile Include="Domain\PreApprovalRequestResponse.cs" />
+    <Compile Include="Domain\PreApprovalRequest.cs" />
     <Compile Include="Domain\Documents.cs" />
     <Compile Include="Domain\MetaData.cs" />
     <Compile Include="Domain\MetaDataItem.cs" />
     <Compile Include="Domain\MetaDataItemKeys.cs" />
     <Compile Include="Domain\Parameter.cs" />
     <Compile Include="Domain\ParameterItem.cs" />
+    <Compile Include="Domain\PreApproval.cs" />
     <Compile Include="Domain\SenderDocument.cs" />
+    <Compile Include="Parse\PreApprovalParse.cs" />
     <Compile Include="Parse\PaymentParse.cs" />
     <Compile Include="Domain\CredentialsNameValuePair.cs" />
     <Compile Include="Log\PagSeguroTrace.cs" />
     <Compile Include="Domain\PaymentRequest.cs" />
+    <Compile Include="Service\PreApprovalService.cs" />
+    <Compile Include="Resources\EnvironmentConfiguration.cs" />
     <Compile Include="Util\PagSeguroUtil.cs" />
     <Compile Include="Domain\PaymentRequestResponse.cs" />
     <Compile Include="Domain\Transaction.cs" />
@@ -86,6 +110,7 @@
     <Compile Include="Domain\Shipping.cs" />
     <Compile Include="Constants\ShippingType.cs" />
     <Compile Include="XmlParse\AddressSerializer.cs" />
+    <Compile Include="XmlParse\PreApprovalSerializer.cs" />
     <Compile Include="XmlParse\ItemListSerializer.cs" />
     <Compile Include="XmlParse\ItemSerializer.cs" />
     <Compile Include="XmlParse\ErrorSerializer.cs" />
@@ -106,6 +131,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Uol.PagSeguro.FxCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

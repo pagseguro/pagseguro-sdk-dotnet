@@ -15,6 +15,7 @@
 using System.Collections.Generic;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Util;
+using Uol.PagSeguro.Constants.PreApproval;
 
 namespace Uol.PagSeguro.Parse
 {
@@ -123,6 +124,42 @@ namespace Uol.PagSeguro.Parse
                         data["itemShippingCost" + i] = PagSeguroUtil.DecimalFormat((decimal)item.ShippingCost);
                     }
                 }
+            }
+
+            //preApproval
+            if (payment.PreApproval != null)
+            {
+                data["preApprovalCharge"] = payment.PreApproval.Charge;
+                data["preApprovalName"] = payment.PreApproval.Name;
+                data["preApprovalDetails"] = payment.PreApproval.Details;
+                data["preApprovalPeriod"] = payment.PreApproval.Period;
+                data["preApprovalFinalDate"] = payment.PreApproval.FinalDate.ToString("yyyy-MM-dd") + "T01:00:00.45-03:00";
+                data["preApprovalMaxTotalAmount"] = payment.PreApproval.MaxTotalAmount.ToString("F").Replace(",", ".");
+                data["preApprovalAmountPerPayment"] = payment.PreApproval.AmountPerPayment.ToString("F").Replace(",", ".");
+
+                if (payment.PreApproval.Charge == Charge.Manual)
+                {
+                    data["preApprovalInitialDate"] = payment.PreApproval.InitialDate.ToString("yyyy-MM-dd") + "T01:00:00.45-03:00";
+                    data["preApprovalMaxAmountPerPeriod"] = payment.PreApproval.MaxAmountPerPeriod.ToString("F").Replace(",", ".");
+                    data["preApprovalMaxPaymentsPerPeriod"] = payment.PreApproval.MaxPaymentsPerPeriod.ToString();
+
+                    if (payment.PreApproval.Period == Period.Yearly)
+                        data["preApprovalDayOfYear"] = payment.PreApproval.DayOfYear.ToString();
+
+                    if (payment.PreApproval.Period == Period.Monthly || payment.PreApproval.Period == Period.Bimonthly || payment.PreApproval.Period == Period.Trimonthly || payment.PreApproval.Period == Period.SemiAnnually)
+                        data["preApprovalDayOfMonth"] = payment.PreApproval.DayOfMonth.ToString();
+
+                    if (payment.PreApproval.Period == Period.Weekly)
+                        data["preApprovalDayOfWeek"] = payment.PreApproval.DayOfWeek.ToString();
+                }
+
+                data["reviewUrl"] = payment.ReviewUri.ToString();
+            }
+
+            //preApproval payment
+            if (payment.PreApprovalCode != null)
+            {
+                data["preApprovalCode"] = payment.PreApprovalCode;
             }
 
             // extraAmount

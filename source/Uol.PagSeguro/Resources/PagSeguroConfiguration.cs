@@ -18,6 +18,7 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.XmlParse;
 using System.Reflection;
 using System.Diagnostics;
+using System.Web;
 
 namespace Uol.PagSeguro.Resources
 {
@@ -26,8 +27,12 @@ namespace Uol.PagSeguro.Resources
     /// </summary>
     public static class PagSeguroConfiguration
     {
-        //Capturando o caminho do arquivo
+        //PagSeguro .NET Library Tests
         private const string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
+
+        //Website
+        //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
+
         private static string _moduleVersion;
         private static string _cmsVersion;
 
@@ -39,6 +44,17 @@ namespace Uol.PagSeguro.Resources
             get
             {
                 return PagSeguroConfigSerializer.GetAccountCredentials(LoadXmlConfig());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string UrlXmlConfiguration
+        {
+            get
+            {
+                return urlXmlConfiguration;
             }
         }
 
@@ -126,6 +142,72 @@ namespace Uol.PagSeguro.Resources
             get
             {
                 return new Uri(GetUrlValue(PagSeguroConfigSerializer.Search));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApproval));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalRedirectUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalRedirect));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalNotificationUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalNotification));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalSearchUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalSearch));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalCancelUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalCancel));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri PreApprovalPaymentUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalPayment));
             }
         }
 

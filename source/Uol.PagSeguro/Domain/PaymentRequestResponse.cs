@@ -25,6 +25,7 @@ namespace Uol.PagSeguro.Domain
     {
         private Uri paymentRedirectBaseUri;
         private string code = String.Empty;
+        private string transactionCode = String.Empty;
 
         /// <summary>
         /// Initializes a new instance of the PaymentRequestResponse class
@@ -47,6 +48,21 @@ namespace Uol.PagSeguro.Domain
             set
             {
                 this.code = value;
+            }
+        }
+
+        /// <summary>
+        /// PreApproval payment transaction code
+        /// </summary>
+        public string TransactionCode
+        {
+            get
+            {
+                return this.transactionCode;
+            }
+            set
+            {
+                this.transactionCode = value;
             }
         }
 

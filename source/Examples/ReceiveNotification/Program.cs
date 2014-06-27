@@ -34,16 +34,25 @@ namespace ReceiveNotification
                 // TODO: Substitute the code below with a notification code for your transaction. 
                 // You receive this notification code through a post on the URL that you specify in 
                 // this page: https://pagseguro.uol.com.br/integracao/notificacao-de-transacoes.jhtml
-                Transaction transaction = NotificationService.CheckTransaction(credentials ,"766B9C-AD4B044B04DA-77742F5FA653-E1AB24");
+                
+                // Use notificationType to check if is PreApproval (preApproval or transaction)
+                Transaction transaction = NotificationService.CheckTransaction(credentials, "766B9C-AD4B044B04DA-77742F5FA653-E1AB24", false);
 
                 Console.WriteLine(transaction);
+                Console.ReadKey();
+
+                Transaction preApprovalTransaction = NotificationService.CheckTransaction(credentials, "3DFAD3123412340334A96F9136C38804", true);
+
+                Console.WriteLine(preApprovalTransaction);
                 Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)
             {
-                if (exception.StatusCode == HttpStatusCode.Unauthorized)
+                Console.WriteLine(exception.Message + "\n");
+
+                foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine("Unauthorized: please verify if the credentials used in the web service call are correct. ");
+                    Console.WriteLine(element + "\n");
                 }
                 Console.ReadKey();
             }

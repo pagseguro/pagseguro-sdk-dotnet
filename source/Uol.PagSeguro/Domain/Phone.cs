@@ -36,8 +36,8 @@ namespace Uol.PagSeguro.Domain
         /// <param name="number"></param>
         public Phone(string areaCode, string number)
         {
-            this.AreaCode = areaCode;
-            this.Number = number;
+            this.AreaCode = PagSeguroUtil.GetOnlyNumbers(areaCode);
+            this.Number = PagSeguroUtil.GetOnlyNumbers(number);
         }
 
         /// <summary>
