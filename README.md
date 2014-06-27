@@ -38,6 +38,12 @@ As chamadas via API exigem que você passe uma instância da classe AccountCrede
 Mais informações estão disponíveis na [documentação oficial].
 
 
+Dúvidas?
+----------
+---
+Caso tenha dúvidas ou precise de suporte, acesse nosso [fórum].
+
+
 Changelog
 ---------
 ---
@@ -87,12 +93,6 @@ Notas
  - Certifique-se que o email e o token informados estejam relacionados a uma conta que possua o perfil de vendedor ou empresarial.
 
 
-[Dúvidas?]
-----------
----
-Em caso de dúvidas mande um e-mail para desenvolvedores@pagseguro.com.br
-
-
 Contribuições
 -------------
 ---
@@ -108,7 +108,7 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
   [transações por código]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-codigo.html
   [transações por intervalo de datas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-intervalo-de-datas.html
   [transações abandonadas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-abandonadas.html
-  [Dúvidas?]: https://pagseguro.uol.com.br/desenvolvedor/comunidade.jhtml
+  [fórum]: http://forum.pagseguro.uol.com.br/
   [.NET Framework]: http://www.microsoft.com/net
   [GitHub]: https://github.com/pagseguro/netframework
   [documentação oficial]: https://pagseguro.uol.com.br/v2/guia-de-integracao/documentacao-da-biblioteca-pagseguro-netframework.html

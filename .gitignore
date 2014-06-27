@@ -158,3 +158,9 @@ $RECYCLE.BIN/
 #################
 .sonar/
 sonar-project.properties
+
+#################
+## IntelliJ
+#################
+.idea/
+*.iml
