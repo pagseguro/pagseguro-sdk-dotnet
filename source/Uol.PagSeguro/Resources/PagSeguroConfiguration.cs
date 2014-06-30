@@ -39,12 +39,9 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
-        public static AccountCredentials Credentials
+        public static AccountCredentials Credentials(bool sandbox)
         {
-            get
-            {
-                return PagSeguroConfigSerializer.GetAccountCredentials(LoadXmlConfig());
-            }
+            return PagSeguroConfigSerializer.GetAccountCredentials(LoadXmlConfig(), sandbox);
         }
 
         /// <summary>
