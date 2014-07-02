@@ -44,8 +44,14 @@
 	</Urls>
 	<!-- user's credential -->
 	<Credential>
-		<Email>your email here</Email>
-		<Token>your token here</Token>
+		<!-- your email here -->
+		<Email>your@email.com</Email>
+		<!-- your token here -->
+		<Token>your_token_here</Token>
+		<!-- your sandbox email here -->
+		<SandboxEmail>your_sandbox@email.com</SandboxEmail>
+		<!-- your sandbox token here -->
+		<SandboxToken>your_sandbox_token_here</SandboxToken>
 	</Credential>
 	<!-- configuration default for PagSeguro API-->
 	<Configuration>

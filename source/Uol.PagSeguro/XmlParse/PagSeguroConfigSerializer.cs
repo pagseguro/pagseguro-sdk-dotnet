@@ -40,6 +40,8 @@ namespace Uol.PagSeguro.XmlParse
         private const string Credential = "Credential";
         internal const string Email = "Email";
         internal const string Token = "Token";
+        internal const string SandboxEmail = "SandboxEmail";
+        internal const string SandboxToken = "SandboxToken";
 
         private const string Configuration = "Configuration";
         internal const string LibVersion = "LibVersion";
@@ -85,12 +87,22 @@ namespace Uol.PagSeguro.XmlParse
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        internal static AccountCredentials GetAccountCredentials(XmlDocument xml)
+        internal static AccountCredentials GetAccountCredentials(XmlDocument xml, bool sandbox)
         {
             AccountCredentials credential = null;
 
-            string email = GetDataConfiguration(xml,PagSeguroConfigSerializer.Email);
-            string token = GetDataConfiguration(xml, PagSeguroConfigSerializer.Token);
+            string email;
+            string token;
+
+            if (sandbox)
+            {
+                email = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxEmail);
+                token = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxToken);
+            }
+            else {
+                email = GetDataConfiguration(xml, PagSeguroConfigSerializer.Email);
+                token = GetDataConfiguration(xml, PagSeguroConfigSerializer.Token);
+            }
 
             try
             {
