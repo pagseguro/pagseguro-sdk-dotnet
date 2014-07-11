@@ -35,8 +35,9 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
-    	public static void CheckEnvironment(bool sandbox)
+        public static void ChangeEnvironment(bool sandbox)
         {
+
             string urlXmlConfiguration = PagSeguroConfiguration.UrlXmlConfiguration;
 
             XmlDocument xml = new XmlDocument();

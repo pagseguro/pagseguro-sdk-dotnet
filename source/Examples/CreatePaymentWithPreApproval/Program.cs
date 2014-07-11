@@ -27,25 +27,14 @@ namespace CreatePaymentWithPreApproval
     {
         static void Main(string[] args)
         {
-            bool sandbox = true;
+            bool isSandbox = true;
 
-            // TODO: Substitute the parameters below with your credentials on XML config
-            //AccountCredentials credentials = PagSeguroConfiguration.Credentials(sandbox);
-
-            AccountCredentials credentials;
-            if (sandbox)
-            {
-                // TODO: Substitute the parameters below with your sandbox credentials
-                credentials = new AccountCredentials("your_sandbox@email.com", "your_sandbox_token_here");
-            }
-            else
-            {
-                // TODO: Substitute the parameters below with your production credentials
-                credentials = new AccountCredentials("your@email.com", "your_token_here");
-            }
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             try
             {
+
+                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 // Instantiate a new payment request
                 PaymentRequest payment = new PaymentRequest();

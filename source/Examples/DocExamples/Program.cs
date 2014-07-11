@@ -17,6 +17,7 @@ using System.Web;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Service;
+using Uol.PagSeguro.Resources;
 
 namespace DocExamples
 {
@@ -112,11 +113,11 @@ namespace DocExamples
             PaymentRequest paymentRequest = new PaymentRequest();
             // Preencher propriedades da requisição do pagamento aqui
 
-            // Inicializando credenciais
-            AccountCredentials credentials =
-                new AccountCredentials(
-                    "suporte@lojamodelo.com.br",
-                    "95112EE828D94278BD394E91C4388F20");
+            bool isSandbox = false;
+
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+
+            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
             // Criando o código de requisição de pagamento
             // e obtendo a URL da página de pagamento
@@ -128,11 +129,11 @@ namespace DocExamples
 
         static void RequestExample(HttpRequest Request)
         {
-            // Inicializando credenciais
-            AccountCredentials credentials =
-                new AccountCredentials(
-                    "suporte@lojamodelo.com.br",
-                    "95112EE828D94278BD394E91C4388F20");
+            bool isSandbox = false;
+
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+
+            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
             string notificationType = Request.Form["notificationType"];
             string notificationCode = Request.Form["notificationCode"];
@@ -149,11 +150,11 @@ namespace DocExamples
 
         static void SearchByCodeExample()
         {
-            // Inicializando credenciais
-            AccountCredentials credentials =
-                new AccountCredentials(
-                    "suporte@lojamodelo.com.br",
-                    "95112EE828D94278BD394E91C4388F20");
+            bool isSandbox = false;
+
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+
+            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
             string transactionCode = "59A13D84-52DA-4AB8-B365-1E7D893052B0";
 
@@ -260,11 +261,11 @@ namespace DocExamples
 
         static void SearchByCodeExample2()
         {
-            // Inicializando credenciais
-            AccountCredentials credentials =
-            new AccountCredentials(
-                "suporte@lojamodelo.com.br",
-                "95112EE828D94278BD394E91C4388F20");
+            bool isSandbox = false;
+
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+
+            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
             // Código identificador da transação  
             string transactionCode = "59A13D84-52DA-4AB8-B365-1E7D893052B0";
@@ -283,11 +284,11 @@ namespace DocExamples
 
         static void SearchByDateExample()
         {
-            // Inicializando credenciais
-            AccountCredentials credentials =
-                new AccountCredentials(
-                    "suporte@lojamodelo.com.br",
-                    "95112EE828D94278BD394E91C4388F20");
+            bool isSandbox = false;
+
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+
+            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
             // Definindo a data de ínicio da consulta 
             DateTime initialDate = new DateTime(2011, 06, 1, 08, 50, 0);

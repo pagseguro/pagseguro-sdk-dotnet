@@ -25,25 +25,15 @@ namespace SearchTransactionByCode
     {
         static void Main(string[] args)
         {
-            bool sandbox = true;
+            bool isSandbox = false;
 
-            // TODO: Substitute the parameters below with your credentials on XML config
-            //AccountCredentials credentials = PagSeguroConfiguration.Credentials(sandbox);
-
-            AccountCredentials credentials;
-            if (sandbox)
-            {
-                // TODO: Substitute the parameters below with your sandbox credentials
-                credentials = new AccountCredentials("your_sandbox@email.com", "your_sandbox_token_here");
-            }
-            else
-            {
-                // TODO: Substitute the parameters below with your production credentials
-                credentials = new AccountCredentials("your@email.com", "your_token_here");
-            }
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             try
             {
+
+                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+
                 // TODO: Substitute the code below with a valid transaction code for your transaction
                 //Transaction transaction = TransactionSearchService.SearchByCode(credentials, "59A13D84-52DA-4AB8-B365-1E7D893052B0", false);
 

@@ -47,10 +47,10 @@ Caso tenha dúvidas ou precise de suporte, acesse nosso [fórum].
 Changelog
 ---------
 ---
-2.0.7
+2.1.0
 
-- Implementação do ambiente Sandbox
-- Validação da implementação de Assinaturas (PreApproval)
+- Implementação do environment Sandbox
+- Validação da implementação de Assinaturas (PreApproval). https://github.com/pagseguro/dotnet/pull/4
 
 
 2.0.6

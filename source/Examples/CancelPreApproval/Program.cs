@@ -25,26 +25,16 @@ namespace CancelPreApproval
     {
         static void Main(string[] args)
         {
-           
-            bool sandbox = true;
 
-            // TODO: Substitute the parameters below with your credentials on XML config
-            //AccountCredentials credentials = PagSeguroConfiguration.Credentials(sandbox);
+            bool isSandbox = false;
 
-            AccountCredentials credentials;
-            if (sandbox) 
-            {
-                // TODO: Substitute the parameters below with your sandbox credentials
-                credentials = new AccountCredentials("your_sandbox@email.com", "your_sandbox_token_here");
-            } 
-            else 
-            {
-                // TODO: Substitute the parameters below with your production credentials
-                credentials = new AccountCredentials("your@email.com", "your_token_here");
-            }
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             try
             {
+
+                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+
                 // TODO: Substitute the code below with a valid transaction code for your transaction
                 bool cancelResult = PreApprovalService.CancelPreApproval(credentials, "3DFAD3123412340334A96F9136C38804");
 

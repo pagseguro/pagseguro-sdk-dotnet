@@ -8,7 +8,7 @@
     <ProjectGuid>{19FAADBD-E16D-457B-A6ED-43C2F1A3CA70}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CreatePreApproval</RootNamespace>
+    <RootNamespace>CreatePaymentWithPreApproval</RootNamespace>
     <AssemblyName>CreatePreApproval</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>

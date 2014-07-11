@@ -89,6 +89,7 @@ namespace Uol.PagSeguro.XmlParse
         /// <returns></returns>
         internal static AccountCredentials GetAccountCredentials(XmlDocument xml, bool sandbox)
         {
+
             AccountCredentials credential = null;
 
             string email;
