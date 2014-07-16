@@ -13,7 +13,7 @@
         public const string Bimonthly = "BIMONTHLY";
         public const string Trimonthly = "TRIMONTHLY";
         public const string SemiAnnually = "SEMIANNUALLY";
-        public const string Yearly = "YEARLY ";
+        public const string Yearly = "YEARLY";
     }
 
     public static class DayOfWeekMethod
