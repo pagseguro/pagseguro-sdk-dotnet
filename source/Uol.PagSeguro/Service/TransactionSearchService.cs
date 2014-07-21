@@ -197,7 +197,7 @@ namespace Uol.PagSeguro.Service
             else
             {
                 searchUrlByCode = new QueryStringBuilder("{url}/{transactionCode}?{credential}");
-                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
                 searchUrlByCode.ReplaceValue("{transactionCode}", HttpUtility.UrlEncode(transactionCode));
             }
 
