@@ -47,6 +47,10 @@ Caso tenha dúvidas ou precise de suporte, acesse nosso [fórum].
 Changelog
 ---------
 ---
+2.1.1
+
+- Ajustes diversos
+
 2.1.0
 
 - Implementação do environment Sandbox
