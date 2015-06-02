@@ -47,15 +47,15 @@
     </PreApprovalPayment>
   </Urls>
   <!-- user's credential -->
-  <Credential>
+ <Credential>
     <!-- your email here -->
-    <Email>edison.junior@s2it.com.br</Email>
+    <Email>backoffice@lojamodelo.com.br</Email>
     <!-- your token here -->
-    <Token>256422BF9E66458CA3FE41189AD1C94A</Token>
+    <Token>2507D8278A9D478D94327BABDDC2A573</Token>
     <!-- your sandbox email here -->
-    <SandboxEmail>edison.junior@s2it.com.br</SandboxEmail>
+    <SandboxEmail>backoffice@lojamodelo.com.br</SandboxEmail>
     <!-- your sandbox token here -->
-    <SandboxToken>256422BF9E66458CA3FE41189AD1C94A</SandboxToken>
+    <SandboxToken>2507D8278A9D478D94327BABDDC2A573</SandboxToken>
   </Credential>
   <!-- configuration default for PagSeguro API-->
   <Configuration>
