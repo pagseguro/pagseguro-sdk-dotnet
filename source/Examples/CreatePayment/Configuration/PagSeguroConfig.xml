@@ -4,54 +4,58 @@
   <Urls>
     <!-- url for payment service -->
     <Payment>
-      <Link>https://ws.pagseguro.uol.com.br/v2/checkout</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/checkout</Link>
     </Payment>
     <!-- url for paymentRedirect service -->
     <PaymentRedirect>
-      <Link>https://pagseguro.uol.com.br/v2/checkout/payment.html</Link>
+      <Link>https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html</Link>
     </PaymentRedirect>
     <!-- url for notifications service -->
     <Notification>
-      <Link>https://ws.pagseguro.uol.com.br/v2/transactions/notifications</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/notifications</Link>
     </Notification>
     <!-- url for transactions service -->
     <Search>
-      <Link>https://ws.pagseguro.uol.com.br/v2/transactions</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/transactions</Link>
     </Search>
+    <!-- url for cancel transactions service -->
+    <Cancel>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/cancels</Link>
+    </Cancel>
     <!-- url for preApproval request service -->
     <PreApproval>
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
     </PreApproval>
     <!-- url for preApprovalRedirect service -->
     <PreApprovalRedirect>
-      <Link>https://pagseguro.uol.com.br/v2/pre-approvals/request.html</Link>
+      <Link>https://sandbox.pagseguro.uol.com.br/v2/pre-approvals/request.html</Link>
     </PreApprovalRedirect>
     <!-- url for preApproval notifications service -->
     <PreApprovalNotification>
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/notifications</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/notifications</Link>
     </PreApprovalNotification>
     <!-- url for preApproval transactions service -->
     <PreApprovalSearch>
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals</Link>
     </PreApprovalSearch>
     <!-- url for preApproval cancel service -->
     <PreApprovalCancel>
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/cancel</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/cancel</Link>
     </PreApprovalCancel>
     <PreApprovalPayment>
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/payment</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/payment</Link>
     </PreApprovalPayment>
   </Urls>
   <!-- user's credential -->
   <Credential>
     <!-- your email here -->
-    <Email>backoffice@lojamodelo.com.br</Email>
+    <Email>edison.junior@s2it.com.br</Email>
     <!-- your token here -->
-    <Token>2507D8278A9D478D94327BABDDC2A573</Token>
+    <Token>256422BF9E66458CA3FE41189AD1C94A</Token>
     <!-- your sandbox email here -->
-    <SandboxEmail>backoffice@lojamodelo.com.br</SandboxEmail>
+    <SandboxEmail>edison.junior@s2it.com.br</SandboxEmail>
     <!-- your sandbox token here -->
-    <SandboxToken>2507D8278A9D478D94327BABDDC2A573</SandboxToken>
+    <SandboxToken>256422BF9E66458CA3FE41189AD1C94A</SandboxToken>
   </Credential>
   <!-- configuration default for PagSeguro API-->
   <Configuration>

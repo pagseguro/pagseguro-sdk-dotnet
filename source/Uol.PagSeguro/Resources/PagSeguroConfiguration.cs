@@ -145,6 +145,17 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
+        public static Uri CancelUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Cancel));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static Uri PreApprovalUri
         {
             get
