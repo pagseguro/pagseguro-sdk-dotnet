@@ -47,7 +47,7 @@
     </PreApprovalPayment>
   </Urls>
   <!-- user's credential -->
-  <Credential>
+ <Credential>
     <!-- your email here -->
     <Email>backoffice@lojamodelo.com.br</Email>
     <!-- your token here -->
