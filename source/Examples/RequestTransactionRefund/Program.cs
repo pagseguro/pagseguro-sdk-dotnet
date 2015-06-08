@@ -21,7 +21,7 @@ using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
 using Uol.PagSeguro.XmlParse;
 
-namespace RequestTransactionCancellation
+namespace RequestTransactionRefund
 {
     class Program
     {
@@ -31,7 +31,8 @@ namespace RequestTransactionCancellation
             bool isSandbox = true;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            String transactionCode = "3B1097583EC84C7E9EDC391949F9C4BC";
+            String transactionCode = "F3D9490291B54FA59F39B22AB9E76799";
+            Decimal refundValue = 150.00m;
 
             try
             {
@@ -39,7 +40,8 @@ namespace RequestTransactionCancellation
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 // TODO: Substitute the code below with a valid transaction code for your transaction
-                RequestResponse result = CancelService.RequestCancel(credentials, transactionCode);
+                RequestResponse result = RefundService.RequestRefund(credentials, transactionCode);
+                //RequestResponse result = RefundService.RequestRefund(credentials, transactionCode, refundValue);
 
                 Console.WriteLine(result.ToString());
 

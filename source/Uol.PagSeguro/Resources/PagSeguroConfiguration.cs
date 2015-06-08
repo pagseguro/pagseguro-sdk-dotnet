@@ -156,6 +156,17 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
+        public static Uri RefundUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Refund));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static Uri PreApprovalUri
         {
             get

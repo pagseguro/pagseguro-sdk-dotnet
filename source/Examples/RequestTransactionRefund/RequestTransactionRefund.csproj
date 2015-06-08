@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EE47C281-48C4-486C-9F0D-7CD78EF8F266}</ProjectGuid>
+    <ProjectGuid>{1D47E1C1-7058-4657-87E7-F8E6D64C997A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RequestTransactionRefund</RootNamespace>
-    <AssemblyName>CancelPreApproval</AssemblyName>
+    <AssemblyName>RequestTransactionRefund</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

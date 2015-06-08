@@ -21,7 +21,7 @@ namespace Uol.PagSeguro.Domain
     /// <summary>
     /// Represents an cancel request result
     /// </summary>
-    public class CancelRequestResponse
+    public class RequestResponse
     {
 
         private string response = String.Empty;
@@ -29,7 +29,7 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Initializes a new instance of the CancelRequestResponse class
         /// </summary>
-        public CancelRequestResponse()
+        public RequestResponse()
         {
         }
 

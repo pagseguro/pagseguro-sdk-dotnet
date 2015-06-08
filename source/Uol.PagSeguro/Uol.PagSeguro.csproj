@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\PreApproval.cs" />
-    <Compile Include="Domain\CancelRequestResponse.cs" />
+    <Compile Include="Domain\RequestResponse.cs" />
     <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\PreApprovalRequestResponse.cs" />
     <Compile Include="Domain\PreApprovalRequest.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="Domain\CredentialsNameValuePair.cs" />
     <Compile Include="Log\PagSeguroTrace.cs" />
     <Compile Include="Domain\PaymentRequest.cs" />
+    <Compile Include="Service\RefundService.cs" />
     <Compile Include="Service\PreApprovalService.cs" />
     <Compile Include="Resources\EnvironmentConfiguration.cs" />
     <Compile Include="Service\CancelService.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Domain\Shipping.cs" />
     <Compile Include="Constants\ShippingType.cs" />
     <Compile Include="XmlParse\AddressSerializer.cs" />
+    <Compile Include="XmlParse\RefundSerializer.cs" />
     <Compile Include="XmlParse\PreApprovalSerializer.cs" />
     <Compile Include="XmlParse\ItemListSerializer.cs" />
     <Compile Include="XmlParse\ItemSerializer.cs" />

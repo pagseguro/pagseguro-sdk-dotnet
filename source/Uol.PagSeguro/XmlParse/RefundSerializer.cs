@@ -24,10 +24,10 @@ namespace Uol.PagSeguro.XmlParse
     /// <summary>
     /// 
     /// </summary>
-    public static class CancelSerializer
+    public static class RefundSerializer
     {
         /// <summary>
-        /// Read a payment cancel request
+        /// Read a payment refund request result
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="result"></param>

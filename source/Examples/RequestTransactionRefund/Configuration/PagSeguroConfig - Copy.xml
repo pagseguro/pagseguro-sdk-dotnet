@@ -22,6 +22,10 @@
     <Cancel>
       <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/cancels</Link>
     </Cancel>
+    <!-- url for refund transactions service -->
+    <Refund>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/refunds</Link>
+    </Refund>
     <!-- url for preApproval request service -->
     <PreApproval>
       <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
