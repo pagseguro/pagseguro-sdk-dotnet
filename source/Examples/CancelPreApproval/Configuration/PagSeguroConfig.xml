@@ -22,6 +22,10 @@
     <Cancel>
       <Link>https://ws.pagseguro.uol.com.br/v2/transactions/cancels</Link>
     </Cancel>
+    <!-- url for refund transactions service -->
+    <Refund>
+      <Link>https://ws.pagseguro.uol.com.br/v2/transactions/refunds</Link>
+    </Refund>
     <!-- url for preApproval request service -->
     <PreApproval>
       <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
@@ -51,11 +55,11 @@
     <!-- your email here -->
     <Email>backoffice@lojamodelo.com.br</Email>
     <!-- your token here -->
-    <Token>2507D8278A9D478D94327BABDDC2A573</Token>
+    <Token>256422BF9E66458CA3FE41189AD1C94A</Token>
     <!-- your sandbox email here -->
     <SandboxEmail>backoffice@lojamodelo.com.br</SandboxEmail>
     <!-- your sandbox token here -->
-    <SandboxToken>2507D8278A9D478D94327BABDDC2A573</SandboxToken>
+    <SandboxToken>256422BF9E66458CA3FE41189AD1C94A</SandboxToken>
   </Credential>
   <!-- configuration default for PagSeguro API-->
   <Configuration>

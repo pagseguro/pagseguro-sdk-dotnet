@@ -31,6 +31,7 @@ namespace Uol.PagSeguro.XmlParse
         internal const string Notification = "Notification";
         internal const string Search = "Search";
         internal const string Cancel = "Cancel";
+        internal const string Refund = "Refund";
         internal const string PreApproval = "PreApproval";
         internal const string PreApprovalRedirect = "PreApprovalRedirect";
         internal const string PreApprovalNotification = "PreApprovalNotification";
