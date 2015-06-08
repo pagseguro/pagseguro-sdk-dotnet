@@ -18,6 +18,10 @@
     <Search>
       <Link>https://ws.pagseguro.uol.com.br/v2/transactions</Link>
     </Search>
+    <!-- url for cancel transactions service -->
+    <Cancel>
+      <Link>https://ws.pagseguro.uol.com.br/v2/transactions/cancels</Link>
+    </Cancel>
     <!-- url for preApproval request service -->
     <PreApproval>
       <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
