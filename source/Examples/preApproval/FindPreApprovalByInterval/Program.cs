@@ -18,42 +18,35 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
-using Uol.PagSeguro.Constants;
 
-namespace CreatePreApprovalPaymentCharge
+namespace FindPreApprovalByInterval
 {
     class Program
     {
         static void Main(string[] args)
         {
-
-            bool isSandbox = false;
-
+            bool isSandbox = true;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+
+            // TODO: Substitute the code below with a valid preApproval days interval for your transaction
+            int interval = 10;
 
             try
             {
-
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                PreApprovalSearchResult result = PreApprovalSearchService.SearchByInterval(credentials,  interval);
 
-                // Instantiate a new payment request
-                PaymentRequest payment = new PaymentRequest();
+                if (result.PreApprovals.Count <= 0)
+                {
+                    Console.WriteLine("Nenhuma assinatura");
+                }
 
-                // Sets the currency
-                payment.Currency = Currency.Brl;
-
-                // Add an item for this preApproval payment request
-                payment.Items.Add(new Item("0001", "Seguro contra roubo do Notebook", 1, 100.00m));
-
-                // Sets a reference code for this payment request, it is useful to identify this payment in future notifications.
-                payment.Reference = "REF1234";
-
-                // Sets the previous preApproval code
-                payment.PreApprovalCode = "3DFAD3123412340334A96F9136C38804";
-                
-                string preApprovalTransactionCode = PreApprovalService.CreatePreApprovalPaymentRequest(credentials, payment);
-
-                Console.WriteLine(preApprovalTransactionCode);
+                foreach (PreApprovalSummary preApproval in result.PreApprovals)
+                {
+                    Console.WriteLine("Começando listagem de assinaturas - \n");
+                    Console.WriteLine(preApproval.ToString());
+                    Console.WriteLine(" - Terminando listagem de assinaturas ");
+                }
                 Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)

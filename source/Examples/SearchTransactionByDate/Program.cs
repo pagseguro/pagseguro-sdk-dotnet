@@ -28,25 +28,24 @@ namespace SearchTransactionByCode
         {
 
             bool isSandbox = false;
-
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+
+            // Definindo a data de ínicio da consulta 
+            DateTime initialDate = new DateTime(2015, 06, 05, 08, 50, 0);
+
+            // Definindo a data de término da consulta
+            DateTime finalDate = DateTime.Now.AddHours(-3);
+
+            // Definindo o número máximo de resultados por página
+            int maxPageResults = 100;
+
+            // Definindo o número da página
+            int pageNumber = 1;
 
             try
             {
 
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
-
-                // Definindo a data de ínicio da consulta 
-                DateTime initialDate = new DateTime(2014, 07, 01, 08, 50, 0);
-
-                // Definindo a data de término da consulta
-                DateTime finalDate = DateTime.Now.AddHours(-5);
-
-                // Definindo o número máximo de resultados por página
-                int maxPageResults = 10;
-
-                // Definindo o número da página
-                int pageNumber = 1;
 
                 // Realizando a consulta
                 TransactionSearchResult result =
@@ -55,17 +54,11 @@ namespace SearchTransactionByCode
                         initialDate,
                         finalDate,
                         pageNumber,
-                        maxPageResults,
-                        false);
+                        maxPageResults);
 
                 if (result.Transactions.Count <= 0)
                 {
                     Console.WriteLine("Nenhuma transação");
-                }
-
-                if (result.PreApprovals.Count <= 0)
-                {
-                    Console.WriteLine("Nenhuma assinatura");
                 }
 
                 foreach (TransactionSummary transaction in result.Transactions)
@@ -74,14 +67,6 @@ namespace SearchTransactionByCode
                     Console.WriteLine(transaction.ToString());
                     Console.WriteLine(" - Terminando listagem de transações ");
                 }
-
-                foreach (TransactionSummary transaction in result.PreApprovals)
-                {
-                    Console.WriteLine("Começando listagem de assinaturas - \n");
-                    Console.WriteLine(transaction.ToString());
-                    Console.WriteLine(" - Terminando listagem de assinaturas ");
-                }
-
                 Console.ReadKey();
 
             }

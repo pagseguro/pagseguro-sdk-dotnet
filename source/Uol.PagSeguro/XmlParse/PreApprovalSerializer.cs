@@ -14,6 +14,7 @@
 
 using System;
 using System.Xml;
+using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse

@@ -142,7 +142,7 @@ namespace DocExamples
             {
                 // obtendo o objeto transaction a partir do código de notificação
                 Transaction transaction =
-                    NotificationService.CheckTransaction(credentials, notificationCode, false);
+                    NotificationService.CheckTransaction(credentials, notificationCode);
 
                 int status = transaction.TransactionStatus;
             }
@@ -159,7 +159,7 @@ namespace DocExamples
             string transactionCode = "59A13D84-52DA-4AB8-B365-1E7D893052B0";
 
             Transaction transaction =
-                TransactionSearchService.SearchByCode(credentials, transactionCode, false);
+                TransactionSearchService.SearchByCode(credentials, transactionCode);
 
             Console.WriteLine(transaction.TransactionStatus);
             Console.WriteLine(transaction.GrossAmount);
@@ -275,8 +275,7 @@ namespace DocExamples
             Transaction transaction =
                 TransactionSearchService.SearchByCode(
                     credentials,
-                    transactionCode,
-                    false);
+                    transactionCode);
 
             // Imprime o status da transação
             Console.WriteLine(transaction.TransactionStatus);
@@ -309,8 +308,7 @@ namespace DocExamples
                     initialDate,
                     finalDate,
                     pageNumber,
-                    maxPageResults,
-                    false);
+                    maxPageResults);
         }
 
         static void TransactionSearchResultExample(TransactionSearchResult transactionSearchResult)

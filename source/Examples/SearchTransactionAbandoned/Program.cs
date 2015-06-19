@@ -27,26 +27,25 @@ namespace SearchTransactionAbandoned
         static void Main(string[] args)
         {
 
-            bool isSandbox = true;
-
+            bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+
+            // Definindo a data de ínicio da consulta 
+            DateTime initialDate = new DateTime(2015, 06, 14, 08, 50, 0);
+
+            // Definindo a data de término da consulta
+            DateTime finalDate = DateTime.Now.AddHours(-5);
+
+            // Definindo o número máximo de resultados por página
+            int maxPageResults = 10;
+
+            // Definindo o número da página
+            int pageNumber = 1;
 
             try
             {
 
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
-
-                // Definindo a data de ínicio da consulta 
-                DateTime initialDate = new DateTime(2015, 04, 30, 08, 50, 0);
-
-                // Definindo a data de término da consulta
-                DateTime finalDate = DateTime.Now.AddHours(-5);
-
-                // Definindo o número máximo de resultados por página
-                int maxPageResults = 10;
-
-                // Definindo o número da página
-                int pageNumber = 1;
 
                 // Realizando a consulta
                 TransactionSearchResult result =

@@ -40,14 +40,9 @@ namespace ReceiveNotification
                 // this page: https://pagseguro.uol.com.br/integracao/notificacao-de-transacoes.jhtml
                 
                 // Use notificationType to check if is PreApproval (preApproval or transaction)
-                Transaction transaction = NotificationService.CheckTransaction(credentials, "766B9C-AD4B044B04DA-77742F5FA653-E1AB24", false);
+                Transaction transaction = NotificationService.CheckTransaction(credentials, "766B9C-AD4B044B04DA-77742F5FA653-E1AB24");
 
                 Console.WriteLine(transaction);
-                Console.ReadKey();
-
-                Transaction preApprovalTransaction = NotificationService.CheckTransaction(credentials, "3DFAD3123412340334A96F9136C38804", true);
-
-                Console.WriteLine(preApprovalTransaction);
                 Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)

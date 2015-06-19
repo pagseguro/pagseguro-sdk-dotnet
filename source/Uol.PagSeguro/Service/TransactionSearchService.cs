@@ -42,19 +42,19 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="transactionCode">Transaction code</param>
         /// <returns cref="T:Uol.PagSeguro.Transaction"><c>Transaction</c></returns>
-        public static Transaction SearchByCode(Credentials credentials, string transactionCode, bool preApproval)
+        public static Transaction SearchByCode(Credentials credentials, string transactionCode)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - begin", transactionCode));
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByCode(credentials, transactionCode, preApproval)))
+                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByCode(credentials, transactionCode)))
                 {
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         Transaction transaction = new Transaction();
-                        TransactionSerializer.Read(reader, transaction, preApproval);
+                        TransactionSerializer.Read(reader, transaction);
                         PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - end {1}", transactionCode, transaction));
                         return transaction;
                     }
@@ -74,19 +74,19 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="reference">Reference</param>
         /// <returns></returns>
-        public static TransactionSearchResult SearchByReference(Credentials credentials, string reference, bool preApproval)
+        public static TransactionSearchResult SearchByReference(Credentials credentials, string reference)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByReference(reference={0}) - begin", reference));
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByReference(credentials, reference, preApproval)))
+                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByReference(credentials, reference)))
                 {
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         TransactionSearchResult result = new TransactionSearchResult();
-                        TransactionSearchResultSerializer.Read(reader, result, preApproval);
+                        TransactionSearchResultSerializer.Read(reader, result);
                         PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByReference(reference={0}) - end", reference));
                         return result;
                     }
@@ -101,82 +101,7 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
-        /// Search transactions associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, bool preApproval)
-        {
-            return SearchByDateCore(credentials, initialDate, DateTime.MaxValue, 0, 0, preApproval);
-        }
-
-        /// <summary>
-        /// Search transactions associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, int pageNumber, bool preApproval)
-        {
-            return SearchByDateCore(credentials, initialDate, DateTime.MaxValue, pageNumber, 0, preApproval);
-        }
-
-        /// <summary>
-        /// Search transactions associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <param name="resultsPerPage"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, int pageNumber, int resultsPerPage, bool preApproval)
-        {
-            return SearchByDateCore(credentials, initialDate, DateTime.MaxValue, pageNumber, resultsPerPage, preApproval);
-        }
-
-        /// <summary>
-        /// Search transactions associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="finalDate"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, bool preApproval)
-        {
-            return SearchByDateCore(credentials, initialDate, finalDate, 0, 0, preApproval);
-        }
-
-        /// <summary>
-        /// Search transactions associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="finalDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, bool preApproval)
-        {
-            return SearchByDateCore(credentials, initialDate, finalDate, pageNumber, 0, preApproval);
-        }
-
-        /// <summary>
-        /// Search transactions associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="finalDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <param name="resultsPerPage"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage, bool preApproval)
-        {
-            return SearchByDateCore(credentials, initialDate, finalDate, pageNumber, resultsPerPage, preApproval);
-        }
-
-        /// <summary>
-        /// Common implmentation of all SearchByDate methods
+        /// Finds a transaction with a matching date interval
         /// </summary>
         /// <param name="credentials">PagSeguro credentials. Required.</param>
         /// <param name="initialDate"></param>
@@ -184,19 +109,19 @@ namespace Uol.PagSeguro.Service
         /// <param name="pageNumber">Page number, starting with 1. If passed as 0, it will call the web service to get the default page, also page number 1.</param>
         /// <param name="resultsPerPage">Results per page, optional.</param>
         /// <returns></returns>
-        private static TransactionSearchResult SearchByDateCore(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage, bool preApproval)
+        public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int? pageNumber = null, int? resultsPerPage = null)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - begin", initialDate, finalDate));
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByDate(credentials, initialDate, finalDate, pageNumber, resultsPerPage, preApproval)))
+                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByDate(credentials, initialDate, finalDate, pageNumber, resultsPerPage)))
                 {
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         TransactionSearchResult result = new TransactionSearchResult();
-                        TransactionSearchResultSerializer.Read(reader, result, preApproval);
+                        TransactionSearchResultSerializer.Read(reader, result);
                         PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - end {2}", initialDate, finalDate, result));
                         return result;
                     }
@@ -211,82 +136,7 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
-        /// Search transactions abandoned associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchAbandoned(Credentials credentials, DateTime initialDate)
-        {
-            return SearchAbandonedCore(credentials, initialDate, DateTime.MaxValue, 0, 0);
-        }
-
-        /// <summary>
-        /// Search transactions abandoned associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchAbandoned(Credentials credentials, DateTime initialDate, int pageNumber)
-        {
-            return SearchAbandonedCore(credentials, initialDate, DateTime.MaxValue, pageNumber, 0);
-        }
-
-        /// <summary>
-        /// Search transactions abandoned associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <param name="resultsPerPage"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchAbandoned(Credentials credentials, DateTime initialDate, int pageNumber, int resultsPerPage)
-        {
-            return SearchAbandonedCore(credentials, initialDate, DateTime.MaxValue, pageNumber, resultsPerPage);
-        }
-
-        /// <summary>
-        /// Search transactions abandoned associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="finalDate"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchAbandoned(Credentials credentials, DateTime initialDate, DateTime finalDate)
-        {
-            return SearchAbandonedCore(credentials, initialDate, finalDate, 0, 0);
-        }
-
-        /// <summary>
-        /// Search transactions abandoned associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="finalDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchAbandoned(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber)
-        {
-            return SearchAbandonedCore(credentials, initialDate, finalDate, pageNumber, 0);
-        }
-
-        /// <summary>
-        /// Search transactions abandoned associated with this set of credentials within a date range
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="finalDate"></param>
-        /// <param name="pageNumber"></param>
-        /// <param name="resultsPerPage"></param>
-        /// <returns></returns>
-        public static TransactionSearchResult SearchAbandoned(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage)
-        {
-            return SearchAbandonedCore(credentials, initialDate, finalDate, pageNumber, resultsPerPage);
-        }
-
-        /// <summary>
-        /// Common implmentation of all abandoned methods
+        /// Finds abandoned transactions
         /// </summary>
         /// <param name="credentials">PagSeguro credentials. Required.</param>
         /// <param name="initialDate"></param>
@@ -294,7 +144,7 @@ namespace Uol.PagSeguro.Service
         /// <param name="pageNumber">Page number, starting with 1. If passed as 0, it will call the web service to get the default page, also page number 1.</param>
         /// <param name="resultsPerPage">Results per page, optional.</param>
         /// <returns></returns>
-        private static TransactionSearchResult SearchAbandonedCore(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage)
+        public static TransactionSearchResult SearchAbandoned(Credentials credentials, DateTime initialDate, DateTime finalDate, int? pageNumber = null, int? resultsPerPage = null)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchAbandoned(initialDate={0}, finalDate={1}) - begin", initialDate, finalDate));
@@ -306,7 +156,7 @@ namespace Uol.PagSeguro.Service
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         TransactionSearchResult result = new TransactionSearchResult();
-                        TransactionSearchResultSerializer.Read(reader, result, false);
+                        TransactionSearchResultSerializer.Read(reader, result);
                         PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchAbandoned(initialDate={0}, finalDate={1}) - end {2}", initialDate, finalDate, result));
                         return result;
                     }
@@ -326,23 +176,13 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials"></param>
         /// <param name="transactionCode"></param>
         /// <returns></returns>
-        private static string BuildSearchUrlByCode(Credentials credentials, string transactionCode, bool preApproval)
+        private static string BuildSearchUrlByCode(Credentials credentials, string transactionCode)
         {
             QueryStringBuilder searchUrlByCode;
 
-            if (preApproval == true)
-            {
-                searchUrlByCode = new QueryStringBuilder("{url}/{preApprovalCode}?{credential}");
-                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
-                searchUrlByCode.ReplaceValue("{preApprovalCode}", HttpUtility.UrlEncode(transactionCode));
-            }
-            else
-            {
-                searchUrlByCode = new QueryStringBuilder("{url}/{transactionCode}?{credential}");
-                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
-                searchUrlByCode.ReplaceValue("{transactionCode}", HttpUtility.UrlEncode(transactionCode));
-            }
-
+            searchUrlByCode = new QueryStringBuilder("{url}/{transactionCode}?{credential}");
+            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+            searchUrlByCode.ReplaceValue("{transactionCode}", HttpUtility.UrlEncode(transactionCode));
             searchUrlByCode.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return searchUrlByCode.ToString();
         }
@@ -356,18 +196,22 @@ namespace Uol.PagSeguro.Service
         /// <param name="pageNumber"></param>
         /// <param name="resultsPerPage"></param>
         /// <returns></returns>
-        private static string BuildSearchUrlByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage, bool preApproval)
+        private static string BuildSearchUrlByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int? pageNumber, int? resultsPerPage)
         {
-            QueryStringBuilder searchUrlByCode = new QueryStringBuilder("{url}/?initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
-            if (preApproval == true)
-                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
-            else
-                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+            QueryStringBuilder searchUrlByCode = new QueryStringBuilder("{url}/?{credential}&initialDate={initialDate}{finalDate}");
+
+            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
             searchUrlByCode.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             searchUrlByCode.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
-            searchUrlByCode.ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
-            searchUrlByCode.ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
-            searchUrlByCode.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().AppendToQuery("&").EncodeCredentialsAsQueryString(credentials).ToString() : "");
+
+            if (pageNumber.HasValue)
+                searchUrlByCode.AppendToQuery("{page}").ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
+
+            if (resultsPerPage.HasValue)
+                searchUrlByCode.AppendToQuery("{maxPageResults}").ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
+
+            searchUrlByCode.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString() : "");
+
             return PagSeguroUtil.RemoveExtraSpaces(searchUrlByCode.ToString());
         }
 
@@ -380,15 +224,20 @@ namespace Uol.PagSeguro.Service
         /// <param name="pageNumber"></param>
         /// <param name="resultsPerPage"></param>
         /// <returns></returns>
-        private static string BuildSearchUrlAbandoned(Credentials credentials, DateTime initialDate, DateTime finalDate, int pageNumber, int resultsPerPage)
+        private static string BuildSearchUrlAbandoned(Credentials credentials, DateTime initialDate, DateTime finalDate, int? pageNumber, int? resultsPerPage)
         {
-            QueryStringBuilder searchUrlAbandoned = new QueryStringBuilder("{url}/abandoned?initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
+            QueryStringBuilder searchUrlAbandoned = new QueryStringBuilder("{url}/abandoned?initialDate={initialDate}{finalDate}{credential}");
 
             searchUrlAbandoned.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
             searchUrlAbandoned.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             searchUrlAbandoned.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
-            searchUrlAbandoned.ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
-            searchUrlAbandoned.ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
+            
+            if (pageNumber.HasValue)
+                searchUrlAbandoned.AppendToQuery("{page}").ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
+            
+            if (resultsPerPage.HasValue)
+                searchUrlAbandoned.AppendToQuery("{maxPageResults}").ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
+            
             searchUrlAbandoned.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().AppendToQuery("&").EncodeCredentialsAsQueryString(credentials).ToString() : "");
 
             return PagSeguroUtil.RemoveExtraSpaces(searchUrlAbandoned.ToString());
@@ -400,23 +249,13 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials"></param>
         /// <param name="reference"></param>
         /// <returns></returns>
-        private static string BuildSearchUrlByReference(Credentials credentials, string reference, bool preApproval)
+        private static string BuildSearchUrlByReference(Credentials credentials, string reference)
         {
             QueryStringBuilder searchUrlByReference;
 
-            if (preApproval == true)
-            {
-                searchUrlByReference = new QueryStringBuilder("{url}/{preApprovalCode}?{credential}");
-                searchUrlByReference.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
-                searchUrlByReference.ReplaceValue("{preApprovalCode}", HttpUtility.UrlEncode(reference));
-            }
-            else
-            {
-                searchUrlByReference = new QueryStringBuilder("{url}?{credentials}&reference={reference}");
-                searchUrlByReference.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
-                searchUrlByReference.ReplaceValue("{reference}", HttpUtility.UrlEncode(reference));
-            }
-
+            searchUrlByReference = new QueryStringBuilder("{url}?{credentials}&reference={reference}");
+            searchUrlByReference.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+            searchUrlByReference.ReplaceValue("{reference}", HttpUtility.UrlEncode(reference));
             searchUrlByReference.ReplaceValue("{credentials}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
 
             return searchUrlByReference.ToString();

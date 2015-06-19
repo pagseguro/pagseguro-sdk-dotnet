@@ -19,26 +19,47 @@ using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
 
-namespace CancelPreApproval
+namespace FindPreApprovalByReference
 {
     class Program
     {
         static void Main(string[] args)
         {
-
-            bool isSandbox = false;
-
+            bool isSandbox = true;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+
+            // TODO: Substitute the code below with a valid preApproval reference for your transaction
+            String reference = "REF1234";
+            DateTime initialDate = new DateTime(2015, 06, 01, 08, 50, 0);
+            DateTime finalDate = DateTime.Now.AddHours(-5);
+            int maxPageResults = 10;
+            int pageNumber = 1;
 
             try
             {
-
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                PreApprovalSearchResult result = 
+                    PreApprovalSearchService.SearchByReference(
+                        credentials, 
+                        reference, 
+                        initialDate,
+                        finalDate,
+                        pageNumber,
+                        maxPageResults
+                    );
 
-                // TODO: Substitute the code below with a valid transaction code for your transaction
-                bool cancelResult = PreApprovalService.CancelPreApproval(credentials, "3DFAD3123412340334A96F9136C38804");
+                if (result.PreApprovals.Count <= 0)
+                {
+                    Console.WriteLine("Nenhuma assinatura");
+                }
 
-                Console.WriteLine(cancelResult);
+                foreach (PreApprovalSummary preApproval in result.PreApprovals)
+                {
+                    Console.WriteLine("Começando listagem de assinaturas - \n");
+                    Console.WriteLine(preApproval.ToString());
+                    Console.WriteLine(" - Terminando listagem de assinaturas ");
+                }
+
                 Console.ReadKey();
             }
             catch (PagSeguroServiceException exception)

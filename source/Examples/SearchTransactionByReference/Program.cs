@@ -26,7 +26,7 @@ namespace SearchTransactionByReference
         static void Main(string[] args)
         {
 
-            bool isSandbox = true;
+            bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             String referenceCode = "REF123";
@@ -37,9 +37,7 @@ namespace SearchTransactionByReference
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 // Realizando a consulta
-                TransactionSearchResult result = TransactionSearchService.SearchByReference(credentials, referenceCode, false);
-
-                //Console.WriteLine(result.Transactions);
+                TransactionSearchResult result = TransactionSearchService.SearchByReference(credentials, referenceCode);
 
                 if (result.Transactions.Count <= 0)
                 {

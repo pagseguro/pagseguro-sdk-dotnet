@@ -21,7 +21,7 @@ using Uol.PagSeguro.Service;
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
-    /// Represents a preApproval request
+    /// Represents a pre-approval request
     /// </summary>
     public class PreApprovalRequest
     {
@@ -156,11 +156,11 @@ namespace Uol.PagSeguro.Domain
         /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
         public Uri Register(Credentials credentials)
         {
-            return PreApprovalService.CreateCheckoutRequest(credentials, this);
+            return PreApprovalService.CreatePreApproval(credentials, this);
         }
 
         /// <summary>
-        /// Add a parameter for PagSeguro metadata checkout request 
+        /// Add a parameter for PagSeguro metadata pre-approval request 
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
@@ -170,7 +170,7 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Add a parameter for PagSeguro metadata checkout request 
+        /// Add a parameter for PagSeguro metadata pre-approval request 
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
@@ -181,7 +181,7 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Add a parameter for PagSeguro checkout request
+        /// Add a parameter for PagSeguro pre-approval request
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
@@ -191,7 +191,7 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Add a parameter for PagSeguro checkout request
+        /// Add a parameter for PagSeguro pre-approval request
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
