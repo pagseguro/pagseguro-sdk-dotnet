@@ -25,14 +25,13 @@ namespace Uol.PagSeguro.XmlParse
     internal static class TransactionSummaryListSerializer
     {
         internal const string Transactions = "transactions";
-        internal const string PreApprovals = "preApprovals";
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="transactions"></param>
-        internal static void Read(XmlReader reader, IList<TransactionSummary> transactions, bool preApproval)
+        internal static void Read(XmlReader reader, IList<TransactionSummary> transactions)
         {
 
             transactions.Clear();
@@ -42,29 +41,15 @@ namespace Uol.PagSeguro.XmlParse
                 XMLParserUtils.SkipNode(reader);
             }
 
-            if (preApproval == true)
-                reader.ReadStartElement(TransactionSummaryListSerializer.PreApprovals);
-            else
-                reader.ReadStartElement(TransactionSummaryListSerializer.Transactions);
+            reader.ReadStartElement(TransactionSummaryListSerializer.Transactions);
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-                if (preApproval == true)
+                if (XMLParserUtils.IsEndElement(reader, TransactionSummaryListSerializer.Transactions))
                 {
-                    if (XMLParserUtils.IsEndElement(reader, TransactionSummaryListSerializer.PreApprovals))
-                    {
-                        XMLParserUtils.SkipNode(reader);
-                        break;
-                    }
-                }
-                else
-                {
-                    if (XMLParserUtils.IsEndElement(reader, TransactionSummaryListSerializer.Transactions))
-                    {
-                        XMLParserUtils.SkipNode(reader);
-                        break;
-                    }
+                    XMLParserUtils.SkipNode(reader);
+                    break;
                 }
 
                 if (reader.NodeType == XmlNodeType.Element)
@@ -73,11 +58,7 @@ namespace Uol.PagSeguro.XmlParse
                     switch (reader.Name)
                     {
                         case TransactionSerializerHelper.Transaction:
-                            TransactionSummarySerializer.Read(reader, transaction, preApproval);
-                            transactions.Add(transaction);
-                            break;
-                        case TransactionSerializerHelper.PreApproval:
-                            TransactionSummarySerializer.Read(reader, transaction, preApproval);
+                            TransactionSummarySerializer.Read(reader, transaction);
                             transactions.Add(transaction);
                             break;
                         default:

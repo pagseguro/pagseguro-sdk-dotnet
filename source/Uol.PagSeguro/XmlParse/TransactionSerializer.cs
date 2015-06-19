@@ -28,7 +28,7 @@ namespace Uol.PagSeguro.XmlParse
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="transaction"></param>
-        internal static void Read(XmlReader reader, Transaction transaction, bool preApproval)
+        internal static void Read(XmlReader reader, Transaction transaction)
         {
 
             if (reader.IsEmptyElement)
@@ -37,29 +37,16 @@ namespace Uol.PagSeguro.XmlParse
                 return;
             }
 
-            if (preApproval == true)
-                reader.ReadStartElement(TransactionSerializerHelper.PreApproval);
-            else
-                reader.ReadStartElement(TransactionSerializerHelper.Transaction);
+            reader.ReadStartElement(TransactionSerializerHelper.Transaction);
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-                if (preApproval == true)
+
+                if (XMLParserUtils.IsEndElement(reader, TransactionSerializerHelper.PreApproval))
                 {
-                    if (XMLParserUtils.IsEndElement(reader, TransactionSerializerHelper.PreApproval))
-                    {
-                        XMLParserUtils.SkipNode(reader);
-                        break;
-                    }
-                }
-                else
-                {
-                    if (XMLParserUtils.IsEndElement(reader, TransactionSerializerHelper.Transaction))
-                    {
-                        XMLParserUtils.SkipNode(reader);
-                        break;
-                    }
+                    XMLParserUtils.SkipNode(reader);
+                    break;
                 }
 
                 if (reader.NodeType == XmlNodeType.Element)
@@ -79,10 +66,7 @@ namespace Uol.PagSeguro.XmlParse
                             transaction.TransactionType = reader.ReadElementContentAsInt();
                             break;
                         case TransactionSerializerHelper.TransactionStatus:
-                            if (preApproval == true)
-                                transaction.Status = reader.ReadElementContentAsString();
-                            else
-                                transaction.TransactionStatus = reader.ReadElementContentAsInt();
+                            transaction.TransactionStatus = reader.ReadElementContentAsInt();
                             break;
                         case TransactionSerializerHelper.GrossAmount:
                             transaction.GrossAmount = reader.ReadElementContentAsDecimal();
@@ -104,15 +88,6 @@ namespace Uol.PagSeguro.XmlParse
                             break;
                         case TransactionSerializerHelper.InstallmentCount:
                             transaction.InstallmentCount = reader.ReadElementContentAsInt();
-                            break;
-                        case TransactionSerializerHelper.Name:
-                            transaction.Name = reader.ReadElementContentAsString();
-                            break;
-                        case TransactionSerializerHelper.Tracker:
-                            transaction.Tracker = reader.ReadElementContentAsString();
-                            break;
-                        case TransactionSerializerHelper.Charge:
-                            transaction.Charge = reader.ReadElementContentAsString();
                             break;
                         case PaymentMethodSerializer.PaymentMethod:
                             PaymentMethod paymentMethod = new PaymentMethod();

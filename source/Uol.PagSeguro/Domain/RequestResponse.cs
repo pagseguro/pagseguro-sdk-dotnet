@@ -19,7 +19,7 @@ using Uol.PagSeguro.Util;
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
-    /// Represents an cancel request result
+    /// Represents an request result
     /// </summary>
     public class RequestResponse
     {
@@ -27,7 +27,7 @@ namespace Uol.PagSeguro.Domain
         private string response = String.Empty;
 
         /// <summary>
-        /// Initializes a new instance of the CancelRequestResponse class
+        /// Initializes a new instance of the RequestResponse class
         /// </summary>
         public RequestResponse()
         {

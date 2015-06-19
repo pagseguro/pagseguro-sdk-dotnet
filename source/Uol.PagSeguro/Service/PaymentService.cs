@@ -96,7 +96,10 @@ namespace Uol.PagSeguro.Service
             foreach (KeyValuePair<string, string> pair in data)
             {
                 builder.Append(pair.Key, pair.Value);
+                Console.WriteLine(builder.ToString());
             }
+
+            Console.WriteLine(builder.ToString());
 
             return builder.ToString();
         }

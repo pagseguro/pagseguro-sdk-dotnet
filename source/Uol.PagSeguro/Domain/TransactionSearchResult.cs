@@ -90,6 +90,7 @@ namespace Uol.PagSeguro.Domain
             builder.Append("TotalPages=").Append(this.TotalPages).Append(", ");
             builder.Append("Transactions in this page=").Append(this.Transactions.Count);
             builder.Append(')');
+
             return builder.ToString();
         }
     }

@@ -24,7 +24,6 @@ namespace Uol.PagSeguro.XmlParse
     internal static class TransactionSearchResultSerializer
     {
         internal const string TransactionSearchResult = "transactionSearchResult";
-        internal const string PreApprovalSearchResult = "preApprovalSearchResult";
 
         private const string Date = "date";
         private const string CurrentPage = "currentPage";
@@ -35,7 +34,7 @@ namespace Uol.PagSeguro.XmlParse
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="result"></param>
-        internal static void Read(XmlReader reader, TransactionSearchResult result, bool preApproval)
+        internal static void Read(XmlReader reader, TransactionSearchResult result)
         {
             if (reader.IsEmptyElement)
             {
@@ -43,29 +42,16 @@ namespace Uol.PagSeguro.XmlParse
                 return;
             }
 
-            if (preApproval == true)
-                reader.ReadStartElement(TransactionSearchResultSerializer.PreApprovalSearchResult);
-            else
-                reader.ReadStartElement(TransactionSearchResultSerializer.TransactionSearchResult);
+            reader.ReadStartElement(TransactionSearchResultSerializer.TransactionSearchResult);
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-                if (preApproval == true)
+                
+                if (XMLParserUtils.IsEndElement(reader, TransactionSearchResultSerializer.TransactionSearchResult))
                 {
-                    if (XMLParserUtils.IsEndElement(reader, TransactionSearchResultSerializer.PreApprovalSearchResult))
-                    {
-                        XMLParserUtils.SkipNode(reader);
-                        break;
-                    }
-                }
-                else
-                {
-                    if (XMLParserUtils.IsEndElement(reader, TransactionSearchResultSerializer.TransactionSearchResult))
-                    {
-                        XMLParserUtils.SkipNode(reader);
-                        break;
-                    }
+                    XMLParserUtils.SkipNode(reader);
+                    break;
                 }
 
                 if (reader.NodeType == XmlNodeType.Element)
@@ -82,10 +68,7 @@ namespace Uol.PagSeguro.XmlParse
                             result.TotalPages = reader.ReadElementContentAsInt();
                             break;
                         case TransactionSummaryListSerializer.Transactions:
-                            TransactionSummaryListSerializer.Read(reader, result.Transactions, preApproval);
-                            break;
-                        case TransactionSummaryListSerializer.PreApprovals:
-                            TransactionSummaryListSerializer.Read(reader, result.PreApprovals, preApproval);
+                            TransactionSummaryListSerializer.Read(reader, result.Transactions);
                             break;
                         default:
                             XMLParserUtils.SkipElement(reader);

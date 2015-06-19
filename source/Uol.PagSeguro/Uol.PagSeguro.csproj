@@ -64,23 +64,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\PreApproval.cs" />
+    <Compile Include="Domain\PreApproval.cs" />
+    <Compile Include="Domain\PreApprovalRequest.cs" />
+    <Compile Include="Domain\PreApprovalRequestResponse.cs" />
     <Compile Include="Domain\RequestResponse.cs" />
     <Compile Include="Domain\Address.cs" />
-    <Compile Include="Domain\PreApprovalRequestResponse.cs" />
-    <Compile Include="Domain\PreApprovalRequest.cs" />
     <Compile Include="Domain\Documents.cs" />
     <Compile Include="Domain\MetaData.cs" />
     <Compile Include="Domain\MetaDataItem.cs" />
     <Compile Include="Domain\MetaDataItemKeys.cs" />
     <Compile Include="Domain\Parameter.cs" />
     <Compile Include="Domain\ParameterItem.cs" />
-    <Compile Include="Domain\PreApproval.cs" />
     <Compile Include="Domain\SenderDocument.cs" />
+    <Compile Include="Domain\PreApprovalSearchResult.cs" />
+    <Compile Include="Domain\PreApprovalSummary.cs" />
+    <Compile Include="Domain\PreApprovalTransaction.cs" />
     <Compile Include="Parse\PreApprovalParse.cs" />
     <Compile Include="Parse\PaymentParse.cs" />
     <Compile Include="Domain\CredentialsNameValuePair.cs" />
     <Compile Include="Log\PagSeguroTrace.cs" />
     <Compile Include="Domain\PaymentRequest.cs" />
+    <Compile Include="Service\PreApprovalSearchService.cs" />
     <Compile Include="Service\RefundService.cs" />
     <Compile Include="Service\PreApprovalService.cs" />
     <Compile Include="Resources\EnvironmentConfiguration.cs" />
@@ -127,10 +131,14 @@
     <Compile Include="XmlParse\SenderSerializer.cs" />
     <Compile Include="XmlParse\ShippingSerializer.cs" />
     <Compile Include="XmlParse\TransactionSearchResultSerializer.cs" />
+    <Compile Include="XmlParse\PreApprovalSearchResultSerializer.cs" />
     <Compile Include="XmlParse\CancelSerializer.cs" />
+    <Compile Include="XmlParse\PreApprovalTransactionSerializer.cs" />
     <Compile Include="XmlParse\TransactionSerializer.cs" />
     <Compile Include="Constants\TransactionSerializerHelper.cs" />
+    <Compile Include="XmlParse\PreApprovalSummaryListSerializer.cs" />
     <Compile Include="XmlParse\TransactionSummaryListSerializer.cs" />
+    <Compile Include="XmlParse\PreApprovalSummarySerializer.cs" />
     <Compile Include="XmlParse\TransactionSummarySerializer.cs" />
     <Compile Include="XmlParse\XMLParserUtils.cs" />
   </ItemGroup>

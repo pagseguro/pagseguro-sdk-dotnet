@@ -35,14 +35,14 @@ namespace Uol.PagSeguro.Service
     {
 
         /// <summary>
-        /// createCheckoutRequest is the actual implementation of the Register method
+        /// CreatePreApproval is the actual implementation of the Register method
         /// This separation serves as test hook to validate the Uri
         /// against the code returned by the service
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="preApproval">PreApproval request information</param>
         /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
-        public static Uri CreateCheckoutRequest(Credentials credentials, PreApprovalRequest preApproval)
+        public static Uri CreatePreApproval(Credentials credentials, PreApprovalRequest preApproval)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - begin", preApproval));
@@ -50,7 +50,7 @@ namespace Uol.PagSeguro.Service
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.PreApprovalUri.AbsoluteUri, BuildCheckoutUrl(credentials, preApproval)))
+                    PagSeguroConfiguration.PreApprovalUri.AbsoluteUri, BuildPreApprovalUrl(credentials, preApproval)))
                 {
 
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
@@ -122,36 +122,37 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
-        /// createPreApprovalPaymentRequest
+        /// ChargePreApproval
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="payment">PreApproval payment request information</param>
         /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
-        public static string CreatePreApprovalPaymentRequest(Credentials credentials, PaymentRequest payment)
+        public static string ChargePreApproval(Credentials credentials, PaymentRequest payment)
         {
 
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CreatePreApprovalPaymentRequest({0}) - begin", payment));
+            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - begin", payment));
 
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.PreApprovalPaymentUri.AbsoluteUri, BuildPaymentUrl(credentials, payment)))
+                    PagSeguroConfiguration.PreApprovalPaymentUri.AbsoluteUri, BuildChargeUrl(credentials, payment)))
                 {
-
+                    
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
                         using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                         {
-                            PaymentRequestResponse paymentResponse = new PaymentRequestResponse(PagSeguroConfiguration.PreApprovalPaymentUri);
-                            PaymentSerializer.Read(reader, paymentResponse);
-                            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CreatePreApprovalPaymentRequest({0}) - end {1}", payment, paymentResponse.PaymentRedirectUri));
-                            return paymentResponse.TransactionCode;
+                            
+                            PaymentRequestResponse chargeResponse = new PaymentRequestResponse(PagSeguroConfiguration.PreApprovalPaymentUri);
+                            PaymentSerializer.Read(reader, chargeResponse);
+                            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - end {1}", payment, chargeResponse.PaymentRedirectUri));
+                            return chargeResponse.TransactionCode;
                         }
                     }
                     else
                     {
                         PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(response);
-                        PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CreatePreApprovalPaymentRequest({0}) - error {1}", payment, pse));
+                        PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - error {1}", payment, pse));
                         throw pse;
                     }
                 }
@@ -159,7 +160,7 @@ namespace Uol.PagSeguro.Service
             catch (WebException exception)
             {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CreatePreApprovalPaymentRequest({0}) - error {1}", payment, pse));
+                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - error {1}", payment, pse));
                 throw pse;
             }
         }
@@ -170,7 +171,7 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials"></param>
         /// <param name="preApproval"></param>
         /// <returns></returns>
-        internal static string BuildCheckoutUrl(Credentials credentials, PreApprovalRequest preApproval)
+        internal static string BuildPreApprovalUrl(Credentials credentials, PreApprovalRequest preApproval)
         {
             QueryStringBuilder builder = new QueryStringBuilder();
             IDictionary<string, string> data = PreApprovalParse.GetData(preApproval);
@@ -207,7 +208,7 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials"></param>
         /// <param name="payment"></param>
         /// <returns></returns>
-        internal static string BuildPaymentUrl(Credentials credentials, PaymentRequest payment)
+        internal static string BuildChargeUrl(Credentials credentials, PaymentRequest payment)
         {
             QueryStringBuilder builder = new QueryStringBuilder();
             IDictionary<string, string> data = PaymentParse.GetData(payment);

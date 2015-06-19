@@ -26,7 +26,6 @@ namespace SearchTransactionByCode
         static void Main(string[] args)
         {
             bool isSandbox = false;
-
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             try
@@ -35,15 +34,11 @@ namespace SearchTransactionByCode
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 // TODO: Substitute the code below with a valid transaction code for your transaction
-                //Transaction transaction = TransactionSearchService.SearchByCode(credentials, "59A13D84-52DA-4AB8-B365-1E7D893052B0", false);
+                Transaction transaction = TransactionSearchService.SearchByCode(credentials, "59A13D84-52DA-4AB8-B365-1E7D893052B0");
 
-                //Console.WriteLine(transaction);
-                //Console.ReadKey();
-
-                Transaction preApprovalTransaction = TransactionSearchService.SearchByCode(credentials, "3DFAD3123412340334A96F9136C38804", true);
-
-                Console.WriteLine(preApprovalTransaction);
+                Console.WriteLine(transaction);
                 Console.ReadKey();
+
             }
             catch (PagSeguroServiceException exception)
             {
