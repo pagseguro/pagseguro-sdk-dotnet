@@ -54,6 +54,15 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
+        /// Sender hash code
+        /// </summary>
+        public String Hash
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Sender documents
         /// </summary>
         public IList<SenderDocument> Documents

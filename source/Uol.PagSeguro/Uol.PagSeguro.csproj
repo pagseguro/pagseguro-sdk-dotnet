@@ -56,6 +56,10 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -63,7 +67,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\PaymentMode.cs" />
     <Compile Include="Constants\PreApproval.cs" />
+    <Compile Include="Constants\BankName.cs" />
+    <Compile Include="Domain\Direct\Billing.cs" />
+    <Compile Include="Domain\Direct\OnlineDebitCheckout.cs" />
+    <Compile Include="Domain\Direct\Checkout.cs" />
+    <Compile Include="Domain\Direct\BoletoCheckout.cs" />
+    <Compile Include="Domain\Direct\CreditCardCheckout.cs" />
+    <Compile Include="Domain\Direct\Holder.cs" />
+    <Compile Include="Domain\Direct\HolderDocument.cs" />
+    <Compile Include="Domain\Direct\Installment.cs" />
+    <Compile Include="Domain\Direct\Session.cs" />
+    <Compile Include="Domain\Installment\Installment.cs" />
+    <Compile Include="Domain\Installment\Installments.cs" />
     <Compile Include="Domain\PreApproval.cs" />
     <Compile Include="Domain\PreApprovalRequest.cs" />
     <Compile Include="Domain\PreApprovalRequestResponse.cs" />
@@ -84,11 +101,15 @@
     <Compile Include="Domain\CredentialsNameValuePair.cs" />
     <Compile Include="Log\PagSeguroTrace.cs" />
     <Compile Include="Domain\PaymentRequest.cs" />
+    <Compile Include="Parse\TransactionParse.cs" />
+    <Compile Include="Service\InstallmentService.cs" />
     <Compile Include="Service\PreApprovalSearchService.cs" />
     <Compile Include="Service\RefundService.cs" />
     <Compile Include="Service\PreApprovalService.cs" />
     <Compile Include="Resources\EnvironmentConfiguration.cs" />
     <Compile Include="Service\CancelService.cs" />
+    <Compile Include="Service\SessionService.cs" />
+    <Compile Include="Service\TransactionService.cs" />
     <Compile Include="Util\PagSeguroUtil.cs" />
     <Compile Include="Domain\PaymentRequestResponse.cs" />
     <Compile Include="Domain\Transaction.cs" />
@@ -117,6 +138,7 @@
     <Compile Include="Domain\Shipping.cs" />
     <Compile Include="Constants\ShippingType.cs" />
     <Compile Include="XmlParse\AddressSerializer.cs" />
+    <Compile Include="XmlParse\InstallmentSerializer.cs" />
     <Compile Include="XmlParse\RefundSerializer.cs" />
     <Compile Include="XmlParse\PreApprovalSerializer.cs" />
     <Compile Include="XmlParse\ItemListSerializer.cs" />
@@ -129,6 +151,7 @@
     <Compile Include="XmlParse\PaymentRequestResponseSerializer.cs" />
     <Compile Include="XmlParse\PhoneSerializer.cs" />
     <Compile Include="XmlParse\SenderSerializer.cs" />
+    <Compile Include="XmlParse\SessionSerializer.cs" />
     <Compile Include="XmlParse\ShippingSerializer.cs" />
     <Compile Include="XmlParse\TransactionSearchResultSerializer.cs" />
     <Compile Include="XmlParse\PreApprovalSearchResultSerializer.cs" />

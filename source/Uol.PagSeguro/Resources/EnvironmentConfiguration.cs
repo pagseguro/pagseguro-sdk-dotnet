@@ -51,6 +51,7 @@ namespace Uol.PagSeguro.Resources
                 {
                     for (int i = 0; i < elemList.Count; i++)
                     {
+
                         Match match = Regex.Match(elemList[i].InnerText, sandboxUrl);
 
                         if (!match.Success)

@@ -32,13 +32,15 @@ namespace Uol.PagSeguro.XmlParse
         internal const string Search = "Search";
         internal const string Cancel = "Cancel";
         internal const string Refund = "Refund";
-        internal const string PreApproval = "PreApproval";
+        internal const string PreApproval = "PreApprovalRequest";
         internal const string PreApprovalRedirect = "PreApprovalRedirect";
         internal const string PreApprovalNotification = "PreApprovalNotification";
         internal const string PreApprovalSearch = "PreApprovalSearch";
         internal const string PreApprovalCancel = "PreApprovalCancel";
         internal const string PreApprovalPayment = "PreApprovalPayment";
-
+        internal const string Session = "Session";
+        internal const string Transactions = "Transactions";
+        internal const string Installment = "Installment";
 
         private const string Credential = "Credential";
         internal const string Email = "Email";

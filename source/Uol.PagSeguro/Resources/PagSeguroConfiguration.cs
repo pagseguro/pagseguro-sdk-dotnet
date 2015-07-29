@@ -28,7 +28,7 @@ namespace Uol.PagSeguro.Resources
     public static class PagSeguroConfiguration
     {
         //PagSeguro .NET Library Tests
-        private const string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
+        private static string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
 
         //Website
         //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
@@ -52,6 +52,10 @@ namespace Uol.PagSeguro.Resources
             get
             {
                 return urlXmlConfiguration;
+            }
+            set
+            {
+                urlXmlConfiguration = value;
             }
         }
 
@@ -233,9 +237,42 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
+        public static Uri SessionUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Session));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri TransactionsUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Transactions));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri InstallmentUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Installment));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static int RequestTimeout
         {
-            get 
+            get
             {
                 return Convert.ToInt32(GetDataConfiguration(PagSeguroConfigSerializer.RequestTimeout));
             }

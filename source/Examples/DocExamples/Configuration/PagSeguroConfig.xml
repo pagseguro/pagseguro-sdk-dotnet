@@ -26,29 +26,45 @@
     <Refund>
       <Link>https://ws.pagseguro.uol.com.br/v2/transactions/refunds</Link>
     </Refund>
-    <!-- url for preApproval request service -->
+    <!-- urls for preApproval -->
     <PreApproval>
+      <!-- urls for preApproval request service -->
       <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
+      <PreApprovalRequest>
+        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
+      </PreApprovalRequest>
+      <!-- url for preApproval redirect service -->
+      <PreApprovalRedirect>
+        <Link>https://pagseguro.uol.com.br/v2/pre-approvals/request.html</Link>
+      </PreApprovalRedirect>
+      <!-- url for preApproval notifications service -->
+      <PreApprovalNotification>
+        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/notifications</Link>
+      </PreApprovalNotification>
+      <!-- url for preApproval search transactions service -->
+      <PreApprovalSearch>
+        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals</Link>
+      </PreApprovalSearch>
+      <!-- url for preApproval cancel transaction service -->
+      <PreApprovalCancel>
+        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/cancel</Link>
+      </PreApprovalCancel>
+      <!-- url for preApproval charge payment service -->
+      <PreApprovalPayment>
+        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/payment</Link>
+      </PreApprovalPayment>
     </PreApproval>
-    <!-- url for preApprovalRedirect service -->
-    <PreApprovalRedirect>
-      <Link>https://pagseguro.uol.com.br/v2/pre-approvals/request.html</Link>
-    </PreApprovalRedirect>
-    <!-- url for preApproval notifications service -->
-    <PreApprovalNotification>
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/notifications</Link>
-    </PreApprovalNotification>
-    <!-- url for preApproval transactions service -->
-    <PreApprovalSearch>
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals</Link>
-    </PreApprovalSearch>
-    <!-- url for preApproval cancel service -->
-    <PreApprovalCancel>
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/cancel</Link>
-    </PreApprovalCancel>
-    <PreApprovalPayment>
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/payment</Link>
-    </PreApprovalPayment>
+    <!-- url for direct payment -->
+    <DirectPayment>
+      <!-- url for get session -->
+      <Session>
+        <Link>https://ws.pagseguro.uol.com.br/v2/sessions</Link>
+      </Session>
+      <!-- url for get installments -->
+      <Installment>
+        <Link>https://pagseguro.uol.com.br/checkout/v2/installments.json</Link>
+      </Installment>
+    </DirectPayment>
   </Urls>
   <!-- user's credential -->
   <Credential>
@@ -64,7 +80,7 @@
   <!-- configuration default for PagSeguro API-->
   <Configuration>
     <!-- version library API PagSeguro .NET C# -->
-    <LibVersion>2.1.1</LibVersion>
+    <LibVersion>2.2.0</LibVersion>
     <!-- content type -->
     <FormUrlEncoded>application/x-www-form-urlencoded</FormUrlEncoded>
     <!-- encoding of the outcoming/incoming communication to/from PagSeguro API -->

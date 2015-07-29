@@ -28,7 +28,8 @@ namespace Uol.PagSeguro.XmlParse
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="transaction"></param>
-        internal static void Read(XmlReader reader, Transaction transaction)
+        /// <param name="payment"></param>
+        internal static void Read(XmlReader reader, Transaction transaction, bool payment = true)
         {
 
             if (reader.IsEmptyElement)
@@ -37,7 +38,7 @@ namespace Uol.PagSeguro.XmlParse
                 return;
             }
 
-            reader.ReadStartElement(TransactionSerializerHelper.Transaction);
+            reader.ReadStartElement(); 
             reader.MoveToContent();
 
             while (!reader.EOF)
