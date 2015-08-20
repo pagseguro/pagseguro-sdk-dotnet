@@ -28,13 +28,19 @@ namespace Uol.PagSeguro.Resources
     public static class PagSeguroConfiguration
     {
         //PagSeguro .NET Library Tests
-        private const string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
+        private const string defaultUrlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
 
         //Website
         //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
 
         private static string _moduleVersion;
         private static string _cmsVersion;
+
+        static PagSeguroConfiguration()
+        {
+            // set's the default configuration as Current
+            UrlXmlConfiguration = defaultUrlXmlConfiguration;
+        }
 
         /// <summary>
         /// 
@@ -45,14 +51,20 @@ namespace Uol.PagSeguro.Resources
         }
 
         /// <summary>
+        /// Allow's the user to change configuration
+        /// </summary>
+        /// <param name="newLocation"></param>
+        public static void SetXmlConfiguration(string newLocation)
+        {
+            UrlXmlConfiguration = newLocation;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public static string UrlXmlConfiguration
         {
-            get
-            {
-                return urlXmlConfiguration;
-            }
+            get; private set;
         }
 
         /// <summary>
@@ -281,7 +293,7 @@ namespace Uol.PagSeguro.Resources
             XmlDocument xml = new XmlDocument();
             using (xml as IDisposable)
             {
-                xml.Load(urlXmlConfiguration);
+                xml.Load(UrlXmlConfiguration);
             }
             return xml;
         }
