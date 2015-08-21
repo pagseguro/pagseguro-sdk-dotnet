@@ -80,6 +80,8 @@
     <Compile Include="Domain\CredentialsNameValuePair.cs" />
     <Compile Include="Log\PagSeguroTrace.cs" />
     <Compile Include="Domain\PaymentRequest.cs" />
+    <Compile Include="Resources\IPagSeguroConfiguration.cs" />
+    <Compile Include="Resources\PagSeguroXmlConfiguration.cs" />
     <Compile Include="Service\PreApprovalService.cs" />
     <Compile Include="Resources\EnvironmentConfiguration.cs" />
     <Compile Include="Util\PagSeguroUtil.cs" />

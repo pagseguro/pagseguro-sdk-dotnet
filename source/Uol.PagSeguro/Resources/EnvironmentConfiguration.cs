@@ -37,53 +37,7 @@ namespace Uol.PagSeguro.Resources
         /// </summary>
         public static void ChangeEnvironment(bool sandbox)
         {
-
-            string urlXmlConfiguration = PagSeguroConfiguration.UrlXmlConfiguration;
-
-            XmlDocument xml = new XmlDocument();
-            xml.Load(urlXmlConfiguration);
-            XmlNodeList elemList = xml.GetElementsByTagName("Link");
-            bool changed = false;
-
-            try
-            {
-                if (sandbox)
-                {
-                    for (int i = 0; i < elemList.Count; i++)
-                    {
-                        Match match = Regex.Match(elemList[i].InnerText, sandboxUrl);
-
-                        if (!match.Success)
-                        {
-                            elemList[i].InnerXml = elemList[i].InnerXml.Replace(pagseguroUrl, sandboxUrl);
-                            changed = true;
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < elemList.Count; i++)
-                    {
-                        Match match = Regex.Match(elemList[i].InnerText, sandboxUrl);
-
-                        if (match.Success)
-                        {
-                            elemList[i].InnerXml = elemList[i].InnerXml.Replace(sandboxUrl, pagseguroUrl);
-                            changed = true;
-                        }
-                    }
-                }
-
-                if (changed)
-                {
-                    xml.Save(urlXmlConfiguration);
-                }
-            }
-            catch (FormatException exception)
-            {
-                Console.WriteLine(exception.Message + "\n");
-                Console.ReadKey();
-            }
+            PagSeguroConfiguration.CurrentConfig.Load(sandbox);
         }
     }
 }

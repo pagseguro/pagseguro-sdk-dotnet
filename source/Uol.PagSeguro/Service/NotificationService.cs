@@ -76,9 +76,9 @@ namespace Uol.PagSeguro.Service
         {
             QueryStringBuilder transactionNotificationUrl = new QueryStringBuilder("{url}/{notificationCode}?{credential}");
             if (preApproval == true)
-                transactionNotificationUrl.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalNotificationUri.AbsoluteUri);
+                transactionNotificationUrl.ReplaceValue("{url}", PagSeguroConfiguration.CurrentConfig.PreApprovalNotificationUrl.AbsoluteUri);
             else
-                transactionNotificationUrl.ReplaceValue("{url}", PagSeguroConfiguration.NotificationUri.AbsoluteUri);
+                transactionNotificationUrl.ReplaceValue("{url}", PagSeguroConfiguration.CurrentConfig.NotificationUrl.AbsoluteUri);
             transactionNotificationUrl.ReplaceValue("{notificationCode}", HttpUtility.UrlEncode(notificationCode));
             transactionNotificationUrl.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return transactionNotificationUrl.ToString();
