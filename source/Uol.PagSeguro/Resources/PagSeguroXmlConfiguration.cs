@@ -5,6 +5,9 @@ namespace Uol.PagSeguro.Resources
 
     using Uol.PagSeguro.XmlParse;
 
+    /// <summary>
+    /// Default xml configuration
+    /// </summary>
     public class PagSeguroXmlConfiguration : IPagSeguroConfiguration
     {
         private readonly string filename;
@@ -62,52 +65,46 @@ namespace Uol.PagSeguro.Resources
             var xml = new XmlDocument();
             xml.Load(filename);
 
-            this.NotificationUrl = new Uri(this.GetUrlValue(xml, PagSeguroConfigSerializer.Notification, sandbox));
+            this.NotificationUrl = new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.Notification, sandbox));
             this.PaymentUrl = new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.Payment, sandbox));
             this.RequestTimeout =
-                Convert.ToInt32(this.GetDataConfiguration(xml, PagSeguroConfigSerializer.RequestTimeout));
+                Convert.ToInt32(GetDataConfiguration(xml, PagSeguroConfigSerializer.RequestTimeout));
 
-            this.Email = this.GetDataConfiguration(xml, PagSeguroConfigSerializer.Email);
-            this.Token = this.GetDataConfiguration(xml, PagSeguroConfigSerializer.Email);
+            this.Email = GetDataConfiguration(xml, PagSeguroConfigSerializer.Email);
+            this.Token = GetDataConfiguration(xml, PagSeguroConfigSerializer.Email);
 
-            this.SandboxEmail = this.GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxEmail);
-            this.SandboxToken = this.GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxToken);
+            this.SandboxEmail = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxEmail);
+            this.SandboxToken = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxToken);
 
-            this.FormUrlEncoded = this.GetDataConfiguration(xml, PagSeguroConfigSerializer.FormUrlEncoded);
-            this.Encoding = this.GetDataConfiguration(xml, PagSeguroConfigSerializer.Encoding);
-            this.FormUrlEncoded = this.GetDataConfiguration(xml, PagSeguroConfigSerializer.FormUrlEncoded);
-            this.LibVersion = this.GetDataConfiguration(xml, PagSeguroConfigSerializer.LibVersion);
-            this.PaymentRedirectUrl = new Uri(this.GetUrlValue(xml, PagSeguroConfigSerializer.PaymentRedirect, sandbox));
-            this.SearchUrl = new Uri(this.GetUrlValue(xml, PagSeguroConfigSerializer.Search, sandbox));
-            this.PreApprovalUrl = new Uri(this.GetUrlValue(xml, PagSeguroConfigSerializer.PreApproval, sandbox));
-            this.PreApprovalRedirectUrl = new Uri(this.GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalRedirect, sandbox));
+            this.FormUrlEncoded = GetDataConfiguration(xml, PagSeguroConfigSerializer.FormUrlEncoded);
+            this.Encoding = GetDataConfiguration(xml, PagSeguroConfigSerializer.Encoding);
+            this.FormUrlEncoded = GetDataConfiguration(xml, PagSeguroConfigSerializer.FormUrlEncoded);
+            this.LibVersion = GetDataConfiguration(xml, PagSeguroConfigSerializer.LibVersion);
+            this.PaymentRedirectUrl = new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.PaymentRedirect, sandbox));
+            this.SearchUrl = new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.Search, sandbox));
+            this.PreApprovalUrl = new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.PreApproval, sandbox));
+            this.PreApprovalRedirectUrl = new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalRedirect, sandbox));
             this.PreApprovalNotificationUrl =
-                new Uri(this.GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalNotification, sandbox));
-            this.PreApprovalSearchUrl = new Uri(this.GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalSearch, sandbox));
-            this.PreApprovalCancelUrl = new Uri(this.GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalCancel, sandbox));
-            this.PreApprovalPaymentUrl = new Uri(this.GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalPayment, sandbox));
+                new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalNotification, sandbox));
+            this.PreApprovalSearchUrl = new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalSearch, sandbox));
+            this.PreApprovalCancelUrl = new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalCancel, sandbox));
+            this.PreApprovalPaymentUrl = new Uri(GetUrlValue(xml, PagSeguroConfigSerializer.PreApprovalPayment, sandbox));
         }
 
-        private string GetDataConfiguration(XmlDocument doc, string data)
+        private static string GetDataConfiguration(XmlDocument doc, string data)
         {
             return PagSeguroConfigSerializer.GetDataConfiguration(doc, data);
         }
 
-        private string GetUrlValue(XmlDocument xml, string url, bool sandBox)
+        private static string GetUrlValue(XmlDocument xml, string url, bool sandBox)
         {
-            const string pagseguroUrl = "pagseguro.uol";
-            const string sandboxUrl = "sandbox.pagseguro.uol";
+            const string PagseguroUrl = "pagseguro.uol";
+
+            const string SandboxUrl = "sandbox.pagseguro.uol";
 
             var value = PagSeguroConfigSerializer.GetWebserviceUrl(xml, url);
             
-            if (sandBox)
-            {
-                return value.Replace(pagseguroUrl, sandboxUrl);
-            }
-            else
-            {
-                return value.Replace(sandboxUrl, pagseguroUrl);
-            }
+            return sandBox ? value.Replace(PagseguroUrl, SandboxUrl) : value.Replace(SandboxUrl, PagseguroUrl);
         }
     }
 }
