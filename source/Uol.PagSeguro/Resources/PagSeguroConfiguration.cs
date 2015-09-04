@@ -28,7 +28,7 @@ namespace Uol.PagSeguro.Resources
     public static class PagSeguroConfiguration
     {
         //PagSeguro .NET Library Tests
-        private const string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
+        private string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
 
         //Website
         //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
@@ -52,6 +52,10 @@ namespace Uol.PagSeguro.Resources
             get
             {
                 return urlXmlConfiguration;
+            }
+            set
+            {
+                urlXmlConfiguration = value;
             }
         }
 
