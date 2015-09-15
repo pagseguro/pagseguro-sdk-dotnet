@@ -18,6 +18,8 @@ using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
+    using Uol.PagSeguro.Resources;
+
     /// <summary>
     /// 
     /// </summary>
@@ -87,7 +89,7 @@ namespace Uol.PagSeguro.XmlParse
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        internal static AccountCredentials GetAccountCredentials(XmlDocument xml, bool sandbox)
+        internal static AccountCredentials GetAccountCredentials(IPagSeguroConfiguration config, bool sandbox)
         {
 
             AccountCredentials credential = null;
@@ -97,12 +99,13 @@ namespace Uol.PagSeguro.XmlParse
 
             if (sandbox)
             {
-                email = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxEmail);
-                token = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxToken);
+                email = config.SandboxEmail;
+                token = config.SandboxToken;
             }
-            else {
-                email = GetDataConfiguration(xml, PagSeguroConfigSerializer.Email);
-                token = GetDataConfiguration(xml, PagSeguroConfigSerializer.Token);
+            else
+            {
+                email = config.Email;
+                token = config.Token;
             }
 
             try

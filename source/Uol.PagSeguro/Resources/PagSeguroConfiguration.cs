@@ -13,12 +13,9 @@
 //   limitations under the License.
 
 using System;
-using System.Xml;
+
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.XmlParse;
-using System.Reflection;
-using System.Diagnostics;
-using System.Web;
 
 namespace Uol.PagSeguro.Resources
 {
@@ -28,7 +25,6 @@ namespace Uol.PagSeguro.Resources
     public static class PagSeguroConfiguration
     {
         //PagSeguro .NET Library Tests
-        private const string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
 
         //Website
         //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
@@ -36,24 +32,25 @@ namespace Uol.PagSeguro.Resources
         private static string _moduleVersion;
         private static string _cmsVersion;
 
+        private static IPagSeguroConfiguration currentConfig;
+
         /// <summary>
         /// 
         /// </summary>
         public static AccountCredentials Credentials(bool sandbox)
         {
-            return PagSeguroConfigSerializer.GetAccountCredentials(LoadXmlConfig(), sandbox);
+            return PagSeguroConfigSerializer.GetAccountCredentials(CurrentConfig, sandbox);
         }
 
         /// <summary>
-        /// 
+        /// Allow's the user to change configuration
         /// </summary>
-        public static string UrlXmlConfiguration
+        /// <param name="newLocation"></param>
+        public static void SetConfiguration(IPagSeguroConfiguration config)
         {
-            get
-            {
-                return urlXmlConfiguration;
-            }
+            currentConfig = config;
         }
+
 
         /// <summary>
         /// 
@@ -101,189 +98,187 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri NotificationUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Notification));
+                return CurrentConfig.NotificationUrl;
+                
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri PaymentUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Payment));
+                return CurrentConfig.PaymentUrl;
+                
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri PaymentRedirectUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PaymentRedirect));
+                return CurrentConfig.PaymentRedirectUrl;
+                
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri SearchUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Search));
+                return CurrentConfig.SearchUrl;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri PreApprovalUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApproval));
+                return CurrentConfig.PreApprovalUrl;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri PreApprovalRedirectUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalRedirect));
+                return CurrentConfig.PreApprovalRedirectUrl;
+                
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri PreApprovalNotificationUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalNotification));
+                return CurrentConfig.PreApprovalNotificationUrl;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri PreApprovalSearchUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalSearch));
+                return CurrentConfig.PreApprovalSearchUrl;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri PreApprovalCancelUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalCancel));
+                return CurrentConfig.PreApprovalCancelUrl;
+                
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static Uri PreApprovalPaymentUri
         {
             get
             {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalPayment));
+                return CurrentConfig.PreApprovalPaymentUrl;
+                
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static int RequestTimeout
         {
-            get 
+            get
             {
-                return Convert.ToInt32(GetDataConfiguration(PagSeguroConfigSerializer.RequestTimeout));
+                return CurrentConfig.RequestTimeout;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static string FormUrlEncoded
         {
             get
             {
-                return GetDataConfiguration(PagSeguroConfigSerializer.FormUrlEncoded);
+                return CurrentConfig.FormUrlEncoded;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static string Encoding
         {
             get
             {
-                return GetDataConfiguration(PagSeguroConfigSerializer.Encoding);
+                return CurrentConfig.Encoding;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [Obsolete("ShouldUse CurrentConfig.", true)]
         public static string LibVersion
         {
             get
             {
-                return GetDataConfiguration(PagSeguroConfigSerializer.LibVersion);
+                return CurrentConfig.LibVersion;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="url"></param>
         /// <returns></returns>
-        private static string GetUrlValue(string url)
+        public static IPagSeguroConfiguration CurrentConfig
         {
-            return PagSeguroConfigSerializer.GetWebserviceUrl(LoadXmlConfig(), url);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        private static string GetDataConfiguration(string data)
-        {
-            return PagSeguroConfigSerializer.GetDataConfiguration(LoadXmlConfig(), data);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private static XmlDocument LoadXmlConfig()
-        {
-            XmlDocument xml = new XmlDocument();
-            using (xml as IDisposable)
+            get
             {
-                xml.Load(urlXmlConfiguration);
+                return currentConfig ?? (currentConfig = new PagSeguroXmlConfiguration());
             }
-            return xml;
         }
     }
 }

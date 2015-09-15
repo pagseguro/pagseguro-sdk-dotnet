@@ -81,7 +81,7 @@ namespace Uol.PagSeguro.Util
         /// <returns></returns>
         internal static HttpWebResponse GetHttpPostConnection(string urlPath, string query)
         {
-            string contentType = PagSeguroConfiguration.FormUrlEncoded + "; charset= " + PagSeguroConfiguration.Encoding;
+            string contentType = PagSeguroConfiguration.CurrentConfig.FormUrlEncoded + "; charset= " + PagSeguroConfiguration.CurrentConfig.Encoding;
             return GetHttpURLConnection(HttpURLConnectionUtil.PostMethod, contentType, urlPath, query);
         }
 
@@ -92,7 +92,7 @@ namespace Uol.PagSeguro.Util
         /// <returns></returns>
         internal static HttpWebResponse GetHttpGetConnection(string urlPath)
         {
-            string contentType = PagSeguroConfiguration.FormUrlEncoded + "; charset= " + PagSeguroConfiguration.Encoding;
+            string contentType = PagSeguroConfiguration.CurrentConfig.FormUrlEncoded + "; charset= " + PagSeguroConfiguration.CurrentConfig.Encoding;
             return GetHttpURLConnection(HttpURLConnectionUtil.GetMethod, contentType, urlPath, null);
         }
 
@@ -113,8 +113,8 @@ namespace Uol.PagSeguro.Util
 
                 request.ContentType = contentType;
                 request.Method = method;
-                request.Timeout = PagSeguroConfiguration.RequestTimeout;
-                request.Headers.Add("lib-description", ".net:" + PagSeguroConfiguration.LibVersion);
+                request.Timeout = PagSeguroConfiguration.CurrentConfig.RequestTimeout;
+                request.Headers.Add("lib-description", ".net:" + PagSeguroConfiguration.CurrentConfig.LibVersion);
                 request.Headers.Add("language-engine-description", ".net:" + PagSeguroConfiguration.LanguageEngineDescription);
 
                 // adding module version to header request 

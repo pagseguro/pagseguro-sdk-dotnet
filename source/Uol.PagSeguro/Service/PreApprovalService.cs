@@ -50,14 +50,14 @@ namespace Uol.PagSeguro.Service
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.PreApprovalUri.AbsoluteUri, BuildCheckoutUrl(credentials, preApproval)))
+                    PagSeguroConfiguration.CurrentConfig.PreApprovalUrl.AbsoluteUri, BuildCheckoutUrl(credentials, preApproval)))
                 {
 
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
                         using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                         {
-                            PreApprovalRequestResponse preApprovalResponse = new PreApprovalRequestResponse(PagSeguroConfiguration.PreApprovalRedirectUri);
+                            PreApprovalRequestResponse preApprovalResponse = new PreApprovalRequestResponse(PagSeguroConfiguration.CurrentConfig.PreApprovalRedirectUrl);
                             PreApprovalSerializer.Read(reader, preApprovalResponse);
                             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - end {1}", preApproval, preApprovalResponse.PreApprovalRedirectUri));
                             return preApprovalResponse.PreApprovalRedirectUri;
@@ -99,7 +99,7 @@ namespace Uol.PagSeguro.Service
                     {
                         using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                         {
-                            PreApprovalRequestResponse paymentResponse = new PreApprovalRequestResponse(PagSeguroConfiguration.PreApprovalCancelUri);
+                            PreApprovalRequestResponse paymentResponse = new PreApprovalRequestResponse(PagSeguroConfiguration.CurrentConfig.PreApprovalCancelUrl);
                             PreApprovalSerializer.Read(reader, paymentResponse);
                             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CancelPreApproval({0}) - end {1}", preApprovalCode, paymentResponse.Status));
                             return paymentResponse.Status.Equals("OK", StringComparison.CurrentCultureIgnoreCase);
@@ -135,14 +135,14 @@ namespace Uol.PagSeguro.Service
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.PreApprovalPaymentUri.AbsoluteUri, BuildPaymentUrl(credentials, payment)))
+                    PagSeguroConfiguration.CurrentConfig.PreApprovalPaymentUrl.AbsoluteUri, BuildPaymentUrl(credentials, payment)))
                 {
 
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
                         using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                         {
-                            PaymentRequestResponse paymentResponse = new PaymentRequestResponse(PagSeguroConfiguration.PreApprovalPaymentUri);
+                            PaymentRequestResponse paymentResponse = new PaymentRequestResponse(PagSeguroConfiguration.CurrentConfig.PreApprovalPaymentUrl);
                             PaymentSerializer.Read(reader, paymentResponse);
                             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CreatePreApprovalPaymentRequest({0}) - end {1}", payment, paymentResponse.PaymentRedirectUri));
                             return paymentResponse.TransactionCode;
@@ -195,7 +195,7 @@ namespace Uol.PagSeguro.Service
         private static string BuildCancelUrl(Credentials credentials, string preApprovalCode)
         {
             QueryStringBuilder searchUrlByCode = new QueryStringBuilder("{url}/{preApprovalCode}?{credential}");
-            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalCancelUri.AbsoluteUri);
+            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.CurrentConfig.PreApprovalCancelUrl.AbsoluteUri);
             searchUrlByCode.ReplaceValue("{preApprovalCode}", HttpUtility.UrlEncode(preApprovalCode));
             searchUrlByCode.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return searchUrlByCode.ToString();

@@ -191,13 +191,13 @@ namespace Uol.PagSeguro.Service
             if (preApproval == true)
             {
                 searchUrlByCode = new QueryStringBuilder("{url}/{preApprovalCode}?{credential}");
-                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.CurrentConfig.PreApprovalSearchUrl.AbsoluteUri);
                 searchUrlByCode.ReplaceValue("{preApprovalCode}", HttpUtility.UrlEncode(transactionCode));
             }
             else
             {
                 searchUrlByCode = new QueryStringBuilder("{url}/{transactionCode}?{credential}");
-                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.CurrentConfig.SearchUrl.AbsoluteUri);
                 searchUrlByCode.ReplaceValue("{transactionCode}", HttpUtility.UrlEncode(transactionCode));
             }
 
@@ -218,9 +218,9 @@ namespace Uol.PagSeguro.Service
         {
             QueryStringBuilder searchUrlByCode = new QueryStringBuilder("{url}/?initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
             if (preApproval == true)
-                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.CurrentConfig.PreApprovalSearchUrl.AbsoluteUri);
             else
-                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+                searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.CurrentConfig.SearchUrl.AbsoluteUri);
             searchUrlByCode.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             searchUrlByCode.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
             searchUrlByCode.ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
