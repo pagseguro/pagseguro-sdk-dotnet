@@ -68,8 +68,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\PaymentMode.cs" />
+    <Compile Include="Constants\PermissionType.cs" />
     <Compile Include="Constants\PreApproval.cs" />
     <Compile Include="Constants\BankName.cs" />
+    <Compile Include="Domain\ApplicationCredentials.cs" />
+    <Compile Include="Domain\Authorization\AuthorizationAccount.cs" />
+    <Compile Include="Domain\Authorization\AuthorizationPermissions.cs" />
+    <Compile Include="Domain\Authorization\AuthorizationRequest.cs" />
+    <Compile Include="Domain\Authorization\AuthorizationSearchResult.cs" />
+    <Compile Include="Domain\Authorization\AuthorizationResponse.cs" />
+    <Compile Include="Domain\Authorization\AuthorizationSummary.cs" />
     <Compile Include="Domain\Direct\Billing.cs" />
     <Compile Include="Domain\Direct\OnlineDebitCheckout.cs" />
     <Compile Include="Domain\Direct\Checkout.cs" />
@@ -101,7 +109,10 @@
     <Compile Include="Domain\CredentialsNameValuePair.cs" />
     <Compile Include="Log\PagSeguroTrace.cs" />
     <Compile Include="Domain\PaymentRequest.cs" />
+    <Compile Include="Parse\AuthorizationParse.cs" />
     <Compile Include="Parse\TransactionParse.cs" />
+    <Compile Include="Service\AuthorizationSearchService .cs" />
+    <Compile Include="Service\AuthorizationService.cs" />
     <Compile Include="Service\InstallmentService.cs" />
     <Compile Include="Service\PreApprovalSearchService.cs" />
     <Compile Include="Service\RefundService.cs" />
@@ -138,7 +149,13 @@
     <Compile Include="Domain\Shipping.cs" />
     <Compile Include="Constants\ShippingType.cs" />
     <Compile Include="XmlParse\AddressSerializer.cs" />
+    <Compile Include="XmlParse\AuthorizationAccountSerializer.cs" />
+    <Compile Include="XmlParse\AuthorizationSummaryListSerializer.cs" />
+    <Compile Include="XmlParse\AuthorizationSummarySerializer.cs" />
     <Compile Include="XmlParse\InstallmentSerializer.cs" />
+    <Compile Include="XmlParse\AuthorizationSearchResultSerializer.cs" />
+    <Compile Include="XmlParse\AuthorizationPermissionListSerializer.cs" />
+    <Compile Include="XmlParse\AuthorizationPermissionSerializer.cs" />
     <Compile Include="XmlParse\RefundSerializer.cs" />
     <Compile Include="XmlParse\PreApprovalSerializer.cs" />
     <Compile Include="XmlParse\ItemListSerializer.cs" />
@@ -157,8 +174,9 @@
     <Compile Include="XmlParse\PreApprovalSearchResultSerializer.cs" />
     <Compile Include="XmlParse\CancelSerializer.cs" />
     <Compile Include="XmlParse\PreApprovalTransactionSerializer.cs" />
+    <Compile Include="XmlParse\AuthorizationSerializer.cs" />
     <Compile Include="XmlParse\TransactionSerializer.cs" />
-    <Compile Include="Constants\TransactionSerializerHelper.cs" />
+    <Compile Include="Constants\SerializerHelper.cs" />
     <Compile Include="XmlParse\PreApprovalSummaryListSerializer.cs" />
     <Compile Include="XmlParse\TransactionSummaryListSerializer.cs" />
     <Compile Include="XmlParse\PreApprovalSummarySerializer.cs" />

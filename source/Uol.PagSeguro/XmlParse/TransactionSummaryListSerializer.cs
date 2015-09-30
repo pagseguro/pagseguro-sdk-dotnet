@@ -57,7 +57,7 @@ namespace Uol.PagSeguro.XmlParse
                     TransactionSummary transaction = new TransactionSummary();
                     switch (reader.Name)
                     {
-                        case TransactionSerializerHelper.Transaction:
+                        case SerializerHelper.Transaction:
                             TransactionSummarySerializer.Read(reader, transaction);
                             transactions.Add(transaction);
                             break;

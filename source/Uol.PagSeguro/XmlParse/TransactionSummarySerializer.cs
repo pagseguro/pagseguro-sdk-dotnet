@@ -37,12 +37,12 @@ namespace Uol.PagSeguro.XmlParse
                 return;
             }
 
-            reader.ReadStartElement(TransactionSerializerHelper.Transaction);
+            reader.ReadStartElement(SerializerHelper.Transaction);
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-                if (XMLParserUtils.IsEndElement(reader, TransactionSerializerHelper.Transaction))
+                if (XMLParserUtils.IsEndElement(reader, SerializerHelper.Transaction))
                 {
                     XMLParserUtils.SkipNode(reader);
                     break;
@@ -52,37 +52,37 @@ namespace Uol.PagSeguro.XmlParse
                 {
                     switch (reader.Name)
                     {
-                        case TransactionSerializerHelper.Code:
+                        case SerializerHelper.Code:
                             transaction.Code = reader.ReadElementContentAsString();
                             break;
-                        case TransactionSerializerHelper.Date:
+                        case SerializerHelper.Date:
                             transaction.Date = reader.ReadElementContentAsDateTime();
                             break;
-                        case TransactionSerializerHelper.Reference:
+                        case SerializerHelper.Reference:
                             transaction.Reference = reader.ReadElementContentAsString();
                             break;
-                        case TransactionSerializerHelper.TransactionType:
+                        case SerializerHelper.TransactionType:
                             transaction.TransactionType = reader.ReadElementContentAsInt();
                             break;
-                        case TransactionSerializerHelper.TransactionStatus:
+                        case SerializerHelper.TransactionStatus:
                             transaction.TransactionStatus = reader.ReadElementContentAsInt();
                             break;
-                        case TransactionSerializerHelper.GrossAmount:
+                        case SerializerHelper.GrossAmount:
                             transaction.GrossAmount = reader.ReadElementContentAsDecimal();
                             break;
-                        case TransactionSerializerHelper.DiscountAmount:
+                        case SerializerHelper.DiscountAmount:
                             transaction.DiscountAmount = reader.ReadElementContentAsDecimal();
                             break;
-                        case TransactionSerializerHelper.FeeAmount:
+                        case SerializerHelper.FeeAmount:
                             transaction.FeeAmount = reader.ReadElementContentAsDecimal();
                             break;
-                        case TransactionSerializerHelper.NetAmount:
+                        case SerializerHelper.NetAmount:
                             transaction.NetAmount = reader.ReadElementContentAsDecimal();
                             break;
-                        case TransactionSerializerHelper.ExtraAmount:
+                        case SerializerHelper.ExtraAmount:
                             transaction.ExtraAmount = reader.ReadElementContentAsDecimal();
                             break;
-                        case TransactionSerializerHelper.LastEventDate:
+                        case SerializerHelper.LastEventDate:
                             transaction.LastEventDate = reader.ReadElementContentAsDateTime();
                             break;
                         case PaymentMethodSerializer.PaymentMethod:

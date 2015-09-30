@@ -18,6 +18,7 @@ using System.Net;
 using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
+using Uol.PagSeguro.Domain.Authorization;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Log;
 using Uol.PagSeguro.Resources;
@@ -67,6 +68,40 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
+        /// Returns a authorization from a notification code
+        /// </summary>
+        /// <param name="credentials">PagSeguro credentials</param>
+        /// <param name="notificationCode">Authorization notification code</param>
+        /// <returns><c cref="T:Uol.PagSeguro.Transaction">Transaction</c></returns>
+        public static AuthorizationSummary CheckAuthorization(Credentials credentials, string notificationCode)
+        {
+
+            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "NotificationService.CheckAuthorization(notificationCode={0}) - begin", notificationCode));
+
+            try
+            {
+                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildAuthorizationNotificationUrl(credentials, notificationCode)))
+                {
+                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    {
+                        AuthorizationSummary authorization = new AuthorizationSummary();
+                        AuthorizationSummarySerializer.Read(reader, authorization);
+
+                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "NotificationService.CheckAuthorization(notificationCode={0}) - end {1}", notificationCode, authorization));
+                        return authorization;
+                    }
+                }
+            }
+            catch (WebException exception)
+            {
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroTrace.Error(
+                String.Format(CultureInfo.InvariantCulture, "NotificationService.CheckAuthorization(notificationCode={0}) - error {1}", notificationCode, pse));
+                throw pse;
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="credentials"></param>
@@ -80,5 +115,20 @@ namespace Uol.PagSeguro.Service
             transactionNotificationUrl.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return transactionNotificationUrl.ToString();
 	    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <param name="notificationCode"></param>
+        /// <returns></returns>
+        private static string BuildAuthorizationNotificationUrl(Credentials credentials, string notificationCode)
+        {
+            QueryStringBuilder builder = new QueryStringBuilder("{url}{notificationCode}?{credential}");
+            builder.ReplaceValue("{url}", PagSeguroConfiguration.AuthorizationNotificationUri.AbsoluteUri);
+            builder.ReplaceValue("{notificationCode}", HttpUtility.UrlEncode(notificationCode));
+            builder.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
+            return builder.ToString();
+        }
     }
 }

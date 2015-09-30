@@ -73,8 +73,8 @@ namespace CreatePreApproval
 
             try
             {
-
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+
                 Uri preApprovalRedirectUri = preApproval.Register(credentials);
 
                 Console.WriteLine("URL do pagamento : " + preApprovalRedirectUri);

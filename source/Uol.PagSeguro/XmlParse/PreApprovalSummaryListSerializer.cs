@@ -59,7 +59,7 @@ namespace Uol.PagSeguro.XmlParse
                     PreApprovalSummary preApproval = new PreApprovalSummary();
                     switch (reader.Name)
                     {
-                        case TransactionSerializerHelper.PreApproval:
+                        case SerializerHelper.PreApproval:
                             PreApprovalSummarySerializer.Read(reader, preApproval);
                             preApprovals.Add(preApproval);
                             break;

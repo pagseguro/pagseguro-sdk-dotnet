@@ -27,7 +27,6 @@ namespace ReceiveNotification
         {
 
             bool isSandbox = false;
-
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             try

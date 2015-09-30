@@ -47,6 +47,14 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
+        public static ApplicationCredentials ApplicationCredentials(bool sandbox)
+        {
+            return PagSeguroConfigSerializer.GetApplicationCredentials(LoadXmlConfig(), sandbox);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string UrlXmlConfiguration
         {
             get
@@ -264,6 +272,50 @@ namespace Uol.PagSeguro.Resources
             get
             {
                 return new Uri(GetUrlValue(PagSeguroConfigSerializer.Installment));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri AuthorizarionRequestUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationRequest));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri AuthorizarionUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Authorization));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri AuthorizarionSearchUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationSearch));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Uri AuthorizationNotificationUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationNotification));
             }
         }
 

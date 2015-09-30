@@ -41,12 +41,20 @@ namespace Uol.PagSeguro.XmlParse
         internal const string Session = "Session";
         internal const string Transactions = "Transactions";
         internal const string Installment = "Installment";
+        internal const string AuthorizationRequest = "AuthorizationRequest";
+        internal const string Authorization = "AuthorizationURL";
+        internal const string AuthorizationSearch = "AuthorizationSearch";
+        internal const string AuthorizationNotification = "AuthorizationNotification";
 
         private const string Credential = "Credential";
         internal const string Email = "Email";
         internal const string Token = "Token";
         internal const string SandboxEmail = "SandboxEmail";
         internal const string SandboxToken = "SandboxToken";
+        internal const string AppId = "AppId";
+        internal const string AppKey = "AppKey";
+        internal const string SandboxAppId = "SandboxAppId";
+        internal const string SandboxAppKey = "SandboxAppKey";
 
         private const string Configuration = "Configuration";
         internal const string LibVersion = "LibVersion";
@@ -120,6 +128,41 @@ namespace Uol.PagSeguro.XmlParse
                 + "configure the properties credential email and credential token.");
             }
             return credential;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        internal static ApplicationCredentials GetApplicationCredentials(XmlDocument xml, bool sandbox)
+        {
+
+            string appId;
+            string appKey;
+
+            if (sandbox)
+            {
+                appId = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxAppId);
+                appKey = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxAppKey);
+            }
+            else
+            {
+                appId = GetDataConfiguration(xml, PagSeguroConfigSerializer.AppId);
+                appKey = GetDataConfiguration(xml, PagSeguroConfigSerializer.AppKey);
+            }
+
+            try
+            {
+                ApplicationCredentials credential = new ApplicationCredentials(appId, appKey);
+                return credential;
+            }
+            catch (System.Exception)
+            {
+                throw new ArgumentException("To use credentials from config.properties file you must "
+                + "configure the properties credential appId and credential appKey.");
+            }
+            
         }
     }
 }

@@ -145,7 +145,10 @@ namespace Uol.PagSeguro.Util
         {
             foreach (CredentialsNameValuePair nv in credentials.Attributes)
             {
-                this.Append(nv.Name, nv.Value);
+                if (nv.Value.Length > 0)
+                {
+                    this.Append(nv.Name, nv.Value);
+                }
             }
             return this;
         }
