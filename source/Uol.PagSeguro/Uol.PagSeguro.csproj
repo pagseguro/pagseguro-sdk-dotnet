@@ -58,7 +58,7 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
+      <HintPath>DllReference\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -67,6 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\PaymentMethodConfigKeys.cs" />
+    <Compile Include="Constants\PaymentMethodGroup.cs" />
     <Compile Include="Constants\PaymentMode.cs" />
     <Compile Include="Constants\PermissionType.cs" />
     <Compile Include="Constants\PreApproval.cs" />
@@ -89,6 +91,9 @@
     <Compile Include="Domain\Direct\Session.cs" />
     <Compile Include="Domain\Installment\Installment.cs" />
     <Compile Include="Domain\Installment\Installments.cs" />
+    <Compile Include="Domain\CreditorFees.cs" />
+    <Compile Include="Domain\PaymentMethodConfigItem.cs" />
+    <Compile Include="Domain\PaymentMethodConfig.cs" />
     <Compile Include="Domain\PreApproval.cs" />
     <Compile Include="Domain\PreApprovalRequest.cs" />
     <Compile Include="Domain\PreApprovalRequestResponse.cs" />
@@ -156,6 +161,7 @@
     <Compile Include="XmlParse\AuthorizationSearchResultSerializer.cs" />
     <Compile Include="XmlParse\AuthorizationPermissionListSerializer.cs" />
     <Compile Include="XmlParse\AuthorizationPermissionSerializer.cs" />
+    <Compile Include="XmlParse\CreditorFeesSerializer.cs" />
     <Compile Include="XmlParse\RefundSerializer.cs" />
     <Compile Include="XmlParse\PreApprovalSerializer.cs" />
     <Compile Include="XmlParse\ItemListSerializer.cs" />
@@ -203,6 +209,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="DllReference\Newtonsoft.Json.dll" />
   </ItemGroup>

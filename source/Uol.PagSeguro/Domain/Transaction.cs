@@ -115,6 +115,15 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
+        /// Creditor fees amount
+        /// </summary>
+        public CreditorFees CreditorFees
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
         /// Net amount
         /// </summary>
         public decimal NetAmount

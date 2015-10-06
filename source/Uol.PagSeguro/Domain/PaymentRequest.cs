@@ -28,6 +28,7 @@ namespace Uol.PagSeguro.Domain
         private IList<Item> _items;
         private MetaData _metaData;
         private Parameter _parameter;
+        private PaymentMethodConfig _methodConfig;
 
         /// <summary>
         /// Party that will be sending the money
@@ -210,6 +211,23 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
+        /// Payment method config reference
+        /// </summary>
+        public PaymentMethodConfig PaymentMethodConfig
+        {
+            get
+            {
+                if (this._methodConfig == null)
+                {
+                    this._methodConfig = new PaymentMethodConfig();
+                }
+                return this._methodConfig;
+            }
+
+            set { this._methodConfig = value; }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the PaymentRequest class
         /// </summary>
         public PaymentRequest()
@@ -256,6 +274,17 @@ namespace Uol.PagSeguro.Domain
         public void AddParameter(string key, string value)
         {
             this.Parameter.Items.Add(new ParameterItem(key, value));
+        }
+
+        /// <summary>
+        /// Add a parameter for PagSeguro payment method config checkout request
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="group"></param>
+        public void AddPaymentMethodConfig(string key, double value, string group)
+        {
+            this.PaymentMethodConfig.Items.Add(new PaymentMethodConfigItem(key, value, group));
         }
 
         /// <summary>

@@ -75,6 +75,11 @@ namespace Uol.PagSeguro.XmlParse
                         case SerializerHelper.DiscountAmount:
                             transaction.DiscountAmount = reader.ReadElementContentAsDecimal();
                             break;
+                        case SerializerHelper.CreditorFees:
+                            CreditorFees creditorFees = new CreditorFees();
+                            CreditorFeesSerializer.Read(reader, creditorFees);
+                            transaction.CreditorFees = creditorFees;
+                            break;
                         case SerializerHelper.FeeAmount:
                             transaction.FeeAmount = reader.ReadElementContentAsDecimal();
                             break;

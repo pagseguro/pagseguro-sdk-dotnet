@@ -16,6 +16,8 @@ using System.Collections.Generic;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Util;
 using Uol.PagSeguro.Constants.PreApproval;
+using Uol.PagSeguro.Constants;
+using System;
 
 namespace Uol.PagSeguro.Parse
 {
@@ -283,6 +285,28 @@ namespace Uol.PagSeguro.Parse
                     }
                 }
             }
+
+            // paymentMethodConfig 
+            if (payment.PaymentMethodConfig.Items.Count > 0)
+            {
+                int i = 0;
+                var configItems = payment.PaymentMethodConfig.Items;
+                foreach (PaymentMethodConfigItem item in configItems)
+                {
+                    if (!PagSeguroUtil.IsEmpty(item.Key) && !PagSeguroUtil.IsEmpty(item.Group))
+                    {
+                        i++;
+                        data["paymentMethodGroup" + i] = item.Group;
+                        data["paymentMethodConfigKey" + i + "_1"] = item.Key;
+                        if (item.Key.Equals(PaymentMethodConfigKeys.DiscountPercent)) {
+                            data["paymentMethodConfigValue" + i + "_1"] = PagSeguroUtil.DecimalFormat(item.Value);
+                        } else {
+                            data["paymentMethodConfigValue" + i + "_1"] = PagSeguroUtil.DoubleToInt(item.Value);
+                        }
+                    }
+                }
+            }
+
             return data;
         }
     }

@@ -81,6 +81,26 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
+        /// Format a double number, just two decimal places
+        /// </summary>
+        /// <param name="numeric"></param>
+        /// <returns></returns>
+        public static string DecimalFormat(double numeric)
+        {
+            return string.Format("{0:0.00}", numeric).Replace(",", ".");
+        }
+
+        /// <summary>
+        /// Converts a double number into a integer
+        /// </summary>
+        /// <param name="numeric"></param>
+        /// <returns></returns>
+        public static string DoubleToInt(double numeric)
+        {
+            return string.Format("{0:0}", numeric);
+        }
+
+        /// <summary>
         /// Check if var is empty
         /// </summary>
         /// <param name="value"></param>

@@ -27,7 +27,7 @@ namespace CreatePayment
         {
 
             //Use global configuration
-            //PagSeguroConfiguration.UrlXmlConfiguration = ".../.../.../.../Configuration/PagSeguroConfig.xml";
+            //PagSeguroConfiguration.UrlXmlConfiguration = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
 
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
@@ -73,6 +73,9 @@ namespace CreatePayment
                 new Phone("11", "56273440")
             );
 
+            SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909");
+            payment.Sender.Documents.Add(senderCPF);
+
             // Sets the url used by PagSeguro for redirect user after ends checkout process
             payment.RedirectUri = new Uri("http://www.lojamodelo.com.br");
 
@@ -88,8 +91,14 @@ namespace CreatePayment
             payment.AddIndexedParameter("itemQuantity", "1", 3);
             payment.AddIndexedParameter("itemAmount", "200.00", 3);
 
-            SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909");
-            payment.Sender.Documents.Add(senderCPF);
+            // Add discount per payment method
+            payment.AddPaymentMethodConfig(PaymentMethodConfigKeys.DiscountPercent, 50.00, PaymentMethodGroup.CreditCard);
+
+            // Add installment without addition per payment method
+            payment.AddPaymentMethodConfig(PaymentMethodConfigKeys.MaxInstallmentsNoInterest, 6, PaymentMethodGroup.CreditCard);
+
+            // Add installment limit per payment method
+            payment.AddPaymentMethodConfig(PaymentMethodConfigKeys.MaxInstallmentsLimit, 8, PaymentMethodGroup.CreditCard);
 
             try
             {

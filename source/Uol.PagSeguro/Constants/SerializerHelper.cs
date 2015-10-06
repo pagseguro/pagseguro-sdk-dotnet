@@ -38,6 +38,7 @@ namespace Uol.PagSeguro.Constants
         internal const string ExtraAmount = "extraAmount";
         internal const string LastEventDate = "lastEventDate";
         internal const string InstallmentCount = "installmentCount";
+        internal const string CreditorFees = "creditorFees";
 
         //PreApproval
         internal const string PreApproval = "preApproval";

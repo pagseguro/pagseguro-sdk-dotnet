@@ -28,8 +28,6 @@ namespace CreateTransactionUsingBoleto
         static void Main(string[] args)
         {
 
-            PagSeguroConfiguration.UrlXmlConfiguration = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 

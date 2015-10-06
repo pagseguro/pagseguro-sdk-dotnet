@@ -12,11 +12,11 @@
     </PaymentRedirect>
     <!-- url for notifications service -->
     <Notification>
-      <Link>https://ws.pagseguro.uol.com.br/v2/transactions/notifications</Link>
+      <Link>https://ws.pagseguro.uol.com.br/v3/transactions/notifications</Link>
     </Notification>
     <!-- url for transactions service -->
     <Search>
-      <Link>https://ws.pagseguro.uol.com.br/v2/transactions</Link>
+      <Link>https://ws.pagseguro.uol.com.br/v3/transactions</Link>
     </Search>
     <!-- url for cancel transactions service -->
     <Cancel>
@@ -66,10 +66,10 @@
       </Installment>
       <!-- url for transactions -->
       <Transactions>
-        <link>https://ws.pagseguro.uol.com.br/v2/transactions</link>
+        <Link>https://ws.pagseguro.uol.com.br/v2/transactions</Link>
       </Transactions>
     </DirectPayment>
-     <!-- url for authorization -->
+    <!-- url for authorization -->
     <Authorization>
       <!-- url for authorization request service -->
       <AuthorizationRequest>
