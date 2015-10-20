@@ -31,10 +31,10 @@ namespace SearchTransactionAbandoned
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // Definindo a data de ínicio da consulta 
-            DateTime initialDate = new DateTime(2015, 06, 14, 08, 50, 0);
+            DateTime initialDate = new DateTime(2015, 10, 14, 08, 50, 0);
 
             // Definindo a data de término da consulta
-            DateTime finalDate = DateTime.Now.AddHours(-5);
+            DateTime finalDate = DateTime.Now.AddMinutes(-15);
 
             // Definindo o número máximo de resultados por página
             int maxPageResults = 10;

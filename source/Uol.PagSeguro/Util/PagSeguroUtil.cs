@@ -85,6 +85,7 @@ namespace Uol.PagSeguro.Util
         /// </summary>
         /// <param name="numeric"></param>
         /// <returns></returns>
+        /// 
         public static string DecimalFormat(double numeric)
         {
             return string.Format("{0:0.00}", numeric).Replace(",", ".");
@@ -117,7 +118,9 @@ namespace Uol.PagSeguro.Util
         /// <returns></returns>
         public static string FormatDateXml(DateTime date)
         {
-            return XmlConvert.ToString(date, XmlDateTimeSerializationMode.Utc);
+            date.ToUniversalTime();
+            date.AddHours(-3);
+            return XmlConvert.ToString(date, XmlDateTimeSerializationMode.RoundtripKind);
         }
     }
 }

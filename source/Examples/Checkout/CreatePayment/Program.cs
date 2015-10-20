@@ -14,6 +14,7 @@
 
 using System;
 using System.Net;
+using Uol.PagSeguro;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;

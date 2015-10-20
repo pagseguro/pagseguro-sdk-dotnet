@@ -25,7 +25,7 @@ namespace FindPreApprovalByInterval
     {
         static void Main(string[] args)
         {
-            bool isSandbox = true;
+            bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // TODO: Substitute the code below with a valid preApproval days interval for your transaction

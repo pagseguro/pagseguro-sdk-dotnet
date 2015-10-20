@@ -217,22 +217,22 @@ namespace Uol.PagSeguro.Service
         /// <returns></returns>
         private static string BuildSearchUrlByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int? pageNumber, int? resultsPerPage)
         {
-            QueryStringBuilder searchUrlByReference = new QueryStringBuilder("{url}?initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
+            QueryStringBuilder builder = new QueryStringBuilder("{url}?initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
 
-            searchUrlByReference.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
-            searchUrlByReference.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
-            searchUrlByReference.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
+            builder.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+            builder.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
+            builder.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
             if (pageNumber.HasValue)
             {
-                searchUrlByReference.ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
+                builder.ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
             }
             if (resultsPerPage.HasValue)
             {
-                searchUrlByReference.ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
+                builder.ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
             }
-            searchUrlByReference.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().AppendToQuery("&").EncodeCredentialsAsQueryString(credentials).ToString() : "");
+            builder.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().AppendToQuery("&").EncodeCredentialsAsQueryString(credentials).ToString() : "");
 
-            return PagSeguroUtil.RemoveExtraSpaces(searchUrlByReference.ToString());
+            return PagSeguroUtil.RemoveExtraSpaces(builder.ToString());
         }
 
         /// <summary>
@@ -247,23 +247,23 @@ namespace Uol.PagSeguro.Service
         /// <returns></returns>
         private static string BuildSearchUrlByReference(Credentials credentials, String reference, DateTime initialDate, DateTime finalDate, int? pageNumber, int? resultsPerPage)
         {
-            QueryStringBuilder searchUrlByReference = new QueryStringBuilder("{url}?reference={reference}&initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
+            QueryStringBuilder builder = new QueryStringBuilder("{url}?reference={reference}&initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
 
-            searchUrlByReference.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
-            searchUrlByReference.ReplaceValue("{reference}", HttpUtility.UrlEncode(reference));
-            searchUrlByReference.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
-            searchUrlByReference.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
+            builder.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+            builder.ReplaceValue("{reference}", HttpUtility.UrlEncode(reference));
+            builder.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
+            builder.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
             if (pageNumber.HasValue)
             {
-                searchUrlByReference.ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
+                builder.ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
             }
             if (resultsPerPage.HasValue)
             {
-                searchUrlByReference.ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
+                builder.ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
             }
-            searchUrlByReference.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().AppendToQuery("&").EncodeCredentialsAsQueryString(credentials).ToString() : "");
+            builder.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().AppendToQuery("&").EncodeCredentialsAsQueryString(credentials).ToString() : "");
 
-            return PagSeguroUtil.RemoveExtraSpaces(searchUrlByReference.ToString());
+            return PagSeguroUtil.RemoveExtraSpaces(builder.ToString());
         }
     }
 }

@@ -228,7 +228,7 @@ namespace Uol.PagSeguro.Service
         {
             QueryStringBuilder searchUrlAbandoned = new QueryStringBuilder("{url}/abandoned?initialDate={initialDate}{finalDate}{credential}");
 
-            searchUrlAbandoned.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+            searchUrlAbandoned.ReplaceValue("{url}", PagSeguroConfiguration.SearchAbandonedUri.AbsoluteUri);
             searchUrlAbandoned.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             searchUrlAbandoned.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
             

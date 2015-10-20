@@ -30,6 +30,7 @@ namespace Uol.PagSeguro.XmlParse
         internal const string PaymentRedirect = "PaymentRedirect";
         internal const string Notification = "Notification";
         internal const string Search = "Search";
+        internal const string SearchAbandoned = "SearchAbandoned";
         internal const string Cancel = "Cancel";
         internal const string Refund = "Refund";
         internal const string PreApproval = "PreApprovalRequest";

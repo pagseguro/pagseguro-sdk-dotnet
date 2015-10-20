@@ -157,6 +157,17 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
+        public static Uri SearchAbandonedUri
+        {
+            get
+            {
+                return new Uri(GetUrlValue(PagSeguroConfigSerializer.SearchAbandoned));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static Uri CancelUri
         {
             get

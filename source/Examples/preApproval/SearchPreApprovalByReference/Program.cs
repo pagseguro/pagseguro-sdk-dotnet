@@ -25,13 +25,15 @@ namespace FindPreApprovalByReference
     {
         static void Main(string[] args)
         {
-            bool isSandbox = true;
+
+            bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // TODO: Substitute the code below with a valid preApproval reference for your transaction
             String reference = "REF1234";
-            DateTime initialDate = new DateTime(2015, 06, 01, 08, 50, 0);
-            DateTime finalDate = DateTime.Now.AddHours(-5);
+            DateTime initialDate = new DateTime(2015, 10, 01, 00, 00, 0);
+            DateTime finalDate = DateTime.Now;
+            //DateTime finalDate = new DateTime(2015, 10, 15, 11, 35, 15);
             int maxPageResults = 10;
             int pageNumber = 1;
 

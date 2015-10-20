@@ -19,8 +19,8 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Installment;
 using System.IO;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Web.Script.Serialization;
+
 
 namespace Uol.PagSeguro.XmlParse
 {
@@ -48,76 +48,46 @@ namespace Uol.PagSeguro.XmlParse
         public static void Read(StreamReader streamReader, Installments installments)
         {
 
-            Boolean startObject = false;
-            Boolean nextIsCardBrand = false;
-
             StringReader sReader = new StringReader(streamReader.ReadToEnd());
 
-            JsonTextReader reader = new JsonTextReader(sReader);
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+            Dictionary<string, object> response = (Dictionary<string, object>)serializer.DeserializeObject(sReader.ReadToEnd());
+
+            if (response.ContainsKey(InstallmentSerializer.Error))
+            {
+                if (Convert.ToBoolean(response[InstallmentSerializer.Error]))
+                {
+                    throw new ArgumentException(response[InstallmentSerializer.Errors].ToString());
+                }
+            }
 
             Installment installment = new Installment();
 
-            while (reader.Read())
+            foreach (var reader in response)
             {
-   
-                if (startObject)
+                if (reader.Key.Equals(InstallmentSerializer.Installments))
                 {
-                    if (reader.TokenType == JsonToken.PropertyName)
+                    Dictionary<string, object> nv2 = (Dictionary<string, object>)reader.Value;
+                    foreach (var obj in nv2)
                     {
+                        installment.cardBrand = obj.Key.ToString();
+                        String brand = installment.cardBrand;
+                        object[] nv3 = (object[])obj.Value;
 
-                        if (nextIsCardBrand)
+                        foreach (var items in nv3)
                         {
-                            installment.cardBrand = reader.Value.ToString();
-                            nextIsCardBrand = false;
-                        }
-                        else
-                        {
-                            switch (reader.Value.ToString())
-                            {
+                            Dictionary<string, object> item = (Dictionary<string, object>)items;
 
-                                case InstallmentSerializer.Errors:
-                                    while (reader.Read())
-                                    {
-                                        if (reader.TokenType == JsonToken.PropertyName)
-                                        {
-                                            throw new ArgumentException(reader.Value.ToString());
-                                        }
-                                    }
-                                    break;
-                                case InstallmentSerializer.Installments:
-                                    nextIsCardBrand = true;
-                                    break;
-                                case InstallmentSerializer.Quantity:
-                                    installment.quantity = Convert.ToInt32(reader.ReadAsString());
-                                    break;
-                                case InstallmentSerializer.InstallmentAmount:
-                                    installment.amount = Convert.ToDecimal(reader.ReadAsString());
-                                    break;
-                                case InstallmentSerializer.TotalAmount:
-                                    installment.totalAmount = Convert.ToDecimal(reader.ReadAsString());
-                                    break;
-                                case InstallmentSerializer.InterestFree:
-                                    installment.interestFree = Convert.ToBoolean(reader.ReadAsString());
-                                    break;
-                                
-                            }
-                        }
-                    }
+                            installment.quantity = Convert.ToInt32(item[InstallmentSerializer.Quantity].ToString());
+                            installment.amount = Convert.ToDecimal(item[InstallmentSerializer.InstallmentAmount].ToString());
+                            installment.totalAmount = Convert.ToDecimal(item[InstallmentSerializer.TotalAmount].ToString());
+                            installment.interestFree = Convert.ToBoolean(item[InstallmentSerializer.InterestFree].ToString());
 
-                    if (reader.TokenType == JsonToken.EndObject)
-                    {
-                        startObject = false;
-                        String aux = installment.cardBrand;
-                        installments.Add(installment);
-                        installment = new Installment();
-                        installment.cardBrand = aux;
-                    }
-                }
-                else
-                {
-                    if (reader.TokenType == JsonToken.StartObject)
-                    {
-                        startObject = true;
+                            installments.Add(installment);
+                            installment = new Installment();
+                            installment.cardBrand = brand;
+                        }  
                     }
                 }
             }
