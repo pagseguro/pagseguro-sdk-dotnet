@@ -90,7 +90,6 @@
     <Compile Include="Domain\Direct\HolderDocument.cs" />
     <Compile Include="Domain\Direct\Installment.cs" />
     <Compile Include="Domain\Direct\Session.cs" />
-    <Compile Include="Domain\Installment\InstallmentResponse.cs" />
     <Compile Include="Domain\Installment\Installment.cs" />
     <Compile Include="Domain\Installment\Installments.cs" />
     <Compile Include="Domain\CreditorFees.cs" />
