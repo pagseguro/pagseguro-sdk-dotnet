@@ -29,6 +29,7 @@ namespace Uol.PagSeguro.Domain
         private MetaData _metaData;
         private Parameter _parameter;
         private PaymentMethodConfig _methodConfig;
+        private AcceptedPaymentMethods _acceptedPaymentsConfig;
 
         /// <summary>
         /// Party that will be sending the money
@@ -228,6 +229,23 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
+        /// Accepted payment method config
+        /// </summary>
+        public AcceptedPaymentMethods AcceptedPaymentMethods
+        {
+            get
+            {
+                if (this._acceptedPaymentsConfig == null)
+                {
+                    this._acceptedPaymentsConfig = new AcceptedPaymentMethods();
+                }
+                return this._acceptedPaymentsConfig;
+            }
+
+            set { this._acceptedPaymentsConfig = value; }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the PaymentRequest class
         /// </summary>
         public PaymentRequest()
@@ -285,6 +303,28 @@ namespace Uol.PagSeguro.Domain
         public void AddPaymentMethodConfig(string key, double value, string group)
         {
             this.PaymentMethodConfig.Items.Add(new PaymentMethodConfigItem(key, value, group));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="group"></param>
+        public void AcceptPaymentMethodConfig(string group, List<string> name)
+        {
+            this.AcceptedPaymentMethods.Items.Add(new AcceptPaymentMethod(group, name));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="group"></param>
+        public void ExcludePaymentMethodConfig(string group, List<string> name)
+        {
+            this.AcceptedPaymentMethods.Items.Add(new ExcludePaymentMethod(group, name));
         }
 
         /// <summary>

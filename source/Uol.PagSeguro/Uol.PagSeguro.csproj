@@ -68,12 +68,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\AcceptedPaymentGroups.cs" />
+    <Compile Include="Constants\AcceptedPaymentNames.cs" />
     <Compile Include="Constants\PaymentMethodConfigKeys.cs" />
     <Compile Include="Constants\PaymentMethodGroup.cs" />
     <Compile Include="Constants\PaymentMode.cs" />
     <Compile Include="Constants\PermissionType.cs" />
     <Compile Include="Constants\PreApproval.cs" />
     <Compile Include="Constants\BankName.cs" />
+    <Compile Include="Domain\AcceptedPaymentMethods.cs" />
+    <Compile Include="Domain\AcceptedPayments.cs" />
+    <Compile Include="Domain\AcceptPaymentMethod.cs" />
     <Compile Include="Domain\ApplicationCredentials.cs" />
     <Compile Include="Domain\Authorization\AuthorizationAccount.cs" />
     <Compile Include="Domain\Authorization\AuthorizationPermissions.cs" />
@@ -90,6 +95,7 @@
     <Compile Include="Domain\Direct\HolderDocument.cs" />
     <Compile Include="Domain\Direct\Installment.cs" />
     <Compile Include="Domain\Direct\Session.cs" />
+    <Compile Include="Domain\ExcludePaymentMethod.cs" />
     <Compile Include="Domain\Installment\Installment.cs" />
     <Compile Include="Domain\Installment\Installments.cs" />
     <Compile Include="Domain\CreditorFees.cs" />

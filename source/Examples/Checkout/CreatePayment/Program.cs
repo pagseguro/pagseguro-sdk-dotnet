@@ -13,6 +13,7 @@
 //   limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using Uol.PagSeguro;
 using Uol.PagSeguro.Constants;
@@ -28,7 +29,7 @@ namespace CreatePayment
         {
 
             //Use global configuration
-            //PagSeguroConfiguration.UrlXmlConfiguration = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
+            //PagSeguroConfiguration.UrlXmlConfiguration = "../../../../../Configuration/PagSeguroConfig.xml";
 
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
@@ -100,6 +101,16 @@ namespace CreatePayment
 
             // Add installment limit per payment method
             payment.AddPaymentMethodConfig(PaymentMethodConfigKeys.MaxInstallmentsLimit, 8, PaymentMethodGroup.CreditCard);
+
+            // Add and remove groups and payment methods
+            List<string> accept = new List<string>();
+            accept.Add(AcceptedPaymentNames.DebitoItau);
+            accept.Add(AcceptedPaymentNames.DebitoHSBC);
+            payment.AcceptPaymentMethodConfig(AcceptedPaymentGroups.CreditCard, accept);
+
+            List<string> exclude = new List<string>();
+            exclude.Add(AcceptedPaymentNames.Boleto);
+            payment.ExcludePaymentMethodConfig(AcceptedPaymentGroups.Boleto, exclude);
 
             try
             {

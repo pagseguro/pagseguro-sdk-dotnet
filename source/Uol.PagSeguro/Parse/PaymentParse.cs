@@ -307,6 +307,48 @@ namespace Uol.PagSeguro.Parse
                 }
             }
 
+            // paymentMethodConfig 
+            if (payment.AcceptedPaymentMethods.Items.Count > 0)
+            {
+                var acceptGroupList = new List<string>();
+                var acceptNameList = new List<string>();
+                var excludeGroupList = new List<string>();
+                var excludeNameList = new List<string>();
+                var config = payment.AcceptedPaymentMethods.Items;
+
+                foreach (AcceptedPayments item in config)
+                {
+
+                    if (item.GetType() == typeof(AcceptPaymentMethod))
+                    {
+                        if (!acceptGroupList.Contains(item.Group))
+                        {
+                            acceptGroupList.Add(item.Group);
+                        }
+                        acceptNameList = item.Name;
+                    }
+                    if (item.GetType() == typeof(ExcludePaymentMethod))
+                    {
+                        if (!excludeGroupList.Contains(item.Group))
+                        {
+                            excludeGroupList.Add(item.Group);
+                        }
+                        excludeNameList = item.Name;
+                    }
+                }
+
+                if (acceptGroupList.Count > 0 && acceptNameList.Count > 0)
+                {
+                    data["acceptPaymentMethodGroup"] = String.Join(",", acceptGroupList.ToArray());
+                    data["acceptPaymentMethodName"] = String.Join(",", acceptNameList.ToArray());
+                }
+                if (excludeGroupList.Count > 0 && excludeNameList.Count > 0)
+                {
+                    data["excludePaymentMethodGroup"] = String.Join(",", excludeGroupList.ToArray());
+                    data["excludePaymentMethodName"] = String.Join(",", excludeNameList.ToArray());
+                }
+            }
+
             return data;
         }
     }

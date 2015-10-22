@@ -18,6 +18,9 @@
     <Search>
       <Link>https://ws.pagseguro.uol.com.br/v3/transactions</Link>
     </Search>
+    <SearchAbandoned>
+      <Link>https://ws.pagseguro.uol.com.br/v2/transactions</Link>
+    </SearchAbandoned>
     <!-- url for cancel transactions service -->
     <Cancel>
       <Link>https://ws.pagseguro.uol.com.br/v2/transactions/cancels</Link>
