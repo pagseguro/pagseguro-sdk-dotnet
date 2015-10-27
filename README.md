@@ -13,7 +13,6 @@ A biblioteca PagSeguro em .NET é um conjunto de classes de domínio que facilit
  - Consultar [transações por código]
  - Consultar [transações por intervalo de datas]
  - Consultar [transações abandonadas]
- - Consultar [transações por referência]
  - Receber [notificações]
 
 
