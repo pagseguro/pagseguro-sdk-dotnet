@@ -7,16 +7,20 @@ Descrição
 A biblioteca PagSeguro em .NET é um conjunto de classes de domínio que facilitam, para o desenvolvedor .NET, a utilização das funcionalidades que o PagSeguro oferece na forma de APIs. Com a biblioteca instalada e configurada, você pode facilmente integrar funcionalidades como:
 
  - Criar [requisições de pagamentos]
+ - Criar [requisições de assinaturas]
+ - Cancelar [assinaturas]
+ - Consultar [assinaturas]
  - Consultar [transações por código]
  - Consultar [transações por intervalo de datas]
  - Consultar [transações abandonadas]
+ - Consultar [transações por referência]
  - Receber [notificações]
 
 
 Requisitos
 ----------
 ---
- - [.NET Framework] 2.0+
+ - [.NET Framework] 4.5+
 
 
 Instalação
@@ -47,6 +51,26 @@ Caso tenha dúvidas ou precise de suporte, acesse nosso [fórum].
 Changelog
 ---------
 ---
+
+2.4.0
+
+- Integração com serviço de modelo de aplicações.
+- Possibilidade de definir descontos por meio de pagamento durante a requisição do código de checkout - Ver exemplo createPaymentRequest.php
+- Ajustes em geral.
+
+2.3.0
+
+- Adicionado classes e métodos para utilização do Checkout Transparente.
+
+2.2.0
+
+- Integração com serviço de solicitação de estorno.
+- Integração com serviço de solicitação de cancelamento.
+- Integração com serviço de consulta de transações por código de referência.
+- Integração com serviço de consulta de transações abandonadas.
+- Ajustes em geral.
+- Obs.: Algumas das funcionalidades descritas ainda não estão disponíveis comercialmente para todos os vendedores. Em caso de dúvidas acesse nosso [fórum].
+
 2.1.1
 
 - Ajustes diversos
@@ -112,10 +136,12 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
 * Adicione sua feature ou correção de bug.
 * Envie um pull request no [GitHub].
 
-
+  [requisições de assinaturas]: http://download.uol.com.br/pagseguro/docs/pagseguro-assinatura-automatica.pdf
+  [assinaturas]: http://download.uol.com.br/pagseguro/docs/pagseguro-assinatura-automatica.pdf
   [requisições de pagamentos]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
-  [notificações]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-notificacoes.html
-  [transações por código]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-codigo.html
+  [notificações]: https://pagseguro.uol.com.br/v3/guia-de-integracao/api-de-notificacoes.html
+  [Checkout Transparente]: https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
+  [transações por código]: https://pagseguro.uol.com.br/v3/guia-de-integracao/consulta-de-transacoes-por-codigo.html
   [transações por intervalo de datas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-intervalo-de-datas.html
   [transações abandonadas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-abandonadas.html
   [fórum]: http://forum.pagseguro.uol.com.br/
