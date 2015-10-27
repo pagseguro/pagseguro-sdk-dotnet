@@ -6,6 +6,7 @@ Descrição
 ---
 A biblioteca PagSeguro em .NET é um conjunto de classes de domínio que facilitam, para o desenvolvedor .NET, a utilização das funcionalidades que o PagSeguro oferece na forma de APIs. Com a biblioteca instalada e configurada, você pode facilmente integrar funcionalidades como:
 
+
  - Criar [requisições de pagamentos]
  - Criar [requisições de assinaturas]
  - Cancelar [assinaturas]
