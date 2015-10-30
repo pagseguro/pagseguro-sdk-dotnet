@@ -20,7 +20,7 @@ A biblioteca PagSeguro em .NET é um conjunto de classes de domínio que facilit
 Requisitos
 ----------
 ---
- - [.NET Framework] 4.5+
+ - [.NET Framework] 4+
 
 
 Instalação
