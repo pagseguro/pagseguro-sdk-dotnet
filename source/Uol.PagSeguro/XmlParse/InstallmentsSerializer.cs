@@ -27,7 +27,7 @@ namespace Uol.PagSeguro.XmlParse
     /// <summary>
     /// 
     /// </summary>
-    public static class InstallmentSerializer
+    public static class InstallmentsSerializer
     {
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Uol.PagSeguro.XmlParse
         /// </summary>
         /// <param name="streamReader"></param>
         /// <param name="installments"></param>
-        internal static void Read(XmlReader reader, Installment installment)
+        internal static void Read(XmlReader reader, Installments installments)
         {
 
             if (reader.IsEmptyElement)
@@ -44,12 +44,12 @@ namespace Uol.PagSeguro.XmlParse
                 return;
             }
 
-            reader.ReadStartElement(SerializerHelper.Installment);
+            reader.ReadStartElement(SerializerHelper.Installments);
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-                if (XMLParserUtils.IsEndElement(reader, SerializerHelper.Installment))
+                if (XMLParserUtils.IsEndElement(reader, SerializerHelper.Installments))
                 {
                     XMLParserUtils.SkipNode(reader);
                     break;
@@ -59,26 +59,12 @@ namespace Uol.PagSeguro.XmlParse
                 {
                     switch (reader.Name)
                     {
-                        case SerializerHelper.CreditCardBrand:
-                            installment.cardBrand = reader.ReadElementContentAsString();
+                        case SerializerHelper.Installment:
+                            Installment installment = new Installment();
+                            InstallmentSerializer.Read(reader, installment);
+                            installments.Add(installment);
                             break;
-
-                        case SerializerHelper.Quantity:
-                            installment.quantity = reader.ReadElementContentAsInt();
-                            break;
-
-                        case SerializerHelper.Amount:
-                            installment.amount = reader.ReadElementContentAsDecimal();
-                            break;
-
-                        case SerializerHelper.TotalAmount:
-                            installment.totalAmount = reader.ReadElementContentAsDecimal();
-                            break;
-
-                        case SerializerHelper.InterestFree:
-                            installment.interestFree = reader.ReadElementContentAsBoolean();
-                            break;
-
+                        
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

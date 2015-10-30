@@ -33,16 +33,15 @@ namespace GetInstallments
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            String sessionId = "18edf7ce61114d4c9effa92f5e2b7d4b";
             Decimal amount = 1000.00m;
-            String creditCardBrand = "mastercard";
+            String creditCardBrand = "visa";
 
             try
             {
 
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
-                Installments result = InstallmentService.GetInstallments(sessionId, amount, creditCardBrand);
+                Installments result = InstallmentService.GetInstallments(credentials, amount, creditCardBrand);
 
                 Console.WriteLine("Começando listagem de parcelas - \n");
                 foreach (Installment installment in result.Get())

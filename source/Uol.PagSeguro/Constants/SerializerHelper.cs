@@ -55,5 +55,15 @@ namespace Uol.PagSeguro.Constants
         internal const string CreationDate = "creationDate";
         internal const string Account = "account";
         internal const string PublicKey = "publicKey";
+
+        //Installment
+        internal const string Installments = "installments";
+        internal const string Installment = "installment";
+        internal const string CreditCardBrand = "cardBrand";
+        internal const string Amount = "amount";
+        internal const string Quantity = "quantity";
+        internal const string TotalAmount = "totalAmount";
+        internal const string InterestFree = "interestFree";
+        
     }
 }

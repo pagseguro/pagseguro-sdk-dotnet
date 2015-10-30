@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Uol.PagSeguro</RootNamespace>
     <AssemblyName>Uol.PagSeguro</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -165,6 +165,7 @@
     <Compile Include="XmlParse\AuthorizationSummaryListSerializer.cs" />
     <Compile Include="XmlParse\AuthorizationSummarySerializer.cs" />
     <Compile Include="XmlParse\InstallmentSerializer.cs" />
+    <Compile Include="XmlParse\InstallmentsSerializer.cs" />
     <Compile Include="XmlParse\AuthorizationSearchResultSerializer.cs" />
     <Compile Include="XmlParse\AuthorizationPermissionListSerializer.cs" />
     <Compile Include="XmlParse\AuthorizationPermissionSerializer.cs" />

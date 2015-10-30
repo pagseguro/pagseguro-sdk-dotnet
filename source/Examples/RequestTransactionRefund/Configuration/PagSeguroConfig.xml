@@ -65,7 +65,7 @@
       </Session>
       <!-- url for get installments -->
       <Installment>
-        <Link>https://pagseguro.uol.com.br/checkout/v2/installments.json</Link>
+        <Link>https://ws.pagseguro.uol.com.br/v2/installments</Link>
       </Installment>
       <!-- url for transactions -->
       <Transactions>

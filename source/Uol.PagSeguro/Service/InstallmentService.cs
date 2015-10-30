@@ -24,20 +24,20 @@ namespace Uol.PagSeguro.Service
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
         /// <returns><c cref="T:Uol.PagSeguro.CancelRequestResponse">Result</c></returns>
-        public static Installments GetInstallments(String session, Decimal amount, String cardBrand)
+        public static Installments GetInstallments(Credentials credentials, Decimal amount, String cardBrand)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "InstallmentService.GetInstallments() - begin"));
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(
-                    BuildInstallmentURL(session, amount, cardBrand)))
+                    BuildInstallmentURL(credentials, amount, cardBrand)))
                 {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
 
                         Installments result = new Installments();
-                        InstallmentSerializer.Read(reader, result);
+                        InstallmentsSerializer.Read(reader, result);
                         PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "InstallmentService.Register({0}) - end", result.ToString()));
                         return result;
                     }
@@ -57,17 +57,16 @@ namespace Uol.PagSeguro.Service
             }
         }
 
-        private static String BuildInstallmentURL(String session, Decimal amount, String cardBrand)
+        private static String BuildInstallmentURL(Credentials credentials, Decimal amount, String cardBrand)
         {
-            QueryStringBuilder builder = new QueryStringBuilder("{url}?sessionId={session}&amount={amount}&creditCardBrand={cardBrand}");
+            QueryStringBuilder builder = new QueryStringBuilder("{url}?{credentials}&amount={amount}&cardBrand={cardBrand}");
 
             builder.ReplaceValue("{url}", PagSeguroConfiguration.InstallmentUri.AbsoluteUri);
-            builder.ReplaceValue("{session}", HttpUtility.UrlEncode(session));
+            builder.ReplaceValue("{credentials}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             builder.ReplaceValue("{amount}", PagSeguroUtil.DecimalFormat(amount));
-            builder.ReplaceValue("{cardBrand}", HttpUtility.UrlEncode(cardBrand));
+            builder.ReplaceValue("{cardBrand}", HttpUtility.UrlEncode(cardBrand.ToString()));
 
             return builder.ToString();
         }
-
     }
 }
