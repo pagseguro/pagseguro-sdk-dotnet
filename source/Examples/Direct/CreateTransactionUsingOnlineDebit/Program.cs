@@ -75,7 +75,7 @@ namespace CreateTransactionUsingOnlineDebit
                 "comprador@uol.com.br",
                 new Phone("11", "56273440")
             );
-
+            checkout.Sender.Hash = "b2806d600653cbb2b195f317ca9a1a58738187a02c05bf7f2280e2076262e73b";
             SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909");
             checkout.Sender.Documents.Add(senderCPF);
 
