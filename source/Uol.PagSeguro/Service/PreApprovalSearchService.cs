@@ -71,6 +71,37 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
+        /// Finds a pre-approval with a matching notification code
+        /// </summary>
+        /// <param name="credentials">PagSeguro credentials</param>
+        /// <param name="notificationCode">Notification code</param>
+        /// <returns cref="T:Uol.PagSeguro.Transaction"><c>Transaction</c></returns>
+        public static PreApprovalTransaction SearchByNofication(Credentials credentials, string notificationCode)
+        {
+            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByNotification(notificationCode={0}) - begin", notificationCode));
+
+            try
+            {
+                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByNotification(credentials, notificationCode)))
+                {
+                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    {
+                        PreApprovalTransaction preApproval = new PreApprovalTransaction();
+                        PreApprovalTransactionSerializer.Read(reader, preApproval);
+                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByNotification(notificationCode={0}) - end {1}", notificationCode, preApproval));
+                        return preApproval;
+                    }
+                }
+            }
+            catch (WebException exception)
+            {
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByNotification(notificationCode={0}) - error {1}", notificationCode, pse));
+                throw pse;
+            }
+        }
+
+        /// <summary>
         /// Finds a pre-approval with a matching day interval
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
@@ -264,6 +295,24 @@ namespace Uol.PagSeguro.Service
             builder.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().AppendToQuery("&").EncodeCredentialsAsQueryString(credentials).ToString() : "");
 
             return PagSeguroUtil.RemoveExtraSpaces(builder.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <param name="notificationCode"></param>
+        /// <returns></returns>
+        private static string BuildSearchUrlByNotification(Credentials credentials, string notificationCode)
+        {
+            QueryStringBuilder searchUrlByNotification;
+
+            searchUrlByNotification = new QueryStringBuilder("{url}/notifications/{notificationCode}?{credential}");
+            searchUrlByNotification.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+            searchUrlByNotification.ReplaceValue("{notificationCode}", HttpUtility.UrlEncode(notificationCode));
+
+            searchUrlByNotification.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
+            return searchUrlByNotification.ToString();
         }
     }
 }
