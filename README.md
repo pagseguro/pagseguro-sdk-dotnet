@@ -52,6 +52,10 @@ Changelog
 ---------
 ---
 
+2.5.0
+
+- Integração com serviço de consulta de Assinaturas (PreApproval) por código de notificação.
+
 2.4.0
 
 - Integração com serviço de modelo de aplicações.
