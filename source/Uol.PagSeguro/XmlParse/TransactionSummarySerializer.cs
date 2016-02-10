@@ -67,6 +67,9 @@ namespace Uol.PagSeguro.XmlParse
                         case SerializerHelper.TransactionStatus:
                             transaction.TransactionStatus = reader.ReadElementContentAsInt();
                             break;
+                        case SerializerHelper.PaymentLink:
+                            transaction.PaymentLink = reader.ReadElementContentAsString();
+                            break;
                         case SerializerHelper.GrossAmount:
                             transaction.GrossAmount = reader.ReadElementContentAsDecimal();
                             break;

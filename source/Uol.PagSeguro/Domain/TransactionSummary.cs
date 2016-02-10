@@ -85,6 +85,15 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
+        /// Payment link
+        /// </summary>
+        public string PaymentLink
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
         /// Gross amount of the transaction
         /// </summary>
         public decimal GrossAmount
