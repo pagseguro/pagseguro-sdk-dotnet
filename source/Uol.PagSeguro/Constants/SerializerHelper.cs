@@ -31,6 +31,7 @@ namespace Uol.PagSeguro.Constants
         internal const string Transaction = "transaction"; 
         internal const string TransactionType = "type";
         internal const string TransactionStatus = "status";
+        internal const string PaymentLink = "paymentLink";
         internal const string GrossAmount = "grossAmount";
         internal const string DiscountAmount = "discountAmount";
         internal const string FeeAmount = "feeAmount";
