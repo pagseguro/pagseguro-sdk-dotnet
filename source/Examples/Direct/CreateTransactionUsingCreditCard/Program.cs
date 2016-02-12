@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Direct;
@@ -103,7 +102,7 @@ namespace CreateTransactionUsingBoleto
             checkout.Token = "9a476b3a36124756a343712754638c7c";
 
             //Sets the installments information
-            checkout.Installment = new Installment(1, 50.00m);
+            checkout.Installment = new Installment(2, 25.00m, 2);
 
             // Sets the notification url
             checkout.NotificationURL = "http://www.lojamodelo.com.br";

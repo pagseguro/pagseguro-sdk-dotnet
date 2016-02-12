@@ -52,6 +52,10 @@ Changelog
 ---------
 ---
 
+2.5.1
+
+- Possibilidade de definir parcelamento sem juros.
+
 2.5.0
 
 - Integração com serviço de consulta de Assinaturas (PreApproval) por código de notificação.

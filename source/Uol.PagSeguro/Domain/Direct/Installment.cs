@@ -13,7 +13,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <summary>
         /// Quantity of installments
         /// </summary>
-        public Int32 Quantity
+        public int Quantity
         {
             get;
             set;
@@ -22,7 +22,16 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <summary>
         /// Value of each installment
         /// </summary>
-        public Decimal Value
+        public decimal Value
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// No interest insallment quantity.
+        /// </summary>
+        public int NoInterestInstallmentQuantity
         {
             get;
             set;
@@ -31,18 +40,26 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <summary>
         /// Initializes a new instance of the Installment Class
         /// </summary>
+        public Installment() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Installment Class
+        /// </summary>
         /// <param name="quantity"></param>
         /// <param name="value"></param>
-        public Installment(Int32? quantity = null, Decimal? value = null) 
-        {
-            if (quantity.HasValue)
-            {
-                Quantity = (Int32)quantity;
-            }
-            if (value.HasValue)
-            {
-                Value = (Decimal)value;
-            }
+        public Installment(int quantity, decimal value) : this (quantity, value, new int()) { }
+
+        /// <summary>
+        /// Initializes a new instance of the Installment Class
+        /// </summary>
+        /// <param name="quantity"></param>
+        /// <param name="value"></param>
+        /// <param name="noInterestInstallmentQuantity"></param>
+        public Installment(int quantity, decimal value, int noInterestInstallmentQuantity) 
+        {   
+                Quantity = quantity;
+                Value = value;
+                NoInterestInstallmentQuantity = noInterestInstallmentQuantity;
         }
 
         /// <summary>
@@ -54,6 +71,7 @@ namespace Uol.PagSeguro.Domain.Direct
             builder.Append("Installment(");
             builder.Append("quantity=" + Quantity);
             builder.Append(",value=" + Value);
+            builder.Append(",noInterestInstallmentQuantity=" + NoInterestInstallmentQuantity);
             builder.Append(")");
             return builder.ToString();
         }

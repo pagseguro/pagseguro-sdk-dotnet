@@ -24,14 +24,14 @@ namespace Uol.PagSeguro.Service
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
         /// <returns><c cref="T:Uol.PagSeguro.CancelRequestResponse">Result</c></returns>
-        public static Installments GetInstallments(Credentials credentials, Decimal amount, String cardBrand)
+        public static Installments GetInstallments(Credentials credentials, Decimal amount, String cardBrand, Int32 maxInstallmentNoInterest)
         {
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "InstallmentService.GetInstallments() - begin"));
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(
-                    BuildInstallmentURL(credentials, amount, cardBrand)))
+                    BuildInstallmentURL(credentials, amount, cardBrand, maxInstallmentNoInterest)))
                 {
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
@@ -57,14 +57,15 @@ namespace Uol.PagSeguro.Service
             }
         }
 
-        private static String BuildInstallmentURL(Credentials credentials, Decimal amount, String cardBrand)
+        private static String BuildInstallmentURL(Credentials credentials, Decimal amount, String cardBrand, Int32 maxInstallmentNoInterest)
         {
-            QueryStringBuilder builder = new QueryStringBuilder("{url}?{credentials}&amount={amount}&cardBrand={cardBrand}");
+            QueryStringBuilder builder = new QueryStringBuilder("{url}?{credentials}&amount={amount}&cardBrand={cardBrand}&maxInstallmentNoInterest={maxInstallmentNoInterest}");
 
             builder.ReplaceValue("{url}", PagSeguroConfiguration.InstallmentUri.AbsoluteUri);
             builder.ReplaceValue("{credentials}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             builder.ReplaceValue("{amount}", PagSeguroUtil.DecimalFormat(amount));
             builder.ReplaceValue("{cardBrand}", HttpUtility.UrlEncode(cardBrand.ToString()));
+            builder.ReplaceValue("{maxInstallmentNoInterest}", HttpUtility.UrlEncode(maxInstallmentNoInterest.ToString()));
 
             return builder.ToString();
         }

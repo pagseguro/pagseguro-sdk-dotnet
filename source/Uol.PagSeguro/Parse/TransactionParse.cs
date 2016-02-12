@@ -15,7 +15,6 @@
 using System.Collections.Generic;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Util;
-using Uol.PagSeguro.Constants.PreApproval;
 using Uol.PagSeguro.Domain.Direct;
 
 namespace Uol.PagSeguro.Parse
@@ -350,13 +349,17 @@ namespace Uol.PagSeguro.Parse
                 // installment
                 if (creditcard.Installment != null)
                 {
-                    if (creditcard.Installment.Quantity != null)
+                    if (creditcard.Installment.Quantity > 0)
                     {
                         data["installmentQuantity"] = creditcard.Installment.Quantity.ToString();
                     }
-                    if (creditcard.Installment.Value != null)
+                    if (creditcard.Installment.Value > 0)
                     {
                         data["installmentValue"] = PagSeguroUtil.DecimalFormat((decimal)creditcard.Installment.Value);
+                    }
+                    if (creditcard.Installment.NoInterestInstallmentQuantity > 0)
+                    {
+                        data["noInterestInstallmentQuantity"] = creditcard.Installment.NoInterestInstallmentQuantity.ToString();
                     }
                 }
 

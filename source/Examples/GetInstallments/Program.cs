@@ -21,7 +21,6 @@ using Uol.PagSeguro.Domain.Installment;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
-using Uol.PagSeguro.XmlParse;
 
 namespace GetInstallments
 {
@@ -35,13 +34,14 @@ namespace GetInstallments
 
             Decimal amount = 1000.00m;
             String creditCardBrand = "visa";
+            Int32 maxInstallmentNoInterest = 5;
 
             try
             {
 
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
-                Installments result = InstallmentService.GetInstallments(credentials, amount, creditCardBrand);
+                Installments result = InstallmentService.GetInstallments(credentials, amount, creditCardBrand, maxInstallmentNoInterest);
 
                 Console.WriteLine("Começando listagem de parcelas - \n");
                 foreach (Installment installment in result.Get())
