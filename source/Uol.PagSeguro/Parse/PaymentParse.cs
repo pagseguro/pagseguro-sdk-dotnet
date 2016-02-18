@@ -77,7 +77,11 @@ namespace Uol.PagSeguro.Parse
                         {
                             if (document != null)
                             {
-                                data["senderCPF"] = document.Value;
+                                if (document.Type.Equals("Cadastro de Pessoa Física")) {
+                                    data["senderCPF"] = document.Value;
+                                } else {
+                                    data["senderCNPJ"] = document.Value;
+                                }
                             }
                         }
                     }

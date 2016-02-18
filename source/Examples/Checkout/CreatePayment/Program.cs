@@ -75,8 +75,8 @@ namespace CreatePayment
                 new Phone("11", "56273440")
             );
 
-            SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909");
-            payment.Sender.Documents.Add(senderCPF);
+            SenderDocument document = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909");
+            payment.Sender.Documents.Add(document);
 
             // Sets the url used by PagSeguro for redirect user after ends checkout process
             payment.RedirectUri = new Uri("http://www.lojamodelo.com.br");

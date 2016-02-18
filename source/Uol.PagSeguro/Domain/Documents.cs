@@ -26,7 +26,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         private static IDictionary<string, string> AvailableDocumentList = new Dictionary<string, string>()
         {
-            {"CPF","Cadastro de Pessoa Física"}
+            {"CPF","Cadastro de Pessoa Física"},
+            {"CNPJ","Cadastro de Pessoa Jurídica"}
         };
 
         /// <summary>
