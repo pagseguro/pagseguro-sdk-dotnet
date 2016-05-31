@@ -28,7 +28,7 @@ namespace CreatePreApproval
         static void Main(string[] args)
         {
 
-            bool isSandbox = false;
+            bool isSandbox = true;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // Instantiate a new preApproval request
@@ -57,7 +57,7 @@ namespace CreatePreApproval
             preApproval.PreApproval.MaxPaymentsPerPeriod = 5;
             preApproval.PreApproval.Details = string.Format("Todo dia {0} será cobrado o valor de {1} referente ao seguro contra roubo do Notebook.", now.Day, preApproval.PreApproval.AmountPerPayment.ToString("C2"));
             preApproval.PreApproval.Period = Period.Monthly;
-            preApproval.PreApproval.DayOfMonth = now.Day;
+            preApproval.PreApproval.DayOfMonth = now.Day <= 28 ? now.Day : 28;
             preApproval.PreApproval.InitialDate = now;
             preApproval.PreApproval.FinalDate = now.AddMonths(6);
             preApproval.PreApproval.MaxTotalAmount = 600.00m;
@@ -68,8 +68,13 @@ namespace CreatePreApproval
             // Sets the url used for user review the signature or read the rules
             preApproval.ReviewUri = new Uri("http://www.lojamodelo.com.br/revisao");
 
+            // Sets sender CPF
             SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909");
             preApproval.Sender.Documents.Add(senderCPF);
+
+            // Sets sender Address
+            Address senderAddress = new Address("BR", "RJ", "Rio de Janeiro", "Copacabana", "03351-800", "Avenida Copacabana", "1000", "2o Andar");
+            preApproval.Sender.Address = senderAddress;
 
             try
             {

@@ -54,6 +54,15 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
+        /// Sender Address
+        /// </summary>
+        public Address Address
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Sender hash code
         /// </summary>
         public String Hash
