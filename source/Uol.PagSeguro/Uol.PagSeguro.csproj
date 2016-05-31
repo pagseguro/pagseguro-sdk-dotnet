@@ -68,8 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\AcceptedPaymentGroups.cs" />
-    <Compile Include="Constants\AcceptedPaymentNames.cs" />
+    <Compile Include="Constants\ListPaymentMethodGroups.cs" />
+    <Compile Include="Constants\ListPaymentMethodNames.cs" />
     <Compile Include="Constants\PaymentMethodConfigKeys.cs" />
     <Compile Include="Constants\PaymentMethodGroup.cs" />
     <Compile Include="Constants\PaymentMode.cs" />

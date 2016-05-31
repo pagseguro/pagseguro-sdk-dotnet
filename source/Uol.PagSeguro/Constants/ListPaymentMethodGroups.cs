@@ -18,7 +18,7 @@ namespace Uol.PagSeguro.Domain
     /// <summary>
     /// Defines a list of known accepted payment groups.
     /// </summary>
-    public static class AcceptedPaymentGroups
+    public static class ListPaymentMethodGroups
     {
         /// <summary>
         /// PagSeguro Balance

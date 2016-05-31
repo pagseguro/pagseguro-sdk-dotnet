@@ -28,13 +28,13 @@ namespace CreateSession
     {
         static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             try
             {
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+
                 Session result = SessionService.CreateSession(credentials);
 
                 Console.WriteLine(result.ToString());
@@ -49,8 +49,8 @@ namespace CreateSession
                     Console.WriteLine(element + "\n");
                 }
                 Console.ReadKey();
-
             }
         }
     }
+    
 }
