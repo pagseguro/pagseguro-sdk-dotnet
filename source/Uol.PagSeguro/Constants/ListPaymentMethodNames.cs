@@ -18,7 +18,7 @@ namespace Uol.PagSeguro.Domain
     /// <summary>
     /// Defines a list of known accepted payment names.
     /// </summary>
-    public static class AcceptedPaymentNames
+    public static class ListPaymentMethodNames
     {
         /// <summary>
         /// Bradesco debit

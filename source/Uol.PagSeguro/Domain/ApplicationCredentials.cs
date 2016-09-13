@@ -59,6 +59,10 @@ namespace Uol.PagSeguro.Domain
             {
                 return this.AttributeDictionary[AppIdParameterName];
             }
+            set
+            {
+                this.AttributeDictionary[AppIdParameterName] = value;
+            }
         }
 
         /// <summary>
@@ -69,6 +73,10 @@ namespace Uol.PagSeguro.Domain
             get
             {
                 return this.AttributeDictionary[AppKeyParameterName];
+            }
+            set
+            {
+                this.AttributeDictionary[AppKeyParameterName] = value;
             }
         }
 

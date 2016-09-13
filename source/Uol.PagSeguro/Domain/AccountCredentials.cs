@@ -48,6 +48,10 @@ namespace Uol.PagSeguro.Domain
             {
                 return this.AttributeDictionary[EmailParameterName];
             }
+            set
+            {
+                this.AttributeDictionary[EmailParameterName] = value;
+            }
         }
 
         /// <summary>
@@ -58,6 +62,10 @@ namespace Uol.PagSeguro.Domain
             get
             {
                 return this.AttributeDictionary[TokenParameterName];
+            }
+            set
+            {
+                this.AttributeDictionary[TokenParameterName] = value;
             }
         }
     }

@@ -104,17 +104,22 @@ namespace CreatePayment
 
             // Add and remove groups and payment methods
             List<string> accept = new List<string>();
-            accept.Add(AcceptedPaymentNames.DebitoItau);
-            accept.Add(AcceptedPaymentNames.DebitoHSBC);
-            payment.AcceptPaymentMethodConfig(AcceptedPaymentGroups.CreditCard, accept);
+            accept.Add(ListPaymentMethodNames.DebitoItau);
+            accept.Add(ListPaymentMethodNames.DebitoHSBC);
+            payment.AcceptPaymentMethodConfig(ListPaymentMethodGroups.CreditCard, accept);
 
             List<string> exclude = new List<string>();
-            exclude.Add(AcceptedPaymentNames.Boleto);
-            payment.ExcludePaymentMethodConfig(AcceptedPaymentGroups.Boleto, exclude);
+            exclude.Add(ListPaymentMethodNames.Boleto);
+            payment.ExcludePaymentMethodConfig(ListPaymentMethodGroups.Boleto, exclude);
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                /// Create new account credentials
+                /// This configuration let you set your credentials from your ".cs" file.
+                AccountCredentials credentials = new AccountCredentials("backoffice@lojamodelo.com.br", "256422BF9E66458CA3FE41189AD1C94A");
+
+                /// @todo with you want to get credentials from xml config file uncommend the line below and comment the line above.
+                //AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 Uri paymentRedirectUri = payment.Register(credentials);
 
