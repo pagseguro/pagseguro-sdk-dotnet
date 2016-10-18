@@ -28,11 +28,11 @@ namespace Uol.PagSeguro.Service
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "SessionService.Register() - begin"));
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
+                using (var response = HttpURLConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.SessionUri.AbsoluteUri, BuildSessionURL(credentials)))
                 {
 
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
 
                         Session result = new Session();
@@ -42,9 +42,9 @@ namespace Uol.PagSeguro.Service
                     }
                 }
             }
-            catch (WebException exception)
+            catch (System.Exception exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "SessionService.Register() - error {0}", pse));
                 throw pse;
             }

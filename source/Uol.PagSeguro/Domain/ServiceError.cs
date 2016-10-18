@@ -13,8 +13,10 @@
 //   limitations under the License.
 
 using System;
+#if !NETSTANDARD1_6
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+#endif
 using System.Text;
 
 namespace Uol.PagSeguro.Domain
@@ -22,8 +24,12 @@ namespace Uol.PagSeguro.Domain
     /// <summary>
     /// Represents a PagSeguro web service error
     /// </summary>
+#if !NETSTANDARD1_6
     [Serializable]
     public sealed class ServiceError : ISerializable
+#else
+    public sealed class ServiceError
+#endif
     {
         private const string CodeField = "Code";
         private const string MessageField = "Message";
@@ -39,6 +45,7 @@ namespace Uol.PagSeguro.Domain
             this.Message = message;
         }
 
+        #if !NETSTANDARD1_6
         private ServiceError(SerializationInfo info, StreamingContext context)
         {
             this.Code = info.GetString(ServiceError.CodeField);
@@ -56,6 +63,7 @@ namespace Uol.PagSeguro.Domain
             info.AddValue(ServiceError.CodeField, this.Code);
             info.AddValue(ServiceError.MessageField, this.Message);
         }
+        #endif
 
         /// <summary>
         /// Error code

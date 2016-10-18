@@ -24,7 +24,6 @@ using Uol.PagSeguro.Parse;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Util;
 using Uol.PagSeguro.XmlParse;
-using System.Web;
 
 namespace Uol.PagSeguro.Service
 {
@@ -51,9 +50,9 @@ namespace Uol.PagSeguro.Service
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByCode(credentials, preApprovalCode)))
+                using (var response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByCode(credentials, preApprovalCode)))
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
                         PreApprovalTransaction preApproval = new PreApprovalTransaction();
                         PreApprovalTransactionSerializer.Read(reader, preApproval);
@@ -62,9 +61,9 @@ namespace Uol.PagSeguro.Service
                     }
                 }
             }
-            catch (WebException exception)
+            catch (System.Exception exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByCode(preApprovalCode={0}) - error {1}", preApprovalCode, pse));
                 throw pse;
             }
@@ -82,9 +81,9 @@ namespace Uol.PagSeguro.Service
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByNotification(credentials, notificationCode)))
+                using (var response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByNotification(credentials, notificationCode)))
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
                         PreApprovalTransaction preApproval = new PreApprovalTransaction();
                         PreApprovalTransactionSerializer.Read(reader, preApproval);
@@ -93,9 +92,9 @@ namespace Uol.PagSeguro.Service
                     }
                 }
             }
-            catch (WebException exception)
+            catch (System.Exception exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByNotification(notificationCode={0}) - error {1}", notificationCode, pse));
                 throw pse;
             }
@@ -114,9 +113,9 @@ namespace Uol.PagSeguro.Service
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByInterval(credentials, interval)))
+                using (var response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByInterval(credentials, interval)))
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
                         PreApprovalSearchResult preApproval = new PreApprovalSearchResult();
                         PreApprovalSearchResultSerializer.Read(reader, preApproval);
@@ -125,9 +124,9 @@ namespace Uol.PagSeguro.Service
                     }
                 }
             }
-            catch (WebException exception)
+            catch (System.Exception exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByInterval(Days={0}) - error {1}", interval, pse));
                 throw pse;
             }
@@ -148,9 +147,9 @@ namespace Uol.PagSeguro.Service
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByDate(initialDate={0} - finalDate={1}) - begin", initialDate, finalDate));
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByDate(credentials, initialDate, finalDate, pageNumber, resultsPerPage)))
+                using (var response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByDate(credentials, initialDate, finalDate, pageNumber, resultsPerPage)))
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
                         PreApprovalSearchResult preApproval = new PreApprovalSearchResult();
                         PreApprovalSearchResultSerializer.Read(reader, preApproval);
@@ -159,9 +158,9 @@ namespace Uol.PagSeguro.Service
                     }
                 }
             }
-            catch (WebException exception)
+            catch (System.Exception exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByDate(initialDate={0} - finalDate={1}) - error {2}", initialDate, finalDate, pse));
                 throw pse;
             }
@@ -183,9 +182,9 @@ namespace Uol.PagSeguro.Service
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByReference(reference={0}) - begin", reference));
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByReference(credentials, reference, initialDate, finalDate, pageNumber, resultsPerPage)))
+                using (var response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByReference(credentials, reference, initialDate, finalDate, pageNumber, resultsPerPage)))
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
                         PreApprovalSearchResult preApproval = new PreApprovalSearchResult();
                         PreApprovalSearchResultSerializer.Read(reader, preApproval);
@@ -194,9 +193,9 @@ namespace Uol.PagSeguro.Service
                     }
                 }
             }
-            catch (WebException exception)
+            catch (System.Exception exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalSearchService.SearchByReference(reference={0}) - error {1}", reference, pse));
                 throw pse;
             }
@@ -214,7 +213,7 @@ namespace Uol.PagSeguro.Service
 
             searchUrlByCode = new QueryStringBuilder("{url}/{preApprovalCode}?{credential}");
             searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
-            searchUrlByCode.ReplaceValue("{preApprovalCode}", HttpUtility.UrlEncode(preApprovalCode));
+            searchUrlByCode.ReplaceValue("{preApprovalCode}", WebUtility.UrlEncode(preApprovalCode));
 
             searchUrlByCode.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return searchUrlByCode.ToString();
@@ -232,7 +231,7 @@ namespace Uol.PagSeguro.Service
 
             searchUrlByInterval = new QueryStringBuilder("{url}/notifications?{credential}&interval={interval}");
             searchUrlByInterval.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
-            searchUrlByInterval.ReplaceValue("{interval}", HttpUtility.UrlEncode(interval.ToString()));
+            searchUrlByInterval.ReplaceValue("{interval}", WebUtility.UrlEncode(interval.ToString()));
             searchUrlByInterval.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return searchUrlByInterval.ToString();
         }
@@ -281,7 +280,7 @@ namespace Uol.PagSeguro.Service
             QueryStringBuilder builder = new QueryStringBuilder("{url}?reference={reference}&initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
 
             builder.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
-            builder.ReplaceValue("{reference}", HttpUtility.UrlEncode(reference));
+            builder.ReplaceValue("{reference}", WebUtility.UrlEncode(reference));
             builder.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             builder.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
             if (pageNumber.HasValue)
@@ -309,7 +308,7 @@ namespace Uol.PagSeguro.Service
 
             searchUrlByNotification = new QueryStringBuilder("{url}/notifications/{notificationCode}?{credential}");
             searchUrlByNotification.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
-            searchUrlByNotification.ReplaceValue("{notificationCode}", HttpUtility.UrlEncode(notificationCode));
+            searchUrlByNotification.ReplaceValue("{notificationCode}", WebUtility.UrlEncode(notificationCode));
 
             searchUrlByNotification.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return searchUrlByNotification.ToString();

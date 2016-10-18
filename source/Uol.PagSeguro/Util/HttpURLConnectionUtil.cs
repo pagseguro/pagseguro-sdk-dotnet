@@ -25,6 +25,8 @@ using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.XmlParse;
 using System.Collections.Specialized;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Uol.PagSeguro.Util
 {
@@ -41,36 +43,9 @@ namespace Uol.PagSeguro.Util
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static PagSeguroServiceException CreatePagSeguroServiceException(HttpWebResponse response)
+        internal static PagSeguroServiceException CreatePagSeguroServiceException(System.Exception exception)
         {
-            if (response == null)
-                throw new PagSeguroServiceException("response answered with null value");
-
-            if (response.StatusCode == HttpStatusCode.OK)
-                throw new ArgumentException("response.StatusCode must be different than HttpStatusCode.OK", "response");
-
-
-            using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
-            {
-                switch (response.StatusCode)
-                {
-                    case HttpStatusCode.BadRequest:
-                        List<ServiceError> errors = new List<ServiceError>();
-                        try
-                        {
-                            ErrorsSerializer.Read(reader, errors);
-                        }
-                        catch (XmlException e)
-                        {
-                            return new PagSeguroServiceException(response.StatusCode, e);
-                        }
-
-                        return new PagSeguroServiceException(response.StatusCode, errors);
-
-                    default:
-                        return new PagSeguroServiceException(response.StatusCode);
-                }
-            }
+            return new PagSeguroServiceException(exception.Message, exception);
         }
 
         /// <summary>
@@ -79,10 +54,9 @@ namespace Uol.PagSeguro.Util
         /// <param name="urlPath"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        internal static HttpWebResponse GetHttpPostConnection(string urlPath, string query)
+        internal static HttpResponseMessage GetHttpPostConnection(string urlPath, string query)
         {
-            string contentType = PagSeguroConfiguration.FormUrlEncoded + "; charset= " + PagSeguroConfiguration.Encoding;
-            return GetHttpURLConnection(HttpURLConnectionUtil.PostMethod, contentType, urlPath, query);
+            return GetHttpURLConnection(HttpURLConnectionUtil.PostMethod, PagSeguroConfiguration.FormUrlEncoded, PagSeguroConfiguration.Encoding, urlPath, query);
         }
 
         /// <summary>
@@ -90,10 +64,9 @@ namespace Uol.PagSeguro.Util
         /// </summary>
         /// <param name="urlPath"></param>
         /// <returns></returns>
-        internal static HttpWebResponse GetHttpGetConnection(string urlPath)
+        internal static HttpResponseMessage GetHttpGetConnection(string urlPath)
         {
-            string contentType = PagSeguroConfiguration.FormUrlEncoded + "; charset= " + PagSeguroConfiguration.Encoding;
-            return GetHttpURLConnection(HttpURLConnectionUtil.GetMethod, contentType, urlPath, null);
+            return GetHttpURLConnection(HttpURLConnectionUtil.GetMethod, PagSeguroConfiguration.FormUrlEncoded, PagSeguroConfiguration.Encoding, urlPath, null);
         }
 
         /// <summary>
@@ -104,42 +77,35 @@ namespace Uol.PagSeguro.Util
         /// <param name="urlPath"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        private static HttpWebResponse GetHttpURLConnection(string method, string contentType, string urlPath, string query)
+        private static HttpResponseMessage GetHttpURLConnection(string method, string contentType, string encoding, string urlPath, string query)
         {
-            HttpWebRequest request;
             try
             {
-                request = (HttpWebRequest) WebRequest.Create(urlPath);
-
-                request.ContentType = contentType;
-                request.Method = method;
-                request.Timeout = PagSeguroConfiguration.RequestTimeout;
-                request.Headers.Add("lib-description", ".net:" + PagSeguroConfiguration.LibVersion);
-                request.Headers.Add("language-engine-description", ".net:" + PagSeguroConfiguration.LanguageEngineDescription);
+                HttpClient client = new HttpClient();
+                client.Timeout = TimeSpan.FromMilliseconds(PagSeguroConfiguration.RequestTimeout);
+                client.DefaultRequestHeaders.Add("lib-description", ".net:" + PagSeguroConfiguration.LibVersion);
+                client.DefaultRequestHeaders.Add("language-engine-description", ".net:" + PagSeguroConfiguration.LanguageEngineDescription);
 
                 // adding module version to header request 
                 if (!string.IsNullOrEmpty(PagSeguroConfiguration.ModuleVersion))
                 {
-                    request.Headers.Add("module-description", PagSeguroConfiguration.ModuleVersion);
+                    client.DefaultRequestHeaders.Add("module-description", PagSeguroConfiguration.ModuleVersion);
                 }
 
                 // adding cms version to header request 
                 if (!string.IsNullOrEmpty(PagSeguroConfiguration.CmsVersion))
                 {
-                    request.Headers.Add("cms-description", PagSeguroConfiguration.CmsVersion);
+                    client.DefaultRequestHeaders.Add("cms-description", PagSeguroConfiguration.CmsVersion);
                 }
 
                 if (HttpURLConnectionUtil.PostMethod.Equals(method))
                 {
-
-                    using (Stream requestStream = request.GetRequestStream())
-                    {
-                        byte[] byteArray = Encoding.UTF8.GetBytes(query);
-                        requestStream.Write(byteArray, 0, byteArray.Length);
-                        requestStream.Close();
-                    }
+                    return client.PostAsync(urlPath, new StringContent(query, Encoding.GetEncoding(encoding), contentType)).Result;
                 }
-                return (HttpWebResponse)request.GetResponse();
+                else
+                {
+                    return client.GetAsync(urlPath).Result;
+                }
             }
             catch (WebException exception)
             {

@@ -24,7 +24,6 @@ using Uol.PagSeguro.Parse;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Util;
 using Uol.PagSeguro.XmlParse;
-using System.Web;
 
 namespace Uol.PagSeguro.Service
 {
@@ -49,13 +48,13 @@ namespace Uol.PagSeguro.Service
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
+                using (var response = HttpURLConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.PaymentUri.AbsoluteUri, BuildCheckoutUrl(credentials, payment)))
                 {
 
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
-                        using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                        using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                         {
                             PaymentRequestResponse paymentResponse = new PaymentRequestResponse(PagSeguroConfiguration.PaymentRedirectUri);
                             PaymentSerializer.Read(reader, paymentResponse);
@@ -65,15 +64,15 @@ namespace Uol.PagSeguro.Service
                     }
                     else
                     {
-                        PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(response);
+                        PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(new System.Exception(response.StatusCode.ToString()));
                         PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - error {1}", payment, pse));
                         throw pse;
                     }
                 }
             }
-            catch (WebException exception)
+            catch (System.Exception exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - error {1}", payment, pse));
                 throw pse;
             }
@@ -92,7 +91,7 @@ namespace Uol.PagSeguro.Service
 
             builder.
                 EncodeCredentialsAsQueryString(credentials);
-            
+
             foreach (KeyValuePair<string, string> pair in data)
             {
                 builder.Append(pair.Key, pair.Value);

@@ -18,7 +18,6 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.XmlParse;
 using System.Reflection;
 using System.Diagnostics;
-using System.Web;
 using System.Text.RegularExpressions;
 using Uol.PagSeguro.Exception;
 
@@ -41,7 +40,11 @@ namespace Uol.PagSeguro.Resources
             string urlXmlConfiguration = PagSeguroConfiguration.UrlXmlConfiguration;
 
             XmlDocument xml = new XmlDocument();
-            xml.Load(urlXmlConfiguration);
+            using (var reader = System.IO.File.OpenRead(urlXmlConfiguration))
+            {
+                xml.Load(reader);
+            }
+
             XmlNodeList elemList = xml.GetElementsByTagName("Link");
             bool changed = false;
 
@@ -77,7 +80,10 @@ namespace Uol.PagSeguro.Resources
 
                 if (changed)
                 {
-                    xml.Save(urlXmlConfiguration);
+                    using(var writer = System.IO.File.Create(urlXmlConfiguration))
+                    {
+                        xml.Save(writer);
+                    }
                 }
             }
             catch (FormatException exception)

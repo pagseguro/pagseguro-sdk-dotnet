@@ -18,7 +18,6 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.XmlParse;
 using System.Reflection;
 using System.Diagnostics;
-using System.Web;
 
 namespace Uol.PagSeguro.Resources
 {
@@ -30,8 +29,11 @@ namespace Uol.PagSeguro.Resources
         //PagSeguro .NET Library Tests
         private static string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
 
-        //Website
-        //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
+        //Website (IIS)
+        //private static string urlXmlConfiguration = System.Web.HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
+
+        //Website (AspNetCore)
+        //private static string urlXmlConfiguration = System.IO.Path.Combine(AppContext.BaseDirectory, "PagSeguroConfig.xml");
 
         private static string _moduleVersion;
         private static string _cmsVersion;
@@ -106,7 +108,11 @@ namespace Uol.PagSeguro.Resources
         {
             get
             {
-                return Environment.Version.ToString();
+#if !NETSTANDARD1_6
+				return Environment.Version.ToString();
+#else
+				return System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+#endif
             }
         }
 
@@ -401,9 +407,9 @@ namespace Uol.PagSeguro.Resources
         private static XmlDocument LoadXmlConfig()
         {
             XmlDocument xml = new XmlDocument();
-            using (xml as IDisposable)
+            using (var reader = System.IO.File.OpenRead(urlXmlConfiguration))
             {
-                xml.Load(urlXmlConfiguration);
+                xml.Load(reader);
             }
             return xml;
         }

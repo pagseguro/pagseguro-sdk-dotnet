@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using System.Text;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Authorization;
@@ -48,10 +47,10 @@ namespace Uol.PagSeguro.Service
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
+                using (var response = HttpURLConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.AuthorizarionRequestUri.AbsoluteUri, buildAuthorizationRequestUrl(credentials, authorizationRequest))) 
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
                         AuthorizationResponse authorization = new AuthorizationResponse();
                         AuthorizationSerializer.Read(reader, authorization);
@@ -105,10 +104,14 @@ namespace Uol.PagSeguro.Service
 
             foreach (KeyValuePair<string, string> pair in data)
             {
+#if !NETSTANDARD1_6
                 builder.Append(pair.Key, pair.Value.ToString(CultureInfo.InvariantCulture));
+#else
+                builder.Append(pair.Key, pair.Value);
+#endif
             }
  
-            return HttpUtility.UrlDecode(builder.ToString());
+            return WebUtility.UrlDecode(builder.ToString());
         }
     }
 }

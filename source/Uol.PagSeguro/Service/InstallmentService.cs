@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Installment;
@@ -30,10 +29,10 @@ namespace Uol.PagSeguro.Service
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "InstallmentService.GetInstallments() - begin"));
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(
+                using (var response = HttpURLConnectionUtil.GetHttpGetConnection(
                     BuildInstallmentURL(credentials, amount, cardBrand, maxInstallmentNoInterest)))
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
 
                         Installments result = new Installments();
@@ -49,9 +48,9 @@ namespace Uol.PagSeguro.Service
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "InstallmentService.Register() - error {0}", exception.Message));
                 throw pse;
             }
-            catch (WebException exception)
+            catch (System.Exception exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "InstallmentService.Register() - error {0}", pse));
                 throw pse;
             }
@@ -64,8 +63,8 @@ namespace Uol.PagSeguro.Service
             builder.ReplaceValue("{url}", PagSeguroConfiguration.InstallmentUri.AbsoluteUri);
             builder.ReplaceValue("{credentials}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             builder.ReplaceValue("{amount}", PagSeguroUtil.DecimalFormat(amount));
-            builder.ReplaceValue("{cardBrand}", HttpUtility.UrlEncode(cardBrand.ToString()));
-            builder.ReplaceValue("{maxInstallmentNoInterest}", HttpUtility.UrlEncode(maxInstallmentNoInterest.ToString()));
+            builder.ReplaceValue("{cardBrand}", WebUtility.UrlEncode(cardBrand.ToString()));
+            builder.ReplaceValue("{maxInstallmentNoInterest}", WebUtility.UrlEncode(maxInstallmentNoInterest.ToString()));
 
             return builder.ToString();
         }

@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Direct;
@@ -47,10 +46,10 @@ namespace Uol.PagSeguro.Service
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - begin"));
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
+                using (var response = HttpURLConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.TransactionsUri.AbsoluteUri, BuildTransactionUrl(credentials, checkout)))
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
                         
                         Transaction transaction = new Transaction();
@@ -60,9 +59,9 @@ namespace Uol.PagSeguro.Service
                     }
                 }
             }
-            catch (WebException exception)
+            catch (System.Exception exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - error {0}", pse));
                 throw pse;
             }

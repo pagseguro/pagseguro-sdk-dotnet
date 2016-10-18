@@ -15,7 +15,6 @@
 using System;
 using System.Globalization;
 using System.Net;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
@@ -45,11 +44,11 @@ namespace Uol.PagSeguro.Service
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "RefundService.Register(transactionCode = {0}) - begin", transactionCode));
             
             try {
-                using(HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
+                using(var response = HttpURLConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.RefundUri.AbsoluteUri, BuildRefundURL(credentials, transactionCode, refundValue)))
                 {
             
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
 
                         RequestResponse refund = new RequestResponse();
@@ -58,8 +57,8 @@ namespace Uol.PagSeguro.Service
                         return refund;
                     }
                 }
-            } catch (WebException exception) {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+            } catch (System.Exception exception) {
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "RefundService.Register() - error {0}", pse));
                 throw pse;
             }

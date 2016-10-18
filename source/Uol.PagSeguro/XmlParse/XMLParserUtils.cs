@@ -12,6 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
+using System;
 using System.Xml;
 
 namespace Uol.PagSeguro.XmlParse
@@ -59,5 +60,14 @@ namespace Uol.PagSeguro.XmlParse
                 reader.Skip();
             }
         }
+
+#if NETSTANDARD1_6
+        internal static DateTime ReadElementContentAsDateTime(this XmlReader reader)
+        {
+            var dateTime = DateTime.MinValue;
+            DateTime.TryParse(reader.ReadElementContentAsString(), out dateTime);
+            return dateTime;
+        }
+#endif
     }
 }

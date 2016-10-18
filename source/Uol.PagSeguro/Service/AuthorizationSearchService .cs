@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using System.Text;
-using System.Web;
+using System.Threading.Tasks;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Authorization;
@@ -52,9 +52,9 @@ namespace Uol.PagSeguro.Service
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByCode(credentials, code))) 
+                using (var response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByCode(credentials, code))) 
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
                         AuthorizationSummary authorization = new AuthorizationSummary();
                         AuthorizationSummarySerializer.Read(reader, authorization);
@@ -87,9 +87,9 @@ namespace Uol.PagSeguro.Service
 
             try
             {
-                using(HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByDate(credentials, initialDate, finalDate, pageNumber, resultsPerPage)))
+                using(var response = HttpURLConnectionUtil.GetHttpGetConnection(BuildSearchUrlByDate(credentials, initialDate, finalDate, pageNumber, resultsPerPage)))
                 {
-                    using(XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using(XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
                         AuthorizationSearchResult authorization = new AuthorizationSearchResult();
                         AuthorizationSearchResultSerializer.Read(reader, authorization);

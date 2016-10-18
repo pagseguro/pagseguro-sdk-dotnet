@@ -13,10 +13,6 @@
 //   limitation
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
@@ -75,7 +71,7 @@ namespace Uol.PagSeguro.XmlParse
         /// <returns></returns>
         internal static string GetWebserviceUrl(XmlDocument xml, string urlToSearch)
         {
-            string url = GetDataConfiguration(xml, urlToSearch);
+            string url = GetDataConfiguration(xml,urlToSearch);
             if (string.IsNullOrEmpty(url))
             {
                 throw new ArgumentException(" WebService URL not set for " + urlToSearch + " environment.");
@@ -107,6 +103,7 @@ namespace Uol.PagSeguro.XmlParse
         /// <returns></returns>
         internal static AccountCredentials GetAccountCredentials(XmlDocument xml, bool sandbox)
         {
+
             AccountCredentials credential = null;
 
             string email;
@@ -117,8 +114,7 @@ namespace Uol.PagSeguro.XmlParse
                 email = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxEmail);
                 token = GetDataConfiguration(xml, PagSeguroConfigSerializer.SandboxToken);
             }
-            else
-            {
+            else {
                 email = GetDataConfiguration(xml, PagSeguroConfigSerializer.Email);
                 token = GetDataConfiguration(xml, PagSeguroConfigSerializer.Token);
             }
@@ -144,7 +140,7 @@ namespace Uol.PagSeguro.XmlParse
         {
 
             string appId;
-            string appKey;          
+            string appKey;
 
             if (sandbox)
             {

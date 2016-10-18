@@ -16,8 +16,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
+#if !NETSTANDARD1_6
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+#endif
 using System.Text;
 using Uol.PagSeguro.Domain;
 
@@ -26,7 +28,9 @@ namespace Uol.PagSeguro.Exception
     /// <summary>
     /// Encapsulates a problem that occurred calling a PagSeguro web service
     /// </summary>
-    [Serializable]
+#if !NETSTANDARD1_6
+	[Serializable]
+#endif
     public sealed class PagSeguroServiceException : System.Exception
     {
         private const string CrLf = "\n";
@@ -95,6 +99,7 @@ namespace Uol.PagSeguro.Exception
             this.StatusCode = statusCode;
         }
 
+#if !NETSTANDARD1_6
         private PagSeguroServiceException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -114,6 +119,7 @@ namespace Uol.PagSeguro.Exception
             info.AddValue(PagSeguroServiceException.HttpStatusCodeField, this.StatusCode);
             info.AddValue(PagSeguroServiceException.ErrorsField, this.Errors);
         }
+#endif
 
         /// <summary>
         /// List of errors returned by the PagSeguro web service

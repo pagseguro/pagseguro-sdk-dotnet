@@ -15,7 +15,6 @@
 using System;
 using System.Globalization;
 using System.Net;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
@@ -44,11 +43,11 @@ namespace Uol.PagSeguro.Service
 
             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "CancelService.Register(transactionCode = {0}) - begin", transactionCode));
             try {
-                using(HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
+                using(var response = HttpURLConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.CancelUri.AbsoluteUri, BuildCancelURL(credentials, transactionCode)))
                 {
             
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (XmlReader reader = XmlReader.Create(response.Content.ReadAsStreamAsync().Result))
                     {
 
                         RequestResponse cancel = new RequestResponse();
@@ -57,8 +56,8 @@ namespace Uol.PagSeguro.Service
                         return cancel;
                     }
                 }
-            } catch (WebException exception) {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+            } catch (System.Exception exception) {
+                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(exception);
                 PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "CancelService.createRequest() - error {0}", pse));
                 throw pse;
             }

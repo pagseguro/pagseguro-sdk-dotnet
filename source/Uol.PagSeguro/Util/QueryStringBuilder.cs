@@ -14,8 +14,8 @@
 
 using System;
 using System.Globalization;
+using System.Net;
 using System.Text;
-using System.Web;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.Util
@@ -60,9 +60,9 @@ namespace Uol.PagSeguro.Util
             {
                 builder.Append(QueryStringBuilder.Separator);
             }
-            builder.Append(HttpUtility.UrlEncode(parameterName));
+            builder.Append(WebUtility.UrlEncode(parameterName));
             builder.Append(QueryStringBuilder.Equal);
-            builder.Append(HttpUtility.UrlEncode(value));
+            builder.Append(WebUtility.UrlEncode(value));
         }
 
         /// <summary>
