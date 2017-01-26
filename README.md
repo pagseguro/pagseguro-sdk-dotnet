@@ -146,13 +146,13 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
 
   [requisições de assinaturas]: http://download.uol.com.br/pagseguro/docs/pagseguro-assinatura-automatica.pdf
   [assinaturas]: http://download.uol.com.br/pagseguro/docs/pagseguro-assinatura-automatica.pdf
-  [requisições de pagamentos]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
-  [notificações]: https://pagseguro.uol.com.br/v3/guia-de-integracao/api-de-notificacoes.html
+  [requisições de pagamentos]: https://dev.pagseguro.uol.com.br/documentacao/pagamentos
+  [notificações]: https://dev.pagseguro.uol.com.br/documentacao/notificacoes
   [Checkout Transparente]: https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
-  [transações por código]: https://pagseguro.uol.com.br/v3/guia-de-integracao/consulta-de-transacoes-por-codigo.html
-  [transações por intervalo de datas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-intervalo-de-datas.html
-  [transações abandonadas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-abandonadas.html
-  [fórum]: http://forum.pagseguro.uol.com.br/
+  [transações por código]: https://dev.pagseguro.uol.com.br/documentacao/pagamentos/consultando-por-codigo-de-referencia
+  [transações por intervalo de datas]: https://dev.pagseguro.uol.com.br/documentacao/pagamentos/consulta-de-transacoes-por-intervalo-de-datas
+  [transações abandonadas]: https://dev.pagseguro.uol.com.br/documentacao/pagamentos/consulta-de-transacoes-abandonadas
+  [fórum]: https://comunidade.pagseguro.uol.com.br/hc/pt-br/community/topics
   [.NET Framework]: http://www.microsoft.com/net
-  [GitHub]: https://github.com/pagseguro/netframework
+  [GitHub]: https://github.com/pagseguro/pagseguro-sdk-dotnet
   [documentação oficial]: https://pagseguro.uol.com.br/v2/guia-de-integracao/documentacao-da-biblioteca-pagseguro-netframework.html
