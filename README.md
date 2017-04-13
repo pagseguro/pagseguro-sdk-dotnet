@@ -20,7 +20,8 @@ A biblioteca PagSeguro em .NET é um conjunto de classes de domínio que facilit
 Requisitos
 ----------
 ---
- - [.NET Framework] 4+
+ - [.NET Framework] 4.5+
+ - [.NET Core]
 
 
 Instalação
@@ -29,8 +30,14 @@ Instalação
  - Baixe o repositório como arquivo zip ou faça um clone;
  - Descompacte os arquivos em seu computador;
  - Dentro do diretório *source* existem dois diretórios, o *Uol.PagSeguro* e o *Examples*. O diretório *Examples* contém exemplos de chamadas utilizando a API e o diretório *Uol.PagSeguro* contém a biblioteca propriamente dita;
+ 
+ [.Net 4.5+]
  - Inclua o projeto Uol.PagSeguro.csproj dentro de sua solução;
  - Adicione uma referência ao projeto Uol.PagSeguro.csproj em seu projeto.
+ 
+ [.Net Core]
+ - Copie o diretório *Uol.PagSeguro* para a pasta da sua solução;
+ - Adicione *"Uol.PagSeguro": "1.0.0"* na lista de dependencias do *project.json* de seu projeto.
 
 Configuração
 ------------
