@@ -51,6 +51,9 @@ Caso tenha dúvidas ou precise de suporte, acesse nosso [fórum].
 Changelog
 ---------
 ---
+3.0.0
+
+- Remoção de funcionalidade depreciada (checkout com cartão de crédito internacional)
 
 2.5.1
 
