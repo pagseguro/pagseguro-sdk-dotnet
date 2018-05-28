@@ -1,5 +1,7 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Uol.PagSeguro.Resources;
+using Uol.PagSeguro.XmlParse;
 
 // ReSharper disable UnusedMember.Global
 
@@ -119,28 +121,36 @@ namespace Uol.PagSeguro.Configuration
             set => this[AuthorizationKey] = value;
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// 
         /// </summary>
-        /// <param name="urlKey"></param>
+        /// <param name="configKey"></param>
         /// <param name="sandbox"></param>
         /// <returns></returns>
-        public string Get(string urlKey, bool sandbox)
+        public string Get(string configKey, bool sandbox)
         {
             string urlValue;
-            switch (urlKey)
+            switch (configKey)
             {
-                case PaymentKey:
-                case PaymentRedirectKey:
-                case NotificationKey:
-                case SearchKey:
-                case SearchAbandonedKey:
-                case CancelKey:
-                case RefundKey:
-                    urlValue = ((UrlElement) this[urlKey]).Link.Value;
+                case PagSeguroConfigSerializer.Payment:
+                case PagSeguroConfigSerializer.PaymentRedirect:
+                case PagSeguroConfigSerializer.Notification:
+                case PagSeguroConfigSerializer.Search:
+                case PagSeguroConfigSerializer.SearchAbandoned:
+                case PagSeguroConfigSerializer.Cancel:
+                case PagSeguroConfigSerializer.Refund:
+                    urlValue = ((UrlElement) this[configKey]).Link.Value;
+                    break;
+                case PagSeguroConfigSerializer.PreApproval:
+                    urlValue = PreApproval.Link.Value;
+                    break;
+                case PagSeguroConfigSerializer.Authorization:
+                    urlValue = Authorization.AuthorizationUrl.Link.Value;
                     break;
                 default:
-                    urlValue = ((IUrlCollectionElement) this[urlKey]).Get(urlKey, sandbox);
+                    var urlKey = configKey;
+                    configKey = GetConfigKey(configKey);
+                    urlValue = ((IUrlCollectionElement) this[configKey]).Get(urlKey, sandbox);
                     break;
             }
 
@@ -148,6 +158,32 @@ namespace Uol.PagSeguro.Configuration
                 urlValue = urlValue.Replace(EnvironmentConfiguration.PagseguroUrl, EnvironmentConfiguration.SandboxUrl);
 
             return urlValue;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configKey"></param>
+        /// <returns></returns>
+        protected string GetConfigKey(string configKey)
+        {
+            switch (configKey)
+            {
+                case PagSeguroConfigSerializer.Session:
+                case PagSeguroConfigSerializer.Transactions:
+                case PagSeguroConfigSerializer.Installment:
+                    return DirectPaymentKey;
+
+                case PagSeguroConfigSerializer.PreApprovalRedirect:
+                    return PreApprovalKey;
+
+                case PagSeguroConfigSerializer.AuthorizationSearch:
+                case PagSeguroConfigSerializer.AuthorizationRequest:
+                case PagSeguroConfigSerializer.AuthorizationNotification:
+                    return AuthorizationKey;
+            }
+
+            throw new ArgumentException($"Configuration key '{configKey}' not found.", nameof(configKey));
         }
     }
 }
