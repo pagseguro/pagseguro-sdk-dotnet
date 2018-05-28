@@ -37,7 +37,7 @@ namespace FindPreApprovalByDate
             try
             {
 
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
                 PreApprovalSearchResult result = 
                     PreApprovalSearchService.SearchByDate(
                         credentials, 

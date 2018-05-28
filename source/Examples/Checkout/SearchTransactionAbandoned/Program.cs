@@ -45,7 +45,7 @@ namespace SearchTransactionAbandoned
             try
             {
 
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 // Realizando a consulta
                 TransactionSearchResult result =

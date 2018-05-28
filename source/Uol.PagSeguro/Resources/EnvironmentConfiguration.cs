@@ -23,8 +23,15 @@ namespace Uol.PagSeguro.Resources
     /// </summary>
     public static class EnvironmentConfiguration
     {
-        private const string PagseguroUrl = "pagseguro.uol";
-        private const string SandboxUrl = "sandbox.pagseguro.uol";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string PagseguroUrl = "pagseguro.uol";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string SandboxUrl = "sandbox.pagseguro.uol";
 
         /// <summary>
         /// 

@@ -109,7 +109,7 @@ namespace CreateTransactionUsingCreditCard
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
                 Transaction result = TransactionService.CreateCheckout(credentials, checkout);
                 Console.WriteLine(result);
                 Console.ReadKey();

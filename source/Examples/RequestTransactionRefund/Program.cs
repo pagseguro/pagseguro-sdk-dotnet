@@ -32,7 +32,7 @@ namespace RequestTransactionRefund
             try
             {
 
-                var credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                var credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 // TODO: Substitute the code below with a valid transaction code for your transaction
                 var result = RefundService.RequestRefund(credentials, transactionCode);

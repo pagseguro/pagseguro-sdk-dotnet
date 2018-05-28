@@ -14,6 +14,7 @@
 
 using System;
 using System.Xml;
+using Uol.PagSeguro.Configuration;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.XmlParse;
 
@@ -26,29 +27,38 @@ namespace Uol.PagSeguro.Resources
     {
         //PagSeguro .NET Library Tests
 
-        //Website
-        //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
-
         /// <summary>
         /// 
         /// </summary>
-        public static AccountCredentials Credentials(bool sandbox)
+        public static AccountCredentials GetAccountCredentials(bool isSandbox, string email = null, string token = null)
         {
-            return PagSeguroConfigSerializer.GetAccountCredentials(LoadXmlConfig(), sandbox);
+            var appConfig = GetAppConfig(isSandbox, email, token);
+            if (appConfig == null)
+                return PagSeguroConfigSerializer.GetAccountCredentials(LoadXmlConfig(), isSandbox);
+
+            return new AccountCredentials(
+                appConfig.GetCredentialEmail(isSandbox),
+                appConfig.GetCredentialToken(isSandbox));
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public static ApplicationCredentials ApplicationCredentials(bool sandbox)
+        public static ApplicationCredentials GetApplicationCredentials(bool isSandbox, string appId = null, string appKey = null)
         {
-            return PagSeguroConfigSerializer.GetApplicationCredentials(LoadXmlConfig(), sandbox);
+            var appConfig = GetAppConfig(isSandbox, null, null, appId, appKey);
+            if (appConfig == null)
+                return PagSeguroConfigSerializer.GetApplicationCredentials(LoadXmlConfig(), isSandbox);
+
+            return new ApplicationCredentials(
+                appConfig.GetCredentialAppId(isSandbox),
+                appConfig.GetCredentialAppKey(isSandbox));
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public static string UrlXmlConfiguration { get; set; } = ".../.../Configuration/PagSeguroConfig.xml";
+        public static string UrlXmlConfiguration { get; set; } = $"{GetBasePath()}/PagSeguroConfig.xml";
 
         /// <summary>
         /// 
@@ -216,6 +226,76 @@ namespace Uol.PagSeguro.Resources
             var xml = new XmlDocument();
             xml.Load(UrlXmlConfiguration);
             return xml;
+        }
+
+        private static string GetBasePath()
+        {
+            return System.Web.HttpContext.Current != null
+                ? System.Web.HttpRuntime.AppDomainAppPath
+                : AppDomain.CurrentDomain.BaseDirectory;
+        }
+
+        private static PagSeguroConfigurationSection GetAppConfig(bool isSandbox, string email = null, string token = null, string appId = null, string appKey = null)
+        {
+            if (!(System.Configuration.ConfigurationManager.GetSection("PagSeguro") is PagSeguroConfigurationSection configuration))
+                return null;
+
+            if (!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(token) ||
+                !string.IsNullOrWhiteSpace(appId) && !string.IsNullOrWhiteSpace(appKey))
+                configuration = SetAppConfigCredentials(configuration, isSandbox, email, token, appId, appKey);
+
+            if (!isSandbox)
+                return configuration;
+
+            const string pagseguroUrl = EnvironmentConfiguration.PagseguroUrl;
+            const string sandboxUrl = EnvironmentConfiguration.SandboxUrl;
+
+            configuration.Urls.Authorization.AuthorizationRequest.Link.Value = configuration.Urls.Authorization.AuthorizationRequest.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+            configuration.Urls.Authorization.AuthorizationUrl.Link.Value = configuration.Urls.Authorization.AuthorizationUrl.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+            configuration.Urls.Authorization.AuthorizationSearch.Link.Value = configuration.Urls.Authorization.AuthorizationSearch.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+            configuration.Urls.Authorization.AuthorizationSearch.Link.Value = configuration.Urls.Authorization.AuthorizationSearch.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+            configuration.Urls.Authorization.AuthorizationNotification.Link.Value = configuration.Urls.Authorization.AuthorizationNotification.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            configuration.Urls.Cancel.Link.Value = configuration.Urls.Cancel.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            configuration.Urls.DirectPayment.Session.Link.Value = configuration.Urls.DirectPayment.Session.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+            configuration.Urls.DirectPayment.Installment.Link.Value = configuration.Urls.DirectPayment.Installment.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+            configuration.Urls.DirectPayment.Transactions.Link.Value = configuration.Urls.DirectPayment.Transactions.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            configuration.Urls.Payment.Link.Value = configuration.Urls.Payment.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            configuration.Urls.PaymentRedirect.Link.Value = configuration.Urls.PaymentRedirect.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            configuration.Urls.Notification.Link.Value = configuration.Urls.Notification.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            configuration.Urls.Search.Link.Value = configuration.Urls.Search.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            configuration.Urls.SearchAbandoned.Link.Value = configuration.Urls.SearchAbandoned.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            configuration.Urls.Refund.Link.Value = configuration.Urls.Refund.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            configuration.Urls.PreApproval.Link.Value = configuration.Urls.PreApproval.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+
+            return configuration;
+        }
+
+        private static PagSeguroConfigurationSection SetAppConfigCredentials(PagSeguroConfigurationSection appConfig,
+            bool isSandbox, string email, string token, string appId = null, string appKey = null)
+        {
+            if (isSandbox)
+            {
+                appConfig.Credential.SandboxEmail.Value = email ?? appConfig.Credential.SandboxEmail.Value;
+                appConfig.Credential.SandboxToken.Value = token ?? appConfig.Credential.SandboxToken.Value;
+                appConfig.Credential.SandboxAppId.Value = appId ?? appConfig.Credential.SandboxAppId.Value;
+                appConfig.Credential.SandboxAppKey.Value = appKey ?? appConfig.Credential.SandboxAppKey.Value;
+                return appConfig;
+            }
+
+            appConfig.Credential.Email.Value = email ?? appConfig.Credential.Email.Value;
+            appConfig.Credential.Token.Value = token ?? appConfig.Credential.Token.Value;
+            appConfig.Credential.AppId.Value = appId ?? appConfig.Credential.AppId.Value;
+            appConfig.Credential.AppKey.Value = appKey ?? appConfig.Credential.AppKey.Value;
+            return appConfig;
         }
     }
 }

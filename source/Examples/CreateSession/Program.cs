@@ -33,7 +33,7 @@ namespace CreateSession
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 Session result = SessionService.CreateSession(credentials);
 

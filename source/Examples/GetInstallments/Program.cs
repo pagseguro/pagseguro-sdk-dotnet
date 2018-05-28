@@ -39,7 +39,7 @@ namespace GetInstallments
             try
             {
 
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 Installments result = InstallmentService.GetInstallments(credentials, amount, creditCardBrand, maxInstallmentNoInterest);
 

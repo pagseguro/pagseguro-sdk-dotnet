@@ -34,7 +34,7 @@ namespace SearchTransactionByReference
             try
             {
 
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 // Realizando a consulta
                 TransactionSearchResult result = TransactionSearchService.SearchByReference(credentials, referenceCode);

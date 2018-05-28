@@ -34,7 +34,7 @@ namespace CancelPreApproval
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
                 bool cancelResult = PreApprovalService.CancelPreApproval(credentials, transactionCode);
 
                 Console.WriteLine(cancelResult);

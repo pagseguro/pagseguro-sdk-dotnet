@@ -47,7 +47,7 @@ namespace CreateAuthorization
             try
             {
 
-                ApplicationCredentials credentials = PagSeguroConfiguration.ApplicationCredentials(isSandbox);
+                ApplicationCredentials credentials = PagSeguroConfiguration.GetApplicationCredentials(isSandbox);
 
                 String result = authorization.Register(credentials);
 

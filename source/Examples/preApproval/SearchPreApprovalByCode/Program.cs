@@ -33,7 +33,7 @@ namespace FindPreApprovalByCode
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 PreApprovalTransaction result = PreApprovalSearchService.SearchByCode(credentials, preApprovalCode);
 
