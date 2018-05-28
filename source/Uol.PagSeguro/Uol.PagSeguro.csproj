@@ -69,6 +69,7 @@
     <Compile Include="Configuration\ConfigurationTextElement.cs" />
     <Compile Include="Configuration\CredentialElement.cs" />
     <Compile Include="Configuration\DirectPaymentElement.cs" />
+    <Compile Include="Configuration\IUrlCollectionElement.cs" />
     <Compile Include="Configuration\PagSeguroConfigurationElement.cs" />
     <Compile Include="Configuration\PagSeguroConfigurationSection.cs" />
     <Compile Include="Configuration\PreApprovalElement.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Domain\PaymentRequest.cs" />
     <Compile Include="Parse\AuthorizationParse.cs" />
     <Compile Include="Parse\TransactionParse.cs" />
+    <Compile Include="Resources\PagSeguroUris.cs" />
     <Compile Include="Service\AuthorizationSearchService .cs" />
     <Compile Include="Service\AuthorizationService.cs" />
     <Compile Include="Service\InstallmentService.cs" />

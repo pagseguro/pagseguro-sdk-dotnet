@@ -1,10 +1,12 @@
 ﻿using System.Configuration;
+using Uol.PagSeguro.Resources;
+
 // ReSharper disable UnusedMember.Global
 
 namespace Uol.PagSeguro.Configuration
 {
-    /// <inheritdoc />
-    public class DirectPaymentElement : ConfigurationElement
+    /// <inheritdoc cref="ConfigurationElement" />
+    public class DirectPaymentElement : ConfigurationElement, IUrlCollectionElement
     {
         private const string SessionKey = "Session";
         private const string InstallmentKey = "Installment";
@@ -38,6 +40,22 @@ namespace Uol.PagSeguro.Configuration
         {
             get => (UrlElement)this[TransactionsKey];
             set => this[TransactionsKey] = value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="urlKey"></param>
+        /// <param name="sandbox"></param>
+        /// <returns></returns>
+        public string Get(string urlKey, bool sandbox)
+        {
+            var urlValue = ((UrlElement) this[urlKey]).Link.Value;
+
+            if (sandbox && !string.IsNullOrWhiteSpace(urlValue))
+                urlValue = urlValue.Replace(EnvironmentConfiguration.PagseguroUrl, EnvironmentConfiguration.SandboxUrl);
+
+            return urlValue;
         }
     }
 }

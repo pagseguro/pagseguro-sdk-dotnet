@@ -27,7 +27,7 @@ namespace CreateTransactionUsingCreditCard
         static void Main(string[] args)
         {
 
-            PagSeguroConfiguration.UrlXmlConfiguration = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
+            PagSeguroConfiguration.XmlConfigFile = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
 
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);

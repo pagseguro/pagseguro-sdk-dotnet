@@ -28,7 +28,7 @@ namespace Uol.PagSeguro.Service
             try
             {
                 using (var response = HttpUrlConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.SessionUri.AbsoluteUri, BuildSessionUrl(credentials)))
+                    PagSeguroUris.GetSessionUri(credentials).AbsoluteUri, BuildSessionUrl(credentials)))
                 {
 
                     using (var reader = XmlReader.Create(response.GetResponseStream()))

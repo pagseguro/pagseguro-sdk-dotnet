@@ -1,10 +1,12 @@
 ﻿using System.Configuration;
+using Uol.PagSeguro.Resources;
+
 // ReSharper disable UnusedMember.Global
 
 namespace Uol.PagSeguro.Configuration
 {
-    /// <inheritdoc />
-    public class UrlsElement : ConfigurationElement
+    /// <inheritdoc cref="ConfigurationElement" />
+    public class UrlsElement : ConfigurationElement, IUrlCollectionElement
     {
         private const string PaymentKey = "Payment";
         private const string PaymentRedirectKey = "PaymentRedirect";
@@ -115,6 +117,37 @@ namespace Uol.PagSeguro.Configuration
         {
             get => (AuthorizationElement)this[AuthorizationKey];
             set => this[AuthorizationKey] = value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="urlKey"></param>
+        /// <param name="sandbox"></param>
+        /// <returns></returns>
+        public string Get(string urlKey, bool sandbox)
+        {
+            string urlValue;
+            switch (urlKey)
+            {
+                case PaymentKey:
+                case PaymentRedirectKey:
+                case NotificationKey:
+                case SearchKey:
+                case SearchAbandonedKey:
+                case CancelKey:
+                case RefundKey:
+                    urlValue = ((UrlElement) this[urlKey]).Link.Value;
+                    break;
+                default:
+                    urlValue = ((IUrlCollectionElement) this[urlKey]).Get(urlKey, sandbox);
+                    break;
+            }
+
+            if (sandbox && !string.IsNullOrWhiteSpace(urlValue))
+                urlValue = urlValue.Replace(EnvironmentConfiguration.PagseguroUrl, EnvironmentConfiguration.SandboxUrl);
+
+            return urlValue;
         }
     }
 }

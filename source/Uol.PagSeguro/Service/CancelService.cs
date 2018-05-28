@@ -41,7 +41,7 @@ namespace Uol.PagSeguro.Service
             PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "CancelService.Register(transactionCode = {0}) - begin", transactionCode));
             try {
                 using(var response = HttpUrlConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.CancelUri.AbsoluteUri, BuildCancelUrl(credentials, transactionCode)))
+                    PagSeguroUris.GetCancelUri(credentials).AbsoluteUri, BuildCancelUrl(credentials, transactionCode)))
                 {
             
                     using (var reader = XmlReader.Create(response.GetResponseStream()))

@@ -44,14 +44,14 @@ namespace Uol.PagSeguro.Service
             try
             {
                 using (var response = HttpUrlConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.AuthorizarionRequestUri.AbsoluteUri, BuildAuthorizationRequestUrl(credentials, authorizationRequest))) 
+                    PagSeguroUris.GetAuthorizarionRequestUri(credentials).AbsoluteUri, BuildAuthorizationRequestUrl(credentials, authorizationRequest))) 
                 {
                     using (var reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         var authorization = new AuthorizationResponse();
                         AuthorizationSerializer.Read(reader, authorization);
 
-                        return onlyAuthorizationCode ? authorization.Code : BuildAuthorizationUrl(authorization.Code);
+                        return onlyAuthorizationCode ? authorization.Code : BuildAuthorizationUrl(credentials, authorization.Code);
                     }
                 }
             }
@@ -65,11 +65,11 @@ namespace Uol.PagSeguro.Service
             }
         }
 
-        internal static string BuildAuthorizationUrl(string code)
+        internal static string BuildAuthorizationUrl(Credentials credentials, string code)
         {
             var builder = new QueryStringBuilder("{URL}?code={code}");
 
-            builder.ReplaceValue("{URL}", PagSeguroConfiguration.AuthorizarionUri.AbsoluteUri);
+            builder.ReplaceValue("{URL}", PagSeguroUris.GetAuthorizarionUri(credentials).AbsoluteUri);
             builder.ReplaceValue("{code}", code);
 
             return builder.ToString();

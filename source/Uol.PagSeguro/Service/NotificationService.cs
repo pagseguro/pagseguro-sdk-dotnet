@@ -103,10 +103,10 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials"></param>
         /// <param name="notificationCode"></param>
         /// <returns></returns>
-        private static string BuildTransactionNotificationUrl(Credentials credentials, string notificationCode) 
+        private static string BuildTransactionNotificationUrl(Credentials credentials, string notificationCode)
         {
             var transactionNotificationUrl = new QueryStringBuilder("{url}/{notificationCode}?{credential}");
-            transactionNotificationUrl.ReplaceValue("{url}", PagSeguroConfiguration.NotificationUri.AbsoluteUri);
+            transactionNotificationUrl.ReplaceValue("{url}", PagSeguroUris.GetNotificationUri(credentials).AbsoluteUri);
             transactionNotificationUrl.ReplaceValue("{notificationCode}", HttpUtility.UrlEncode(notificationCode));
             transactionNotificationUrl.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return transactionNotificationUrl.ToString();
@@ -121,7 +121,7 @@ namespace Uol.PagSeguro.Service
         private static string BuildAuthorizationNotificationUrl(Credentials credentials, string notificationCode)
         {
             var builder = new QueryStringBuilder("{url}{notificationCode}?{credential}");
-            builder.ReplaceValue("{url}", PagSeguroConfiguration.AuthorizationNotificationUri.AbsoluteUri);
+            builder.ReplaceValue("{url}", PagSeguroUris.GetAuthorizationNotificationUri(credentials).AbsoluteUri);
             builder.ReplaceValue("{notificationCode}", HttpUtility.UrlEncode(notificationCode));
             builder.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return builder.ToString();

@@ -44,7 +44,7 @@ namespace Uol.PagSeguro.Service
             try
             {
                 using (var response = HttpUrlConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.TransactionsUri.AbsoluteUri, BuildTransactionUrl(credentials, checkout)))
+                    PagSeguroUris.GetTransactionsUri(credentials).AbsoluteUri, BuildTransactionUrl(credentials, checkout)))
                 {
                     using (var reader = XmlReader.Create(response.GetResponseStream()))
                     {

@@ -115,7 +115,7 @@ namespace Uol.PagSeguro.Service
         {
             var builder = new QueryStringBuilder("{URL}{code}?{credentials}");
 
-            builder.ReplaceValue("{URL}", PagSeguroConfiguration.AuthorizarionSearchUri.AbsoluteUri);
+            builder.ReplaceValue("{URL}", PagSeguroUris.GetAuthorizarionSearchUri(credentials).AbsoluteUri);
             builder.ReplaceValue("{code}", code);
             builder.ReplaceValue("{credentials}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString() );
 
@@ -134,7 +134,7 @@ namespace Uol.PagSeguro.Service
         internal static string BuildSearchUrlByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int? pageNumber = null, int? resultsPerPage = null)
         {
             var builder = new QueryStringBuilder("{URL}?{credentials}&initialDate={initialDate}{finalDate}{page}{maxPageResults}");
-            builder.ReplaceValue("{URL}", PagSeguroConfiguration.AuthorizarionSearchUri.AbsoluteUri);
+            builder.ReplaceValue("{URL}", PagSeguroUris.GetAuthorizarionSearchUri(credentials).AbsoluteUri);
             builder.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             builder.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
             

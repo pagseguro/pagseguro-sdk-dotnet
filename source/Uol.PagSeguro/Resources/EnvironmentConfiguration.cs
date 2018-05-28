@@ -15,6 +15,7 @@
 using System;
 using System.Xml;
 using System.Text.RegularExpressions;
+using Uol.PagSeguro.XmlParse;
 
 namespace Uol.PagSeguro.Resources
 {
@@ -36,12 +37,17 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
+        public static bool IsSandbox { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static void ChangeEnvironment(bool sandbox)
         {
-            var urlXmlConfiguration = PagSeguroConfiguration.UrlXmlConfiguration;
+            var xmlConfigFile = PagSeguroConfiguration.XmlConfigFile;
 
             var xml = new XmlDocument();
-            xml.Load(urlXmlConfiguration);
+            xml.Load(xmlConfigFile);
             var elemList = xml.GetElementsByTagName("Link");
             var changed = false;
 
@@ -73,8 +79,12 @@ namespace Uol.PagSeguro.Resources
                     }
                 }
 
-                if (changed)
-                    xml.Save(urlXmlConfiguration);
+                IsSandbox = sandbox;
+                if (!changed)
+                    return;
+
+                xml.Save(xmlConfigFile);
+                PagSeguroConfigSerializer.ResetXmlConfig();
             }
             catch (FormatException exception)
             {

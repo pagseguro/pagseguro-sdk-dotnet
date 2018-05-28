@@ -62,7 +62,7 @@ namespace Uol.PagSeguro.Service
         {
             var builder = new QueryStringBuilder("{url}?{credentials}&amount={amount}&cardBrand={cardBrand}&maxInstallmentNoInterest={maxInstallmentNoInterest}");
 
-            builder.ReplaceValue("{url}", PagSeguroConfiguration.InstallmentUri.AbsoluteUri);
+            builder.ReplaceValue("{url}", PagSeguroUris.GetInstallmentUri(credentials).AbsoluteUri);
             builder.ReplaceValue("{credentials}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             builder.ReplaceValue("{amount}", PagSeguroUtil.DecimalFormat(amount));
             builder.ReplaceValue("{cardBrand}", HttpUtility.UrlEncode(cardBrand));

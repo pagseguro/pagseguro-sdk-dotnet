@@ -208,7 +208,7 @@ namespace Uol.PagSeguro.Service
         private static string BuildSearchUrlByCode(Credentials credentials, string preApprovalCode)
         {
             var searchUrlByCode = new QueryStringBuilder("{url}/{preApprovalCode}?{credential}");
-            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+            searchUrlByCode.ReplaceValue("{url}", PagSeguroUris.GetPreApprovalSearchUri(credentials).AbsoluteUri);
             searchUrlByCode.ReplaceValue("{preApprovalCode}", HttpUtility.UrlEncode(preApprovalCode));
 
             searchUrlByCode.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
@@ -224,7 +224,7 @@ namespace Uol.PagSeguro.Service
         private static string BuildSearchUrlByInterval(Credentials credentials, int interval)
         {
             var searchUrlByInterval = new QueryStringBuilder("{url}/notifications?{credential}&interval={interval}");
-            searchUrlByInterval.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+            searchUrlByInterval.ReplaceValue("{url}", PagSeguroUris.GetPreApprovalSearchUri(credentials).AbsoluteUri);
             searchUrlByInterval.ReplaceValue("{interval}", HttpUtility.UrlEncode(interval.ToString()));
             searchUrlByInterval.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return searchUrlByInterval.ToString();
@@ -243,7 +243,7 @@ namespace Uol.PagSeguro.Service
         {
             var builder = new QueryStringBuilder("{url}?initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
 
-            builder.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+            builder.ReplaceValue("{url}", PagSeguroUris.GetPreApprovalSearchUri(credentials).AbsoluteUri);
             builder.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             builder.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
             if (pageNumber.HasValue)
@@ -273,7 +273,7 @@ namespace Uol.PagSeguro.Service
         {
             var builder = new QueryStringBuilder("{url}?reference={reference}&initialDate={initialDate}{finalDate}{page}{maxPageResults}{credential}");
 
-            builder.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+            builder.ReplaceValue("{url}", PagSeguroUris.GetPreApprovalSearchUri(credentials).AbsoluteUri);
             builder.ReplaceValue("{reference}", HttpUtility.UrlEncode(reference));
             builder.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             builder.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
@@ -299,7 +299,7 @@ namespace Uol.PagSeguro.Service
         private static string BuildSearchUrlByNotification(Credentials credentials, string notificationCode)
         {
             var searchUrlByNotification = new QueryStringBuilder("{url}/notifications/{notificationCode}?{credential}");
-            searchUrlByNotification.ReplaceValue("{url}", PagSeguroConfiguration.PreApprovalSearchUri.AbsoluteUri);
+            searchUrlByNotification.ReplaceValue("{url}", PagSeguroUris.GetPreApprovalSearchUri(credentials).AbsoluteUri);
             searchUrlByNotification.ReplaceValue("{notificationCode}", HttpUtility.UrlEncode(notificationCode));
 
             searchUrlByNotification.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());

@@ -179,7 +179,7 @@ namespace Uol.PagSeguro.Service
         private static string BuildSearchUrlByCode(Credentials credentials, string transactionCode)
         {
             var searchUrlByCode = new QueryStringBuilder("{url}/{transactionCode}?{credential}");
-            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+            searchUrlByCode.ReplaceValue("{url}", PagSeguroUris.GetSearchUri(credentials).AbsoluteUri);
             searchUrlByCode.ReplaceValue("{transactionCode}", HttpUtility.UrlEncode(transactionCode));
             searchUrlByCode.ReplaceValue("{credential}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
             return searchUrlByCode.ToString();
@@ -198,7 +198,7 @@ namespace Uol.PagSeguro.Service
         {
             var searchUrlByCode = new QueryStringBuilder("{url}/?{credential}&initialDate={initialDate}{finalDate}");
 
-            searchUrlByCode.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+            searchUrlByCode.ReplaceValue("{url}", PagSeguroUris.GetSearchUri(credentials).AbsoluteUri);
             searchUrlByCode.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             searchUrlByCode.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
 
@@ -226,7 +226,7 @@ namespace Uol.PagSeguro.Service
         {
             var searchUrlAbandoned = new QueryStringBuilder("{url}/abandoned?initialDate={initialDate}{finalDate}{credential}");
 
-            searchUrlAbandoned.ReplaceValue("{url}", PagSeguroConfiguration.SearchAbandonedUri.AbsoluteUri);
+            searchUrlAbandoned.ReplaceValue("{url}", PagSeguroUris.GetSearchAbandonedUri(credentials).AbsoluteUri);
             searchUrlAbandoned.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             searchUrlAbandoned.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
             
@@ -250,7 +250,7 @@ namespace Uol.PagSeguro.Service
         private static string BuildSearchUrlByReference(Credentials credentials, string reference)
         {
             var searchUrlByReference = new QueryStringBuilder("{url}?{credentials}&reference={reference}");
-            searchUrlByReference.ReplaceValue("{url}", PagSeguroConfiguration.SearchUri.AbsoluteUri);
+            searchUrlByReference.ReplaceValue("{url}", PagSeguroUris.GetSearchUri(credentials).AbsoluteUri);
             searchUrlByReference.ReplaceValue("{reference}", HttpUtility.UrlEncode(reference));
             searchUrlByReference.ReplaceValue("{credentials}", new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString());
 

@@ -29,16 +29,18 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Initializes a new instance of the ApplicationCredentials class
         /// </summary>
+        /// <param name="isSandbox"></param>
         /// <param name="appId"></param>
         /// <param name="appKey"></param>
         /// <param name="authorizationCode"></param>
         /// <remarks>
         /// A PagSeguro application is identified by an app identifier and a app key
         /// </remarks>
-        public ApplicationCredentials(string appId, string appKey, string authorizationCode = null)
+        public ApplicationCredentials(bool isSandbox, string appId, string appKey, string authorizationCode = null)
         {
             try
             {
+                IsSandbox = isSandbox;
                 AttributeDictionary[AppIdParameterName] = appId;
                 AttributeDictionary[AppKeyParameterName] = appKey;
             }

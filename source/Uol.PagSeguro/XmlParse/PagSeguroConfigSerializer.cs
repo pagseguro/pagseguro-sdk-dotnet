@@ -67,6 +67,32 @@ namespace Uol.PagSeguro.XmlParse
         internal const string Encoding = "Encoding";
         internal const string RequestTimeout = "RequestTimeout";
 
+        private static readonly object XmlConfigLock = new object();
+
+        private static XmlDocument _xmlConfig;
+        internal static XmlDocument GetXmlConfig(string xmlPath)
+        {
+            lock(XmlConfigLock)
+                return _xmlConfig ?? (_xmlConfig = LoadXmlConfig(xmlPath));
+        }
+
+        internal static void ResetXmlConfig()
+        {
+            lock (XmlConfigLock)
+                _xmlConfig = null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private static XmlDocument LoadXmlConfig(string xmlPath)
+        {
+            var xml = new XmlDocument();
+            xml.Load(xmlPath);
+            return xml;
+        }
+
         internal static string GetWebserviceUrl(XmlDocument xml, string urlToSearch)
         {
             var url = GetDataConfiguration(xml, urlToSearch);
@@ -106,7 +132,7 @@ namespace Uol.PagSeguro.XmlParse
 
             try
             {
-                credential = new AccountCredentials(email, token);
+                credential = new AccountCredentials(sandbox, email, token);
             }
             catch (System.Exception)
             {
@@ -135,7 +161,7 @@ namespace Uol.PagSeguro.XmlParse
 
             try
             {
-                var credential = new ApplicationCredentials(appId, appKey);
+                var credential = new ApplicationCredentials(sandbox, appId, appKey);
                 return credential;
             }
             catch (System.Exception)

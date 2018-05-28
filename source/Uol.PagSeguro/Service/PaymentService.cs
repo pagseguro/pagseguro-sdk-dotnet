@@ -46,14 +46,14 @@ namespace Uol.PagSeguro.Service
             try
             {
                 using (var response = HttpUrlConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.PaymentUri.AbsoluteUri, BuildCheckoutUrl(credentials, payment)))
+                    PagSeguroUris.GetPaymentUri(credentials).AbsoluteUri, BuildCheckoutUrl(credentials, payment)))
                 {
 
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
                         using (var reader = XmlReader.Create(response.GetResponseStream()))
                         {
-                            var paymentResponse = new PaymentRequestResponse(PagSeguroConfiguration.PaymentRedirectUri);
+                            var paymentResponse = new PaymentRequestResponse(PagSeguroUris.GetPaymentRedirectUri(credentials));
                             PaymentSerializer.Read(reader, paymentResponse);
                             PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - end {1}", payment, paymentResponse.PaymentRedirectUri));
                             return paymentResponse.PaymentRedirectUri;

@@ -61,5 +61,15 @@ namespace Uol.PagSeguro.Configuration
             get => (TextElement)this[SandboxKey];
             set => this[SandboxKey] = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataKey"></param>
+        /// <returns></returns>
+        public string Get(string dataKey)
+        {
+            return ((TextElement) this[dataKey]).Value;
+        }
     }
 }
