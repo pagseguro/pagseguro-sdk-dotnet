@@ -16,9 +16,6 @@ using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.XmlParse;
-using System.Reflection;
-using System.Diagnostics;
-using System.Web;
 
 namespace Uol.PagSeguro.Resources
 {
@@ -28,13 +25,9 @@ namespace Uol.PagSeguro.Resources
     public static class PagSeguroConfiguration
     {
         //PagSeguro .NET Library Tests
-        private static string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
 
         //Website
         //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
-
-        private static string _moduleVersion;
-        private static string _cmsVersion;
 
         /// <summary>
         /// 
@@ -55,324 +48,144 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
-        public static string UrlXmlConfiguration
-        {
-            get
-            {
-                return urlXmlConfiguration;
-            }
-            set
-            {
-                urlXmlConfiguration = value;
-            }
-        }
+        public static string UrlXmlConfiguration { get; set; } = ".../.../Configuration/PagSeguroConfig.xml";
 
         /// <summary>
         /// 
         /// </summary>
-        public static string ModuleVersion
-        {
-            get
-            {
-                return _moduleVersion;
-            }
-
-            set
-            {
-                _moduleVersion = value;
-            }
-        }
+        public static string ModuleVersion { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public static string CmsVersion
-        {
-            get
-            {
-                return _cmsVersion;
-            }
-
-            set
-            {
-                _cmsVersion = value;
-            }
-        }
+        public static string CmsVersion { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public static string LanguageEngineDescription
-        {
-            get
-            {
-                return Environment.Version.ToString();
-            }
-        }
+        public static string LanguageEngineDescription => Environment.Version.ToString();
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri NotificationUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Notification));
-            }
-        }
+        public static Uri NotificationUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.Notification));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri PaymentUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Payment));
-            }
-        }
+        public static Uri PaymentUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.Payment));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri PaymentRedirectUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PaymentRedirect));
-            }
-        }
+        public static Uri PaymentRedirectUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.PaymentRedirect));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri SearchUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Search));
-            }
-        }
+        public static Uri SearchUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.Search));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri SearchAbandonedUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.SearchAbandoned));
-            }
-        }
+        public static Uri SearchAbandonedUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.SearchAbandoned));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri CancelUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Cancel));
-            }
-        }
+        public static Uri CancelUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.Cancel));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri RefundUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Refund));
-            }
-        }
+        public static Uri RefundUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.Refund));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri PreApprovalUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApproval));
-            }
-        }
+        public static Uri PreApprovalUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApproval));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri PreApprovalRedirectUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalRedirect));
-            }
-        }
+        public static Uri PreApprovalRedirectUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalRedirect));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri PreApprovalNotificationUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalNotification));
-            }
-        }
+        // ReSharper disable once UnusedMember.Global
+        public static Uri PreApprovalNotificationUri =>
+            new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalNotification));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri PreApprovalSearchUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalSearch));
-            }
-        }
+        public static Uri PreApprovalSearchUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalSearch));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri PreApprovalCancelUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalCancel));
-            }
-        }
+        public static Uri PreApprovalCancelUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalCancel));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri PreApprovalPaymentUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalPayment));
-            }
-        }
+        public static Uri PreApprovalPaymentUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalPayment));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri SessionUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Session));
-            }
-        }
+        public static Uri SessionUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.Session));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri TransactionsUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Transactions));
-            }
-        }
+        public static Uri TransactionsUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.Transactions));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri InstallmentUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Installment));
-            }
-        }
+        public static Uri InstallmentUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.Installment));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri AuthorizarionRequestUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationRequest));
-            }
-        }
+        public static Uri AuthorizarionRequestUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationRequest));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri AuthorizarionUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.Authorization));
-            }
-        }
+        public static Uri AuthorizarionUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.Authorization));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri AuthorizarionSearchUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationSearch));
-            }
-        }
+        public static Uri AuthorizarionSearchUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationSearch));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri AuthorizationNotificationUri
-        {
-            get
-            {
-                return new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationNotification));
-            }
-        }
+        public static Uri AuthorizationNotificationUri => new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationNotification));
 
         /// <summary>
         /// 
         /// </summary>
-        public static int RequestTimeout
-        {
-            get
-            {
-                return Convert.ToInt32(GetDataConfiguration(PagSeguroConfigSerializer.RequestTimeout));
-            }
-        }
+        public static int RequestTimeout => Convert.ToInt32(GetDataConfiguration(PagSeguroConfigSerializer.RequestTimeout));
 
         /// <summary>
         /// 
         /// </summary>
-        public static string FormUrlEncoded
-        {
-            get
-            {
-                return GetDataConfiguration(PagSeguroConfigSerializer.FormUrlEncoded);
-            }
-        }
+        public static string FormUrlEncoded => GetDataConfiguration(PagSeguroConfigSerializer.FormUrlEncoded);
 
         /// <summary>
         /// 
         /// </summary>
-        public static string Encoding
-        {
-            get
-            {
-                return GetDataConfiguration(PagSeguroConfigSerializer.Encoding);
-            }
-        }
+        public static string Encoding => GetDataConfiguration(PagSeguroConfigSerializer.Encoding);
 
         /// <summary>
         /// 
         /// </summary>
-        public static string LibVersion
-        {
-            get
-            {
-                return GetDataConfiguration(PagSeguroConfigSerializer.LibVersion);
-            }
-        }
+        public static string LibVersion => GetDataConfiguration(PagSeguroConfigSerializer.LibVersion);
 
         /// <summary>
         /// 
@@ -400,11 +213,8 @@ namespace Uol.PagSeguro.Resources
         /// <returns></returns>
         private static XmlDocument LoadXmlConfig()
         {
-            XmlDocument xml = new XmlDocument();
-            using (xml as IDisposable)
-            {
-                xml.Load(urlXmlConfiguration);
-            }
+            var xml = new XmlDocument();
+            xml.Load(UrlXmlConfiguration);
             return xml;
         }
     }
