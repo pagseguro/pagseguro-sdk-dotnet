@@ -13,31 +13,15 @@
 //   limitation
 
 using System.Xml;
-using System;
 using Uol.PagSeguro.Constants;
-using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Installment;
-using System.IO;
-using System.Collections.Generic;
 
 namespace Uol.PagSeguro.XmlParse
 {
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static class InstallmentsSerializer
+    internal static class InstallmentsSerializer
     {
-
-        /// <summary>
-        /// Read a direct payment session request result
-        /// </summary>
-        /// <param name="streamReader"></param>
-        /// <param name="installments"></param>
         internal static void Read(XmlReader reader, Installments installments)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -60,7 +44,7 @@ namespace Uol.PagSeguro.XmlParse
                     switch (reader.Name)
                     {
                         case SerializerHelper.Installment:
-                            Installment installment = new Installment();
+                            var installment = new Installment();
                             InstallmentSerializer.Read(reader, installment);
                             installments.Add(installment);
                             break;

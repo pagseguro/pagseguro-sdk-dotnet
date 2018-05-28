@@ -35,34 +35,25 @@ namespace Uol.PagSeguro.Parse
 
             // reference
             if (preApproval.Reference != null)
-            {
                 data["reference"] = preApproval.Reference;
-            }
 
             // sender
             if (preApproval.Sender != null)
             {
-
                 if (preApproval.Sender.Name != null)
-                {
                     data["senderName"] = preApproval.Sender.Name;
-                }
+
                 if (preApproval.Sender.Email != null)
-                {
                     data["senderEmail"] = preApproval.Sender.Email;
-                }
 
                 // phone
                 if (preApproval.Sender.Phone != null)
                 {
                     if (preApproval.Sender.Phone.AreaCode != null)
-                    {
                         data["senderAreaCode"] = preApproval.Sender.Phone.AreaCode;
-                    }
+
                     if (preApproval.Sender.Phone.Number != null)
-                    {
                         data["senderPhone"] = preApproval.Sender.Phone.Number;
-                    }
                 }
 
                 // documents
@@ -71,12 +62,10 @@ namespace Uol.PagSeguro.Parse
                     var documents = preApproval.Sender.Documents;
                     if (documents.Count == 1)
                     {
-                        foreach (SenderDocument document in documents)
+                        foreach (var document in documents)
                         {
                             if (document != null)
-                            {
                                 data["senderCPF"] = document.Value;
-                            }
                         }
                     }
                 }
@@ -99,7 +88,10 @@ namespace Uol.PagSeguro.Parse
                 if (preApproval.PreApproval.Period == Period.Yearly)
                     data["preApprovalDayOfYear"] = preApproval.PreApproval.DayOfYear.ToString();
 
-                if (preApproval.PreApproval.Period == Period.Monthly || preApproval.PreApproval.Period == Period.Bimonthly || preApproval.PreApproval.Period == Period.Trimonthly || preApproval.PreApproval.Period == Period.SemiAnnually)
+                if (preApproval.PreApproval.Period == Period.Monthly ||
+                    preApproval.PreApproval.Period == Period.Bimonthly ||
+                    preApproval.PreApproval.Period == Period.Trimonthly ||
+                    preApproval.PreApproval.Period == Period.SemiAnnually)
                     data["preApprovalDayOfMonth"] = preApproval.PreApproval.DayOfMonth.ToString();
 
                 if (preApproval.PreApproval.Period == Period.Weekly)
@@ -108,68 +100,55 @@ namespace Uol.PagSeguro.Parse
 
             // currency
             if (preApproval.Currency != null)
-            {
                 data["currency"] = preApproval.Currency;
-            }
 
             // redirectURL
             if (preApproval.RedirectUri != null)
-            {
                 data["redirectURL"] = preApproval.RedirectUri.ToString();
-            }
 
             // redirectURL
             if (preApproval.ReviewUri != null)
-            {
                 data["reviewUrl"] = preApproval.ReviewUri.ToString();
-            }
 
             // notificationURL
             if (preApproval.NotificationURL != null)
-            {
                 data["notificationURL"] = preApproval.NotificationURL;
-            }
 
             // metadata
             if (preApproval.MetaData.Items.Count > 0)
             {
-                int i = 0;
+                var i = 0;
                 var metaDataItems = preApproval.MetaData.Items;
-                foreach (MetaDataItem item in metaDataItems)
+                foreach (var item in metaDataItems)
                 {
-                    if (!PagSeguroUtil.IsEmpty(item.Key) && !PagSeguroUtil.IsEmpty(item.Value))
-                    {
-                        i++;
-                        data["metadataItemKey" + i] = item.Key;
-                        data["metadataItemValue" + i] = item.Value;
+                    if (PagSeguroUtil.IsEmpty(item.Key) || PagSeguroUtil.IsEmpty(item.Value))
+                        continue;
 
-                        if (item.Group != null)
-                        {
-                            data["metadataItemGroup" + i] = item.Group.ToString();
-                        }
-                    }
+                    i++;
+                    data["metadataItemKey" + i] = item.Key;
+                    data["metadataItemValue" + i] = item.Value;
+
+                    if (item.Group != null)
+                        data["metadataItemGroup" + i] = item.Group.ToString();
                 }
             }
 
             // parameter
-            if (preApproval.Parameter.Items.Count > 0)
+            if (preApproval.Parameter.Items.Count <= 0)
+                return data;
+
+            var parameterItems = preApproval.Parameter.Items;
+            foreach (var item in parameterItems)
             {
-                var parameterItems = preApproval.Parameter.Items;
-                foreach (ParameterItem item in parameterItems)
-                {
-                    if (!PagSeguroUtil.IsEmpty(item.Key) && !PagSeguroUtil.IsEmpty(item.Value))
-                    {
-                        if (item.Group != null)
-                        {
-                            data[item.Key + "" + item.Group] = item.Value;
-                        }
-                        else
-                        {
-                            data[item.Key] = item.Value;
-                        }
-                    }
-                }
+                if (PagSeguroUtil.IsEmpty(item.Key) || PagSeguroUtil.IsEmpty(item.Value))
+                    continue;
+
+                if (item.Group != null)
+                    data[item.Key + "" + item.Group] = item.Value;
+                else
+                    data[item.Key] = item.Value;
             }
+
             return data;
         }
     }

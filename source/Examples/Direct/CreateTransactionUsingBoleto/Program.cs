@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Direct;
@@ -79,7 +78,7 @@ namespace CreateTransactionUsingBoleto
             checkout.Sender.Documents.Add(senderCPF);
 
             // Sets the notification url
-            checkout.NotificationURL = "http://www.lojamodelo.com.br";
+            checkout.NotificationUrl = "http://www.lojamodelo.com.br";
 
             try
             {

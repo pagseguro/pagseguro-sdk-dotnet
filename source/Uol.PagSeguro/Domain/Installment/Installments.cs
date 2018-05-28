@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Uol.PagSeguro.Domain.Installment
 {
+    /// <summary>
+    /// </summary>
     public class Installments
     {
-        private List<Installment> installments = new List<Installment>();
+        private readonly List<Installment> _installments = new List<Installment>();
 
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
         public List<Installment> Get()
         {
-            return this.installments;
+            return _installments;
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="installment"></param>
         public void Add(Installment installment)
         {
-            this.installments.Add(installment);
+            _installments.Add(installment);
         }
     }
 }

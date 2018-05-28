@@ -12,15 +12,11 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Direct;
-using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Log;
 using Uol.PagSeguro.Parse;
 using Uol.PagSeguro.Resources;
@@ -44,46 +40,38 @@ namespace Uol.PagSeguro.Service
         public static Transaction CreateCheckout(Credentials credentials, Checkout checkout)
         {
 
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - begin"));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - begin"));
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
+                using (var response = HttpUrlConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.TransactionsUri.AbsoluteUri, BuildTransactionUrl(credentials, checkout)))
                 {
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (var reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         
-                        Transaction transaction = new Transaction();
+                        var transaction = new Transaction();
                         TransactionSerializer.Read(reader, transaction);
-                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - end {0}", transaction));
+                        PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - end {0}", transaction));
                         return transaction;
                     }
                 }
             }
             catch (WebException exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - error {0}", pse));
+                var pse = HttpUrlConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - error {0}", pse));
                 throw pse;
             }
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <param name="payment"></param>
-        /// <returns></returns>
         internal static string BuildTransactionUrl(Credentials credentials, Checkout checkout)
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
-            IDictionary<string, string> data = TransactionParse.GetData(checkout);
+            var builder = new QueryStringBuilder();
+            var data = TransactionParse.GetData(checkout);
 
-            builder.
-                EncodeCredentialsAsQueryString(credentials);
+            builder.EncodeCredentialsAsQueryString(credentials);
 
-            foreach (KeyValuePair<string, string> pair in data)
+            foreach (var pair in data)
             {
                 builder.Append(pair.Key, pair.Value);
             }

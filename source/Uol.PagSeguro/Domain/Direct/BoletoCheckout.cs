@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Uol.PagSeguro.Service;
-
-namespace Uol.PagSeguro.Domain.Direct
+﻿namespace Uol.PagSeguro.Domain.Direct
 {
+    /// <inheritdoc />
     public class BoletoCheckout : Checkout
     {
         /// <summary>
         /// Payment Method
         /// </summary>
-        public string PaymentMethod
-        {
-            get;
-            set;
-        }
+        public string PaymentMethod { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Constructor
         /// </summary>
         public BoletoCheckout()
         {
-            this.PaymentMethod = "Boleto";
+            PaymentMethod = "Boleto";
         }
     }
 }

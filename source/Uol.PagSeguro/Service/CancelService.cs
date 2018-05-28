@@ -12,13 +12,10 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using System.Globalization;
 using System.Net;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Log;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Util;
@@ -32,7 +29,6 @@ namespace Uol.PagSeguro.Service
     /// </summary>
     public static class CancelService
     {
-
         /// <summary>
         /// Request a transaction cancellation from transaction code
         /// </summary>
@@ -42,24 +38,24 @@ namespace Uol.PagSeguro.Service
         public static RequestResponse RequestCancel(Credentials credentials, string transactionCode)
         {
 
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "CancelService.Register(transactionCode = {0}) - begin", transactionCode));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "CancelService.Register(transactionCode = {0}) - begin", transactionCode));
             try {
-                using(HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.CancelUri.AbsoluteUri, BuildCancelURL(credentials, transactionCode)))
+                using(var response = HttpUrlConnectionUtil.GetHttpPostConnection(
+                    PagSeguroConfiguration.CancelUri.AbsoluteUri, BuildCancelUrl(credentials, transactionCode)))
                 {
             
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (var reader = XmlReader.Create(response.GetResponseStream()))
                     {
 
-                        RequestResponse cancel = new RequestResponse();
+                        var cancel = new RequestResponse();
                         CancelSerializer.Read(reader, cancel);
-                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "CancelService.createRequest({0}) - end", cancel.ToString()));
+                        PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "CancelService.createRequest({0}) - end", cancel.ToString()));
                         return cancel;
                     }
                 }
             } catch (WebException exception) {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "CancelService.createRequest() - error {0}", pse));
+                var pse = HttpUrlConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "CancelService.createRequest() - error {0}", pse));
                 throw pse;
             }
         }
@@ -70,15 +66,14 @@ namespace Uol.PagSeguro.Service
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="transactionCode">Transaction Code</param>
         /// <returns></returns>
-        private static string BuildCancelURL(Credentials credentials, string transactionCode)
+        private static string BuildCancelUrl(Credentials credentials, string transactionCode)
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            var builder = new QueryStringBuilder();
 
             builder.EncodeCredentialsAsQueryString(credentials);
             builder.Append("transactionCode", transactionCode);
 
             return builder.ToString();
         }
-
      }
 }

@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Text;
 using Uol.PagSeguro.Service;
 
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -34,23 +33,15 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Party that will be sending the money
         /// </summary>
-        public Sender Sender
-        {
-            get;
-            set;
-        }
+        public Sender Sender { get; set; }
 
-        public PreApproval PreApproval
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// </summary>
+        public PreApproval PreApproval { get; set; }
 
-        public string PreApprovalCode
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// </summary>
+        public string PreApprovalCode { get; set; }
 
         /// <summary>
         /// Payment currency.
@@ -58,26 +49,12 @@ namespace Uol.PagSeguro.Domain
         /// <remarks>
         /// The expected currency values are defined in the <c cref="T:Uol.PagSeguro.Domain.Currency">Currencty</c> class.
         /// </remarks>
-        public string Currency
-        {
-            get;
-            set;
-        }
+        public string Currency { get; set; }
 
         /// <summary>
         /// Products/items in this payment request
         /// </summary>
-        public IList<Item> Items
-        {
-            get
-            {
-                if (this._items == null)
-                {
-                    this._items = new List<Item>();
-                }
-                return _items;
-            }
-        }
+        public IList<Item> Items => _items ?? (_items = new List<Item>());
 
         /// <summary>
         /// Uri to where the PagSeguro payment page should redirect the user after the payment information is processed.
@@ -85,11 +62,7 @@ namespace Uol.PagSeguro.Domain
         /// <remarks>
         /// Typically this is a confirmation page on your web site.
         /// </remarks>
-        public Uri RedirectUri
-        {
-            get;
-            set;
-        }
+        public Uri RedirectUri { get; set; }
 
         /// <summary>
         /// Uri to where the user review the signature or read the rules.
@@ -97,11 +70,7 @@ namespace Uol.PagSeguro.Domain
         /// <remarks>
         /// Typically this is the signature page on your web site.
         /// </remarks>
-        public Uri ReviewUri
-        {
-            get;
-            set;
-        }
+        public Uri ReviewUri { get; set; }
 
         /// <summary>
         /// Extra amount to be added to the transaction total
@@ -110,11 +79,7 @@ namespace Uol.PagSeguro.Domain
         /// This value can be used to add an extra charge to the transaction
         /// or provide a discount in the case <c>ExtraAmount</c> is a negative value.
         /// </remarks>
-        public decimal? ExtraAmount
-        {
-            get;
-            set;
-        }
+        public decimal? ExtraAmount { get; set; }
 
         /// <summary>
         /// Reference code
@@ -123,20 +88,12 @@ namespace Uol.PagSeguro.Domain
         /// Optional. You can use the reference code to store an identifier so you can
         /// associate the PagSeguro transaction to a transaction in your system.
         /// </remarks>
-        public string Reference
-        {
-            get;
-            set;
-        }
+        public string Reference { get; set; }
 
         /// <summary>
         /// Shipping information associated with this payment request
         /// </summary>
-        public Shipping Shipping
-        {
-            get;
-            set;
-        }
+        public Shipping Shipping { get; set; }
 
         /// <summary>
         /// How long this payment request will remain valid, in seconds.
@@ -145,11 +102,7 @@ namespace Uol.PagSeguro.Domain
         /// Optional. After this payment request is submitted, the payment code returned
         /// will remain valid for the period specified here.
         /// </remarks>
-        public int? MaxAge
-        {
-            get;
-            set;
-        }
+        public int? MaxAge { get; set; }
 
         /// <summary>
         /// How many times the payment redirect uri returned by the payment web service can be accessed.
@@ -159,11 +112,7 @@ namespace Uol.PagSeguro.Domain
         /// the payment web service will remain valid for the number of uses specified here.
         ///
         /// </remarks>
-        public int? MaxUses
-        {
-            get;
-            set;
-        }
+        public int? MaxUses { get; set; }
 
         /// <summary>
         /// Determines for which url PagSeguro will send the order related notifications codes.
@@ -172,27 +121,15 @@ namespace Uol.PagSeguro.Domain
         /// to this url. You can use that for update the related order.
         /// </remarks>
         /// </summary>
-        public string NotificationURL
-        {
-            get;
-            set;
-        }
+        public string NotificationUrl { get; set; }
 
         /// <summary>
         /// Meta Data reference
         /// </summary>
         public MetaData MetaData
         {
-            get
-            {
-                if (this._metaData == null)
-                {
-                    this._metaData = new MetaData();
-                }
-                return this._metaData;
-            }
-
-            set { this._metaData = value; }
+            get => _metaData ?? (_metaData = new MetaData());
+            set => _metaData = value;
         }
 
         /// <summary>
@@ -200,15 +137,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public Parameter Parameter
         {
-            get
-            {
-                if (this._parameter == null)
-                {
-                    this._parameter = new Parameter();
-                }
-                return this._parameter;
-            }
-            set { this._parameter = value; }
+            get => _parameter ?? (_parameter = new Parameter());
+            set => _parameter = value;
         }
 
         /// <summary>
@@ -216,16 +146,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public PaymentMethodConfig PaymentMethodConfig
         {
-            get
-            {
-                if (this._methodConfig == null)
-                {
-                    this._methodConfig = new PaymentMethodConfig();
-                }
-                return this._methodConfig;
-            }
-
-            set { this._methodConfig = value; }
+            get => _methodConfig ?? (_methodConfig = new PaymentMethodConfig());
+            set => _methodConfig = value;
         }
 
         /// <summary>
@@ -233,16 +155,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public AcceptedPaymentMethods AcceptedPaymentMethods
         {
-            get
-            {
-                if (this._acceptedPaymentsConfig == null)
-                {
-                    this._acceptedPaymentsConfig = new AcceptedPaymentMethods();
-                }
-                return this._acceptedPaymentsConfig;
-            }
-
-            set { this._acceptedPaymentsConfig = value; }
+            get => _acceptedPaymentsConfig ?? (_acceptedPaymentsConfig = new AcceptedPaymentMethods());
+            set => _acceptedPaymentsConfig = value;
         }
 
         /// <summary>
@@ -250,7 +164,7 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public PaymentRequest()
         {
-            this.Currency = Uol.PagSeguro.Constants.Currency.Brl;
+            Currency = Constants.Currency.Brl;
         }
 
         /// <summary>
@@ -268,9 +182,10 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
+        // ReSharper disable once UnusedMember.Global
         public void AddMetaData(string key, string value)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value));
+            MetaData.Items.Add(new MetaDataItem(key, value));
         }
 
         /// <summary>
@@ -281,7 +196,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public void AddMetaData(string key, string value, int? group)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value, group));
+            MetaData.Items.Add(new MetaDataItem(key, value, group));
         }
 
         /// <summary>
@@ -291,7 +206,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="value"></param>
         public void AddParameter(string key, string value)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value));
+            Parameter.Items.Add(new ParameterItem(key, value));
         }
 
         /// <summary>
@@ -302,29 +217,25 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public void AddPaymentMethodConfig(string key, double value, string group)
         {
-            this.PaymentMethodConfig.Items.Add(new PaymentMethodConfigItem(key, value, group));
+            PaymentMethodConfig.Items.Add(new PaymentMethodConfigItem(key, value, group));
         }
 
         /// <summary>
-        /// 
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
         /// <param name="group"></param>
+        /// <param name="name"></param>
         public void AcceptPaymentMethodConfig(string group, List<string> name)
         {
-            this.AcceptedPaymentMethods.Items.Add(new AcceptPaymentMethod(group, name));
+            AcceptedPaymentMethods.Items.Add(new AcceptPaymentMethod(group, name));
         }
 
         /// <summary>
-        /// 
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
         /// <param name="group"></param>
+        /// <param name="name"></param>
         public void ExcludePaymentMethodConfig(string group, List<string> name)
         {
-            this.AcceptedPaymentMethods.Items.Add(new ExcludePaymentMethod(group, name));
+            AcceptedPaymentMethods.Items.Add(new ExcludePaymentMethod(group, name));
         }
 
         /// <summary>
@@ -335,7 +246,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public void AddIndexedParameter(string key, string value, int? group)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value, group));
+            Parameter.Items.Add(new ParameterItem(key, value, group));
         }
 
         /// <summary>
@@ -344,10 +255,10 @@ namespace Uol.PagSeguro.Domain
         /// <returns></returns>
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name).Append("(");
-            builder.Append("Reference=").Append(this.Reference).Append(", ");
-            string email = this.Sender == null ? null : this.Sender.Email;
+            var builder = new StringBuilder();
+            builder.Append(GetType().Name).Append("(");
+            builder.Append("Reference=").Append(Reference).Append(", ");
+            var email = Sender?.Email ?? string.Empty;
             builder.Append("Sender.Email=").Append(email).Append(")");
             return builder.ToString();
         }

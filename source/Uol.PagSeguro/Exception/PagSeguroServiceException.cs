@@ -23,6 +23,7 @@ using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.Exception
 {
+    /// <inheritdoc />
     /// <summary>
     /// Encapsulates a problem that occurred calling a PagSeguro web service
     /// </summary>
@@ -32,39 +33,45 @@ namespace Uol.PagSeguro.Exception
         private const string CrLf = "\n";
         private const string HttpStatusCodeField = "HttpStatusCode";
         private const string ErrorsField = "Errors";
-        private List<ServiceError> errors;
+        private List<ServiceError> _errors;
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the PagSeguroServiceException class
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public PagSeguroServiceException()
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the PagSeguroServiceException class
         /// </summary>
         /// <param name="statusCode"></param>
         public PagSeguroServiceException(HttpStatusCode statusCode) :
-            base(String.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0}", statusCode))
+            base(string.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0}", statusCode))
         {
-            this.StatusCode = statusCode;
+            StatusCode = statusCode;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the PagSeguroServiceException class
         /// </summary>
         /// <param name="statusCode"></param>
         /// <param name="errors"></param>
         public PagSeguroServiceException(HttpStatusCode statusCode, IEnumerable<ServiceError> errors) :
-            base(String.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0}", statusCode))
+            base(string.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0}", statusCode))
         {
             if (errors == null)
-                throw new ArgumentNullException("errors");
-            this.errors = new List<ServiceError>(errors);
-            this.StatusCode = statusCode;
+                throw new ArgumentNullException(nameof(errors));
+
+            _errors = new List<ServiceError>(errors);
+            StatusCode = statusCode;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the PagSeguroServiceException class
         /// </summary>
@@ -74,34 +81,38 @@ namespace Uol.PagSeguro.Exception
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the PagSeguroServiceException class
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
+        // ReSharper disable once UnusedMember.Global
         public PagSeguroServiceException(string message, System.Exception innerException)
             : base(message, innerException)
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the PagSeguroServiceException class
         /// </summary>
         /// <param name="statusCode"></param>
         /// <param name="innerException"></param>
         public PagSeguroServiceException(HttpStatusCode statusCode, System.Exception innerException) :
-            base(String.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0} ({1})", statusCode, (int)statusCode), innerException)
+            base(string.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0} ({1})", statusCode, (int)statusCode), innerException)
         {
-            this.StatusCode = statusCode;
+            StatusCode = statusCode;
         }
 
         private PagSeguroServiceException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            this.StatusCode = (HttpStatusCode)info.GetValue(PagSeguroServiceException.HttpStatusCodeField, typeof(HttpStatusCode));
-            this.errors = (List<ServiceError>)info.GetValue(PagSeguroServiceException.ErrorsField, typeof(List<ServiceError>));
+            _errors = (List<ServiceError>)info.GetValue(ErrorsField, typeof(List<ServiceError>));
+            StatusCode = (HttpStatusCode)info.GetValue(HttpStatusCodeField, typeof(HttpStatusCode));
         }
         
+        /// <inheritdoc />
         /// <summary>
         /// Populates a SerializationInfo with the data needed to serialize the target object
         /// </summary>
@@ -111,8 +122,9 @@ namespace Uol.PagSeguro.Exception
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue(PagSeguroServiceException.HttpStatusCodeField, this.StatusCode);
-            info.AddValue(PagSeguroServiceException.ErrorsField, this.Errors);
+
+            info.AddValue(HttpStatusCodeField, StatusCode);
+            info.AddValue(ErrorsField, Errors);
         }
 
         /// <summary>
@@ -122,35 +134,31 @@ namespace Uol.PagSeguro.Exception
         {
             get
             {
-                if (this.errors == null)
-                {
-                    this.errors = new List<ServiceError>();
-                }
-                return this.errors.AsReadOnly();
+                if (_errors == null)
+                    _errors = new List<ServiceError>();
+
+                return _errors.AsReadOnly();
             }
         }
 
         /// <summary>
         /// Http status code
         /// </summary>
-        public HttpStatusCode StatusCode
-        {
-            get;
-            private set;
-        }
+        public HttpStatusCode StatusCode { get; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Returns a textual representation of this object
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder(base.ToString());
+            var builder = new StringBuilder(base.ToString());
             builder.Append(CrLf);
-            foreach (ServiceError error in this.Errors)
-            {
-                builder.Append(error.ToString()).Append(CrLf);
-            }
+
+            foreach (var error in Errors)
+                builder.Append(error).Append(CrLf);
+
             return builder.ToString();
         }
     }

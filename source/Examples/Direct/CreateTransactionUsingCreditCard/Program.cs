@@ -20,7 +20,7 @@ using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
 
-namespace CreateTransactionUsingBoleto
+namespace CreateTransactionUsingCreditCard
 {
     class Program
     {
@@ -105,7 +105,7 @@ namespace CreateTransactionUsingBoleto
             checkout.Installment = new Installment(2, 25.00m, 2);
 
             // Sets the notification url
-            checkout.NotificationURL = "http://www.lojamodelo.com.br";
+            checkout.NotificationUrl = "http://www.lojamodelo.com.br";
 
             try
             {

@@ -18,19 +18,10 @@ using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
-    /// <summary>
-    /// 
-    /// </summary>
     internal static class PreApprovalTransactionSerializer
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="transaction"></param>
         internal static void Read(XmlReader reader, PreApprovalTransaction preApproval)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -38,12 +29,10 @@ namespace Uol.PagSeguro.XmlParse
             }
 
             reader.ReadStartElement(SerializerHelper.PreApproval);
-
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-
                 if (XMLParserUtils.IsEndElement(reader, SerializerHelper.PreApproval))
                 {
                     XMLParserUtils.SkipNode(reader);

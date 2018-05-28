@@ -12,13 +12,10 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using System.Globalization;
 using System.Net;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Log;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Util;
@@ -32,35 +29,35 @@ namespace Uol.PagSeguro.Service
     /// </summary>
     public static class RefundService
     {
-
         /// <summary>
         /// Request a transaction refund from transaction code
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="transactionCode">Transaction Code</param>
+        /// <param name="refundValue"></param>
         /// <returns><c cref="T:Uol.PagSeguro.CancelRequestResponse">Result</c></returns>
         public static RequestResponse RequestRefund(Credentials credentials, string transactionCode, decimal? refundValue = null)
         {
 
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "RefundService.Register(transactionCode = {0}) - begin", transactionCode));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "RefundService.Register(transactionCode = {0}) - begin", transactionCode));
             
             try {
-                using(HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.RefundUri.AbsoluteUri, BuildRefundURL(credentials, transactionCode, refundValue)))
+                using(var response = HttpUrlConnectionUtil.GetHttpPostConnection(
+                    PagSeguroConfiguration.RefundUri.AbsoluteUri, BuildRefundUrl(credentials, transactionCode, refundValue)))
                 {
             
-                    using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                    using (var reader = XmlReader.Create(response.GetResponseStream()))
                     {
 
-                        RequestResponse refund = new RequestResponse();
+                        var refund = new RequestResponse();
                         RefundSerializer.Read(reader, refund);
-                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "RefundService.Register({0}) - end", refund.ToString()));
+                        PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "RefundService.Register({0}) - end", refund.ToString()));
                         return refund;
                     }
                 }
             } catch (WebException exception) {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "RefundService.Register() - error {0}", pse));
+                var pse = HttpUrlConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "RefundService.Register() - error {0}", pse));
                 throw pse;
             }
         }
@@ -72,9 +69,9 @@ namespace Uol.PagSeguro.Service
         /// <param name="transactionCode">Transaction Code</param>
         /// <param name="refundValue">Refund Value</param>
         /// <returns></returns>
-        private static string BuildRefundURL(Credentials credentials, string transactionCode, decimal? refundValue)
+        private static string BuildRefundUrl(Credentials credentials, string transactionCode, decimal? refundValue)
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            var builder = new QueryStringBuilder();
 
             builder.EncodeCredentialsAsQueryString(credentials);
             builder.Append("transactionCode", transactionCode);

@@ -12,15 +12,11 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
-    /// <summary>
-    /// 
-    /// </summary>
     internal static class CreditorFeesSerializer
     {
         internal const string CreditorFees = "creditorFees";
@@ -28,11 +24,6 @@ namespace Uol.PagSeguro.XmlParse
         private const string IntermediationRateAmount = "intermediationRateAmount";
         private const string IntermediationFeeAmount = "intermediationFeeAmount";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="item"></param>
         internal static void Read(XmlReader reader, CreditorFees creditorFees)
         {
 
@@ -42,12 +33,12 @@ namespace Uol.PagSeguro.XmlParse
                 return;
             }
 
-            reader.ReadStartElement(CreditorFeesSerializer.CreditorFees);
+            reader.ReadStartElement(CreditorFees);
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-                if (XMLParserUtils.IsEndElement(reader, CreditorFeesSerializer.CreditorFees))
+                if (XMLParserUtils.IsEndElement(reader, CreditorFees))
                 {
                     XMLParserUtils.SkipNode(reader);
                     break;
@@ -57,11 +48,11 @@ namespace Uol.PagSeguro.XmlParse
                 {
                     switch (reader.Name)
                     {
-                        case CreditorFeesSerializer.IntermediationRateAmount:
-                            creditorFees.intermediationRateAmount = reader.ReadElementContentAsDecimal();
+                        case IntermediationRateAmount:
+                            creditorFees.IntermediationRateAmount = reader.ReadElementContentAsDecimal();
                             break;
-                        case CreditorFeesSerializer.IntermediationFeeAmount:
-                            creditorFees.intermediationFeeAmount = reader.ReadElementContentAsDecimal();
+                        case IntermediationFeeAmount:
+                            creditorFees.IntermediationFeeAmount = reader.ReadElementContentAsDecimal();
                             break;
                         default:
                             XMLParserUtils.SkipElement(reader);

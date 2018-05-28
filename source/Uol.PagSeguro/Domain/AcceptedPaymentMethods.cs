@@ -21,22 +21,11 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class AcceptedPaymentMethods
     {
-
-        private List<AcceptedPayments> _config;
+        private List<IAcceptedPayments> _config;
 
         /// <summary>
         ///  List of available parameter item for send in checkout
         /// </summary>
-        public List<AcceptedPayments> Items
-        {
-            get
-            {
-                if (_config == null)
-                {
-                    _config = new List<AcceptedPayments>();
-                }
-                return this._config;
-            }
-        }
+        public List<IAcceptedPayments> Items => _config ?? (_config = new List<IAcceptedPayments>());
     }
 }

@@ -17,22 +17,15 @@ using System.Collections.Generic;
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
-    /// 
     /// </summary>
-    public interface AcceptedPayments
+    public interface IAcceptedPayments
     {
+        /// <summary>
+        /// </summary>
+        List<string> Name { get; set; }
 
-        List<string> Name
-        {
-            get;
-            set;
-        }
-
-        string Group
-        {
-            get;
-            set;
-        }
-
+        /// <summary>
+        /// </summary>
+        string Group { get; set; }
     }
 }

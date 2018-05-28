@@ -21,15 +21,14 @@ namespace Uol.PagSeguro.Log
     /// <summary>
     /// 
     /// </summary>
-    static internal class PagSeguroTrace
+    internal static class PagSeguroTrace
     {
         private enum Level
         {
-            None = 0,
             Info = 1,
             Warn = 2,
             Error = 3
-        };
+        }
 
         /// <summary>
         /// 
@@ -37,9 +36,9 @@ namespace Uol.PagSeguro.Log
         /// <param name="level"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        static private string FormatMessage(Level level, string message)
+        private static string FormatMessage(Level level, string message)
         {
-            return String.Format(
+            return string.Format(
                 CultureInfo.InvariantCulture,
                 "{0} {1}: {2}",
                 DateTime.Now,
@@ -51,7 +50,7 @@ namespace Uol.PagSeguro.Log
         /// 
         /// </summary>
         /// <param name="message"></param>
-        static public void Info(string message)
+        public static void Info(string message)
         {
             Trace.TraceInformation(FormatMessage(Level.Info, message));
         }
@@ -60,7 +59,8 @@ namespace Uol.PagSeguro.Log
         /// 
         /// </summary>
         /// <param name="message"></param>
-        static public void Warn(string message)
+        // ReSharper disable once UnusedMember.Global
+        public static void Warn(string message)
         {
             Trace.TraceError(FormatMessage(Level.Warn, message));
         }
@@ -69,7 +69,7 @@ namespace Uol.PagSeguro.Log
         /// 
         /// </summary>
         /// <param name="message"></param>
-        static public void Error(string message)
+        public static void Error(string message)
         {
             Trace.TraceError(FormatMessage(Level.Error, message));
         }

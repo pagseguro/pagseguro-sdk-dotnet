@@ -13,15 +13,10 @@
 //   limitation
 
 using System.Xml;
-using System;
-using Uol.PagSeguro.Constants;
-using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Direct;
 
 namespace Uol.PagSeguro.XmlParse
 {
-
-
     /// <summary>
     /// 
     /// </summary>
@@ -31,10 +26,9 @@ namespace Uol.PagSeguro.XmlParse
         /// Read a direct payment session request result
         /// </summary>
         /// <param name="reader"></param>
-        /// <param name="result"></param>
+        /// <param name="session"></param>
         public static void Read(XmlReader reader, Session session)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -49,7 +43,7 @@ namespace Uol.PagSeguro.XmlParse
                         session.id = reader.Value;
                         break;
                 }
-            }    
+            }
         }
     }
 }

@@ -11,10 +11,6 @@
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
-
-using System;
-using Uol.PagSeguro.Util;
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -26,6 +22,7 @@ namespace Uol.PagSeguro.Domain
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the Item class
         /// </summary>
@@ -38,6 +35,7 @@ namespace Uol.PagSeguro.Domain
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the Item class
         /// </summary>
@@ -51,6 +49,7 @@ namespace Uol.PagSeguro.Domain
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the Item class
         /// </summary>
@@ -75,66 +74,42 @@ namespace Uol.PagSeguro.Domain
         /// <param name="shippingCost"></param>
         public Item(string id, string description, int quantity, decimal amount, long? weight, decimal? shippingCost)
         {
-            this.Id = id;
-            this.Description = description;
-            this.Quantity = quantity;
-            this.Amount = amount;
-            this.Weight = weight;
-            this.ShippingCost = shippingCost;
+            Id = id;
+            Description = description;
+            Quantity = quantity;
+            Amount = amount;
+            Weight = weight;
+            ShippingCost = shippingCost;
         }
 
         /// <summary>
         /// Product identifier, such as SKU
         /// </summary>
-        public string Id
-        {
-            get;
-            set;
-        }
+        public string Id { get; set; }
 
         /// <summary>
         /// Product description
         /// </summary>
-        public string Description
-        {
-            get;
-            set;
-        }
+        public string Description { get; set; }
 
         /// <summary>
         /// Quantity
         /// </summary>
-        public int Quantity
-        {
-            get;
-            set;
-        }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Product unit price 
         /// </summary>
-        public decimal Amount
-        {
-            get;
-            set;
-        }
+        public decimal Amount { get; set; }
 
         /// <summary>
         /// Single unit weight, in grams
         /// </summary>
-        public long? Weight
-        {
-            get;
-            set;
-        }
+        public long? Weight { get; set; }
 
         /// <summary>
         /// Single unit shipping cost
         /// </summary>
-        public decimal? ShippingCost
-        {
-            get;
-            set;
-        }
+        public decimal? ShippingCost { get; set; }
     }
 }
