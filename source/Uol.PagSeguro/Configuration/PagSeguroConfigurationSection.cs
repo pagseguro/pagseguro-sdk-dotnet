@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Uol.PagSeguro.Resources;
 
 // ReSharper disable UnusedMember.Global
@@ -96,52 +97,44 @@ namespace Uol.PagSeguro.Configuration
             if (!isSandbox)
                 return configuration;
 
-            const string pagseguroUrl = EnvironmentConfiguration.PagseguroUrl;
-            const string sandboxUrl = EnvironmentConfiguration.SandboxUrl;
+            CheckSandboxEnvironment(configuration.Urls.Cancel.Link);
+            CheckSandboxEnvironment(configuration.Urls.Payment.Link);
+            CheckSandboxEnvironment(configuration.Urls.PaymentRedirect.Link);
+            CheckSandboxEnvironment(configuration.Urls.Notification.Link);
+            CheckSandboxEnvironment(configuration.Urls.Search.Link);
+            CheckSandboxEnvironment(configuration.Urls.SearchAbandoned.Link);
+            CheckSandboxEnvironment(configuration.Urls.Refund.Link);
 
-            configuration.Urls.Authorization.AuthorizationRequest.Link.Value =
-                configuration.Urls.Authorization.AuthorizationRequest.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-            configuration.Urls.Authorization.AuthorizationUrl.Link.Value =
-                configuration.Urls.Authorization.AuthorizationUrl.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-            configuration.Urls.Authorization.AuthorizationSearch.Link.Value =
-                configuration.Urls.Authorization.AuthorizationSearch.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-            configuration.Urls.Authorization.AuthorizationSearch.Link.Value =
-                configuration.Urls.Authorization.AuthorizationSearch.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-            configuration.Urls.Authorization.AuthorizationNotification.Link.Value =
-                configuration.Urls.Authorization.AuthorizationNotification.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+            CheckSandboxEnvironment(configuration.Urls.DirectPayment.Session.Link);
+            CheckSandboxEnvironment(configuration.Urls.DirectPayment.Installment.Link);
+            CheckSandboxEnvironment(configuration.Urls.DirectPayment.Transactions.Link);
 
-            configuration.Urls.Cancel.Link.Value =
-                configuration.Urls.Cancel.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+            CheckSandboxEnvironment(configuration.Urls.Authorization.AuthorizationUrl.Link);
+            CheckSandboxEnvironment(configuration.Urls.Authorization.AuthorizationRequest.Link);
+            CheckSandboxEnvironment(configuration.Urls.Authorization.AuthorizationSearch.Link);
+            CheckSandboxEnvironment(configuration.Urls.Authorization.AuthorizationNotification.Link);
 
-            configuration.Urls.DirectPayment.Session.Link.Value =
-                configuration.Urls.DirectPayment.Session.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-            configuration.Urls.DirectPayment.Installment.Link.Value =
-                configuration.Urls.DirectPayment.Installment.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-            configuration.Urls.DirectPayment.Transactions.Link.Value =
-                configuration.Urls.DirectPayment.Transactions.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-
-            configuration.Urls.Payment.Link.Value =
-                configuration.Urls.Payment.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-
-            configuration.Urls.PaymentRedirect.Link.Value =
-                configuration.Urls.PaymentRedirect.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-
-            configuration.Urls.Notification.Link.Value =
-                configuration.Urls.Notification.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-
-            configuration.Urls.Search.Link.Value =
-                configuration.Urls.Search.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-
-            configuration.Urls.SearchAbandoned.Link.Value =
-                configuration.Urls.SearchAbandoned.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-
-            configuration.Urls.Refund.Link.Value =
-                configuration.Urls.Refund.Link.Value.Replace(pagseguroUrl, sandboxUrl);
-
-            configuration.Urls.PreApproval.Link.Value =
-                configuration.Urls.PreApproval.Link.Value.Replace(pagseguroUrl, sandboxUrl);
+            CheckSandboxEnvironment(configuration.Urls.PreApproval.PreApprovalRequest.Link);
+            CheckSandboxEnvironment(configuration.Urls.PreApproval.PreApprovalRedirect.Link);
+            CheckSandboxEnvironment(configuration.Urls.PreApproval.PreApprovalNotification.Link);
+            CheckSandboxEnvironment(configuration.Urls.PreApproval.PreApprovalPayment.Link);
+            CheckSandboxEnvironment(configuration.Urls.PreApproval.PreApprovalSearch.Link);
+            CheckSandboxEnvironment(configuration.Urls.PreApproval.PreApprovalCancel.Link);
 
             return configuration;
+        }
+
+        private static void CheckSandboxEnvironment(TextElement configElement)
+        {
+            var urlValue = configElement?.Value;
+            const string pagSeguroUrl = EnvironmentConfiguration.PagseguroUrl;
+            const string sandboxUrl = EnvironmentConfiguration.SandboxUrl;
+
+            if (string.IsNullOrWhiteSpace(urlValue) ||
+                urlValue.IndexOf(sandboxUrl, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                return;
+
+            configElement.Value = urlValue.Replace(pagSeguroUrl, sandboxUrl);
         }
 
         private static PagSeguroConfigurationSection SetAppConfigCredentials(PagSeguroConfigurationSection appConfig,

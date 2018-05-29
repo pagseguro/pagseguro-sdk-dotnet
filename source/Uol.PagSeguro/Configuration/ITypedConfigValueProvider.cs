@@ -1,16 +1,14 @@
 ﻿namespace Uol.PagSeguro.Configuration
 {
     /// <summary>
-    /// 
     /// </summary>
-    public interface IUrlCollectionElement
+    public interface ITypedConfigValueProvider
     {
         /// <summary>
-        /// 
         /// </summary>
-        /// <param name="urlKey"></param>
+        /// <param name="elementKey"></param>
         /// <param name="sandbox"></param>
         /// <returns></returns>
-        string Get(string urlKey, bool sandbox);
+        T GetValue<T>(string elementKey = null, bool sandbox = false);
     }
 }

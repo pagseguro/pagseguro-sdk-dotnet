@@ -1,30 +1,17 @@
 ﻿using System.Configuration;
-using Uol.PagSeguro.Resources;
-
 // ReSharper disable UnusedMember.Global
 
 namespace Uol.PagSeguro.Configuration
 {
     /// <inheritdoc cref="ConfigurationElement" />
-    public class PreApprovalElement : ConfigurationElement, IUrlCollectionElement
+    public class PreApprovalElement : ConfigurationElement, ITypedConfigValueProvider
     {
-        private const string LinkKey = "Link";
         private const string PreApprovalRequestKey = "PreApprovalRequest";
         private const string PreApprovalRedirectKey = "PreApprovalRedirect";
         private const string PreApprovalNotificationKey = "PreApprovalNotification";
         private const string PreApprovalSearchKey = "PreApprovalSearch";
         private const string PreApprovalCancelKey = "PreApprovalCancel";
         private const string PreApprovalPaymentKey = "PreApprovalPayment";
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [ConfigurationProperty(LinkKey, IsRequired = true)]
-        public TextElement Link
-        {
-            get => (TextElement)this[LinkKey];
-            set => this[LinkKey] = value;
-        }
 
         /// <summary>
         /// 
@@ -86,20 +73,18 @@ namespace Uol.PagSeguro.Configuration
             set => this[PreApprovalPaymentKey] = value;
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// 
         /// </summary>
-        /// <param name="urlKey"></param>
+        /// <param name="elementKey"></param>
         /// <param name="sandbox"></param>
         /// <returns></returns>
-        public string Get(string urlKey, bool sandbox)
+        public T GetValue<T>(string elementKey = null, bool sandbox = false)
         {
-            var urlValue = ((UrlElement) this[urlKey]).Link.Value;
+            if (typeof(T) != typeof(string) || string.IsNullOrWhiteSpace(elementKey))
+                return default(T);
 
-            if (sandbox && !string.IsNullOrWhiteSpace(urlValue))
-                urlValue = urlValue.Replace(EnvironmentConfiguration.PagseguroUrl, EnvironmentConfiguration.SandboxUrl);
-
-            return urlValue;
+            return ((UrlElement) this[elementKey]).GetValue<T>();
         }
     }
 }

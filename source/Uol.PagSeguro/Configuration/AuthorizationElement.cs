@@ -1,12 +1,10 @@
 ﻿using System.Configuration;
-using Uol.PagSeguro.Resources;
-
 // ReSharper disable UnusedMember.Global
 
 namespace Uol.PagSeguro.Configuration
 {
     /// <inheritdoc cref="ConfigurationElement" />
-    public class AuthorizationElement : ConfigurationElement, IUrlCollectionElement
+    public class AuthorizationElement : ConfigurationElement, ITypedConfigValueProvider
     {
         private const string AuthorizationRequestKey = "AuthorizationRequest";
         private const string AuthorizationUrlKey = "AuthorizationURL";
@@ -53,20 +51,18 @@ namespace Uol.PagSeguro.Configuration
             set => this[AuthorizationNotificationKey] = value;
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// 
         /// </summary>
-        /// <param name="urlKey"></param>
+        /// <param name="elementKey"></param>
         /// <param name="sandbox"></param>
         /// <returns></returns>
-        public string Get(string urlKey, bool sandbox)
+        public T GetValue<T>(string elementKey = null, bool sandbox = false)
         {
-            var urlValue = ((UrlElement) this[urlKey]).Link.Value;
+            if (typeof(T) != typeof(string) || string.IsNullOrWhiteSpace(elementKey))
+                return default(T);
 
-            if (sandbox && !string.IsNullOrWhiteSpace(urlValue))
-                urlValue = urlValue.Replace(EnvironmentConfiguration.PagseguroUrl, EnvironmentConfiguration.SandboxUrl);
-
-            return urlValue;
+            return ((UrlElement) this[elementKey]).GetValue<T>();
         }
     }
 }

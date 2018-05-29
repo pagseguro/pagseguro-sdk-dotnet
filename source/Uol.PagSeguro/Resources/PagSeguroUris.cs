@@ -61,8 +61,8 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
-        public static Uri GetPreApprovalUri(Credentials credentials) =>
-            new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApproval, credentials.IsSandbox));
+        public static Uri GetPreApprovalRequestUri(Credentials credentials) =>
+            new Uri(GetUrlValue(PagSeguroConfigSerializer.PreApprovalRequest, credentials.IsSandbox));
 
         /// <summary>
         /// 
@@ -116,14 +116,14 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
-        public static Uri GetAuthorizarionRequestUri(Credentials credentials) =>
-            new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationRequest, credentials.IsSandbox));
+        public static Uri GetAuthorizarionUri(Credentials credentials) =>
+            new Uri(GetUrlValue(PagSeguroConfigSerializer.Authorization, credentials.IsSandbox));
 
         /// <summary>
         /// 
         /// </summary>
-        public static Uri GetAuthorizarionUri(Credentials credentials) =>
-            new Uri(GetUrlValue(PagSeguroConfigSerializer.Authorization, credentials.IsSandbox));
+        public static Uri GetAuthorizarionRequestUri(Credentials credentials) =>
+            new Uri(GetUrlValue(PagSeguroConfigSerializer.AuthorizationRequest, credentials.IsSandbox));
 
         /// <summary>
         /// 
@@ -140,15 +140,15 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="url"></param>
+        /// <param name="urlKey"></param>
         /// <param name="sandbox"></param>
         /// <returns></returns>
-        private static string GetUrlValue(string url, bool sandbox)
+        private static string GetUrlValue(string urlKey, bool sandbox)
         {
             var appConfig = PagSeguroConfigurationSection.GetCurrent(sandbox);
-            var urlFromAppConfig = appConfig?.Urls.Get(url, sandbox);
+            var urlFromAppConfig = appConfig?.Urls.GetValue<string>(urlKey, sandbox);
 
-            return urlFromAppConfig ?? PagSeguroConfigSerializer.GetWebserviceUrl(XmlConfig, url);
+            return urlFromAppConfig ?? PagSeguroConfigSerializer.GetWebserviceUrl(XmlConfig, urlKey);
         }
     }
 }

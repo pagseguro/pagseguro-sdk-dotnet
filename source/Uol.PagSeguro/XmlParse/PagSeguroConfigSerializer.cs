@@ -35,7 +35,7 @@ namespace Uol.PagSeguro.XmlParse
         internal const string SearchAbandoned = "SearchAbandoned";
         internal const string Cancel = "Cancel";
         internal const string Refund = "Refund";
-        internal const string PreApproval = "PreApprovalRequest";
+        internal const string PreApprovalRequest = "PreApprovalRequest";
         internal const string PreApprovalRedirect = "PreApprovalRedirect";
         internal const string PreApprovalNotification = "PreApprovalNotification";
         internal const string PreApprovalSearch = "PreApprovalSearch";

@@ -3,8 +3,8 @@
 
 namespace Uol.PagSeguro.Configuration
 {
-    /// <inheritdoc />
-    public class UrlElement : ConfigurationElement
+    /// <inheritdoc cref="ConfigurationElement" />
+    public class UrlElement : ConfigurationElement, ITypedConfigValueProvider
     {
         private const string LinkKey = "Link";
 
@@ -16,6 +16,20 @@ namespace Uol.PagSeguro.Configuration
         {
             get => (TextElement)this[LinkKey];
             set => this[LinkKey] = value;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// </summary>
+        /// <param name="elementKey"></param>
+        /// <param name="sandbox"></param>
+        /// <returns></returns>
+        public virtual T GetValue<T>(string elementKey = null, bool sandbox = false)
+        {
+            if (typeof(T) != typeof(string))
+                return default(T);
+
+            return Link.Value is T ? (T) (object) Link.Value : default(T);
         }
     }
 }

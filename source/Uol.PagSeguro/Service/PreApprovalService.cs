@@ -47,7 +47,7 @@ namespace Uol.PagSeguro.Service
             try
             {
                 using (var response = HttpUrlConnectionUtil.GetHttpPostConnection(
-                    PagSeguroUris.GetPreApprovalUri(credentials).AbsoluteUri, BuildPreApprovalUrl(credentials, preApproval)))
+                    PagSeguroUris.GetPreApprovalRequestUri(credentials).AbsoluteUri, BuildPreApprovalUrl(credentials, preApproval)))
                 {
 
                     if (HttpStatusCode.OK.Equals(response.StatusCode))

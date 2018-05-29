@@ -103,14 +103,14 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="dataKey"></param>
         /// <returns></returns>
-        private static string GetDataValue(string data)
+        private static string GetDataValue(string dataKey)
         {
             var appConfig = PagSeguroConfigurationSection.GetCurrent();
-            var dataFromAppConfig = appConfig?.Configuration.Get(data);
+            var dataFromAppConfig = appConfig?.Configuration.Get(dataKey);
 
-            return dataFromAppConfig ?? PagSeguroConfigSerializer.GetDataConfiguration(XmlConfiguration, data);
+            return dataFromAppConfig ?? PagSeguroConfigSerializer.GetDataConfiguration(XmlConfiguration, dataKey);
         }
 
         private static string GetBasePath()

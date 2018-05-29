@@ -8,7 +8,7 @@ using Uol.PagSeguro.XmlParse;
 namespace Uol.PagSeguro.Configuration
 {
     /// <inheritdoc cref="ConfigurationElement" />
-    public class UrlsElement : ConfigurationElement, IUrlCollectionElement
+    public class UrlsElement : ConfigurationElement, ITypedConfigValueProvider
     {
         private const string PaymentKey = "Payment";
         private const string PaymentRedirectKey = "PaymentRedirect";
@@ -124,13 +124,16 @@ namespace Uol.PagSeguro.Configuration
         /// <inheritdoc />
         /// <summary>
         /// </summary>
-        /// <param name="configKey"></param>
+        /// <param name="elementKey"></param>
         /// <param name="sandbox"></param>
         /// <returns></returns>
-        public string Get(string configKey, bool sandbox)
+        public T GetValue<T>(string elementKey = null, bool sandbox = false)
         {
-            string urlValue;
-            switch (configKey)
+            if (typeof(T) != typeof(string))
+                return default(T);
+
+            T configValue;
+            switch (elementKey)
             {
                 case PagSeguroConfigSerializer.Payment:
                 case PagSeguroConfigSerializer.PaymentRedirect:
@@ -139,51 +142,39 @@ namespace Uol.PagSeguro.Configuration
                 case PagSeguroConfigSerializer.SearchAbandoned:
                 case PagSeguroConfigSerializer.Cancel:
                 case PagSeguroConfigSerializer.Refund:
-                    urlValue = ((UrlElement) this[configKey]).Link.Value;
+                    configValue = ((UrlElement)this[elementKey]).GetValue<T>();
                     break;
-                case PagSeguroConfigSerializer.PreApproval:
-                    urlValue = PreApproval.Link.Value;
-                    break;
-                case PagSeguroConfigSerializer.Authorization:
-                    urlValue = Authorization.AuthorizationUrl.Link.Value;
-                    break;
-                default:
-                    var urlKey = configKey;
-                    configKey = GetConfigKey(configKey);
-                    urlValue = ((IUrlCollectionElement) this[configKey]).Get(urlKey, sandbox);
-                    break;
-            }
-
-            if (sandbox && !string.IsNullOrWhiteSpace(urlValue))
-                urlValue = urlValue.Replace(EnvironmentConfiguration.PagseguroUrl, EnvironmentConfiguration.SandboxUrl);
-
-            return urlValue;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="configKey"></param>
-        /// <returns></returns>
-        protected string GetConfigKey(string configKey)
-        {
-            switch (configKey)
-            {
                 case PagSeguroConfigSerializer.Session:
                 case PagSeguroConfigSerializer.Transactions:
                 case PagSeguroConfigSerializer.Installment:
-                    return DirectPaymentKey;
-
+                    configValue = DirectPayment.GetValue<T>(elementKey);
+                    break;
+                case PagSeguroConfigSerializer.PreApprovalRequest:
                 case PagSeguroConfigSerializer.PreApprovalRedirect:
-                    return PreApprovalKey;
-
+                case PagSeguroConfigSerializer.PreApprovalNotification:
+                case PagSeguroConfigSerializer.PreApprovalCancel:
+                case PagSeguroConfigSerializer.PreApprovalSearch:
+                case PagSeguroConfigSerializer.PreApprovalPayment:
+                    configValue = PreApproval.GetValue<T>(elementKey);
+                    break;
+                case PagSeguroConfigSerializer.Authorization:
                 case PagSeguroConfigSerializer.AuthorizationSearch:
                 case PagSeguroConfigSerializer.AuthorizationRequest:
                 case PagSeguroConfigSerializer.AuthorizationNotification:
-                    return AuthorizationKey;
+                    configValue = Authorization.GetValue<T>(elementKey);
+                    break;
+                default:
+                    return default(T);
             }
 
-            throw new ArgumentException($"Configuration key '{configKey}' not found.", nameof(configKey));
+            var urlValue = configValue as string;
+            const string pagSeguroUrl = EnvironmentConfiguration.PagseguroUrl;
+            const string sandboxUrl = EnvironmentConfiguration.SandboxUrl;
+            if (sandbox && !string.IsNullOrWhiteSpace(urlValue) &&
+                urlValue.IndexOf(EnvironmentConfiguration.SandboxUrl, StringComparison.InvariantCultureIgnoreCase) < 0)
+                return (T) (object) urlValue.Replace(pagSeguroUrl, sandboxUrl);
+
+            return (T) (object) urlValue;
         }
     }
 }

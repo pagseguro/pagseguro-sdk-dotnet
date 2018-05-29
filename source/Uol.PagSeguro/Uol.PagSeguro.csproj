@@ -66,10 +66,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\AuthorizationElement.cs" />
-    <Compile Include="Configuration\ConfigurationTextElement.cs" />
+    <Compile Include="Configuration\TypedConfigurationElement.cs" />
     <Compile Include="Configuration\CredentialElement.cs" />
     <Compile Include="Configuration\DirectPaymentElement.cs" />
-    <Compile Include="Configuration\IUrlCollectionElement.cs" />
+    <Compile Include="Configuration\ITypedConfigValueProvider.cs" />
     <Compile Include="Configuration\PagSeguroConfigurationElement.cs" />
     <Compile Include="Configuration\PagSeguroConfigurationSection.cs" />
     <Compile Include="Configuration\PreApprovalElement.cs" />
