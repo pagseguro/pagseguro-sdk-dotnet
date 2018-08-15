@@ -7,14 +7,13 @@ Descrição
 A biblioteca PagSeguro em .NET é um conjunto de classes de domínio que facilitam, para o desenvolvedor .NET, a utilização das funcionalidades que o PagSeguro oferece na forma de APIs. Com a biblioteca instalada e configurada, você pode facilmente integrar funcionalidades como:
 
 
- - Criar [requisições de pagamentos]
- - Criar [requisições de assinaturas]
- - Cancelar [assinaturas]
- - Consultar [assinaturas]
- - Consultar [transações por código]
- - Consultar [transações por intervalo de datas]
- - Consultar [transações abandonadas]
- - Receber [notificações]
+ - [Criar Requisições de Pagamentos]
+ - [Criar Requisições de assinaturas]
+ - [Cancelar Assinaturas]
+ - [Consultar Assinaturas]
+ - [Consultar Transações por Código]
+ - [Consultar Transações por Intervalo de Datas]
+ - [Receber Notificações]
 
 
 Requisitos
@@ -147,14 +146,13 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
 * Adicione sua feature ou correção de bug.
 * Envie um pull request no [GitHub].
 
-  [requisições de assinaturas]: http://download.uol.com.br/pagseguro/docs/pagseguro-assinatura-automatica.pdf
-  [assinaturas]: http://download.uol.com.br/pagseguro/docs/pagseguro-assinatura-automatica.pdf
-  [requisições de pagamentos]: https://dev.pagseguro.uol.com.br/documentacao/pagamentos
-  [notificações]: https://dev.pagseguro.uol.com.br/documentacao/notificacoes
-  [Checkout Transparente]: https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
-  [transações por código]: https://dev.pagseguro.uol.com.br/documentacao/pagamentos/consultando-por-codigo-de-referencia
-  [transações por intervalo de datas]: https://dev.pagseguro.uol.com.br/documentacao/pagamentos/consulta-de-transacoes-por-intervalo-de-datas
-  [transações abandonadas]: https://dev.pagseguro.uol.com.br/documentacao/pagamentos/consulta-de-transacoes-abandonadas
+  [Criar Requisições de Pagamentos]: https://devs.pagseguro.uol.com.br/docs/checkout-web
+  [Criar Requisições de assinaturas]: https://devs.pagseguro.uol.com.br/docs/arquivo-documentacoes-depreciadas
+  [Cancelar Assinaturas]: https://devs.pagseguro.uol.com.br/docs/arquivo-documentacoes-depreciadas
+  [Consultar Assinaturas]: https://devs.pagseguro.uol.com.br/docs/arquivo-documentacoes-depreciadas
+  [Consultar Transações por Código]: https://devs.pagseguro.uol.com.br/docs/pagamento-recorrente-consulta-pelo-codigo-de-adesao
+  [Consultar Transações por Intervalo de Datas]: https://devs.pagseguro.uol.com.br/docs/pagamento-recorrente-consulta-por-intervalo-de-datas
+  [Receber Notificações]: https://devs.pagseguro.uol.com.br/docs/checkout-web-notificacoes
   [fórum]: https://comunidade.pagseguro.uol.com.br/hc/pt-br/community/topics
   [.NET Framework]: http://www.microsoft.com/net
   [GitHub]: https://github.com/pagseguro/pagseguro-sdk-dotnet
