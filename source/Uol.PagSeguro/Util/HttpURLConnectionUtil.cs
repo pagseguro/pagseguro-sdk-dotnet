@@ -29,10 +29,15 @@ namespace Uol.PagSeguro.Util
         internal const string GetMethod = "GET";
         internal const string PostMethod = "POST";
 
-        internal static PagSeguroServiceException CreatePagSeguroServiceException(HttpWebResponse response)
+        internal static PagSeguroServiceException CreatePagSeguroServiceException(HttpWebResponse response, System.Exception sourceException = null)
         {
             if (response == null)
-                throw new PagSeguroServiceException("response answered with null value");
+            {
+                if (sourceException == null)
+                    throw new PagSeguroServiceException("response answered with null value");
+
+                return new PagSeguroServiceException(0, sourceException);
+            }
 
             if (response.StatusCode == HttpStatusCode.OK)
                 throw new ArgumentException("response.StatusCode must be different than HttpStatusCode.OK", nameof(response));

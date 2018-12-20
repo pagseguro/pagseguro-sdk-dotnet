@@ -43,7 +43,7 @@ namespace Uol.PagSeguro.Service
             }
             catch (WebException exception)
             {
-                var pse = HttpUrlConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                var pse = HttpUrlConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response, exception);
                 PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "SessionService.Register() - error {0}", pse));
                 throw pse;
             }
