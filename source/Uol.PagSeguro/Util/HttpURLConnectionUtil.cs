@@ -104,6 +104,7 @@ namespace Uol.PagSeguro.Util
 
                 request.ContentType = contentType;
                 request.Method = method;
+                request.KeepAlive = true;
                 request.Timeout = PagSeguroConfiguration.RequestTimeout;
                 request.ReadWriteTimeout = PagSeguroConfiguration.RequestTimeout;
                 request.Headers.Add("lib-description", ".net:" + PagSeguroConfiguration.LibVersion);

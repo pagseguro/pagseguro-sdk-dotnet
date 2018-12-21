@@ -100,7 +100,7 @@ namespace Uol.PagSeguro.Exception
         /// <param name="statusCode"></param>
         /// <param name="innerException"></param>
         public PagSeguroServiceException(HttpStatusCode statusCode, System.Exception innerException) :
-            base(string.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0} ({1})", statusCode, (int)statusCode), innerException)
+            base(string.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0} - {1}", statusCode, innerException?.Message ?? "Falha desconhecida"), innerException)
         {
             StatusCode = statusCode;
         }
