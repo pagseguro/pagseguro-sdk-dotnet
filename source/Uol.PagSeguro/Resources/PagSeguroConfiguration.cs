@@ -83,7 +83,8 @@ namespace Uol.PagSeguro.Resources
         /// <summary>
         /// 
         /// </summary>
-        public static int RequestTimeout => Convert.ToInt32(GetDataValue(PagSeguroConfigSerializer.RequestTimeout));
+        public static int RequestTimeout =>
+            int.TryParse(GetDataValue(PagSeguroConfigSerializer.RequestTimeout), out var value) ? value : 10000;
 
         /// <summary>
         /// 

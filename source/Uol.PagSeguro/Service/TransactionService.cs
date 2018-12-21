@@ -39,7 +39,6 @@ namespace Uol.PagSeguro.Service
         /// <returns cref="T:Uol.PagSeguro.Transaction"><c>Transaction</c></returns>
         public static Transaction CreateCheckout(Credentials credentials, Checkout checkout)
         {
-
             PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - begin"));
             try
             {
@@ -48,7 +47,6 @@ namespace Uol.PagSeguro.Service
                 {
                     using (var reader = XmlReader.Create(response.GetResponseStream()))
                     {
-                        
                         var transaction = new Transaction();
                         TransactionSerializer.Read(reader, transaction);
                         PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - end {0}", transaction));
@@ -58,7 +56,7 @@ namespace Uol.PagSeguro.Service
             }
             catch (WebException exception)
             {
-                var pse = HttpUrlConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                var pse = HttpUrlConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response, exception);
                 PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - error {0}", pse));
                 throw pse;
             }
