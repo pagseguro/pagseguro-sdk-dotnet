@@ -61,9 +61,12 @@ namespace Uol.PagSeguro.Resources
             if (appConfig == null)
                 return PagSeguroConfigSerializer.GetAccountCredentials(XmlConfiguration, isSandbox);
 
-            return new AccountCredentials(isSandbox,
-                appConfig.GetCredentialEmail(isSandbox),
-                appConfig.GetCredentialToken(isSandbox));
+            email = appConfig.GetCredentialEmail(isSandbox);
+            token = appConfig.GetCredentialToken(isSandbox);
+            if (string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(token))
+                return PagSeguroConfigSerializer.GetAccountCredentials(XmlConfiguration, isSandbox);
+
+            return new AccountCredentials(isSandbox, email, token);
         }
 
         /// <summary>
@@ -75,9 +78,12 @@ namespace Uol.PagSeguro.Resources
             if (appConfig == null)
                 return PagSeguroConfigSerializer.GetApplicationCredentials(XmlConfiguration, isSandbox);
 
-            return new ApplicationCredentials(isSandbox,
-                appConfig.GetCredentialAppId(isSandbox),
-                appConfig.GetCredentialAppKey(isSandbox));
+            appId = appConfig.GetCredentialAppId(isSandbox);
+            appKey = appConfig.GetCredentialAppKey(isSandbox);
+            if (string.IsNullOrWhiteSpace(appId) && string.IsNullOrWhiteSpace(appKey))
+                return PagSeguroConfigSerializer.GetApplicationCredentials(XmlConfiguration, isSandbox);
+
+            return new ApplicationCredentials(isSandbox, appId, appKey);
         }
 
         /// <summary>
