@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>Uol.PagSeguro</PackageId>
+    <Authors>Uol.PagSeguro</Authors>
+    <Company>UOL</Company>
+    <Product>PagSeguro</Product>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
 
 </Project>
