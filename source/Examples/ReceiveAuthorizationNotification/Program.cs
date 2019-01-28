@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Authorization;
 using Uol.PagSeguro.Exception;
@@ -22,22 +21,20 @@ using Uol.PagSeguro.Service;
 
 namespace ReceiveAuthorizationNotification
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            String nofiticationCode = "B071CC714E044E04389CC4606FBEFAA3A1BD";
+            string nofiticationCode = "B071CC714E044E04389CC4606FBEFAA3A1BD";
 
             try
             {
-
                 ApplicationCredentials credentials = PagSeguroConfiguration.ApplicationCredentials(isSandbox);
 
-                // TODO: Substitute the code below with a notification code for your authorization. 
+                // TODO: Substitute the code below with a notification code for your authorization.
                 // You receive this notification code through a post on the URL that you specify
                 AuthorizationSummary authorization = NotificationService.CheckAuthorization(credentials, nofiticationCode);
 

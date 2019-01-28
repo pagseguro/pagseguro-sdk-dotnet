@@ -12,9 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using Uol.PagSeguro.Exception;
-using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Domain
 {
@@ -39,15 +37,15 @@ namespace Uol.PagSeguro.Domain
         {
             try
             {
-                this.AttributeDictionary[AppIdParameterName] = appId;
-                this.AttributeDictionary[AppKeyParameterName] = appKey;
+                AttributeDictionary[AppIdParameterName] = appId;
+                AttributeDictionary[AppKeyParameterName] = appKey;
             }
             catch (PagSeguroServiceException)
             {
                 throw new PagSeguroServiceException("Application Credentials not set correctly.");
             }
 
-            this.AttributeDictionary[AuthorizatinCodeParameterName] = !string.IsNullOrEmpty(authorizationCode) ? authorizationCode.ToString() : string.Empty;
+            AttributeDictionary[AuthorizatinCodeParameterName] = !string.IsNullOrEmpty(authorizationCode) ? authorizationCode.ToString() : string.Empty;
         }
 
         /// <summary>
@@ -55,14 +53,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public string AppId
         {
-            get
-            {
-                return this.AttributeDictionary[AppIdParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[AppIdParameterName] = value;
-            }
+            get => AttributeDictionary[AppIdParameterName];
+            set => AttributeDictionary[AppIdParameterName] = value;
         }
 
         /// <summary>
@@ -70,14 +62,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public string AppKey
         {
-            get
-            {
-                return this.AttributeDictionary[AppKeyParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[AppKeyParameterName] = value;
-            }
+            get => AttributeDictionary[AppKeyParameterName];
+            set => AttributeDictionary[AppKeyParameterName] = value;
         }
 
         /// <summary>
@@ -85,14 +71,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public string AuthorizationCode
         {
-            get
-            {
-                return this.AttributeDictionary[AuthorizatinCodeParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[AuthorizatinCodeParameterName] = value;
-            }
+            get => AttributeDictionary[AuthorizatinCodeParameterName];
+            set => AttributeDictionary[AuthorizatinCodeParameterName] = value;
         }
     }
 }

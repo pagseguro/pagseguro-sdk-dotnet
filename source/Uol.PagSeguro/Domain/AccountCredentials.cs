@@ -12,9 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-using Uol.PagSeguro.Util;
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -33,10 +30,10 @@ namespace Uol.PagSeguro.Domain
         /// <remarks>
         /// A PagSeguro account is identified by an email and a security token
         /// </remarks>
-        public  AccountCredentials(string email, string token)
+        public AccountCredentials(string email, string token)
         {
-            this.AttributeDictionary[EmailParameterName] = email;
-            this.AttributeDictionary[TokenParameterName] = token;
+            AttributeDictionary[EmailParameterName] = email;
+            AttributeDictionary[TokenParameterName] = token;
         }
 
         /// <summary>
@@ -44,14 +41,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public string Email
         {
-            get
-            {
-                return this.AttributeDictionary[EmailParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[EmailParameterName] = value;
-            }
+            get => AttributeDictionary[EmailParameterName];
+            set => AttributeDictionary[EmailParameterName] = value;
         }
 
         /// <summary>
@@ -59,14 +50,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public string Token
         {
-            get
-            {
-                return this.AttributeDictionary[TokenParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[TokenParameterName] = value;
-            }
+            get => AttributeDictionary[TokenParameterName];
+            set => AttributeDictionary[TokenParameterName] = value;
         }
     }
 }

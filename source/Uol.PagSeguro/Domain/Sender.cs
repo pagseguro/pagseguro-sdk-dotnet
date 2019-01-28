@@ -12,9 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using System.Collections.Generic;
-using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Domain
 {
@@ -23,7 +21,6 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class Sender
     {
-
         private IList<SenderDocument> _documents;
 
         /// <summary>
@@ -56,7 +53,7 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Sender hash code
         /// </summary>
-        public String Hash
+        public string Hash
         {
             get;
             set;
@@ -67,15 +64,15 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public IList<SenderDocument> Documents
         {
-            get 
-            { 
-                if(this._documents == null)
+            get
+            {
+                if (_documents == null)
                 {
-                    this._documents = new List<SenderDocument>();
+                    _documents = new List<SenderDocument>();
                 }
-                return this._documents;  
+                return _documents;
             }
-            set { this._documents = value; }
+            set => _documents = value;
         }
 
         internal Sender()
@@ -93,12 +90,12 @@ namespace Uol.PagSeguro.Domain
         /// <param name="value"></param>
         public Sender(string name, string email, string areaCode, string number, string type, string value)
         {
-            this.Name = name;
-            this.Email = email;
-            this.Phone = new Phone(areaCode, number);
-            this.Documents.Add(new SenderDocument(type,value));
+            Name = name;
+            Email = email;
+            Phone = new Phone(areaCode, number);
+            Documents.Add(new SenderDocument(type, value));
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the Sender class
         /// </summary>
@@ -107,16 +104,16 @@ namespace Uol.PagSeguro.Domain
         /// <param name="phone"></param>
         public Sender(string name, string email, Phone phone)
         {
-            this.Name = name;
-            this.Email = email;
-            this.Phone = phone;
+            Name = name;
+            Email = email;
+            Phone = phone;
         }
 
         /// <summary>
         /// Gets toString class
         /// </summary>
         /// <returns>string</returns>
-        public override string  ToString()
+        public override string ToString()
         {
             return "Sender [name=" + Name + ", email=" + Email + ", phone=" + Phone
                     + ", documents=" + Documents + "]";

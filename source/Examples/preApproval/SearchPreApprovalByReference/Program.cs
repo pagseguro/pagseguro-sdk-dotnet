@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
@@ -21,16 +20,15 @@ using Uol.PagSeguro.Service;
 
 namespace FindPreApprovalByReference
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // TODO: Substitute the code below with a valid preApproval reference for your transaction
-            String reference = "REF1234";
+            string reference = "REF1234";
             DateTime initialDate = new DateTime(2015, 10, 01, 00, 00, 0);
             DateTime finalDate = DateTime.Now;
             //DateTime finalDate = new DateTime(2015, 10, 15, 11, 35, 15);
@@ -40,10 +38,10 @@ namespace FindPreApprovalByReference
             try
             {
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
-                PreApprovalSearchResult result = 
+                PreApprovalSearchResult result =
                     PreApprovalSearchService.SearchByReference(
-                        credentials, 
-                        reference, 
+                        credentials,
+                        reference,
                         initialDate,
                         finalDate,
                         pageNumber,

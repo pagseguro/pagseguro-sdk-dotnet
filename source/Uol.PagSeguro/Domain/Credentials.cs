@@ -15,7 +15,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -27,15 +26,9 @@ namespace Uol.PagSeguro.Domain
 
         /// <summary>
         /// Derived classes should add all of the credential "parts" as name value pairs
-        /// in this dictionary. 
+        /// in this dictionary.
         /// </summary>
-        protected Dictionary<string, string> AttributeDictionary
-        {
-            get
-            {
-                return attributeDictionary;
-            }
-        }
+        protected Dictionary<string, string> AttributeDictionary => attributeDictionary;
 
         /// <summary>
         /// Returns a collection of name value pairs that compose this set of credentials
@@ -46,7 +39,7 @@ namespace Uol.PagSeguro.Domain
             get
             {
                 List<CredentialsNameValuePair> list = new List<CredentialsNameValuePair>(attributeDictionary.Count);
-                foreach(KeyValuePair<string, string> kv in attributeDictionary)
+                foreach (KeyValuePair<string, string> kv in attributeDictionary)
                 {
                     list.Add(new CredentialsNameValuePair(kv.Key, kv.Value));
                 }

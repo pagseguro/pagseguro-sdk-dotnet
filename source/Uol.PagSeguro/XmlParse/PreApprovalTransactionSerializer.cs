@@ -19,18 +19,17 @@ using Uol.PagSeguro.Domain;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PreApprovalTransactionSerializer
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="transaction"></param>
         internal static void Read(XmlReader reader, PreApprovalTransaction preApproval)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -43,7 +42,6 @@ namespace Uol.PagSeguro.XmlParse
 
             while (!reader.EOF)
             {
-
                 if (XMLParserUtils.IsEndElement(reader, SerializerHelper.PreApproval))
                 {
                     XMLParserUtils.SkipNode(reader);
@@ -57,30 +55,39 @@ namespace Uol.PagSeguro.XmlParse
                         case SerializerHelper.Code:
                             preApproval.Code = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.Date:
                             preApproval.Date = reader.ReadElementContentAsDateTime();
                             break;
+
                         case SerializerHelper.Reference:
                             preApproval.Reference = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.TransactionStatus:
-                                preApproval.Status = reader.ReadElementContentAsString();
+                            preApproval.Status = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.LastEventDate:
                             preApproval.LastEventDate = reader.ReadElementContentAsDateTime();
                             break;
+
                         case SerializerHelper.Name:
                             preApproval.Name = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.Tracker:
                             preApproval.Tracker = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.Charge:
                             preApproval.Charge = reader.ReadElementContentAsString();
                             break;
-                       case ItemListSerializer.Items:
+
+                        case ItemListSerializer.Items:
                             ItemListSerializer.Read(reader, preApproval.Items);
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

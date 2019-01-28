@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
-using Uol.PagSeguro.Constants;
 
 namespace Uol.PagSeguro.Domain.Direct
 {
@@ -23,7 +21,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <summary>
         /// Specifies the e- mail should will get paid
         /// </summary>
-        public String ReceiverEmail
+        public string ReceiverEmail
         {
             get;
             set;
@@ -57,9 +55,9 @@ namespace Uol.PagSeguro.Domain.Direct
         {
             get
             {
-                if (this._items == null)
+                if (_items == null)
                 {
-                    this._items = new List<Item>();
+                    _items = new List<Item>();
                 }
                 return _items;
             }
@@ -147,14 +145,14 @@ namespace Uol.PagSeguro.Domain.Direct
         {
             get
             {
-                if (this._metaData == null)
+                if (_metaData == null)
                 {
-                    this._metaData = new MetaData();
+                    _metaData = new MetaData();
                 }
-                return this._metaData;
+                return _metaData;
             }
 
-            set { this._metaData = value; }
+            set => _metaData = value;
         }
 
         /// <summary>
@@ -164,13 +162,13 @@ namespace Uol.PagSeguro.Domain.Direct
         {
             get
             {
-                if (this._parameter == null)
+                if (_parameter == null)
                 {
-                    this._parameter = new Parameter();
+                    _parameter = new Parameter();
                 }
-                return this._parameter;
+                return _parameter;
             }
-            set { this._parameter = value; }
+            set => _parameter = value;
         }
 
         /// <summary>
@@ -178,7 +176,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// </summary>
         public Checkout()
         {
-            this.Currency = Uol.PagSeguro.Constants.Currency.Brl;
+            Currency = Uol.PagSeguro.Constants.Currency.Brl;
         }
 
         /// <summary>
@@ -188,7 +186,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <param name="value"></param>
         public void AddMetaData(string key, string value)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value));
+            MetaData.Items.Add(new MetaDataItem(key, value));
         }
 
         /// <summary>
@@ -199,7 +197,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <param name="group"></param>
         public void AddMetaData(string key, string value, int? group)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value, group));
+            MetaData.Items.Add(new MetaDataItem(key, value, group));
         }
 
         /// <summary>
@@ -209,7 +207,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <param name="value"></param>
         public void AddParameter(string key, string value)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value));
+            Parameter.Items.Add(new ParameterItem(key, value));
         }
 
         /// <summary>
@@ -220,7 +218,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <param name="group"></param>
         public void AddIndexedParameter(string key, string value, int? group)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value, group));
+            Parameter.Items.Add(new ParameterItem(key, value, group));
         }
 
         /// <summary>
@@ -230,12 +228,11 @@ namespace Uol.PagSeguro.Domain.Direct
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name).Append("(");
-            builder.Append("Reference=").Append(this.Reference).Append(", ");
-            string email = this.Sender == null ? null : this.Sender.Email;
+            builder.Append(GetType().Name).Append("(");
+            builder.Append("Reference=").Append(Reference).Append(", ");
+            string email = Sender == null ? null : Sender.Email;
             builder.Append("Sender.Email=").Append(email).Append(")");
             return builder.ToString();
         }
     }
 }
-    

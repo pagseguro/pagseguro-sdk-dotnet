@@ -26,20 +26,17 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         ///  List of available metadata itens for send in checkout
         /// </summary>
-        public IList<MetaDataItem> Items 
-        { 
+        public IList<MetaDataItem> Items
+        {
             get
             {
-                if (this._items == null)
+                if (_items == null)
                 {
-                    this._items = new List<MetaDataItem>();
+                    _items = new List<MetaDataItem>();
                 }
-                return this._items;
+                return _items;
             }
-            set
-            {
-                this._items = value;
-            }
+            set => _items = value;
         }
     }
 }

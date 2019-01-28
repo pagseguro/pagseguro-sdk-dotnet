@@ -12,25 +12,23 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PreApprovalSearchResultSerializer
     {
-
         internal const string PreApprovalSearchResult = "preApprovalSearchResult";
         private const string Date = "date";
         private const string CurrentPage = "currentPage";
         private const string TotalPages = "totalPages";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="result"></param>
@@ -43,18 +41,16 @@ namespace Uol.PagSeguro.XmlParse
             }
 
             reader.ReadStartElement(PreApprovalSearchResultSerializer.PreApprovalSearchResult);
- 
+
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-
                 if (XMLParserUtils.IsEndElement(reader, PreApprovalSearchResultSerializer.PreApprovalSearchResult))
                 {
                     XMLParserUtils.SkipNode(reader);
                     break;
                 }
-                
 
                 if (reader.NodeType == XmlNodeType.Element)
                 {
@@ -63,15 +59,19 @@ namespace Uol.PagSeguro.XmlParse
                         case PreApprovalSearchResultSerializer.Date:
                             result.Date = reader.ReadElementContentAsDateTime();
                             break;
+
                         case PreApprovalSearchResultSerializer.CurrentPage:
                             result.CurrentPage = reader.ReadElementContentAsInt();
                             break;
+
                         case PreApprovalSearchResultSerializer.TotalPages:
                             result.TotalPages = reader.ReadElementContentAsInt();
                             break;
+
                         case PreApprovalSummaryListSerializer.PreApprovals:
                             PreApprovalSummaryListSerializer.Read(reader, result.PreApprovals);
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

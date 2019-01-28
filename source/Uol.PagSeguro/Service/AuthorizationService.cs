@@ -12,12 +12,9 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
-using System.Text;
 using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
@@ -31,9 +28,8 @@ using Uol.PagSeguro.XmlParse;
 
 namespace Uol.PagSeguro.Service
 {
-    class AuthorizationService
+    internal class AuthorizationService
     {
-
         /// <summary>
         /// Creates a new authorization request
         /// </summary>
@@ -41,24 +37,26 @@ namespace Uol.PagSeguro.Service
         /// <param name="authorizationRequest">PagSeguro AuthorizationRequest</param>
         /// <param name="onlyAuthorizationCode"></param>
         /// <returns></returns>
-        public static String CreateAuthorizationRequest(Credentials credentials, AuthorizationRequest authorizationRequest, Boolean onlyAuthorizationCode)
+        public static string CreateAuthorizationRequest(Credentials credentials, AuthorizationRequest authorizationRequest, bool onlyAuthorizationCode)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "AuthorizationService.CreateAuthorizationRequest() - begin"));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "AuthorizationService.CreateAuthorizationRequest() - begin"));
 
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.AuthorizarionRequestUri.AbsoluteUri, buildAuthorizationRequestUrl(credentials, authorizationRequest))) 
+                    PagSeguroConfiguration.AuthorizarionRequestUri.AbsoluteUri, buildAuthorizationRequestUrl(credentials, authorizationRequest)))
                 {
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
                         AuthorizationResponse authorization = new AuthorizationResponse();
                         AuthorizationSerializer.Read(reader, authorization);
 
-                        if (onlyAuthorizationCode) {
+                        if (onlyAuthorizationCode)
+                        {
                             return authorization.Code;
-                        } else {
+                        }
+                        else
+                        {
                             return BuildAuthorizationURL(authorization.Code);
                         }
                     }
@@ -75,13 +73,12 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        internal static String BuildAuthorizationURL(String code)
+        internal static string BuildAuthorizationURL(string code)
         {
-
             QueryStringBuilder builder = new QueryStringBuilder("{URL}?code={code}");
             builder.ReplaceValue("{URL}", PagSeguroConfiguration.AuthorizarionUri.AbsoluteUri);
             builder.ReplaceValue("{code}", code);
@@ -90,7 +87,7 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="code"></param>
@@ -107,7 +104,7 @@ namespace Uol.PagSeguro.Service
             {
                 builder.Append(pair.Key, pair.Value.ToString(CultureInfo.InvariantCulture));
             }
- 
+
             return HttpUtility.UrlDecode(builder.ToString());
         }
     }

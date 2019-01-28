@@ -19,18 +19,17 @@ using Uol.PagSeguro.Domain;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class TransactionSummarySerializer
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="transaction"></param>
         internal static void Read(XmlReader reader, TransactionSummary transaction)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -55,44 +54,57 @@ namespace Uol.PagSeguro.XmlParse
                         case SerializerHelper.Code:
                             transaction.Code = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.Date:
                             transaction.Date = reader.ReadElementContentAsDateTime();
                             break;
+
                         case SerializerHelper.Reference:
                             transaction.Reference = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.TransactionType:
                             transaction.TransactionType = reader.ReadElementContentAsInt();
                             break;
+
                         case SerializerHelper.TransactionStatus:
                             transaction.TransactionStatus = reader.ReadElementContentAsInt();
                             break;
+
                         case SerializerHelper.PaymentLink:
                             transaction.PaymentLink = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.GrossAmount:
                             transaction.GrossAmount = reader.ReadElementContentAsDecimal();
                             break;
+
                         case SerializerHelper.DiscountAmount:
                             transaction.DiscountAmount = reader.ReadElementContentAsDecimal();
                             break;
+
                         case SerializerHelper.FeeAmount:
                             transaction.FeeAmount = reader.ReadElementContentAsDecimal();
                             break;
+
                         case SerializerHelper.NetAmount:
                             transaction.NetAmount = reader.ReadElementContentAsDecimal();
                             break;
+
                         case SerializerHelper.ExtraAmount:
                             transaction.ExtraAmount = reader.ReadElementContentAsDecimal();
                             break;
+
                         case SerializerHelper.LastEventDate:
                             transaction.LastEventDate = reader.ReadElementContentAsDateTime();
                             break;
+
                         case PaymentMethodSerializer.PaymentMethod:
                             PaymentMethod paymentMethod = new PaymentMethod();
                             PaymentMethodSerializer.Read(reader, paymentMethod);
                             transaction.PaymentMethod = paymentMethod;
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

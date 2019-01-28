@@ -19,11 +19,10 @@ using System.Xml;
 namespace Uol.PagSeguro.Util
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PagSeguroUtil
     {
-
         /// <summary>
         /// Truncate a String and add final end chars to them
         /// </summary>
@@ -34,7 +33,10 @@ namespace Uol.PagSeguro.Util
         public static string TruncateValue(string value, int limit, string endChars)
         {
             if (!value.Equals(null) && value.Length > limit)
+            {
                 value = value.Substring(0, limit - endChars.Length) + endChars;
+            }
+
             return value;
         }
 
@@ -47,7 +49,7 @@ namespace Uol.PagSeguro.Util
         {
             return value.Replace("( +)", " ").Trim();
         }
-        
+
         /// <summary>
         /// Format a String dropping extra spaces and truncate value
         /// </summary>
@@ -65,7 +67,7 @@ namespace Uol.PagSeguro.Util
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetOnlyNumbers(String value)
+        public static string GetOnlyNumbers(string value)
         {
             return Regex.Replace(value, @"\D+", string.Empty);
         }
@@ -75,7 +77,7 @@ namespace Uol.PagSeguro.Util
         /// </summary>
         /// <param name="numeric"></param>
         /// <returns></returns>
-        public static string DecimalFormat(decimal numeric) 
+        public static string DecimalFormat(decimal numeric)
         {
             return string.Format("{0:0.00}", numeric).Replace(",", ".");
         }
@@ -85,7 +87,7 @@ namespace Uol.PagSeguro.Util
         /// </summary>
         /// <param name="numeric"></param>
         /// <returns></returns>
-        /// 
+        ///
         public static string DecimalFormat(double numeric)
         {
             return string.Format("{0:0.00}", numeric).Replace(",", ".");
@@ -112,7 +114,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>

@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
@@ -41,7 +40,6 @@ namespace Uol.PagSeguro.XmlParse
         /// <param name="address"></param>
         internal static void Read(XmlReader reader, Address address)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -66,27 +64,35 @@ namespace Uol.PagSeguro.XmlParse
                         case AddressSerializer.Country:
                             address.Country = reader.ReadElementContentAsString();
                             break;
+
                         case AddressSerializer.State:
                             address.State = reader.ReadElementContentAsString();
                             break;
+
                         case AddressSerializer.City:
                             address.City = reader.ReadElementContentAsString();
                             break;
+
                         case AddressSerializer.District:
                             address.District = reader.ReadElementContentAsString();
                             break;
+
                         case AddressSerializer.PostalCode:
                             address.PostalCode = reader.ReadElementContentAsString();
                             break;
+
                         case AddressSerializer.Street:
                             address.Street = reader.ReadElementContentAsString();
                             break;
+
                         case AddressSerializer.Number:
                             address.Number = reader.ReadElementContentAsString();
                             break;
+
                         case AddressSerializer.Complement:
                             address.Complement = reader.ReadElementContentAsString();
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

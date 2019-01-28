@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Collections.Generic;
 using System.Xml;
 using Uol.PagSeguro.Domain;
@@ -33,7 +32,6 @@ namespace Uol.PagSeguro.XmlParse
         /// <param name="errors"></param>
         internal static void Read(XmlReader reader, IList<ServiceError> errors)
         {
-
             errors.Clear();
 
             if (reader.IsEmptyElement)
@@ -59,6 +57,7 @@ namespace Uol.PagSeguro.XmlParse
                         case ErrorSerializer.Error:
                             errors.Add(ErrorSerializer.Read(reader));
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

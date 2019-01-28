@@ -22,16 +22,15 @@ using Uol.PagSeguro.Service;
 
 namespace FindAuthorizationByCode
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // TODO: Substitute the code below with a valid preApproval code for your transaction
-            String authorizationCode = "FD455B5830A54DD58669D361932870E4";
+            string authorizationCode = "FD455B5830A54DD58669D361932870E4";
 
             try
             {
@@ -41,8 +40,8 @@ namespace FindAuthorizationByCode
 
                 Console.WriteLine(result);
                 Console.ReadKey();
-            } 
-            catch (WebException exception) 
+            }
+            catch (WebException exception)
             {
                 Console.WriteLine(exception.Message + "\n");
                 Console.ReadKey();

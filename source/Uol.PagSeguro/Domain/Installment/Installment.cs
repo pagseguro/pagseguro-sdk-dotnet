@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Uol.PagSeguro.Domain.Installment
 {
     public class Installment : IComparable<Installment>
     {
-
         /// <summary>
         /// Credit card brand
         /// </summary>
-        public String cardBrand
+        public string cardBrand
         {
             get;
             set;
@@ -19,7 +17,7 @@ namespace Uol.PagSeguro.Domain.Installment
         /// <summary>
         /// Quantity of installments
         /// </summary>
-        public Int32 quantity
+        public int quantity
         {
             get;
             set;
@@ -28,16 +26,16 @@ namespace Uol.PagSeguro.Domain.Installment
         /// <summary>
         /// Value of each installment
         /// </summary>
-        public Decimal amount
+        public decimal amount
         {
             get;
             set;
         }
 
         /// <summary>
-        /// Total value of installments 
+        /// Total value of installments
         /// </summary>
-        public Decimal totalAmount
+        public decimal totalAmount
         {
             get;
             set;
@@ -46,7 +44,7 @@ namespace Uol.PagSeguro.Domain.Installment
         /// <summary>
         /// Indicates if is an interest free transaction
         /// </summary>
-        public Boolean interestFree
+        public bool interestFree
         {
             get;
             set;
@@ -64,8 +62,8 @@ namespace Uol.PagSeguro.Domain.Installment
         {
         }
 
-        public String ToString() {
-
+        public string ToString()
+        {
             StringBuilder builder = new StringBuilder();
 
             builder.Append("Installment(");
@@ -78,7 +76,6 @@ namespace Uol.PagSeguro.Domain.Installment
 
             return builder.ToString();
         }
-
 
         int IComparable<Installment>.CompareTo(Installment other)
         {

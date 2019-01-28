@@ -21,7 +21,6 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class AcceptedPaymentMethods
     {
-
         private List<AcceptedPayments> _config;
 
         /// <summary>
@@ -35,7 +34,7 @@ namespace Uol.PagSeguro.Domain
                 {
                     _config = new List<AcceptedPayments>();
                 }
-                return this._config;
+                return _config;
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Domain
 {
@@ -9,10 +8,10 @@ namespace Uol.PagSeguro.Domain
     {
         /// <summary>
         /// </summary>
-        public string Charge 
-        { 
-            get; 
-            set; 
+        public string Charge
+        {
+            get;
+            set;
         }
 
         /// <summary>

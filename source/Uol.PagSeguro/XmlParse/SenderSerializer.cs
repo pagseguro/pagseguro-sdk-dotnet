@@ -12,14 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class SenderSerializer
     {
@@ -29,13 +28,12 @@ namespace Uol.PagSeguro.XmlParse
         private const string Email = "email";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="sender"></param>
         internal static void Read(XmlReader reader, Sender sender)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -60,14 +58,17 @@ namespace Uol.PagSeguro.XmlParse
                         case SenderSerializer.Name:
                             sender.Name = reader.ReadElementContentAsString();
                             break;
+
                         case SenderSerializer.Email:
                             sender.Email = reader.ReadElementContentAsString();
                             break;
+
                         case PhoneSerializer.Phone:
                             Phone phone = new Phone();
                             PhoneSerializer.Read(reader, phone);
                             sender.Phone = phone;
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

@@ -12,9 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-using Uol.PagSeguro.Util;
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -33,7 +30,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="description"></param>
         /// <param name="quantity"></param>
         /// <param name="amount"></param>
-        public Item(string id, string description, int quantity, decimal amount) : 
+        public Item(string id, string description, int quantity, decimal amount) :
             this(id, description, quantity, amount, null, null)
         {
         }
@@ -75,12 +72,12 @@ namespace Uol.PagSeguro.Domain
         /// <param name="shippingCost"></param>
         public Item(string id, string description, int quantity, decimal amount, long? weight, decimal? shippingCost)
         {
-            this.Id = id;
-            this.Description = description;
-            this.Quantity = quantity;
-            this.Amount = amount;
-            this.Weight = weight;
-            this.ShippingCost = shippingCost;
+            Id = id;
+            Description = description;
+            Quantity = quantity;
+            Amount = amount;
+            Weight = weight;
+            ShippingCost = shippingCost;
         }
 
         /// <summary>
@@ -111,7 +108,7 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Product unit price 
+        /// Product unit price
         /// </summary>
         public decimal Amount
         {

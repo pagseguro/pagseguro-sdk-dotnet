@@ -20,7 +20,7 @@ namespace Uol.PagSeguro.Domain
     /// <summary>
     /// Represents a summary of a PagSeguro pre-approval transaction, typically returned by search services.
     /// </summary>
-    public class PreApprovalSummary 
+    public class PreApprovalSummary
     {
         internal PreApprovalSummary()
         {
@@ -48,7 +48,7 @@ namespace Uol.PagSeguro.Domain
         /// Reference code
         /// </summary>
         /// <remarks>
-        /// You can use the reference code to store an identifier so you can 
+        /// You can use the reference code to store an identifier so you can
         /// associate the PagSeguro transaction to a transaction in your system.
         /// </remarks>
         public string Reference
@@ -112,11 +112,11 @@ namespace Uol.PagSeguro.Domain
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Code=").Append(this.Code).Append(", ");
-            builder.Append("Date=").Append(this.Date).Append(", ");
-            builder.Append("Reference=").Append(this.Reference);
+            builder.Append("Code=").Append(Code).Append(", ");
+            builder.Append("Date=").Append(Date).Append(", ");
+            builder.Append("Reference=").Append(Reference);
             builder.Append(')');
             return builder.ToString();
         }

@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -55,9 +54,9 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public PaymentMethodConfigItem(string key, double value, string group)
         {
-            this.Key = key;
-            this.Value = value;
-            this.Group = group;
+            Key = key;
+            Value = value;
+            Group = group;
         }
     }
 }

@@ -12,10 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Uol.PagSeguro.Constants
 {
     /// <summary>
@@ -52,5 +48,4 @@ namespace Uol.PagSeguro.Constants
         /// </summary>
         public const string DIRECT_PAYMENT = "DIRECT_PAYMENT";
     }
-
 }

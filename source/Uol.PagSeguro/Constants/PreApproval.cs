@@ -14,7 +14,6 @@
 
 namespace Uol.PagSeguro.Constants.PreApproval
 {
-
     /// <summary>
     /// Defines a list of known pre-approval charge types.
     /// </summary>
@@ -28,6 +27,7 @@ namespace Uol.PagSeguro.Constants.PreApproval
         /// Auto
         /// </summary>
         public const string Auto = "auto";
+
         /// <summary>
         /// Manual
         /// </summary>

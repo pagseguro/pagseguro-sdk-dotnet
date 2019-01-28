@@ -13,32 +13,30 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Constants;
+using Uol.PagSeguro.Constants.PreApproval;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
-using Uol.PagSeguro.Constants.PreApproval;
-using System.Diagnostics;
 
 namespace CreatePaymentWithPreApproval
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // Instantiate a new payment request
-            PaymentRequest payment = new PaymentRequest();
-
-            // Sets the currency
-            payment.Currency = Currency.Brl;
+            PaymentRequest payment = new PaymentRequest
+            {
+                // Sets the currency
+                Currency = Currency.Brl
+            };
 
             // Add an item for this payment request
             payment.Items.Add(new Item("0001", "Notebook Prata", 1, 2430.00m));
-
 
             // Add another item for this payment request
             payment.Items.Add(new Item("0002", "Notebook Rosa", 2, 150.99m));
@@ -47,13 +45,14 @@ namespace CreatePaymentWithPreApproval
             payment.Reference = "REF1234";
 
             // Sets shipping information for this payment request
-            payment.Shipping = new Shipping();
-            payment.Shipping.ShippingType = ShippingType.Sedex;
+            payment.Shipping = new Shipping
+            {
+                ShippingType = ShippingType.Sedex,
 
-            //Passando valor para ShippingCost
-            payment.Shipping.Cost = 10.00m;
+                //Passando valor para ShippingCost
+                Cost = 10.00m,
 
-            payment.Shipping.Address = new Address(
+                Address = new Address(
                 "BRA",
                 "SP",
                 "Sao Paulo",
@@ -62,7 +61,8 @@ namespace CreatePaymentWithPreApproval
                 "Av. Brig. Faria Lima",
                 "1384",
                 "5o andar"
-            );
+            )
+            };
 
             // Sets your customer information.
             payment.Sender = new Sender(

@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
@@ -21,23 +20,21 @@ using Uol.PagSeguro.Service;
 
 namespace ReceiveNotification
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             try
             {
-
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
-                // TODO: Substitute the code below with a notification code for your transaction. 
-                // You receive this notification code through a post on the URL that you specify in 
+                // TODO: Substitute the code below with a notification code for your transaction.
+                // You receive this notification code through a post on the URL that you specify in
                 // this page: https://pagseguro.uol.com.br/integracao/notificacao-de-transacoes.jhtml
-                
+
                 // Use notificationType to check if is PreApproval (preApproval or transaction)
                 Transaction transaction = NotificationService.CheckTransaction(credentials, "766B9C-AD4B044B04DA-77742F5FA653-E1AB24");
 

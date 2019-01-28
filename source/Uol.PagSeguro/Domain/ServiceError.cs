@@ -35,14 +35,14 @@ namespace Uol.PagSeguro.Domain
         /// <param name="message"></param>
         public ServiceError(string code, string message)
         {
-            this.Code = code;
-            this.Message = message;
+            Code = code;
+            Message = message;
         }
 
         private ServiceError(SerializationInfo info, StreamingContext context)
         {
-            this.Code = info.GetString(ServiceError.CodeField);
-            this.Message = info.GetString(ServiceError.MessageField);
+            Code = info.GetString(ServiceError.CodeField);
+            Message = info.GetString(ServiceError.MessageField);
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace Uol.PagSeguro.Domain
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue(ServiceError.CodeField, this.Code);
-            info.AddValue(ServiceError.MessageField, this.Message);
+            info.AddValue(ServiceError.CodeField, Code);
+            info.AddValue(ServiceError.MessageField, Message);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace Uol.PagSeguro.Domain
         /// <returns></returns>
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder(this.Code);
+            StringBuilder builder = new StringBuilder(Code);
             builder.Append("=");
-            builder.Append(this.Message);
+            builder.Append(Message);
             return builder.ToString();
         }
     }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Uol.PagSeguro.Domain.Direct
+﻿namespace Uol.PagSeguro.Domain.Direct
 {
     /// <summary>
     /// Represents the holder of the credit card payment

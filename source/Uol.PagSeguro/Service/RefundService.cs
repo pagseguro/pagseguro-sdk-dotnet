@@ -12,10 +12,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using System.Globalization;
 using System.Net;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
@@ -26,13 +24,11 @@ using Uol.PagSeguro.XmlParse;
 
 namespace Uol.PagSeguro.Service
 {
-
     /// <summary>
     /// Encapsulates web service calls regarding PagSeguro Cancels
     /// </summary>
     public static class RefundService
     {
-
         /// <summary>
         /// Request a transaction refund from transaction code
         /// </summary>
@@ -41,32 +37,32 @@ namespace Uol.PagSeguro.Service
         /// <returns><c cref="T:Uol.PagSeguro.CancelRequestResponse">Result</c></returns>
         public static RequestResponse RequestRefund(Credentials credentials, string transactionCode, decimal? refundValue = null)
         {
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "RefundService.Register(transactionCode = {0}) - begin", transactionCode));
 
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "RefundService.Register(transactionCode = {0}) - begin", transactionCode));
-            
-            try {
-                using(HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
+            try
+            {
+                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.RefundUri.AbsoluteUri, BuildRefundURL(credentials, transactionCode, refundValue)))
                 {
-            
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
-
                         RequestResponse refund = new RequestResponse();
                         RefundSerializer.Read(reader, refund);
-                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "RefundService.Register({0}) - end", refund.ToString()));
+                        PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "RefundService.Register({0}) - end", refund.ToString()));
                         return refund;
                     }
                 }
-            } catch (WebException exception) {
+            }
+            catch (WebException exception)
+            {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "RefundService.Register() - error {0}", pse));
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "RefundService.Register() - error {0}", pse));
                 throw pse;
             }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials">PagSeguro credentials</param>
         /// <param name="transactionCode">Transaction Code</param>
@@ -78,12 +74,12 @@ namespace Uol.PagSeguro.Service
 
             builder.EncodeCredentialsAsQueryString(credentials);
             builder.Append("transactionCode", transactionCode);
-            if (refundValue.HasValue) {
+            if (refundValue.HasValue)
+            {
                 builder.Append("refundValue", PagSeguroUtil.DecimalFormat(refundValue.Value));
             }
 
             return builder.ToString();
         }
-
-     }
+    }
 }

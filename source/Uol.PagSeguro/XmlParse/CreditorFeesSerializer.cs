@@ -12,14 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class CreditorFeesSerializer
     {
@@ -29,13 +28,12 @@ namespace Uol.PagSeguro.XmlParse
         private const string IntermediationFeeAmount = "intermediationFeeAmount";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="item"></param>
         internal static void Read(XmlReader reader, CreditorFees creditorFees)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -60,9 +58,11 @@ namespace Uol.PagSeguro.XmlParse
                         case CreditorFeesSerializer.IntermediationRateAmount:
                             creditorFees.intermediationRateAmount = reader.ReadElementContentAsDecimal();
                             break;
+
                         case CreditorFeesSerializer.IntermediationFeeAmount:
                             creditorFees.intermediationFeeAmount = reader.ReadElementContentAsDecimal();
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

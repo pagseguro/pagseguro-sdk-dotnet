@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Uol.PagSeguro.Service;
-
-namespace Uol.PagSeguro.Domain.Direct
+﻿namespace Uol.PagSeguro.Domain.Direct
 {
     public class CreditCardCheckout : Checkout
     {
-
         /// <summary>
         /// Credit Card Token
         /// </summary>
-        public String Token
+        public string Token
         {
             get;
             set;
@@ -27,7 +21,7 @@ namespace Uol.PagSeguro.Domain.Direct
         }
 
         /// <summary>
-        /// Holder 
+        /// Holder
         /// </summary>
         public Holder Holder
         {
@@ -58,7 +52,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// </summary>
         public CreditCardCheckout()
         {
-            this.PaymentMethod = "CreditCard";
+            PaymentMethod = "CreditCard";
         }
     }
 }

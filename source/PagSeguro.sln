@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uol.PagSeguro", "Uol.PagSeguro\Uol.PagSeguro.csproj", "{BABC5658-6AFD-4F8E-81F1-434553663D99}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocExamples", "Examples\DocExamples\DocExamples.csproj", "{60D682C1-2AC5-4162-B968-0835A58FED6C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiveNotification", "Examples\ReceiveNotification\ReceiveNotification.csproj", "{E4BC5507-CF38-40BE-8D63-9CB819288CC3}"
@@ -67,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchPreApprovalByReferenc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchPreApprovalByNotification", "Examples\preApproval\SearchPreApprovalByNotification\SearchPreApprovalByNotification.csproj", "{14304A81-B823-4487-85CF-68C6E4B6C7B2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uol.PagSeguro", "Uol.PagSeguro\Uol.PagSeguro.csproj", "{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,16 +77,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Release|x86.ActiveCfg = Release|Any CPU
 		{60D682C1-2AC5-4162-B968-0835A58FED6C}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{60D682C1-2AC5-4162-B968-0835A58FED6C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{60D682C1-2AC5-4162-B968-0835A58FED6C}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -359,6 +349,18 @@ Global
 		{14304A81-B823-4487-85CF-68C6E4B6C7B2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{14304A81-B823-4487-85CF-68C6E4B6C7B2}.Release|x86.ActiveCfg = Release|Any CPU
 		{14304A81-B823-4487-85CF-68C6E4B6C7B2}.Release|x86.Build.0 = Release|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Debug|x86.Build.0 = Debug|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Release|x86.ActiveCfg = Release|Any CPU
+		{852D2EFD-6ACD-40DB-B6D3-0B4ABAB57E29}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

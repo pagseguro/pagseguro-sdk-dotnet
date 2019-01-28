@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace Uol.PagSeguro.Domain.Direct
 {
-
     /// <summary>
     /// Represents the installment of a credit card payment
     /// </summary>
-    public class Installment {
-
+    public class Installment
+    {
         /// <summary>
         /// Quantity of installments
         /// </summary>
@@ -47,7 +44,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// </summary>
         /// <param name="quantity"></param>
         /// <param name="value"></param>
-        public Installment(int quantity, decimal value) : this (quantity, value, new int()) { }
+        public Installment(int quantity, decimal value) : this(quantity, value, new int()) { }
 
         /// <summary>
         /// Initializes a new instance of the Installment Class
@@ -55,18 +52,19 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <param name="quantity"></param>
         /// <param name="value"></param>
         /// <param name="noInterestInstallmentQuantity"></param>
-        public Installment(int quantity, decimal value, int noInterestInstallmentQuantity) 
-        {   
-                Quantity = quantity;
-                Value = value;
-                NoInterestInstallmentQuantity = noInterestInstallmentQuantity;
+        public Installment(int quantity, decimal value, int noInterestInstallmentQuantity)
+        {
+            Quantity = quantity;
+            Value = value;
+            NoInterestInstallmentQuantity = noInterestInstallmentQuantity;
         }
 
         /// <summary>
         /// Returns a string that represents the current object
         /// </summary>
         /// <returns></returns>
-        public String ToString() {
+        public string ToString()
+        {
             StringBuilder builder = new StringBuilder();
             builder.Append("Installment(");
             builder.Append("quantity=" + Quantity);
@@ -75,6 +73,5 @@ namespace Uol.PagSeguro.Domain.Direct
             builder.Append(")");
             return builder.ToString();
         }
-
     }
 }

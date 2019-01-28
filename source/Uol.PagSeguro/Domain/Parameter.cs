@@ -26,7 +26,7 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         ///  List of available parameter item for send in checkout
         /// </summary>
-        public IList<ParameterItem> Items 
+        public IList<ParameterItem> Items
         {
             get
             {
@@ -34,7 +34,7 @@ namespace Uol.PagSeguro.Domain
                 {
                     _items = new List<ParameterItem>();
                 }
-                return this._items;
+                return _items;
             }
         }
     }

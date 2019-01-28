@@ -17,12 +17,12 @@ using System.Xml;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class XMLParserUtils
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         internal static void SkipNode(XmlReader reader)
@@ -32,7 +32,7 @@ namespace Uol.PagSeguro.XmlParse
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="name"></param>
@@ -45,7 +45,7 @@ namespace Uol.PagSeguro.XmlParse
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         internal static void SkipElement(XmlReader reader)

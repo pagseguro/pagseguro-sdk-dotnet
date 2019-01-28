@@ -12,14 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PaymentRequestResponseSerializer
     {
@@ -27,13 +26,12 @@ namespace Uol.PagSeguro.XmlParse
         private const string Date = "date";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="paymentResponse"></param>
         internal static void Read(XmlReader reader, PaymentRequestResponse paymentResponse)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -59,9 +57,11 @@ namespace Uol.PagSeguro.XmlParse
                         case PaymentRequestResponseSerializer.Date:
                             paymentResponse.RegistrationDate = reader.ReadElementContentAsDateTime();
                             break;
+
                         case PaymentRequestResponseSerializer.Code:
                             paymentResponse.Code = reader.ReadElementContentAsString();
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

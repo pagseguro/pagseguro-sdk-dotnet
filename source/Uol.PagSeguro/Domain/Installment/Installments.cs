@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Uol.PagSeguro.Domain.Installment
 {
@@ -11,12 +8,12 @@ namespace Uol.PagSeguro.Domain.Installment
 
         public List<Installment> Get()
         {
-            return this.installments;
+            return installments;
         }
 
         public void Add(Installment installment)
         {
-            this.installments.Add(installment);
+            installments.Add(installment);
         }
     }
 }

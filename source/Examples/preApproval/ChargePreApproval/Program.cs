@@ -13,28 +13,27 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
+using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
-using Uol.PagSeguro.Constants;
 
 namespace ChargePreApproval
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // Instantiate a new payment request
-            PaymentRequest payment = new PaymentRequest();
-
-            // Sets the currency
-            payment.Currency = Currency.Brl;
+            PaymentRequest payment = new PaymentRequest
+            {
+                // Sets the currency
+                Currency = Currency.Brl
+            };
 
             // Add an item for this preApproval payment request
             payment.Items.Add(new Item("0001", "Seguro contra roubo do Notebook", 1, 10.00m));
@@ -48,7 +47,7 @@ namespace ChargePreApproval
             try
             {
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
-                String result = PreApprovalService.ChargePreApproval(credentials, payment);
+                string result = PreApprovalService.ChargePreApproval(credentials, payment);
 
                 Console.WriteLine(result);
                 Console.ReadKey();

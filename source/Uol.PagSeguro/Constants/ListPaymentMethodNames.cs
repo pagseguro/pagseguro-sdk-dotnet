@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -54,32 +53,32 @@ namespace Uol.PagSeguro.Domain
         /// Boleto
         /// </summary>
         public const string Boleto = "BOLETO";
-        
+
         /// <summary>
         /// Visa brand
         /// </summary>
         public const string Visa = "VISA";
-        
+
         /// <summary>
         /// Mastercard brand
         /// </summary>
         public const string Mastercard = "MASTERCARD";
-        
+
         /// <summary>
         /// Amex brand
         /// </summary>
         public const string Amex = "AMEX";
-        
+
         /// <summary>
         /// Diners brand
         /// </summary>
         public const string Diners = "DINERS";
-        
+
         /// <summary>
         /// Hipercard brand
         /// </summary>
         public const string Hipercard = "HIPERCARD";
-        
+
         /// <summary>
         /// Aura brand
         /// </summary>

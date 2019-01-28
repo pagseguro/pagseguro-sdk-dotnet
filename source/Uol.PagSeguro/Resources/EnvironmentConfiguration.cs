@@ -13,19 +13,13 @@
 //   limitations under the License.
 
 using System;
-using System.Xml;
-using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.XmlParse;
-using System.Reflection;
-using System.Diagnostics;
-using System.Web;
 using System.Text.RegularExpressions;
-using Uol.PagSeguro.Exception;
+using System.Xml;
 
 namespace Uol.PagSeguro.Resources
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public static class EnvironmentConfiguration
     {
@@ -33,11 +27,10 @@ namespace Uol.PagSeguro.Resources
         private const string sandboxUrl = "sandbox.pagseguro.uol";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static void ChangeEnvironment(bool sandbox)
         {
-
             string urlXmlConfiguration = PagSeguroConfiguration.UrlXmlConfiguration;
 
             XmlDocument xml = new XmlDocument();
@@ -51,7 +44,6 @@ namespace Uol.PagSeguro.Resources
                 {
                     for (int i = 0; i < elemList.Count; i++)
                     {
-
                         Match match = Regex.Match(elemList[i].InnerText, sandboxUrl);
 
                         if (!match.Success)

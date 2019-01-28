@@ -16,14 +16,14 @@ using System;
 using System.Web;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Service;
 using Uol.PagSeguro.Resources;
+using Uol.PagSeguro.Service;
 
 namespace DocExamples
 {
-    class Program
+    internal class Program
     {
-        static void SenderExample()
+        private static void SenderExample()
         {
             PaymentRequest paymentRequest = new PaymentRequest();
 
@@ -31,7 +31,7 @@ namespace DocExamples
             // na transação, normalmente o comprador
             Sender sender =
                 new Sender(
-                    "José Comprador",       // Nome 
+                    "José Comprador",       // Nome
                     "comprador@uol.com.br", // Email
                     new Phone("11", "56273440") // Telefone
                     );
@@ -47,32 +47,37 @@ namespace DocExamples
                     Console.WriteLine(paymentRequest.Sender.Phone.Number);
                 }
             }
-
         }
 
-        static void PhoneExample()
+        private static void PhoneExample()
         {
             Phone phone = new Phone("11", "56273440");
         }
 
-        static void AddItemExample()
+        private static void AddItemExample()
         {
             PaymentRequest paymentRequest = new PaymentRequest();
             paymentRequest.Items.Add(new Item("0001", "Notebook", 1, 2430.00m));
         }
 
-        static void ShippingTypeExample()
+        private static void ShippingTypeExample()
         {
-            PaymentRequest paymentRequest = new PaymentRequest();
-            paymentRequest.Shipping = new Shipping();
-            paymentRequest.Shipping.ShippingType = ShippingType.Pac;
+            PaymentRequest paymentRequest = new PaymentRequest
+            {
+                Shipping = new Shipping
+                {
+                    ShippingType = ShippingType.Pac
+                }
+            };
         }
 
-        static void ShippingAddressExample()
+        private static void ShippingAddressExample()
         {
-            PaymentRequest paymentRequest = new PaymentRequest();
-            paymentRequest.Shipping = new Shipping();
-            paymentRequest.Shipping.Address = new Address(
+            PaymentRequest paymentRequest = new PaymentRequest
+            {
+                Shipping = new Shipping
+                {
+                    Address = new Address(
                 "BRA",
                 "SP",
                 "São Paulo",
@@ -80,35 +85,45 @@ namespace DocExamples
                 "01452002",
                 "Av. Brig. Faria Lima",
                 "1384",
-                "5o. Andar");
+                "5o. Andar")
+                }
+            };
         }
 
-        static void ExtraAmountExample()
+        private static void ExtraAmountExample()
         {
-            PaymentRequest paymentRequest = new PaymentRequest();
-            paymentRequest.ExtraAmount = 15.79m;
+            PaymentRequest paymentRequest = new PaymentRequest
+            {
+                ExtraAmount = 15.79m
+            };
         }
 
-        static void ReferenceExample()
+        private static void ReferenceExample()
         {
-            PaymentRequest paymentRequest = new PaymentRequest();
-            paymentRequest.Reference = "REF1234";
+            PaymentRequest paymentRequest = new PaymentRequest
+            {
+                Reference = "REF1234"
+            };
         }
 
-        static void RedirectUriExample()
+        private static void RedirectUriExample()
         {
-            PaymentRequest paymentRequest = new PaymentRequest();
-            paymentRequest.RedirectUri = new Uri("http://lojamodelo.com.br/conclusao.html");
+            PaymentRequest paymentRequest = new PaymentRequest
+            {
+                RedirectUri = new Uri("http://lojamodelo.com.br/conclusao.html")
+            };
         }
 
-        static void MaxAgeUsesExample()
+        private static void MaxAgeUsesExample()
         {
-            PaymentRequest paymentRequest = new PaymentRequest();
-            paymentRequest.MaxAge = 2880; // 2 dias  
-            paymentRequest.MaxUses = 15; // 15 vezes
+            PaymentRequest paymentRequest = new PaymentRequest
+            {
+                MaxAge = 2880, // 2 dias
+                MaxUses = 15 // 15 vezes
+            };
         }
 
-        static void RegisterExample()
+        private static void RegisterExample()
         {
             PaymentRequest paymentRequest = new PaymentRequest();
             // Preencher propriedades da requisição do pagamento aqui
@@ -127,7 +142,7 @@ namespace DocExamples
             //Response.Redirect(paymentRedirectUri.ToString());
         }
 
-        static void RequestExample(HttpRequest Request)
+        private static void RequestExample(HttpRequest Request)
         {
             bool isSandbox = false;
 
@@ -148,7 +163,7 @@ namespace DocExamples
             }
         }
 
-        static void SearchByCodeExample()
+        private static void SearchByCodeExample()
         {
             bool isSandbox = false;
 
@@ -165,14 +180,14 @@ namespace DocExamples
             Console.WriteLine(transaction.GrossAmount);
         }
 
-        static void PaymentMethodExample(Transaction transaction)
+        private static void PaymentMethodExample(Transaction transaction)
         {
             PaymentMethod paymentMethod = transaction.PaymentMethod;
             int code = transaction.PaymentMethod.PaymentMethodCode;
             int type = transaction.PaymentMethod.PaymentMethodType;
         }
 
-        static void AddressExample()
+        private static void AddressExample()
         {
             Address address =
                 new Address(
@@ -186,26 +201,29 @@ namespace DocExamples
                     "5o. Andar");
         }
 
-        static void Addres2sExample()
+        private static void Addres2sExample()
         {
-            Address address = new Address();
-            address.Country = "BRA";
-            address.State = "SP";
-            address.City = "São Paulo";
-            address.District = "Jardim Paulistano";
-            address.PostalCode = "01452002";
-            address.Street = "Av. Brig. Faria Lima";
-            address.Number = "1384";
-            address.Complement = "5o. Andar";
+            Address address = new Address
+            {
+                Country = "BRA",
+                State = "SP",
+                City = "São Paulo",
+                District = "Jardim Paulistano",
+                PostalCode = "01452002",
+                Street = "Av. Brig. Faria Lima",
+                Number = "1384",
+                Complement = "5o. Andar"
+            };
         }
 
-        static void ShippingExample()
+        private static void ShippingExample()
         {
             PaymentRequest paymentRequest = new PaymentRequest();
 
-            Shipping shipping = new Shipping();
-            shipping.ShippingType = ShippingType.Pac;
-            shipping.Address =
+            Shipping shipping = new Shipping
+            {
+                ShippingType = ShippingType.Pac,
+                Address =
                 new Address(
                     "BRA",
                     "SP",
@@ -214,13 +232,13 @@ namespace DocExamples
                     "01452002",
                     "Av. Brig. Faria Lima",
                     "1384",
-                    "5o. Andar");
+                    "5o. Andar")
+            };
 
             paymentRequest.Shipping = shipping;
-
         }
 
-        static void Shipping2Example(Transaction transaction)
+        private static void Shipping2Example(Transaction transaction)
         {
             if (transaction.Shipping != null)
             {
@@ -234,7 +252,7 @@ namespace DocExamples
             }
         }
 
-        static void ItemExample(PaymentRequest paymentRequest)
+        private static void ItemExample(PaymentRequest paymentRequest)
         {
             Item item =
                 new Item(
@@ -248,7 +266,7 @@ namespace DocExamples
             paymentRequest.Items.Add(item);
         }
 
-        static void ItemsExample(PaymentRequest paymentRequest)
+        private static void ItemsExample(PaymentRequest paymentRequest)
         {
             foreach (Item item in paymentRequest.Items)
             {
@@ -259,7 +277,7 @@ namespace DocExamples
             }
         }
 
-        static void SearchByCodeExample2()
+        private static void SearchByCodeExample2()
         {
             bool isSandbox = false;
 
@@ -267,10 +285,10 @@ namespace DocExamples
 
             AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
-            // Código identificador da transação  
+            // Código identificador da transação
             string transactionCode = "59A13D84-52DA-4AB8-B365-1E7D893052B0";
 
-            // Realizando uma consulta de transação a partir do código identificador 
+            // Realizando uma consulta de transação a partir do código identificador
             // para obter o objeto Transaction
             Transaction transaction =
                 TransactionSearchService.SearchByCode(
@@ -281,7 +299,7 @@ namespace DocExamples
             Console.WriteLine(transaction.TransactionStatus);
         }
 
-        static void SearchByDateExample()
+        private static void SearchByDateExample()
         {
             bool isSandbox = false;
 
@@ -289,7 +307,7 @@ namespace DocExamples
 
             AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
-            // Definindo a data de ínicio da consulta 
+            // Definindo a data de ínicio da consulta
             DateTime initialDate = new DateTime(2011, 06, 1, 08, 50, 0);
 
             // Definindo a data de término da consulta
@@ -311,61 +329,61 @@ namespace DocExamples
                     maxPageResults);
         }
 
-        static void TransactionSearchResultExample(TransactionSearchResult transactionSearchResult)
+        private static void TransactionSearchResultExample(TransactionSearchResult transactionSearchResult)
         {
-            // Obtendo a data da realização da consulta  
+            // Obtendo a data da realização da consulta
             DateTime date = transactionSearchResult.Date;
 
-            // Obtendo a quantidade de resultados na página 
+            // Obtendo a quantidade de resultados na página
             int resultsInThisPage = transactionSearchResult.Transactions.Count;
 
-            // Obtendo a quantidade total de páginas 
+            // Obtendo a quantidade total de páginas
             int totalPages = transactionSearchResult.TotalPages;
 
-            // Obtendo o número da página consultada 
+            // Obtendo o número da página consultada
             int currentPage = transactionSearchResult.CurrentPage;
 
             // Iterando na lista de transações
             foreach (TransactionSummary transaction in transactionSearchResult.Transactions)
             {
-                // Código da transação  
+                // Código da transação
                 string code = transaction.Code;
-                // Status da transação 
+                // Status da transação
                 int status = transaction.TransactionStatus;
-                // Refência da transação 
+                // Refência da transação
                 string reference = transaction.Reference;
-                // Valor bruto da transação 
+                // Valor bruto da transação
                 decimal amount = transaction.GrossAmount;
             }
         }
 
-        static void TransactionSummaryExample(TransactionSummary transactionSummary)
+        private static void TransactionSummaryExample(TransactionSummary transactionSummary)
         {
-            // Data da criação 
+            // Data da criação
             DateTime date = transactionSummary.Date;
 
-            // Data da última atualização 
+            // Data da última atualização
             DateTime lastEventDate = transactionSummary.LastEventDate;
 
-            // Código da transação 
+            // Código da transação
             string code = transactionSummary.Code;
 
-            // Refência 
+            // Refência
             string reference = transactionSummary.Reference;
 
-            // Valor bruto  
+            // Valor bruto
             decimal grossAmount = transactionSummary.GrossAmount;
 
-            // Tipo 
+            // Tipo
             int type = transactionSummary.TransactionType;
 
-            // Status 
+            // Status
             int status = transactionSummary.TransactionStatus;
 
-            // Valor líquido  
+            // Valor líquido
             decimal netAmount = transactionSummary.NetAmount;
 
-            // Valor das taxas cobradas  
+            // Valor das taxas cobradas
             decimal feeAmount = transactionSummary.FeeAmount;
 
             // Valor extra ou desconto
@@ -374,9 +392,9 @@ namespace DocExamples
             // Tipo de meio de pagamento
             PaymentMethod paymentMethod = transactionSummary.PaymentMethod;
         }
-        static void Main(string[] args)
-        {
 
+        private static void Main(string[] args)
+        {
         }
     }
 }

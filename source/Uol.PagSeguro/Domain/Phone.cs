@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Domain
@@ -36,8 +35,8 @@ namespace Uol.PagSeguro.Domain
         /// <param name="number"></param>
         public Phone(string areaCode, string number)
         {
-            this.AreaCode = PagSeguroUtil.GetOnlyNumbers(areaCode);
-            this.Number = PagSeguroUtil.GetOnlyNumbers(number);
+            AreaCode = PagSeguroUtil.GetOnlyNumbers(areaCode);
+            Number = PagSeguroUtil.GetOnlyNumbers(number);
         }
 
         /// <summary>

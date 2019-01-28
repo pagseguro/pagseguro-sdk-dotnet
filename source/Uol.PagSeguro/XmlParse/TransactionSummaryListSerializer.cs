@@ -20,20 +20,19 @@ using Uol.PagSeguro.Domain;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class TransactionSummaryListSerializer
     {
         internal const string Transactions = "transactions";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="transactions"></param>
         internal static void Read(XmlReader reader, IList<TransactionSummary> transactions)
         {
-
             transactions.Clear();
 
             if (reader.IsEmptyElement)
@@ -61,6 +60,7 @@ namespace Uol.PagSeguro.XmlParse
                             TransactionSummarySerializer.Read(reader, transaction);
                             transactions.Add(transaction);
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

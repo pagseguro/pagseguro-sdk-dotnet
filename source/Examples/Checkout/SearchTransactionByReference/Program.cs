@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
@@ -21,19 +20,17 @@ using Uol.PagSeguro.Service;
 
 namespace SearchTransactionByReference
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            String referenceCode = "REF123";
+            string referenceCode = "REF123";
 
             try
             {
-
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 // Realizando a consulta
@@ -50,7 +47,6 @@ namespace SearchTransactionByReference
                     Console.WriteLine(" - Terminando listagem de transações ");
                 }
                 Console.ReadKey();
-
             }
             catch (PagSeguroServiceException exception)
             {
@@ -62,7 +58,6 @@ namespace SearchTransactionByReference
                 }
                 Console.ReadKey();
             }
-           
         }
     }
 }

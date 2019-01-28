@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Domain
@@ -41,11 +40,11 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
-    	public SenderDocument(){
-
-    	}
+    	public SenderDocument()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the SenderDocumet class
@@ -54,9 +53,9 @@ namespace Uol.PagSeguro.Domain
         /// <param name="value"></param>
     	public SenderDocument(string type, string value)
         {
-            this.Type = type;
-            this.Value = PagSeguroUtil.GetOnlyNumbers(value);
-    	}
+            Type = type;
+            Value = PagSeguroUtil.GetOnlyNumbers(value);
+        }
 
         /// <summary>
         /// Gets toString class
@@ -64,8 +63,7 @@ namespace Uol.PagSeguro.Domain
         /// <returns>string</returns>
         public override string ToString()
         {
-            return "SenderDocument [type=" + this.Type + ", value=" + this.Value + "]";
+            return "SenderDocument [type=" + Type + ", value=" + Value + "]";
         }
-
     }
 }

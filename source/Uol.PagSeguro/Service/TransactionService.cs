@@ -12,11 +12,9 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
-using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Direct;
@@ -34,7 +32,6 @@ namespace Uol.PagSeguro.Service
     /// </summary>
     public static class TransactionService
     {
-
         /// <summary>
         /// Create a new transaction checkout
         /// </summary>
@@ -43,8 +40,7 @@ namespace Uol.PagSeguro.Service
         /// <returns cref="T:Uol.PagSeguro.Transaction"><c>Transaction</c></returns>
         public static Transaction CreateCheckout(Credentials credentials, Checkout checkout)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - begin"));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - begin"));
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
@@ -52,10 +48,9 @@ namespace Uol.PagSeguro.Service
                 {
                     using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                     {
-                        
                         Transaction transaction = new Transaction();
                         TransactionSerializer.Read(reader, transaction);
-                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - end {0}", transaction));
+                        PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - end {0}", transaction));
                         return transaction;
                     }
                 }
@@ -63,14 +58,13 @@ namespace Uol.PagSeguro.Service
             catch (WebException exception)
             {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - error {0}", pse));
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "TransactionService.Register() - error {0}", pse));
                 throw pse;
             }
         }
 
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials"></param>
         /// <param name="payment"></param>
@@ -90,6 +84,5 @@ namespace Uol.PagSeguro.Service
 
             return builder.ToString();
         }
-
-     }
+    }
 }

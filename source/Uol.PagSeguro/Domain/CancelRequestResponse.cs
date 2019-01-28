@@ -12,9 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using System.Text;
-using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Domain
 {
@@ -23,8 +21,7 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class CancelRequestResponse
     {
-
-        private string response = String.Empty;
+        private string response = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the CancelRequestResponse class
@@ -38,14 +35,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public string Response
         {
-            get
-            {
-                return this.response;
-            }
-            set
-            {
-                this.response = value;
-            }
+            get => response;
+            set => response = value;
         }
 
         /// <summary>
@@ -55,9 +46,9 @@ namespace Uol.PagSeguro.Domain
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Result=").Append(this.response.ToString());
+            builder.Append("Result=").Append(response.ToString());
             builder.Append(')');
             return builder.ToString();
         }

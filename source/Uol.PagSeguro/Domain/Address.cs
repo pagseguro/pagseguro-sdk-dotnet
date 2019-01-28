@@ -12,10 +12,10 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Domain
+
 {
     /// <summary>
     /// Represents an address location, typically for shipping or charging purposes.
@@ -42,14 +42,14 @@ namespace Uol.PagSeguro.Domain
         /// <param name="complement"></param>
         public Address(string country, string state, string city, string district, string postalCode, string street, string number, string complement)
         {
-            this.Country = country;
-            this.State = state;
-            this.City = city;
-            this.District = district;
-            this.PostalCode = PagSeguroUtil.GetOnlyNumbers(postalCode);
-            this.Street = street;
-            this.Number = PagSeguroUtil.GetOnlyNumbers(number);
-            this.Complement = complement;
+            Country = country;
+            State = state;
+            City = city;
+            District = district;
+            PostalCode = PagSeguroUtil.GetOnlyNumbers(postalCode);
+            Street = street;
+            Number = PagSeguroUtil.GetOnlyNumbers(number);
+            Complement = complement;
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Uol.PagSeguro.Domain
         /// Apartment, suite number or any other qualifier after the street/number pair.
         /// </summary>
         /// <example>
-        /// Apt 274, building A. 
+        /// Apt 274, building A.
         /// </example>
         public string Complement
         {

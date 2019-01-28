@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Text;
 using Uol.PagSeguro.Service;
 
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -71,9 +70,9 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                if (this._items == null)
+                if (_items == null)
                 {
-                    this._items = new List<Item>();
+                    _items = new List<Item>();
                 }
                 return _items;
             }
@@ -185,14 +184,14 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                if (this._metaData == null)
+                if (_metaData == null)
                 {
-                    this._metaData = new MetaData();
+                    _metaData = new MetaData();
                 }
-                return this._metaData;
+                return _metaData;
             }
 
-            set { this._metaData = value; }
+            set => _metaData = value;
         }
 
         /// <summary>
@@ -202,13 +201,13 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                if (this._parameter == null)
+                if (_parameter == null)
                 {
-                    this._parameter = new Parameter();
+                    _parameter = new Parameter();
                 }
-                return this._parameter;
+                return _parameter;
             }
-            set { this._parameter = value; }
+            set => _parameter = value;
         }
 
         /// <summary>
@@ -218,14 +217,14 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                if (this._methodConfig == null)
+                if (_methodConfig == null)
                 {
-                    this._methodConfig = new PaymentMethodConfig();
+                    _methodConfig = new PaymentMethodConfig();
                 }
-                return this._methodConfig;
+                return _methodConfig;
             }
 
-            set { this._methodConfig = value; }
+            set => _methodConfig = value;
         }
 
         /// <summary>
@@ -235,14 +234,14 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                if (this._acceptedPaymentsConfig == null)
+                if (_acceptedPaymentsConfig == null)
                 {
-                    this._acceptedPaymentsConfig = new AcceptedPaymentMethods();
+                    _acceptedPaymentsConfig = new AcceptedPaymentMethods();
                 }
-                return this._acceptedPaymentsConfig;
+                return _acceptedPaymentsConfig;
             }
 
-            set { this._acceptedPaymentsConfig = value; }
+            set => _acceptedPaymentsConfig = value;
         }
 
         /// <summary>
@@ -250,7 +249,7 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public PaymentRequest()
         {
-            this.Currency = Uol.PagSeguro.Constants.Currency.Brl;
+            Currency = Uol.PagSeguro.Constants.Currency.Brl;
         }
 
         /// <summary>
@@ -270,7 +269,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="value"></param>
         public void AddMetaData(string key, string value)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value));
+            MetaData.Items.Add(new MetaDataItem(key, value));
         }
 
         /// <summary>
@@ -281,7 +280,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public void AddMetaData(string key, string value, int? group)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value, group));
+            MetaData.Items.Add(new MetaDataItem(key, value, group));
         }
 
         /// <summary>
@@ -291,7 +290,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="value"></param>
         public void AddParameter(string key, string value)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value));
+            Parameter.Items.Add(new ParameterItem(key, value));
         }
 
         /// <summary>
@@ -302,29 +301,29 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public void AddPaymentMethodConfig(string key, double value, string group)
         {
-            this.PaymentMethodConfig.Items.Add(new PaymentMethodConfigItem(key, value, group));
+            PaymentMethodConfig.Items.Add(new PaymentMethodConfigItem(key, value, group));
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="group"></param>
         public void AcceptPaymentMethodConfig(string group, List<string> name)
         {
-            this.AcceptedPaymentMethods.Items.Add(new AcceptPaymentMethod(group, name));
+            AcceptedPaymentMethods.Items.Add(new AcceptPaymentMethod(group, name));
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="group"></param>
         public void ExcludePaymentMethodConfig(string group, List<string> name)
         {
-            this.AcceptedPaymentMethods.Items.Add(new ExcludePaymentMethod(group, name));
+            AcceptedPaymentMethods.Items.Add(new ExcludePaymentMethod(group, name));
         }
 
         /// <summary>
@@ -335,7 +334,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public void AddIndexedParameter(string key, string value, int? group)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value, group));
+            Parameter.Items.Add(new ParameterItem(key, value, group));
         }
 
         /// <summary>
@@ -345,9 +344,9 @@ namespace Uol.PagSeguro.Domain
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name).Append("(");
-            builder.Append("Reference=").Append(this.Reference).Append(", ");
-            string email = this.Sender == null ? null : this.Sender.Email;
+            builder.Append(GetType().Name).Append("(");
+            builder.Append("Reference=").Append(Reference).Append(", ");
+            string email = Sender == null ? null : Sender.Email;
             builder.Append("Sender.Email=").Append(email).Append(")");
             return builder.ToString();
         }

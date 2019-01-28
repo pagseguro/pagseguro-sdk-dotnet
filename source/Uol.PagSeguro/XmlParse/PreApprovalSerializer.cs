@@ -12,15 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
-using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PreApprovalSerializer
     {
@@ -29,13 +27,12 @@ namespace Uol.PagSeguro.XmlParse
         private const string Date = "date";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="preApprovalResponse"></param>
         internal static void Read(XmlReader reader, PreApprovalRequestResponse preApprovalResponse)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -61,12 +58,15 @@ namespace Uol.PagSeguro.XmlParse
                         case PreApprovalSerializer.Date:
                             preApprovalResponse.RegistrationDate = reader.ReadElementContentAsDateTime();
                             break;
+
                         case PreApprovalSerializer.Code:
                             preApprovalResponse.Code = reader.ReadElementContentAsString();
                             break;
+
                         case PreApprovalSerializer.Status:
                             preApprovalResponse.Status = reader.ReadElementContentAsString();
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

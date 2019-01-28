@@ -21,7 +21,7 @@ using Uol.PagSeguro.Domain;
 namespace Uol.PagSeguro.Util
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal class QueryStringBuilder
     {
@@ -35,7 +35,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="queryString"></param>
         public QueryStringBuilder(string queryString)
@@ -44,17 +44,21 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameterName"></param>
         /// <param name="value"></param>
         private void AppendCore(string parameterName, string value)
         {
             if (parameterName == null)
+            {
                 throw new ArgumentNullException("parameterName");
+            }
 
             if (value == null)
+            {
                 throw new ArgumentNullException("value");
+            }
 
             if (builder.Length > 0)
             {
@@ -66,7 +70,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameterName"></param>
         /// <param name="value"></param>
@@ -78,7 +82,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameterName"></param>
         /// <param name="value"></param>
@@ -90,7 +94,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameterName"></param>
         /// <param name="value"></param>
@@ -102,7 +106,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameterName"></param>
         /// <param name="value"></param>
@@ -114,7 +118,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameterName"></param>
         /// <param name="value"></param>
@@ -126,18 +130,18 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         public QueryStringBuilder AppendToQuery(string value)
         {
-            this.builder.Append(value);
+            builder.Append(value);
             return this;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials"></param>
         /// <returns></returns>
@@ -147,31 +151,31 @@ namespace Uol.PagSeguro.Util
             {
                 if (nv.Value.Length > 0)
                 {
-                    this.Append(nv.Name, nv.Value);
+                    Append(nv.Name, nv.Value);
                 }
             }
             return this;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="oldValue"></param>
         /// <param name="newValue"></param>
         /// <returns></returns>
         public QueryStringBuilder ReplaceValue(string oldValue, string newValue)
         {
-            this.builder.Replace(oldValue,newValue);
+            builder.Replace(oldValue, newValue);
             return this;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return this.builder.ToString();
+            return builder.ToString();
         }
     }
 }

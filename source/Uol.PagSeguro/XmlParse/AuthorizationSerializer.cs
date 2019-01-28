@@ -12,8 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
-using System.Collections.Generic;
 using System.Xml;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain.Authorization;
@@ -21,30 +19,28 @@ using Uol.PagSeguro.Domain.Authorization;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class AuthorizationSerializer
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="authorization">PagSeguro AuthorizationResponse</param>
         internal static void Read(XmlReader reader, AuthorizationResponse authorization)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
                 return;
             }
 
-            reader.ReadStartElement(); 
+            reader.ReadStartElement();
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-
                 if (XMLParserUtils.IsEndElement(reader, SerializerHelper.PreApproval))
                 {
                     XMLParserUtils.SkipNode(reader);
@@ -58,6 +54,7 @@ namespace Uol.PagSeguro.XmlParse
                         case SerializerHelper.Code:
                             authorization.Code = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.Date:
                             authorization.Date = reader.ReadElementContentAsDateTime();
                             break;

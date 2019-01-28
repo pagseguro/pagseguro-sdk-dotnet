@@ -22,27 +22,27 @@ using Uol.PagSeguro.Service;
 
 namespace CreateTransactionUsingBoleto
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             PagSeguroConfiguration.UrlXmlConfiguration = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
 
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // Instantiate a new checkout
-            CreditCardCheckout checkout = new CreditCardCheckout();
+            CreditCardCheckout checkout = new CreditCardCheckout
+            {
+                // Sets the payment mode
+                PaymentMode = PaymentMode.DEFAULT,
 
-            // Sets the payment mode
-            checkout.PaymentMode = PaymentMode.DEFAULT;
+                // Sets the receiver e-mail should will get paid
+                ReceiverEmail = "backoffice@lojamodelo.com.br",
 
-            // Sets the receiver e-mail should will get paid
-            checkout.ReceiverEmail = "backoffice@lojamodelo.com.br";
-
-            // Sets the currency
-            checkout.Currency = Currency.Brl;
+                // Sets the currency
+                Currency = Currency.Brl
+            };
 
             // Add items
             checkout.Items.Add(new Item("0001", "Notebook Prata", 2, 2000.00m));
@@ -52,10 +52,11 @@ namespace CreateTransactionUsingBoleto
             checkout.Reference = "REF1234";
 
             // Sets shipping information.
-            checkout.Shipping = new Shipping();
-            checkout.Shipping.ShippingType = ShippingType.Sedex;
-            checkout.Shipping.Cost = 0.00m;
-            checkout.Shipping.Address = new Address(
+            checkout.Shipping = new Shipping
+            {
+                ShippingType = ShippingType.Sedex,
+                Cost = 0.00m,
+                Address = new Address(
                 "BRA",
                 "SP",
                 "Sao Paulo",
@@ -64,11 +65,13 @@ namespace CreateTransactionUsingBoleto
                 "Av. Brig. Faria Lima",
                 "1384",
                 "5o andar"
-            );
+            )
+            };
 
             // Sets shipping information.
-            checkout.Billing = new Billing();
-            checkout.Billing.Address = new Address(
+            checkout.Billing = new Billing
+            {
+                Address = new Address(
                 "BRA",
                 "SP",
                 "Sao Paulo",
@@ -77,7 +80,8 @@ namespace CreateTransactionUsingBoleto
                 "Av. Brig. Faria Lima",
                 "1384",
                 "5o andar"
-            );
+            )
+            };
 
             // Sets credit card holder information.
             checkout.Holder = new Holder(
@@ -93,8 +97,10 @@ namespace CreateTransactionUsingBoleto
                 "Joao Comprador",
                 "comprador@uol.com.br",
                 new Phone("11", "56273440")
-            );
-            checkout.Sender.Hash = "b2806d600653cbb2b195f317ca9a1a58738187a02c05bf7f2280e2076262e73b";
+            )
+            {
+                Hash = "b2806d600653cbb2b195f317ca9a1a58738187a02c05bf7f2280e2076262e73b"
+            };
             SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "12345678909");
             checkout.Sender.Documents.Add(senderCPF);
 

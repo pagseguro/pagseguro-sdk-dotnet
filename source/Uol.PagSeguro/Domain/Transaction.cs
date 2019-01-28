@@ -51,7 +51,7 @@ namespace Uol.PagSeguro.Domain
         /// Reference code
         /// </summary>
         /// <remarks>
-        /// You can use the reference code to store an identifier so you can 
+        /// You can use the reference code to store an identifier so you can
         /// associate the PagSeguro transaction to a transaction in your system.
         /// </remarks>
         public string Reference
@@ -187,9 +187,9 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                if (this.items == null)
+                if (items == null)
                 {
-                    this.items = new List<Item>();
+                    items = new List<Item>();
                 }
                 return items;
             }
@@ -211,16 +211,19 @@ namespace Uol.PagSeguro.Domain
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Code=").Append(this.Code).Append(", ");
-            builder.Append("Date=").Append(this.Date).Append(", ");
-            if (this.Reference != null)
-                builder.Append("Reference=").Append(this.Reference.ToString()).Append(", ");
-            builder.Append("TransactionStatus=").Append(this.TransactionStatus).Append(", ");
-            string email = this.Sender == null ? null : this.Sender.Email;
+            builder.Append("Code=").Append(Code).Append(", ");
+            builder.Append("Date=").Append(Date).Append(", ");
+            if (Reference != null)
+            {
+                builder.Append("Reference=").Append(Reference.ToString()).Append(", ");
+            }
+
+            builder.Append("TransactionStatus=").Append(TransactionStatus).Append(", ");
+            string email = Sender == null ? null : Sender.Email;
             builder.Append("Sender.Email=").Append(email).Append(", ");
-            builder.Append("Items.Count=").Append(this.Items.Count);
+            builder.Append("Items.Count=").Append(Items.Count);
             builder.Append(')');
             return builder.ToString();
         }

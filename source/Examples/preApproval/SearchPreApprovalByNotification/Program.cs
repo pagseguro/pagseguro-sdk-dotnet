@@ -12,23 +12,23 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using Uol.PagSeguro.Resources;
 using System;
 using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Service;
 using Uol.PagSeguro.Exception;
+using Uol.PagSeguro.Resources;
+using Uol.PagSeguro.Service;
 
 namespace FindPreApprovalByNotification
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             bool isSandbox = true;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // TODO: Substitute the code below with a valid code notification for your transaction
-            String notificationCode = "29B0BEC9D653D653435EE42F3FAEF4461091";
+            string notificationCode = "29B0BEC9D653D653435EE42F3FAEF4461091";
 
             try
             {

@@ -12,9 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-using Uol.PagSeguro.Util;
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -39,7 +36,6 @@ namespace Uol.PagSeguro.Domain
             this.intermediationFeeAmount = intermediationFeeAmount;
         }
 
- 
         /// <summary>
         /// Rate amount
         /// </summary>

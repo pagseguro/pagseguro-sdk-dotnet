@@ -12,14 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class TransactionSearchResultSerializer
     {
@@ -30,7 +29,7 @@ namespace Uol.PagSeguro.XmlParse
         private const string TotalPages = "totalPages";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="result"></param>
@@ -47,7 +46,6 @@ namespace Uol.PagSeguro.XmlParse
 
             while (!reader.EOF)
             {
-                
                 if (XMLParserUtils.IsEndElement(reader, TransactionSearchResultSerializer.TransactionSearchResult))
                 {
                     XMLParserUtils.SkipNode(reader);
@@ -61,15 +59,19 @@ namespace Uol.PagSeguro.XmlParse
                         case TransactionSearchResultSerializer.Date:
                             result.Date = reader.ReadElementContentAsDateTime();
                             break;
+
                         case TransactionSearchResultSerializer.CurrentPage:
                             result.CurrentPage = reader.ReadElementContentAsInt();
                             break;
+
                         case TransactionSearchResultSerializer.TotalPages:
                             result.TotalPages = reader.ReadElementContentAsInt();
                             break;
+
                         case TransactionSummaryListSerializer.Transactions:
                             TransactionSummaryListSerializer.Read(reader, result.Transactions);
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

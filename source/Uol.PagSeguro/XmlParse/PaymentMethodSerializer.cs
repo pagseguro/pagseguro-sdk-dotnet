@@ -12,14 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PaymentMethodSerializer
     {
@@ -29,13 +28,12 @@ namespace Uol.PagSeguro.XmlParse
         private const string PaymentMethodCode = "code";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="paymentMethod"></param>
         internal static void Read(XmlReader reader, PaymentMethod paymentMethod)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -60,9 +58,11 @@ namespace Uol.PagSeguro.XmlParse
                         case PaymentMethodSerializer.PaymentMethodType:
                             paymentMethod.PaymentMethodType = reader.ReadElementContentAsInt();
                             break;
+
                         case PaymentMethodSerializer.PaymentMethodCode:
                             paymentMethod.PaymentMethodCode = reader.ReadElementContentAsInt();
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

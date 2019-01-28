@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-
 namespace Uol.PagSeguro.Constants
 {
     /// <summary>
@@ -48,7 +47,7 @@ namespace Uol.PagSeguro.Constants
         /// Charge
         /// </summary>
         public const int Charge = 5;
-        
+
         /// <summary>
         /// Donation
         /// </summary>

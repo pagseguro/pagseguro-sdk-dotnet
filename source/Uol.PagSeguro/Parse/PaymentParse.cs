@@ -13,21 +13,20 @@
 //   limitations under the License.
 
 using System.Collections.Generic;
+using Uol.PagSeguro.Constants;
+using Uol.PagSeguro.Constants.PreApproval;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Util;
-using Uol.PagSeguro.Constants.PreApproval;
-using Uol.PagSeguro.Constants;
-using System;
 
 namespace Uol.PagSeguro.Parse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PaymentParse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="payment"></param>
         /// <returns></returns>
@@ -44,7 +43,6 @@ namespace Uol.PagSeguro.Parse
             // sender
             if (payment.Sender != null)
             {
-
                 if (payment.Sender.Name != null)
                 {
                     data["senderName"] = payment.Sender.Name;
@@ -77,9 +75,12 @@ namespace Uol.PagSeguro.Parse
                         {
                             if (document != null)
                             {
-                                if (document.Type.Equals("Cadastro de Pessoa Física")) {
+                                if (document.Type.Equals("Cadastro de Pessoa Física"))
+                                {
                                     data["senderCPF"] = document.Value;
-                                } else {
+                                }
+                                else
+                                {
                                     data["senderCNPJ"] = document.Value;
                                 }
                             }
@@ -97,12 +98,10 @@ namespace Uol.PagSeguro.Parse
             // items
             if (payment.Items.Count > 0)
             {
-
                 var items = payment.Items;
                 int i = 0;
                 foreach (Item item in items)
                 {
-
                     i++;
 
                     if (item.Id != null)
@@ -150,13 +149,19 @@ namespace Uol.PagSeguro.Parse
                     data["preApprovalMaxPaymentsPerPeriod"] = payment.PreApproval.MaxPaymentsPerPeriod.ToString();
 
                     if (payment.PreApproval.Period == Period.Yearly)
+                    {
                         data["preApprovalDayOfYear"] = payment.PreApproval.DayOfYear.ToString();
+                    }
 
                     if (payment.PreApproval.Period == Period.Monthly || payment.PreApproval.Period == Period.Bimonthly || payment.PreApproval.Period == Period.Trimonthly || payment.PreApproval.Period == Period.SemiAnnually)
+                    {
                         data["preApprovalDayOfMonth"] = payment.PreApproval.DayOfMonth.ToString();
+                    }
 
                     if (payment.PreApproval.Period == Period.Weekly)
+                    {
                         data["preApprovalDayOfWeek"] = payment.PreApproval.DayOfWeek.ToString();
+                    }
                 }
 
                 data["reviewUrl"] = payment.ReviewUri.ToString();
@@ -177,7 +182,6 @@ namespace Uol.PagSeguro.Parse
             // shipping
             if (payment.Shipping != null)
             {
-
                 if (payment.Shipping.ShippingType != null && payment.Shipping.ShippingType.Value != null)
                 {
                     data["shippingType"] = payment.Shipping.ShippingType.Value.ToString();
@@ -290,7 +294,7 @@ namespace Uol.PagSeguro.Parse
                 }
             }
 
-            // paymentMethodConfig 
+            // paymentMethodConfig
             if (payment.PaymentMethodConfig.Items.Count > 0)
             {
                 int i = 0;
@@ -302,16 +306,19 @@ namespace Uol.PagSeguro.Parse
                         i++;
                         data["paymentMethodGroup" + i] = item.Group;
                         data["paymentMethodConfigKey" + i + "_1"] = item.Key;
-                        if (item.Key.Equals(PaymentMethodConfigKeys.DiscountPercent)) {
+                        if (item.Key.Equals(PaymentMethodConfigKeys.DiscountPercent))
+                        {
                             data["paymentMethodConfigValue" + i + "_1"] = PagSeguroUtil.DecimalFormat(item.Value);
-                        } else {
+                        }
+                        else
+                        {
                             data["paymentMethodConfigValue" + i + "_1"] = PagSeguroUtil.DoubleToInt(item.Value);
                         }
                     }
                 }
             }
 
-            // paymentMethodConfig 
+            // paymentMethodConfig
             if (payment.AcceptedPaymentMethods.Items.Count > 0)
             {
                 var acceptGroupList = new List<string>();
@@ -322,7 +329,6 @@ namespace Uol.PagSeguro.Parse
 
                 foreach (AcceptedPayments item in config)
                 {
-
                     if (item.GetType() == typeof(AcceptPaymentMethod))
                     {
                         if (!acceptGroupList.Contains(item.Group))
@@ -343,13 +349,13 @@ namespace Uol.PagSeguro.Parse
 
                 if (acceptGroupList.Count > 0 && acceptNameList.Count > 0)
                 {
-                    data["acceptPaymentMethodGroup"] = String.Join(",", acceptGroupList.ToArray());
-                    data["acceptPaymentMethodName"] = String.Join(",", acceptNameList.ToArray());
+                    data["acceptPaymentMethodGroup"] = string.Join(",", acceptGroupList.ToArray());
+                    data["acceptPaymentMethodName"] = string.Join(",", acceptNameList.ToArray());
                 }
                 if (excludeGroupList.Count > 0 && excludeNameList.Count > 0)
                 {
-                    data["excludePaymentMethodGroup"] = String.Join(",", excludeGroupList.ToArray());
-                    data["excludePaymentMethodName"] = String.Join(",", excludeNameList.ToArray());
+                    data["excludePaymentMethodGroup"] = string.Join(",", excludeGroupList.ToArray());
+                    data["excludePaymentMethodName"] = string.Join(",", excludeNameList.ToArray());
                 }
             }
 

@@ -44,8 +44,7 @@ namespace Uol.PagSeguro.Service
         /// <returns cref="T:Uol.PagSeguro.Transaction"><c>Transaction</c></returns>
         public static Transaction SearchByCode(Credentials credentials, string transactionCode)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - begin", transactionCode));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - begin", transactionCode));
 
             try
             {
@@ -55,7 +54,7 @@ namespace Uol.PagSeguro.Service
                     {
                         Transaction transaction = new Transaction();
                         TransactionSerializer.Read(reader, transaction);
-                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - end {1}", transactionCode, transaction));
+                        PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - end {1}", transactionCode, transaction));
                         return transaction;
                     }
                 }
@@ -63,7 +62,7 @@ namespace Uol.PagSeguro.Service
             catch (WebException exception)
             {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - error {1}", transactionCode, pse));
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByCode(transactionCode={0}) - error {1}", transactionCode, pse));
                 throw pse;
             }
         }
@@ -76,8 +75,7 @@ namespace Uol.PagSeguro.Service
         /// <returns></returns>
         public static TransactionSearchResult SearchByReference(Credentials credentials, string reference)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByReference(reference={0}) - begin", reference));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByReference(reference={0}) - begin", reference));
 
             try
             {
@@ -87,7 +85,7 @@ namespace Uol.PagSeguro.Service
                     {
                         TransactionSearchResult result = new TransactionSearchResult();
                         TransactionSearchResultSerializer.Read(reader, result);
-                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByReference(reference={0}) - end", reference));
+                        PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByReference(reference={0}) - end", reference));
                         return result;
                     }
                 }
@@ -95,7 +93,7 @@ namespace Uol.PagSeguro.Service
             catch (WebException exception)
             {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByReference(reference={0}) - error {1}", reference, pse));
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByReference(reference={0}) - error {1}", reference, pse));
                 throw pse;
             }
         }
@@ -111,8 +109,7 @@ namespace Uol.PagSeguro.Service
         /// <returns></returns>
         public static TransactionSearchResult SearchByDate(Credentials credentials, DateTime initialDate, DateTime finalDate, int? pageNumber = null, int? resultsPerPage = null)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - begin", initialDate, finalDate));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - begin", initialDate, finalDate));
 
             try
             {
@@ -122,7 +119,7 @@ namespace Uol.PagSeguro.Service
                     {
                         TransactionSearchResult result = new TransactionSearchResult();
                         TransactionSearchResultSerializer.Read(reader, result);
-                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - end {2}", initialDate, finalDate, result));
+                        PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - end {2}", initialDate, finalDate, result));
                         return result;
                     }
                 }
@@ -130,7 +127,7 @@ namespace Uol.PagSeguro.Service
             catch (WebException exception)
             {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - error {2}", initialDate, finalDate, pse));
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchByDate(initialDate={0}, finalDate={1}) - error {2}", initialDate, finalDate, pse));
                 throw pse;
             }
         }
@@ -146,8 +143,7 @@ namespace Uol.PagSeguro.Service
         /// <returns></returns>
         public static TransactionSearchResult SearchAbandoned(Credentials credentials, DateTime initialDate, DateTime finalDate, int? pageNumber = null, int? resultsPerPage = null)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchAbandoned(initialDate={0}, finalDate={1}) - begin", initialDate, finalDate));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchAbandoned(initialDate={0}, finalDate={1}) - begin", initialDate, finalDate));
 
             try
             {
@@ -157,7 +153,7 @@ namespace Uol.PagSeguro.Service
                     {
                         TransactionSearchResult result = new TransactionSearchResult();
                         TransactionSearchResultSerializer.Read(reader, result);
-                        PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchAbandoned(initialDate={0}, finalDate={1}) - end {2}", initialDate, finalDate, result));
+                        PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchAbandoned(initialDate={0}, finalDate={1}) - end {2}", initialDate, finalDate, result));
                         return result;
                     }
                 }
@@ -165,13 +161,13 @@ namespace Uol.PagSeguro.Service
             catch (WebException exception)
             {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchAbandoned(initialDate={0}, finalDate={1}) - error {2}", initialDate, finalDate, pse));
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "TransactionSearchService.SearchAbandoned(initialDate={0}, finalDate={1}) - error {2}", initialDate, finalDate, pse));
                 throw pse;
             }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials"></param>
         /// <param name="transactionCode"></param>
@@ -188,7 +184,7 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials"></param>
         /// <param name="initialDate"></param>
@@ -205,10 +201,14 @@ namespace Uol.PagSeguro.Service
             searchUrlByCode.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
 
             if (pageNumber.HasValue)
+            {
                 searchUrlByCode.AppendToQuery("{page}").ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
+            }
 
             if (resultsPerPage.HasValue)
+            {
                 searchUrlByCode.AppendToQuery("{maxPageResults}").ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
+            }
 
             searchUrlByCode.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().EncodeCredentialsAsQueryString(credentials).ToString() : "");
 
@@ -216,7 +216,7 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials"></param>
         /// <param name="initialDate"></param>
@@ -231,20 +231,24 @@ namespace Uol.PagSeguro.Service
             searchUrlAbandoned.ReplaceValue("{url}", PagSeguroConfiguration.SearchAbandonedUri.AbsoluteUri);
             searchUrlAbandoned.ReplaceValue("{initialDate}", PagSeguroUtil.FormatDateXml(initialDate));
             searchUrlAbandoned.ReplaceValue("{finalDate}", finalDate < DateTime.MaxValue ? "&" + FinalDateParameterName + "=" + PagSeguroUtil.FormatDateXml(finalDate) : "");
-            
+
             if (pageNumber.HasValue)
+            {
                 searchUrlAbandoned.AppendToQuery("{page}").ReplaceValue("{page}", pageNumber > 0 ? "&" + PageNumberParameterName + "=" + pageNumber : "");
-            
+            }
+
             if (resultsPerPage.HasValue)
+            {
                 searchUrlAbandoned.AppendToQuery("{maxPageResults}").ReplaceValue("{maxPageResults}", resultsPerPage > 0 ? "&" + MaxPageResultsParameterName + "=" + resultsPerPage : "");
-            
+            }
+
             searchUrlAbandoned.ReplaceValue("{credential}", credentials != null ? new QueryStringBuilder().AppendToQuery("&").EncodeCredentialsAsQueryString(credentials).ToString() : "");
 
             return PagSeguroUtil.RemoveExtraSpaces(searchUrlAbandoned.ToString());
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials"></param>
         /// <param name="reference"></param>
@@ -260,6 +264,5 @@ namespace Uol.PagSeguro.Service
 
             return searchUrlByReference.ToString();
         }
-
-     }
+    }
 }

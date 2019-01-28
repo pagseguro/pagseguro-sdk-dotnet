@@ -46,9 +46,9 @@ namespace Uol.PagSeguro.Exception
         /// </summary>
         /// <param name="statusCode"></param>
         public PagSeguroServiceException(HttpStatusCode statusCode) :
-            base(String.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0}", statusCode))
+            base(string.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0}", statusCode))
         {
-            this.StatusCode = statusCode;
+            StatusCode = statusCode;
         }
 
         /// <summary>
@@ -57,12 +57,15 @@ namespace Uol.PagSeguro.Exception
         /// <param name="statusCode"></param>
         /// <param name="errors"></param>
         public PagSeguroServiceException(HttpStatusCode statusCode, IEnumerable<ServiceError> errors) :
-            base(String.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0}", statusCode))
+            base(string.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0}", statusCode))
         {
             if (errors == null)
+            {
                 throw new ArgumentNullException("errors");
+            }
+
             this.errors = new List<ServiceError>(errors);
-            this.StatusCode = statusCode;
+            StatusCode = statusCode;
         }
 
         /// <summary>
@@ -90,18 +93,18 @@ namespace Uol.PagSeguro.Exception
         /// <param name="statusCode"></param>
         /// <param name="innerException"></param>
         public PagSeguroServiceException(HttpStatusCode statusCode, System.Exception innerException) :
-            base(String.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0} ({1})", statusCode, (int)statusCode), innerException)
+            base(string.Format(CultureInfo.InvariantCulture, "HttpStatusCode: {0} ({1})", statusCode, (int)statusCode), innerException)
         {
-            this.StatusCode = statusCode;
+            StatusCode = statusCode;
         }
 
         private PagSeguroServiceException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            this.StatusCode = (HttpStatusCode)info.GetValue(PagSeguroServiceException.HttpStatusCodeField, typeof(HttpStatusCode));
-            this.errors = (List<ServiceError>)info.GetValue(PagSeguroServiceException.ErrorsField, typeof(List<ServiceError>));
+            StatusCode = (HttpStatusCode)info.GetValue(PagSeguroServiceException.HttpStatusCodeField, typeof(HttpStatusCode));
+            errors = (List<ServiceError>)info.GetValue(PagSeguroServiceException.ErrorsField, typeof(List<ServiceError>));
         }
-        
+
         /// <summary>
         /// Populates a SerializationInfo with the data needed to serialize the target object
         /// </summary>
@@ -111,8 +114,8 @@ namespace Uol.PagSeguro.Exception
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue(PagSeguroServiceException.HttpStatusCodeField, this.StatusCode);
-            info.AddValue(PagSeguroServiceException.ErrorsField, this.Errors);
+            info.AddValue(PagSeguroServiceException.HttpStatusCodeField, StatusCode);
+            info.AddValue(PagSeguroServiceException.ErrorsField, Errors);
         }
 
         /// <summary>
@@ -122,11 +125,11 @@ namespace Uol.PagSeguro.Exception
         {
             get
             {
-                if (this.errors == null)
+                if (errors == null)
                 {
-                    this.errors = new List<ServiceError>();
+                    errors = new List<ServiceError>();
                 }
-                return this.errors.AsReadOnly();
+                return errors.AsReadOnly();
             }
         }
 
@@ -147,7 +150,7 @@ namespace Uol.PagSeguro.Exception
         {
             StringBuilder builder = new StringBuilder(base.ToString());
             builder.Append(CrLf);
-            foreach (ServiceError error in this.Errors)
+            foreach (ServiceError error in Errors)
             {
                 builder.Append(error.ToString()).Append(CrLf);
             }

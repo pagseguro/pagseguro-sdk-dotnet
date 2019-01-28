@@ -37,7 +37,7 @@ namespace Uol.PagSeguro.Domain
            ,{"MOBILE_NUMBER","Celular de recarga"}
            ,{"PASSENGER_NAME","Nome do passageiro"}
         };
-        
+
         /// <summary>
         /// Get available  keys and values list for metadata item
         /// </summary>

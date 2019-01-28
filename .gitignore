@@ -164,3 +164,4 @@ sonar-project.properties
 #################
 .idea/
 *.iml
+/source/.vs/PagSeguro/v15/Server/sqlite3

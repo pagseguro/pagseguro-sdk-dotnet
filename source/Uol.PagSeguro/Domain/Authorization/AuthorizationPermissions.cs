@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Uol.PagSeguro.Domain.Authorization
@@ -23,11 +22,10 @@ namespace Uol.PagSeguro.Domain.Authorization
     /// </summary>
     public class AuthorizationPermissions
     {
-
         /// <summary>
         /// Code
         /// </summary>
-        public String Code
+        public string Code
         {
             get;
             internal set;
@@ -36,7 +34,7 @@ namespace Uol.PagSeguro.Domain.Authorization
         /// <summary>
         /// Status
         /// </summary>
-        public String Status
+        public string Status
         {
             get;
             internal set;
@@ -58,14 +56,13 @@ namespace Uol.PagSeguro.Domain.Authorization
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Code=").Append(this.Code).Append(", ");
-            builder.Append("Status=").Append(this.Status).Append(", ");
-            builder.Append("LastUpdate=").Append(this.LastUpdate);
+            builder.Append("Code=").Append(Code).Append(", ");
+            builder.Append("Status=").Append(Status).Append(", ");
+            builder.Append("LastUpdate=").Append(LastUpdate);
             builder.Append(')');
             return builder.ToString();
         }
-
     }
 }

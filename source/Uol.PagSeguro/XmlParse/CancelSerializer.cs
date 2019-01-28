@@ -13,16 +13,12 @@
 //   limitation
 
 using System.Xml;
-using System;
-using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
-
-
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public static class CancelSerializer
     {
@@ -33,7 +29,6 @@ namespace Uol.PagSeguro.XmlParse
         /// <param name="result"></param>
         public static void Read(XmlReader reader, RequestResponse result)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -48,7 +43,7 @@ namespace Uol.PagSeguro.XmlParse
                         result.Response = reader.Value;
                         break;
                 }
-            }    
+            }
         }
     }
 }

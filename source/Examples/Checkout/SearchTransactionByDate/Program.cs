@@ -13,24 +13,21 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
-using System.Collections.Generic;
 
 namespace SearchTransactionByCode
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            // Definindo a data de ínicio da consulta 
+            // Definindo a data de ínicio da consulta
             DateTime initialDate = new DateTime(2015, 10, 05, 00, 00, 0);
 
             // Definindo a data de término da consulta
@@ -44,7 +41,6 @@ namespace SearchTransactionByCode
 
             try
             {
-
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 // Realizando a consulta
@@ -68,7 +64,6 @@ namespace SearchTransactionByCode
                     Console.WriteLine(" - Terminando listagem de transações ");
                 }
                 Console.ReadKey();
-
             }
             catch (PagSeguroServiceException exception)
             {

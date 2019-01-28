@@ -13,21 +13,17 @@
 //   limitations under the License.
 
 using System.Collections.Generic;
-using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Util;
 using Uol.PagSeguro.Domain.Authorization;
-using System;
 
 namespace Uol.PagSeguro.Parse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class AuthorizationParse
     {
-        
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="authorizationRequest">PagSeguro AuthorizationRequest</param>
         /// <returns></returns>

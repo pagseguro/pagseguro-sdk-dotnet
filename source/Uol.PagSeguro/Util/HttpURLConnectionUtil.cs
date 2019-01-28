@@ -16,20 +16,17 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.XmlParse;
-using System.Collections.Specialized;
 
 namespace Uol.PagSeguro.Util
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class HttpURLConnectionUtil
     {
@@ -37,18 +34,21 @@ namespace Uol.PagSeguro.Util
         internal const string PostMethod = "POST";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
         internal static PagSeguroServiceException CreatePagSeguroServiceException(HttpWebResponse response)
         {
             if (response == null)
+            {
                 throw new PagSeguroServiceException("response answered with null value");
+            }
 
             if (response.StatusCode == HttpStatusCode.OK)
+            {
                 throw new ArgumentException("response.StatusCode must be different than HttpStatusCode.OK", "response");
-
+            }
 
             using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
             {
@@ -74,7 +74,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="urlPath"></param>
         /// <param name="query"></param>
@@ -86,7 +86,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="urlPath"></param>
         /// <returns></returns>
@@ -97,7 +97,7 @@ namespace Uol.PagSeguro.Util
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="method"></param>
         /// <param name="contentType"></param>
@@ -109,7 +109,7 @@ namespace Uol.PagSeguro.Util
             HttpWebRequest request;
             try
             {
-                request = (HttpWebRequest) WebRequest.Create(urlPath);
+                request = (HttpWebRequest)WebRequest.Create(urlPath);
 
                 request.ContentType = contentType;
                 request.Method = method;
@@ -117,13 +117,13 @@ namespace Uol.PagSeguro.Util
                 request.Headers.Add("lib-description", ".net:" + PagSeguroConfiguration.LibVersion);
                 request.Headers.Add("language-engine-description", ".net:" + PagSeguroConfiguration.LanguageEngineDescription);
 
-                // adding module version to header request 
+                // adding module version to header request
                 if (!string.IsNullOrEmpty(PagSeguroConfiguration.ModuleVersion))
                 {
                     request.Headers.Add("module-description", PagSeguroConfiguration.ModuleVersion);
                 }
 
-                // adding cms version to header request 
+                // adding cms version to header request
                 if (!string.IsNullOrEmpty(PagSeguroConfiguration.CmsVersion))
                 {
                     request.Headers.Add("cms-description", PagSeguroConfiguration.CmsVersion);
@@ -131,7 +131,6 @@ namespace Uol.PagSeguro.Util
 
                 if (HttpURLConnectionUtil.PostMethod.Equals(method))
                 {
-
                     using (Stream requestStream = request.GetRequestStream())
                     {
                         byte[] byteArray = Encoding.UTF8.GetBytes(query);
@@ -146,6 +145,5 @@ namespace Uol.PagSeguro.Util
                 throw exception;
             }
         }
-
     }
 }

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Uol.PagSeguro.Service;
-
-namespace Uol.PagSeguro.Domain.Direct
+﻿namespace Uol.PagSeguro.Domain.Direct
 {
-
     public class OnlineDebitCheckout : Checkout
     {
         /// <summary>
@@ -31,7 +25,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// </summary>
         public OnlineDebitCheckout()
         {
-            this.PaymentMethod = "eft";
+            PaymentMethod = "eft";
         }
     }
 }

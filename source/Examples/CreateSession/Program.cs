@@ -13,20 +13,17 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
-using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Direct;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
-using Uol.PagSeguro.XmlParse;
 
 namespace CreateSession
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
@@ -52,5 +49,4 @@ namespace CreateSession
             }
         }
     }
-    
 }

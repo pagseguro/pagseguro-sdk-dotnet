@@ -15,17 +15,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Uol.PagSeguro.Domain.Authorization;
 
 namespace Uol.PagSeguro.Domain.Authorization
 {
     /// <summary>
     /// Represents a summary of a PagSeguro authorization, typically returned by search services.
     /// </summary>
-    public class AuthorizationSummary 
+    public class AuthorizationSummary
     {
-
-        private List<AuthorizationPermissions> permissions = new List<AuthorizationPermissions>();
+        private readonly List<AuthorizationPermissions> permissions = new List<AuthorizationPermissions>();
 
         /// <summary>
         /// Code
@@ -49,7 +47,7 @@ namespace Uol.PagSeguro.Domain.Authorization
         /// Reference code
         /// </summary>
         /// <remarks>
-        /// You can use the reference code to store an identifier so you can 
+        /// You can use the reference code to store an identifier so you can
         /// associate the PagSeguro transaction to a transaction in your system.
         /// </remarks>
         public string Reference
@@ -70,13 +68,7 @@ namespace Uol.PagSeguro.Domain.Authorization
         /// <summary>
         /// Authorizations in this page
         /// </summary>
-        public IList<AuthorizationPermissions> Permissions
-        {
-            get
-            {
-                return this.permissions;
-            }
-        }
+        public IList<AuthorizationPermissions> Permissions => permissions;
 
         /// <summary>
         /// Returns a string that represents the current object
@@ -85,21 +77,24 @@ namespace Uol.PagSeguro.Domain.Authorization
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Code=").Append(this.Code).Append(", ");
-            builder.Append("CreationDate=").Append(this.CreationDate).Append(", ");
-            builder.Append("Reference=").Append(this.Reference).Append(", ");
-            if (this.Account != null) {
-                builder.Append("PublicKey=").Append(this.Account.PublicKey).Append(", ");
-            } else  {
+            builder.Append("Code=").Append(Code).Append(", ");
+            builder.Append("CreationDate=").Append(CreationDate).Append(", ");
+            builder.Append("Reference=").Append(Reference).Append(", ");
+            if (Account != null)
+            {
+                builder.Append("PublicKey=").Append(Account.PublicKey).Append(", ");
+            }
+            else
+            {
                 builder.Append("PublicKey=").Append("").Append(", ");
             }
             builder.Append("Permissions for this authorization=").Append("(");
             int counter = 1;
-            foreach (AuthorizationPermissions permission in this.Permissions)
+            foreach (AuthorizationPermissions permission in Permissions)
             {
-                if (this.Permissions.Count == counter)
+                if (Permissions.Count == counter)
                 {
                     builder.Append(permission.Code);
                 }

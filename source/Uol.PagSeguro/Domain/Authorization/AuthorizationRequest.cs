@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using System.Text;
 using Uol.PagSeguro.Exception;
@@ -25,7 +24,6 @@ namespace Uol.PagSeguro.Domain.Authorization
     /// </summary>
     public class AuthorizationRequest
     {
-
         /// <summary>
         /// Reference code
         /// </summary>
@@ -33,7 +31,7 @@ namespace Uol.PagSeguro.Domain.Authorization
         /// Optional. You can use the reference code to store an identifier so you can associate the PagSeguro authorization
         /// to a authorization in your system.
         /// </remarks>
-        public String Reference
+        public string Reference
         {
             get;
             set;
@@ -42,7 +40,7 @@ namespace Uol.PagSeguro.Domain.Authorization
         /// <summary>
         /// List of permissions in this authorization
         /// </summary>
-        public List<String> Permissions
+        public List<string> Permissions
         {
             get;
             set;
@@ -52,7 +50,7 @@ namespace Uol.PagSeguro.Domain.Authorization
         /// Uri to where the PagSeguro checkout page should redirect the user after the payment information is processed.
         /// Typically this is a confirmation page on your web site.
         /// </summary>
-        public String RedirectURL
+        public string RedirectURL
         {
             get;
             set;
@@ -65,7 +63,7 @@ namespace Uol.PagSeguro.Domain.Authorization
         /// Optional. A new notification will be send to this url if any change happens in the transaction status. You can
         /// use that for update the related order.
         /// </remarks>
-        public String NotificationURL
+        public string NotificationURL
         {
             get;
             set;
@@ -79,28 +77,29 @@ namespace Uol.PagSeguro.Domain.Authorization
         /// </remarks>
         public AuthorizationRequest()
         {
-            this.Permissions = new List<String>();
+            Permissions = new List<string>();
         }
 
         /// <summary>
         /// Add a permission to the permissions list
         /// </summary>
-        public void addPermission(String permission)
+        public void addPermission(string permission)
         {
             if (Permissions != null)
             {
-                this.Permissions.Add(permission);
+                Permissions.Add(permission);
             }
         }
 
         /**
          * Calls the PagSeguro web service and register this request for authorization
-         * 
+         *
          * @param credentials
          * @return The URL to where the user needs to be redirected to in order to complete the authorization process
          * @throws PagSeguroServiceException
          */
-        public String Register(Credentials credentials, Boolean onlyAuthorizationCode = false)
+
+        public string Register(Credentials credentials, bool onlyAuthorizationCode = false)
         {
             try
             {
@@ -119,11 +118,11 @@ namespace Uol.PagSeguro.Domain.Authorization
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name).Append("(");
-            builder.Append("Reference=").Append(this.Reference).Append(", ");
-            builder.Append("Permissions=").Append(this.Permissions).Append(", ");
-            builder.Append("RedirectURL=").Append(this.Reference).Append(", ");
-            builder.Append("NotificationURL=").Append(this.NotificationURL).Append(")");
+            builder.Append(GetType().Name).Append("(");
+            builder.Append("Reference=").Append(Reference).Append(", ");
+            builder.Append("Permissions=").Append(Permissions).Append(", ");
+            builder.Append("RedirectURL=").Append(Reference).Append(", ");
+            builder.Append("NotificationURL=").Append(NotificationURL).Append(")");
             return builder.ToString();
         }
     }

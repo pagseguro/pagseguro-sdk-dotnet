@@ -12,8 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -26,8 +24,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public CredentialsNameValuePair(string name, string value)
         {
-            this.Name = name;
-            this.Value = value;
+            Name = name;
+            Value = value;
         }
 
         /// <summary>

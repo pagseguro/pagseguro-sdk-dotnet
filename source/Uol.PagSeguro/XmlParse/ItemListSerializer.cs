@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Collections.Generic;
 using System.Xml;
 using Uol.PagSeguro.Domain;
@@ -20,20 +19,19 @@ using Uol.PagSeguro.Domain;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class ItemListSerializer
     {
         internal const string Items = "items";
-        
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="items"></param>
         internal static void Read(XmlReader reader, IList<Item> items)
         {
-
             items.Clear();
 
             if (reader.IsEmptyElement)
@@ -61,6 +59,7 @@ namespace Uol.PagSeguro.XmlParse
                             ItemSerializer.Read(reader, item);
                             items.Add(item);
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

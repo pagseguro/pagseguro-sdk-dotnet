@@ -14,18 +14,18 @@
 
 using System.Collections.Generic;
 using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Util;
 using Uol.PagSeguro.Domain.Direct;
+using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Parse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class TransactionParse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="checkout"></param>
         /// <returns></returns>
@@ -44,7 +44,7 @@ namespace Uol.PagSeguro.Parse
             {
                 data["receiverEmail"] = checkout.ReceiverEmail;
             }
-   
+
             // reference
             if (checkout.Reference != null)
             {
@@ -54,7 +54,6 @@ namespace Uol.PagSeguro.Parse
             // sender
             if (checkout.Sender != null)
             {
-
                 if (checkout.Sender.Name != null)
                 {
                     data["senderName"] = checkout.Sender.Name;
@@ -91,9 +90,12 @@ namespace Uol.PagSeguro.Parse
                         {
                             if (document != null)
                             {
-                                if (document.Type.Equals("Cadastro de Pessoa Física")) {
+                                if (document.Type.Equals("Cadastro de Pessoa Física"))
+                                {
                                     data["senderCPF"] = document.Value;
-                                } else {
+                                }
+                                else
+                                {
                                     data["senderCNPJ"] = document.Value;
                                 }
                             }
@@ -111,12 +113,10 @@ namespace Uol.PagSeguro.Parse
             // items
             if (checkout.Items.Count > 0)
             {
-
                 var items = checkout.Items;
                 int i = 0;
                 foreach (Item item in items)
                 {
-
                     i++;
 
                     if (item.Id != null)
@@ -155,7 +155,6 @@ namespace Uol.PagSeguro.Parse
             // shipping
             if (checkout.Shipping != null)
             {
-
                 if (checkout.Shipping.ShippingType != null && checkout.Shipping.ShippingType.Value != null)
                 {
                     data["shippingType"] = checkout.Shipping.ShippingType.Value.ToString();
@@ -202,7 +201,6 @@ namespace Uol.PagSeguro.Parse
                         data["shippingAddressCountry"] = checkout.Shipping.Address.Country;
                     }
                 }
-
             }
 
             // maxAge
@@ -270,7 +268,6 @@ namespace Uol.PagSeguro.Parse
                 // billing
                 if (creditcard.Billing != null)
                 {
-
                     // address
                     if (creditcard.Billing.Address != null)
                     {
@@ -359,7 +356,7 @@ namespace Uol.PagSeguro.Parse
                     }
                     if (creditcard.Installment.Value > 0)
                     {
-                        data["installmentValue"] = PagSeguroUtil.DecimalFormat((decimal)creditcard.Installment.Value);
+                        data["installmentValue"] = PagSeguroUtil.DecimalFormat(creditcard.Installment.Value);
                     }
                     if (creditcard.Installment.NoInterestInstallmentQuantity > 0)
                     {
@@ -373,7 +370,6 @@ namespace Uol.PagSeguro.Parse
                     data["paymentMethod"] = creditcard.PaymentMethod;
                 }
             }
-
 
             //Verify if exists the boleto checkout data
             if (checkout is BoletoCheckout)

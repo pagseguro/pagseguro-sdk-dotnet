@@ -20,19 +20,17 @@ using Uol.PagSeguro.Domain.Authorization;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class AuthorizationPermissionListSerializer
     {
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="permissions">PagSeguro AuthorizationPermissions List</param>
         internal static void Read(XmlReader reader, IList<AuthorizationPermissions> permissions)
         {
-
             permissions.Clear();
 
             if (reader.IsEmptyElement)
@@ -45,7 +43,6 @@ namespace Uol.PagSeguro.XmlParse
 
             while (!reader.EOF)
             {
-
                 if (XMLParserUtils.IsEndElement(reader, SerializerHelper.Permissions))
                 {
                     XMLParserUtils.SkipNode(reader);
@@ -61,6 +58,7 @@ namespace Uol.PagSeguro.XmlParse
                             AuthorizationPermissionSerializer.Read(reader, permission);
                             permissions.Add(permission);
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

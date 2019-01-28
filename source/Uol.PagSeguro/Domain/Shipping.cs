@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -47,7 +46,7 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Total shipping cost. This is a read-only property and it is calculated by PagSeguro 
+        /// Total shipping cost. This is a read-only property and it is calculated by PagSeguro
         /// based on the shipping information provided with the payment request.
         /// </summary>
         public decimal? Cost

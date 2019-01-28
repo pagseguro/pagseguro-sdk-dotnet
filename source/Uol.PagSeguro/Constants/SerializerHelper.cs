@@ -12,23 +12,24 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-
 namespace Uol.PagSeguro.Constants
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class SerializerHelper
     {
         //Global
         internal const string Code = "code";
+
         internal const string Date = "date";
         internal const string Reference = "reference";
         internal const string Status = "status";
         internal const string LastUpdate = "lastUpdate";
 
         //Transaction
-        internal const string Transaction = "transaction"; 
+        internal const string Transaction = "transaction";
+
         internal const string TransactionType = "type";
         internal const string TransactionStatus = "status";
         internal const string PaymentLink = "paymentLink";
@@ -43,12 +44,14 @@ namespace Uol.PagSeguro.Constants
 
         //PreApproval
         internal const string PreApproval = "preApproval";
+
         internal const string Name = "name";
         internal const string Tracker = "tracker";
         internal const string Charge = "charge";
 
         //Authorization
         internal const string AuthorizationSearchResult = "authorizationSearchResult";
+
         internal const string Authorization = "authorization";
         internal const string Authorizations = "authorizations";
         internal const string Permission = "permission";
@@ -59,12 +62,12 @@ namespace Uol.PagSeguro.Constants
 
         //Installment
         internal const string Installments = "installments";
+
         internal const string Installment = "installment";
         internal const string CreditCardBrand = "cardBrand";
         internal const string Amount = "amount";
         internal const string Quantity = "quantity";
         internal const string TotalAmount = "totalAmount";
         internal const string InterestFree = "interestFree";
-        
     }
 }

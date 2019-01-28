@@ -22,11 +22,10 @@ using Uol.PagSeguro.Service;
 
 namespace FindAuthorizationByDate
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
@@ -38,15 +37,14 @@ namespace FindAuthorizationByDate
 
             try
             {
-
                 ApplicationCredentials credentials = PagSeguroConfiguration.ApplicationCredentials(isSandbox);
 
                 AuthorizationSearchResult result = AuthorizationSearchService.SearchByDate(credentials, initialDate, finalDate, pageNumber, maxPageResults);
 
                 Console.WriteLine(result);
                 Console.ReadKey();
-            } 
-            catch (WebException exception) 
+            }
+            catch (WebException exception)
             {
                 Console.WriteLine(exception.Message + "\n");
                 Console.ReadKey();

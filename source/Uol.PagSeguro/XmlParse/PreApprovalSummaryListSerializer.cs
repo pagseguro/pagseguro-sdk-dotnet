@@ -20,21 +20,19 @@ using Uol.PagSeguro.Domain;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PreApprovalSummaryListSerializer
     {
-
         internal const string PreApprovals = "preApprovals";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="preApprovals"></param>
         internal static void Read(XmlReader reader, IList<PreApprovalSummary> preApprovals)
         {
-
             preApprovals.Clear();
 
             if (reader.IsEmptyElement)
@@ -47,7 +45,6 @@ namespace Uol.PagSeguro.XmlParse
 
             while (!reader.EOF)
             {
- 
                 if (XMLParserUtils.IsEndElement(reader, PreApprovalSummaryListSerializer.PreApprovals))
                 {
                     XMLParserUtils.SkipNode(reader);
@@ -63,6 +60,7 @@ namespace Uol.PagSeguro.XmlParse
                             PreApprovalSummarySerializer.Read(reader, preApproval);
                             preApprovals.Add(preApproval);
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

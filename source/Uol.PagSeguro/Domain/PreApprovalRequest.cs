@@ -13,10 +13,8 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Text;
 using Uol.PagSeguro.Service;
-
 
 namespace Uol.PagSeguro.Domain
 {
@@ -56,7 +54,7 @@ namespace Uol.PagSeguro.Domain
         /// Reference code
         /// </summary>
         /// <remarks>
-        /// Optional. You can use the reference code to store an identifier so you can 
+        /// Optional. You can use the reference code to store an identifier so you can
         /// associate the PagSeguro transaction to a transaction in your system.
         /// </remarks>
         public string Reference
@@ -84,7 +82,7 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Payment currency. 
+        /// Payment currency.
         /// </summary>
         /// <remarks>
         /// The expected currency values are defined in the <c cref="T:Uol.PagSeguro.Domain.Currency">Currencty</c> class.
@@ -93,19 +91,19 @@ namespace Uol.PagSeguro.Domain
         {
             get;
             set;
-        }        
+        }
 
         /// <summary>
         /// Determines for which url PagSeguro will send the order related notifications codes.
         /// <remarks>
         /// Optional. Any change happens in the transaction status, a new notification request will be send
         /// to this url. You can use that for update the related order.
-        /// </remarks>    
+        /// </remarks>
         /// </summary>
-        public string NotificationURL 
-        { 
-            get; 
-            set; 
+        public string NotificationURL
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -115,14 +113,14 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                if (this._metaData == null)
+                if (_metaData == null)
                 {
-                    this._metaData = new MetaData();
+                    _metaData = new MetaData();
                 }
-                return this._metaData;
+                return _metaData;
             }
 
-            set { this._metaData = value; }
+            set => _metaData = value;
         }
 
         /// <summary>
@@ -132,13 +130,13 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                if (this._parameter == null)
+                if (_parameter == null)
                 {
-                    this._parameter = new Parameter();
+                    _parameter = new Parameter();
                 }
-                return this._parameter;
+                return _parameter;
             }
-            set { this._parameter = value; }
+            set => _parameter = value;
         }
 
         /// <summary>
@@ -146,7 +144,7 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public PreApprovalRequest()
         {
-            this.Currency = Uol.PagSeguro.Constants.Currency.Brl;
+            Currency = Uol.PagSeguro.Constants.Currency.Brl;
         }
 
         /// <summary>
@@ -160,24 +158,24 @@ namespace Uol.PagSeguro.Domain
         }
 
         /// <summary>
-        /// Add a parameter for PagSeguro metadata pre-approval request 
+        /// Add a parameter for PagSeguro metadata pre-approval request
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
         public void AddMetaData(string key, string value)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value));
+            MetaData.Items.Add(new MetaDataItem(key, value));
         }
 
         /// <summary>
-        /// Add a parameter for PagSeguro metadata pre-approval request 
+        /// Add a parameter for PagSeguro metadata pre-approval request
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="group"></param>
         public void AddMetaData(string key, string value, int? group)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value, group));
+            MetaData.Items.Add(new MetaDataItem(key, value, group));
         }
 
         /// <summary>
@@ -187,7 +185,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="value"></param>
         public void AddParameter(string key, string value)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value));
+            Parameter.Items.Add(new ParameterItem(key, value));
         }
 
         /// <summary>
@@ -198,7 +196,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public void AddIndexedParameter(string key, string value, int? group)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value, group));
+            Parameter.Items.Add(new ParameterItem(key, value, group));
         }
 
         /// <summary>
@@ -208,9 +206,9 @@ namespace Uol.PagSeguro.Domain
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name).Append("(");
-            builder.Append("Reference=").Append(this.Reference).Append(", ");
-            string email = this.Sender == null ? null : this.Sender.Email;
+            builder.Append(GetType().Name).Append("(");
+            builder.Append("Reference=").Append(Reference).Append(", ");
+            string email = Sender == null ? null : Sender.Email;
             builder.Append("Sender.Email=").Append(email).Append(")");
             return builder.ToString();
         }

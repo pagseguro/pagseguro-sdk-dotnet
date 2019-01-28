@@ -13,19 +13,19 @@
 //   limitations under the License.
 
 using System.Collections.Generic;
+using Uol.PagSeguro.Constants.PreApproval;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Util;
-using Uol.PagSeguro.Constants.PreApproval;
 
 namespace Uol.PagSeguro.Parse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PreApprovalParse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="preApproval"></param>
         /// <returns></returns>
@@ -42,7 +42,6 @@ namespace Uol.PagSeguro.Parse
             // sender
             if (preApproval.Sender != null)
             {
-
                 if (preApproval.Sender.Name != null)
                 {
                     data["senderName"] = preApproval.Sender.Name;
@@ -97,13 +96,19 @@ namespace Uol.PagSeguro.Parse
                 data["preApprovalMaxPaymentsPerPeriod"] = preApproval.PreApproval.MaxPaymentsPerPeriod.ToString();
 
                 if (preApproval.PreApproval.Period == Period.Yearly)
+                {
                     data["preApprovalDayOfYear"] = preApproval.PreApproval.DayOfYear.ToString();
+                }
 
                 if (preApproval.PreApproval.Period == Period.Monthly || preApproval.PreApproval.Period == Period.Bimonthly || preApproval.PreApproval.Period == Period.Trimonthly || preApproval.PreApproval.Period == Period.SemiAnnually)
+                {
                     data["preApprovalDayOfMonth"] = preApproval.PreApproval.DayOfMonth.ToString();
+                }
 
                 if (preApproval.PreApproval.Period == Period.Weekly)
+                {
                     data["preApprovalDayOfWeek"] = preApproval.PreApproval.DayOfWeek.ToString();
+                }
             }
 
             // currency

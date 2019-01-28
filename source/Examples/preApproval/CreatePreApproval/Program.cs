@@ -13,48 +13,48 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Constants;
+using Uol.PagSeguro.Constants.PreApproval;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
-using Uol.PagSeguro.Constants.PreApproval;
-using System.Diagnostics;
 
 namespace CreatePreApproval
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
             // Instantiate a new preApproval request
-            PreApprovalRequest preApproval = new PreApprovalRequest();
+            PreApprovalRequest preApproval = new PreApprovalRequest
+            {
+                // Sets the currency
+                Currency = Currency.Brl,
 
-            // Sets the currency
-            preApproval.Currency = Currency.Brl;
+                // Sets a reference code for this preApproval request, it is useful to identify this payment in future notifications.
+                Reference = "REF1234",
 
-            // Sets a reference code for this preApproval request, it is useful to identify this payment in future notifications.
-            preApproval.Reference = "REF1234";
-
-            // Sets your customer information.
-            preApproval.Sender = new Sender(
+                // Sets your customer information.
+                Sender = new Sender(
                 "Joao Comprador",
                 "comprador@uol.com.br",
                 new Phone("11", "56273440")
-            );
+            )
+            };
 
             // Sets the preApproval informations
             var now = DateTime.Now;
-            preApproval.PreApproval = new PreApproval();
-            preApproval.PreApproval.Charge = Charge.Manual;
-            preApproval.PreApproval.Name = "Seguro contra roubo do Notebook";
-            preApproval.PreApproval.AmountPerPayment = 100.00m;
-            preApproval.PreApproval.MaxAmountPerPeriod = 100.00m;
-            preApproval.PreApproval.MaxPaymentsPerPeriod = 5;
+            preApproval.PreApproval = new PreApproval
+            {
+                Charge = Charge.Manual,
+                Name = "Seguro contra roubo do Notebook",
+                AmountPerPayment = 100.00m,
+                MaxAmountPerPeriod = 100.00m,
+                MaxPaymentsPerPeriod = 5
+            };
             preApproval.PreApproval.Details = string.Format("Todo dia {0} será cobrado o valor de {1} referente ao seguro contra roubo do Notebook.", now.Day, preApproval.PreApproval.AmountPerPayment.ToString("C2"));
             preApproval.PreApproval.Period = Period.Monthly;
             preApproval.PreApproval.DayOfMonth = now.Day;

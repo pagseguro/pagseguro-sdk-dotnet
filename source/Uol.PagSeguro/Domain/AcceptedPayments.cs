@@ -17,11 +17,10 @@ using System.Collections.Generic;
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public interface AcceptedPayments
     {
-
         List<string> Name
         {
             get;
@@ -33,6 +32,5 @@ namespace Uol.PagSeguro.Domain
             get;
             set;
         }
-
     }
 }

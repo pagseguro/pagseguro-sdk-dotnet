@@ -12,14 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PhoneSerializer
     {
@@ -29,13 +28,12 @@ namespace Uol.PagSeguro.XmlParse
         private const string Number = "number";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="phone"></param>
         internal static void Read(XmlReader reader, Phone phone)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -60,9 +58,11 @@ namespace Uol.PagSeguro.XmlParse
                         case PhoneSerializer.AreaCode:
                             phone.AreaCode = reader.ReadElementContentAsString();
                             break;
+
                         case PhoneSerializer.Number:
                             phone.Number = reader.ReadElementContentAsString();
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;
@@ -74,5 +74,5 @@ namespace Uol.PagSeguro.XmlParse
                 }
             }
         }
-   }
+    }
 }

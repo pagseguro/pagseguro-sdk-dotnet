@@ -21,7 +21,6 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class PaymentMethodConfig
     {
-
         private IList<PaymentMethodConfigItem> _config;
 
         /// <summary>
@@ -35,7 +34,7 @@ namespace Uol.PagSeguro.Domain
                 {
                     _config = new List<PaymentMethodConfigItem>();
                 }
-                return this._config;
+                return _config;
             }
         }
     }

@@ -23,9 +23,9 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     internal class PaymentRequestResponse
     {
-        private Uri paymentRedirectBaseUri;
-        private string code = String.Empty;
-        private string transactionCode = String.Empty;
+        private readonly Uri paymentRedirectBaseUri;
+        private string code = string.Empty;
+        private string transactionCode = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the PaymentRequestResponse class
@@ -41,14 +41,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public string Code
         {
-            get
-            {
-                return this.code;
-            }
-            set
-            {
-                this.code = value;
-            }
+            get => code;
+            set => code = value;
         }
 
         /// <summary>
@@ -56,14 +50,8 @@ namespace Uol.PagSeguro.Domain
         /// </summary>
         public string TransactionCode
         {
-            get
-            {
-                return this.transactionCode;
-            }
-            set
-            {
-                this.transactionCode = value;
-            }
+            get => transactionCode;
+            set => transactionCode = value;
         }
 
         /// <summary>
@@ -83,9 +71,11 @@ namespace Uol.PagSeguro.Domain
             get
             {
                 QueryStringBuilder builder = new QueryStringBuilder();
-                builder.Append("code", this.Code);
-                UriBuilder uriBuilder = new UriBuilder(this.paymentRedirectBaseUri);
-                uriBuilder.Query = builder.ToString();
+                builder.Append("code", Code);
+                UriBuilder uriBuilder = new UriBuilder(paymentRedirectBaseUri)
+                {
+                    Query = builder.ToString()
+                };
                 return uriBuilder.Uri;
             }
         }
@@ -97,11 +87,11 @@ namespace Uol.PagSeguro.Domain
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Code=").Append(this.Code).Append(", ");
-            builder.Append("RegistrationDate=").Append(this.RegistrationDate).Append(", ");
-            builder.Append("PaymentRedirectUri=").Append(this.PaymentRedirectUri.ToString());
+            builder.Append("Code=").Append(Code).Append(", ");
+            builder.Append("RegistrationDate=").Append(RegistrationDate).Append(", ");
+            builder.Append("PaymentRedirectUri=").Append(PaymentRedirectUri.ToString());
             builder.Append(')');
             return builder.ToString();
         }

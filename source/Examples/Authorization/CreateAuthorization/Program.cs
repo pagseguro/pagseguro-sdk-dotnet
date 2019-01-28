@@ -22,21 +22,21 @@ using Uol.PagSeguro.Resources;
 
 namespace CreateAuthorization
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            AuthorizationRequest authorization = new AuthorizationRequest();
+            AuthorizationRequest authorization = new AuthorizationRequest
+            {
+                Reference = "REF1234",
 
-            authorization.Reference = "REF1234";
+                RedirectURL = "http://www.lojamodelo.com.br/redirect",
 
-            authorization.RedirectURL = "http://www.lojamodelo.com.br/redirect";
-
-            authorization.NotificationURL = "http://www.lojamodelo.com.br/notification";
+                NotificationURL = "http://www.lojamodelo.com.br/notification"
+            };
 
             authorization.addPermission(PermissionType.CREATE_CHECKOUTS);
             authorization.addPermission(PermissionType.DIRECT_PAYMENT);
@@ -46,10 +46,9 @@ namespace CreateAuthorization
 
             try
             {
-
                 ApplicationCredentials credentials = PagSeguroConfiguration.ApplicationCredentials(isSandbox);
 
-                String result = authorization.Register(credentials);
+                string result = authorization.Register(credentials);
 
                 Console.WriteLine("URL da autorização: " + result);
                 Console.ReadKey();

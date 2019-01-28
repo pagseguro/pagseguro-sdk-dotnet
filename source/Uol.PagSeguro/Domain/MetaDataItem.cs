@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Domain
@@ -27,31 +26,28 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// key wich represents a metadata item
         /// </summary>
-        public string Key 
-        { 
-            get; 
-            set; 
+        public string Key
+        {
+            get;
+            set;
         }
-        
+
         /// <summary>
         /// Value of a metadata item
         /// </summary>
-        public string Value 
-        { 
-            get { return this._value; } 
-            set 
-            {
-                this._value = NormalizeParameter(value); 
-            } 
+        public string Value
+        {
+            get => _value;
+            set => _value = NormalizeParameter(value);
         }
-        
+
         /// <summary>
         /// group wich metadata item is inserted
         /// </summary>
-        public int? Group 
-        { 
-            get; 
-            set; 
+        public int? Group
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -61,8 +57,8 @@ namespace Uol.PagSeguro.Domain
         /// <param name="value"></param>
         public MetaDataItem(string key, string value)
         {
-            this.Key = key;
-            this.Value = this.NormalizeParameter(value);
+            Key = key;
+            Value = NormalizeParameter(value);
         }
 
         /// <summary>
@@ -73,11 +69,11 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public MetaDataItem(string key, string value, int? group) : this(key, value)
         {
-            this.Group = group;
-        }        
+            Group = group;
+        }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameterValue"></param>
         /// <returns></returns>
@@ -85,18 +81,21 @@ namespace Uol.PagSeguro.Domain
         {
             parameterValue = parameterValue.Trim().ToLower();
 
-            switch (MetaDataItemKeys.GetItemDescriptionByKey(this.Key))
+            switch (MetaDataItemKeys.GetItemDescriptionByKey(Key))
             {
                 case "CPF do passageiro":
                     parameterValue = PagSeguroUtil.GetOnlyNumbers(parameterValue);
                     break;
+
                 case "Tempo no jogo em dias":
                     parameterValue = PagSeguroUtil.GetOnlyNumbers(parameterValue);
                     break;
+
                 case "Celular de recarga":
                     parameterValue = PagSeguroUtil.GetOnlyNumbers(parameterValue);
                     break;
-                default :
+
+                default:
                     break;
             }
 

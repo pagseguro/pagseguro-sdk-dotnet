@@ -13,29 +13,24 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
-using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
-using Uol.PagSeguro.XmlParse;
 
 namespace CancelPreApproval
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            String transactionCode = "3B1097583EC84C7E9EDC391949F9C4BC";
+            string transactionCode = "3B1097583EC84C7E9EDC391949F9C4BC";
 
             try
             {
-
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 // TODO: Substitute the code below with a valid transaction code for your transaction

@@ -12,9 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-using Uol.PagSeguro.Util;
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -56,8 +53,8 @@ namespace Uol.PagSeguro.Domain
         /// <param name="value"></param>
         public ParameterItem(string key, string value)
         {
-            this.Key = key;
-            this.Value = value;
+            Key = key;
+            Value = value;
         }
 
         /// <summary>
@@ -68,7 +65,7 @@ namespace Uol.PagSeguro.Domain
         /// <param name="group"></param>
         public ParameterItem(string key, string value, int? group) : this(key, value)
         {
-            this.Group = group;
+            Group = group;
         }
     }
 }

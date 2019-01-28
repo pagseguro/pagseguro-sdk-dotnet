@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Uol.PagSeguro.Service;
-
-namespace Uol.PagSeguro.Domain.Direct
+﻿namespace Uol.PagSeguro.Domain.Direct
 {
     public class BoletoCheckout : Checkout
     {
@@ -21,7 +16,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// </summary>
         public BoletoCheckout()
         {
-            this.PaymentMethod = "Boleto";
+            PaymentMethod = "Boleto";
         }
     }
 }

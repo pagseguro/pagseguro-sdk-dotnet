@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace Uol.PagSeguro.Domain.Direct
 {
@@ -12,7 +10,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <summary>
         /// Holder name
         /// </summary>
-        public String Name
+        public string Name
         {
             get;
             set;
@@ -39,7 +37,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <summary>
         /// Holder birthdate
         /// </summary>
-        public String Birthdate
+        public string Birthdate
         {
             get;
             set;
@@ -52,23 +50,23 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <param name="phone"></param>
         /// <param name="document"></param>
         /// <param name="birthDate"></param>
-        public Holder(String name = null, Phone phone = null, HolderDocument document = null, String birthDate = null)
+        public Holder(string name = null, Phone phone = null, HolderDocument document = null, string birthDate = null)
         {
-            if (!String.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(name))
             {
-                this.Name = name;
+                Name = name;
             }
             if (phone != null)
             {
-                this.Phone = phone;
+                Phone = phone;
             }
             if (document != null)
             {
-                this.Document = document;
+                Document = document;
             }
-            if (!String.IsNullOrEmpty(birthDate))
+            if (!string.IsNullOrEmpty(birthDate))
             {
-                this.Birthdate = birthDate;
+                Birthdate = birthDate;
             }
         }
 
@@ -79,12 +77,12 @@ namespace Uol.PagSeguro.Domain.Direct
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Name=").Append(this.Name).Append(", ");
-            builder.Append("Phone=").Append(this.Phone.ToString()).Append(", ");
-            builder.Append("Document=").Append(this.Document.ToString());
-            builder.Append("Birthdate=").Append(this.Birthdate);
+            builder.Append("Name=").Append(Name).Append(", ");
+            builder.Append("Phone=").Append(Phone.ToString()).Append(", ");
+            builder.Append("Document=").Append(Document.ToString());
+            builder.Append("Birthdate=").Append(Birthdate);
             builder.Append(')');
             return builder.ToString();
         }

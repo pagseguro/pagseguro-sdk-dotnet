@@ -13,18 +13,15 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Text;
-using Uol.PagSeguro.Domain.Authorization;
 
 namespace Uol.PagSeguro.Domain.Authorization
 {
     /// <summary>
     /// Represents a authorization response, typically returned by search services.
     /// </summary>
-    public class AuthorizationResponse 
+    public class AuthorizationResponse
     {
-
         /// <summary>
         /// Code
         /// </summary>
@@ -50,10 +47,10 @@ namespace Uol.PagSeguro.Domain.Authorization
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Code=").Append(this.Code).Append(", ");
-            builder.Append("Date=").Append(this.Date);
+            builder.Append("Code=").Append(Code).Append(", ");
+            builder.Append("Date=").Append(Date);
             builder.Append(')');
             return builder.ToString();
         }

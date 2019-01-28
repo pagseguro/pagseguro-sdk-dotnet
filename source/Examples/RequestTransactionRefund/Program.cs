@@ -13,30 +13,25 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
-using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
-using Uol.PagSeguro.XmlParse;
 
 namespace RequestTransactionRefund
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            String transactionCode = "F3D9490291B54FA59F39B22AB9E76799";
-            Decimal refundValue = 150.00m;
+            string transactionCode = "F3D9490291B54FA59F39B22AB9E76799";
+            decimal refundValue = 150.00m;
 
             try
             {
-
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 // TODO: Substitute the code below with a valid transaction code for your transaction

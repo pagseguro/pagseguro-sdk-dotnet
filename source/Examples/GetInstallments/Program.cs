@@ -13,9 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Installment;
 using Uol.PagSeguro.Exception;
@@ -24,28 +21,26 @@ using Uol.PagSeguro.Service;
 
 namespace GetInstallments
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            Decimal amount = 1000.00m;
-            String creditCardBrand = "visa";
-            Int32 maxInstallmentNoInterest = 5;
+            decimal amount = 1000.00m;
+            string creditCardBrand = "visa";
+            int maxInstallmentNoInterest = 5;
 
             try
             {
-
                 AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 
                 Installments result = InstallmentService.GetInstallments(credentials, amount, creditCardBrand, maxInstallmentNoInterest);
 
                 Console.WriteLine("Começando listagem de parcelas - \n");
                 foreach (Installment installment in result.Get())
-                { 
+                {
                     Console.WriteLine(installment.ToString());
                 }
                 Console.WriteLine(" - Terminando listagem de parcelas ");
@@ -61,7 +56,6 @@ namespace GetInstallments
                     Console.WriteLine(element + "\n");
                 }
                 Console.ReadKey();
-
             }
         }
     }

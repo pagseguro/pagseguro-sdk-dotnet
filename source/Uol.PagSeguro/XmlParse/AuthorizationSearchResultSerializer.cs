@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain.Authorization;
@@ -20,13 +19,12 @@ using Uol.PagSeguro.Domain.Authorization;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class AuthorizationSearchResultSerializer
     {
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="result">PagSeguro AuthorizationSearchResult</param>
@@ -39,18 +37,16 @@ namespace Uol.PagSeguro.XmlParse
                 return;
             }
             reader.ReadStartElement(SerializerHelper.AuthorizationSearchResult);
- 
+
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-
                 if (XMLParserUtils.IsEndElement(reader, SerializerHelper.AuthorizationSearchResult))
                 {
                     XMLParserUtils.SkipNode(reader);
                     break;
                 }
-                
 
                 if (reader.NodeType == XmlNodeType.Element)
                 {
@@ -59,9 +55,11 @@ namespace Uol.PagSeguro.XmlParse
                         case SerializerHelper.Date:
                             result.Date = reader.ReadElementContentAsDateTime();
                             break;
+
                         case SerializerHelper.Authorizations:
                             AuthorizationSummaryListSerializer.Read(reader, result.Authorizations);
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

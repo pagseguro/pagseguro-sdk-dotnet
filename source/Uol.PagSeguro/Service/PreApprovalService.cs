@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
+using System.Web;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
@@ -24,7 +25,6 @@ using Uol.PagSeguro.Parse;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Util;
 using Uol.PagSeguro.XmlParse;
-using System.Web;
 
 namespace Uol.PagSeguro.Service
 {
@@ -33,7 +33,6 @@ namespace Uol.PagSeguro.Service
     /// </summary>
     public static class PreApprovalService
     {
-
         /// <summary>
         /// CreatePreApproval is the actual implementation of the Register method
         /// This separation serves as test hook to validate the Uri
@@ -44,29 +43,27 @@ namespace Uol.PagSeguro.Service
         /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
         public static Uri CreatePreApproval(Credentials credentials, PreApprovalRequest preApproval)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - begin", preApproval));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - begin", preApproval));
 
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.PreApprovalUri.AbsoluteUri, BuildPreApprovalUrl(credentials, preApproval)))
                 {
-
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
                         using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                         {
                             PreApprovalRequestResponse preApprovalResponse = new PreApprovalRequestResponse(PagSeguroConfiguration.PreApprovalRedirectUri);
                             PreApprovalSerializer.Read(reader, preApprovalResponse);
-                            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - end {1}", preApproval, preApprovalResponse.PreApprovalRedirectUri));
+                            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - end {1}", preApproval, preApprovalResponse.PreApprovalRedirectUri));
                             return preApprovalResponse.PreApprovalRedirectUri;
                         }
                     }
                     else
                     {
                         PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(response);
-                        PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - error {1}", preApproval, pse));
+                        PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - error {1}", preApproval, pse));
                         throw pse;
                     }
                 }
@@ -74,7 +71,7 @@ namespace Uol.PagSeguro.Service
             catch (WebException exception)
             {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - error {1}", preApproval, pse));
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.Register({0}) - error {1}", preApproval, pse));
                 throw pse;
             }
         }
@@ -87,28 +84,26 @@ namespace Uol.PagSeguro.Service
         /// <returns>The PreApprovalRequestResponse wich contains the response</returns>
         public static bool CancelPreApproval(Credentials credentials, string preApprovalCode)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CancelPreApproval({0}) - begin", preApprovalCode));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.CancelPreApproval({0}) - begin", preApprovalCode));
 
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpGetConnection(BuildCancelUrl(credentials, preApprovalCode)))
                 {
-
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
                         using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                         {
                             PreApprovalRequestResponse paymentResponse = new PreApprovalRequestResponse(PagSeguroConfiguration.PreApprovalCancelUri);
                             PreApprovalSerializer.Read(reader, paymentResponse);
-                            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CancelPreApproval({0}) - end {1}", preApprovalCode, paymentResponse.Status));
+                            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.CancelPreApproval({0}) - end {1}", preApprovalCode, paymentResponse.Status));
                             return paymentResponse.Status.Equals("OK", StringComparison.CurrentCultureIgnoreCase);
                         }
                     }
                     else
                     {
                         PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(response);
-                        PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CancelPreApproval({0}) - error {1}", preApprovalCode, pse));
+                        PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.CancelPreApproval({0}) - error {1}", preApprovalCode, pse));
                         throw pse;
                     }
                 }
@@ -116,7 +111,7 @@ namespace Uol.PagSeguro.Service
             catch (WebException exception)
             {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.CancelPreApproval({0}) - error {1}", preApprovalCode, pse));
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.CancelPreApproval({0}) - error {1}", preApprovalCode, pse));
                 throw pse;
             }
         }
@@ -129,30 +124,27 @@ namespace Uol.PagSeguro.Service
         /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
         public static string ChargePreApproval(Credentials credentials, PaymentRequest payment)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - begin", payment));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - begin", payment));
 
             try
             {
                 using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
                     PagSeguroConfiguration.PreApprovalPaymentUri.AbsoluteUri, BuildChargeUrl(credentials, payment)))
                 {
-                    
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
                         using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                         {
-                            
                             PaymentRequestResponse chargeResponse = new PaymentRequestResponse(PagSeguroConfiguration.PreApprovalPaymentUri);
                             PaymentSerializer.Read(reader, chargeResponse);
-                            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - end {1}", payment, chargeResponse.PaymentRedirectUri));
+                            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - end {1}", payment, chargeResponse.PaymentRedirectUri));
                             return chargeResponse.TransactionCode;
                         }
                     }
                     else
                     {
                         PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(response);
-                        PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - error {1}", payment, pse));
+                        PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - error {1}", payment, pse));
                         throw pse;
                     }
                 }
@@ -160,13 +152,13 @@ namespace Uol.PagSeguro.Service
             catch (WebException exception)
             {
                 PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - error {1}", payment, pse));
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "PreApprovalService.ChargePreApproval({0}) - error {1}", payment, pse));
                 throw pse;
             }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials"></param>
         /// <param name="preApproval"></param>
@@ -178,7 +170,7 @@ namespace Uol.PagSeguro.Service
 
             builder.
                 EncodeCredentialsAsQueryString(credentials);
-            
+
             foreach (KeyValuePair<string, string> pair in data)
             {
                 builder.Append(pair.Key, pair.Value);
@@ -188,7 +180,7 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials"></param>
         /// <param name="preApprovalCode"></param>
@@ -203,7 +195,7 @@ namespace Uol.PagSeguro.Service
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="credentials"></param>
         /// <param name="payment"></param>

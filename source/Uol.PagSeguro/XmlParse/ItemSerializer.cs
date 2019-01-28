@@ -12,14 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class ItemSerializer
     {
@@ -33,13 +32,12 @@ namespace Uol.PagSeguro.XmlParse
         private const string ShippingCost = "shippingCost";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="item"></param>
         internal static void Read(XmlReader reader, Item item)
         {
-
             if (reader.IsEmptyElement)
             {
                 XMLParserUtils.SkipNode(reader);
@@ -64,21 +62,27 @@ namespace Uol.PagSeguro.XmlParse
                         case ItemSerializer.Id:
                             item.Id = reader.ReadElementContentAsString();
                             break;
+
                         case ItemSerializer.Description:
                             item.Description = reader.ReadElementContentAsString();
                             break;
+
                         case ItemSerializer.Quantity:
                             item.Quantity = reader.ReadElementContentAsInt();
                             break;
+
                         case ItemSerializer.Amount:
                             item.Amount = reader.ReadElementContentAsDecimal();
                             break;
+
                         case ItemSerializer.Weight:
                             item.Weight = reader.ReadElementContentAsLong();
                             break;
+
                         case ItemSerializer.ShippingCost:
                             item.ShippingCost = reader.ReadElementContentAsDecimal();
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

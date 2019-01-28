@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -153,7 +152,7 @@ namespace Uol.PagSeguro.Domain
         /// Banco Real online transfer
         /// </summary>
         public const int RealOnlineTransfer = 305;
-        
+
         /// <summary>
         /// Banrisul online transfer
         /// </summary>

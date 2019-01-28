@@ -12,7 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitation
 
-using System;
 using System.Xml;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain.Authorization;
@@ -20,13 +19,12 @@ using Uol.PagSeguro.Domain.Authorization;
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class AuthorizationSummarySerializer
     {
-        
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="result">PagSeguro AuthorizationSummary</param>
@@ -39,12 +37,11 @@ namespace Uol.PagSeguro.XmlParse
             }
 
             reader.ReadStartElement(SerializerHelper.Authorization);
- 
+
             reader.MoveToContent();
 
             while (!reader.EOF)
             {
-
                 if (XMLParserUtils.IsEndElement(reader, SerializerHelper.Authorization))
                 {
                     XMLParserUtils.SkipNode(reader);
@@ -58,18 +55,23 @@ namespace Uol.PagSeguro.XmlParse
                         case SerializerHelper.Code:
                             result.Code = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.CreationDate:
                             result.CreationDate = reader.ReadElementContentAsDateTime();
                             break;
+
                         case SerializerHelper.Reference:
                             result.Reference = reader.ReadElementContentAsString();
                             break;
+
                         case SerializerHelper.Account:
                             AuthorizationAccountSerializer.Read(reader, result);
                             break;
+
                         case SerializerHelper.Permissions:
                             AuthorizationPermissionListSerializer.Read(reader, result.Permissions);
                             break;
+
                         default:
                             XMLParserUtils.SkipElement(reader);
                             break;

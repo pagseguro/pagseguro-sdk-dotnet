@@ -14,7 +14,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Uol.PagSeguro.Domain.Authorization
@@ -24,7 +23,7 @@ namespace Uol.PagSeguro.Domain.Authorization
     /// </summary>
     public class AuthorizationSearchResult
     {
-        private List<AuthorizationSummary> authorizations = new List<AuthorizationSummary>();
+        private readonly List<AuthorizationSummary> authorizations = new List<AuthorizationSummary>();
 
         /// <summary>
         /// date
@@ -38,13 +37,7 @@ namespace Uol.PagSeguro.Domain.Authorization
         /// <summary>
         /// Authorizations in this page
         /// </summary>
-        public IList<AuthorizationSummary> Authorizations
-        {
-            get
-            {
-                return this.authorizations;
-            }
-        }
+        public IList<AuthorizationSummary> Authorizations => authorizations;
 
         /// <summary>
         /// Returns a string that represents the current object
@@ -53,16 +46,19 @@ namespace Uol.PagSeguro.Domain.Authorization
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Date=").Append(this.Date).Append(", ");
+            builder.Append("Date=").Append(Date).Append(", ");
             builder.Append("Authorizations=").Append("(");
             int counter = 1;
-            foreach (AuthorizationSummary authorization in this.Authorizations)
+            foreach (AuthorizationSummary authorization in Authorizations)
             {
-                if (this.Authorizations.Count == counter) {
+                if (Authorizations.Count == counter)
+                {
                     builder.Append(authorization.Code);
-                } else {
+                }
+                else
+                {
                     builder.Append(authorization.Code).Append(", ");
                     counter++;
                 }

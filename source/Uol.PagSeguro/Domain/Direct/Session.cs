@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace Uol.PagSeguro.Domain.Direct
 {
-
     /// <summary>
     /// Represents a direct payment session
     /// </summary>

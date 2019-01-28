@@ -14,7 +14,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Uol.PagSeguro.Domain
@@ -24,7 +23,7 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class TransactionSearchResult
     {
-        private List<TransactionSummary> transactions = new List<TransactionSummary>();
+        private readonly List<TransactionSummary> transactions = new List<TransactionSummary>();
 
         /// <summary>
         /// Date/time when this search was executed
@@ -56,13 +55,7 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Transactions in this page
         /// </summary>
-        public IList<TransactionSummary> Transactions
-        {
-            get
-            {
-                return this.transactions;
-            }
-        }
+        public IList<TransactionSummary> Transactions => transactions;
 
         /// <summary>
         /// Returns a string that represents the current object
@@ -71,12 +64,12 @@ namespace Uol.PagSeguro.Domain
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name);
+            builder.Append(GetType().Name);
             builder.Append('(');
-            builder.Append("Date=").Append(this.Date).Append(", ");
-            builder.Append("CurrentPage=").Append(this.CurrentPage).Append(", ");
-            builder.Append("TotalPages=").Append(this.TotalPages).Append(", ");
-            builder.Append("Transactions in this page=").Append(this.Transactions.Count);
+            builder.Append("Date=").Append(Date).Append(", ");
+            builder.Append("CurrentPage=").Append(CurrentPage).Append(", ");
+            builder.Append("TotalPages=").Append(TotalPages).Append(", ");
+            builder.Append("Transactions in this page=").Append(Transactions.Count);
             builder.Append(')');
 
             return builder.ToString();

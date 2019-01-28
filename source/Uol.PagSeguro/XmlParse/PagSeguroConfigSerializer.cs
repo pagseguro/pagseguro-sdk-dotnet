@@ -13,17 +13,13 @@
 //   limitation
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Xml;
 using Uol.PagSeguro.Domain;
 
 namespace Uol.PagSeguro.XmlParse
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal static class PagSeguroConfigSerializer
     {
@@ -68,7 +64,7 @@ namespace Uol.PagSeguro.XmlParse
         internal const string RequestTimeout = "RequestTimeout";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="urlToSearch"></param>
@@ -84,7 +80,7 @@ namespace Uol.PagSeguro.XmlParse
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
@@ -101,7 +97,7 @@ namespace Uol.PagSeguro.XmlParse
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
@@ -136,15 +132,14 @@ namespace Uol.PagSeguro.XmlParse
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
         internal static ApplicationCredentials GetApplicationCredentials(XmlDocument xml, bool sandbox)
         {
-
             string appId;
-            string appKey;          
+            string appKey;
 
             if (sandbox)
             {
@@ -167,7 +162,6 @@ namespace Uol.PagSeguro.XmlParse
                 throw new ArgumentException("To use credentials from config.properties file you must "
                 + "configure the properties credential appId and credential appKey.");
             }
-
         }
     }
 }
