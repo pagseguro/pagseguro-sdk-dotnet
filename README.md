@@ -38,8 +38,6 @@ Visando garantir a segurança dos seus dados no PagSeguro, é necessário que vo
 
 As chamadas via API exigem que você passe uma instância da classe AccountCredentials que é responsável por encapsular suas credenciais.
 
-Mais informações estão disponíveis na [documentação oficial].
-
 
 Dúvidas?
 ----------
