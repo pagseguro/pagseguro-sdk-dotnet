@@ -69,6 +69,62 @@ namespace Uol.PagSeguro.Parse
                         }
                     }
                 }
+
+                // address
+                if (preApproval.Sender.Address != null)
+                {
+                    var address = preApproval.Sender.Address;
+                    
+                    // country
+                    if (address.Country != null)
+                    {
+                        data["senderAddressCountry"] = address.Country;
+                    }
+
+                    // state
+                    if (address.State != null)
+                    {
+                        data["senderAddressState"] = address.State;
+                    }
+
+                    // city
+                    if (address.City != null)
+                    {
+                        data["senderAddressCity"] = address.City;
+                    }
+
+                    // PostalCode
+                    if (address.PostalCode != null)
+                    {
+                        data["senderAddressPostalCode"] = address.PostalCode;
+                    }
+
+                    // PostalCode
+                    if (address.District != null)
+                    {
+                        data["senderAddressDistrict"] = address.District;
+                    }
+
+                    // Complement
+                    if (address.Complement != null)
+                    {
+                        data["senderAddressComplement"] = address.Complement;
+                    }
+
+                    // Address Number
+                    if (address.Number != null)
+                    {
+                        data["senderAddressNumber"] = address.Number;
+                    }
+
+                    // Street
+                    if (address.Street != null)
+                    {
+                        data["senderAddressStreet"] = address.Street;
+                    }
+
+
+                }
             }
 
             data["preApprovalCharge"] = preApproval.PreApproval.Charge;
