@@ -16,44 +16,20 @@ using System.Collections.Generic;
 
 namespace Uol.PagSeguro.Domain
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class ExcludePaymentMethod : AcceptedPayments
+    /// <inheritdoc />
+    public class ExcludePaymentMethod : IAcceptedPayments
     {
+        /// <inheritdoc />
+        public List<string> Name { get; set; }
 
-        private List<string> _name;
-        private string _group;
+        /// <inheritdoc />
+        public string Group { get; set; }
 
-        public List<string> Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-
-        public string Group
-        {
-            get
-            {
-                return this._group;
-            }
-            set
-            {
-                this._group = value;
-            }
-        }
-
+        /// <inheritdoc />
         public ExcludePaymentMethod(string group, List<string> name)
         {
-            this._name = name;
-            this._group = group;
+            Name = name;
+            Group = group;
         }
-
     }
 }

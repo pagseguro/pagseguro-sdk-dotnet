@@ -21,39 +21,28 @@ namespace Uol.PagSeguro.Domain
     public class Shipping
     {
         /// <summary>
-        /// Initializes a new instance of the Shipping class
-        /// </summary>
-        public Shipping()
-        {
-        }
-
-        /// <summary>
         /// Shipping address
         /// </summary>
-        public Address Address
-        {
-            get;
-            set;
-        }
+        public Address Address { get; set; }
 
         /// <summary>
         /// Shipping type. See the ShippingType helper class for a list of known shipping
         /// types.
         /// </summary>
-        public int? ShippingType
-        {
-            get;
-            set;
-        }
+        public int? ShippingType { get; set; }
 
         /// <summary>
         /// Total shipping cost. This is a read-only property and it is calculated by PagSeguro 
         /// based on the shipping information provided with the payment request.
         /// </summary>
-        public decimal? Cost
+        public decimal? Cost { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the Shipping class
+        /// </summary>
+        // ReSharper disable once EmptyConstructor
+        public Shipping()
         {
-            get;
-            set;
         }
     }
 }

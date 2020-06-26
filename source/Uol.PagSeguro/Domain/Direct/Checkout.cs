@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
-using Uol.PagSeguro.Constants;
 
 namespace Uol.PagSeguro.Domain.Direct
 {
@@ -14,29 +12,20 @@ namespace Uol.PagSeguro.Domain.Direct
         private MetaData _metaData;
         private Parameter _parameter;
 
-        public string PaymentMode
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PaymentMode { get; set; }
 
         /// <summary>
         /// Specifies the e- mail should will get paid
         /// </summary>
-        public String ReceiverEmail
-        {
-            get;
-            set;
-        }
+        public string ReceiverEmail { get; set; }
 
         /// <summary>
         /// Party that will be sending the money
         /// </summary>
-        public Sender Sender
-        {
-            get;
-            set;
-        }
+        public Sender Sender { get; set; }
 
         /// <summary>
         /// Payment currency.
@@ -44,26 +33,12 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <remarks>
         /// The expected currency values are defined in the <c cref="T:Uol.PagSeguro.Domain.Currency">Currencty</c> class.
         /// </remarks>
-        public string Currency
-        {
-            get;
-            set;
-        }
+        public string Currency { get; set; }
 
         /// <summary>
         /// Products/items in this payment request
         /// </summary>
-        public IList<Item> Items
-        {
-            get
-            {
-                if (this._items == null)
-                {
-                    this._items = new List<Item>();
-                }
-                return _items;
-            }
-        }
+        public IList<Item> Items => _items ?? (_items = new List<Item>());
 
         /// <summary>
         /// Extra amount to be added to the transaction total
@@ -72,11 +47,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// This value can be used to add an extra charge to the transaction
         /// or provide a discount in the case <c>ExtraAmount</c> is a negative value.
         /// </remarks>
-        public decimal? ExtraAmount
-        {
-            get;
-            set;
-        }
+        public decimal? ExtraAmount { get; set; }
 
         /// <summary>
         /// Reference code
@@ -85,20 +56,12 @@ namespace Uol.PagSeguro.Domain.Direct
         /// Optional. You can use the reference code to store an identifier so you can
         /// associate the PagSeguro transaction to a transaction in your system.
         /// </remarks>
-        public string Reference
-        {
-            get;
-            set;
-        }
+        public string Reference { get; set; }
 
         /// <summary>
         /// Shipping information associated with this payment request
         /// </summary>
-        public Shipping Shipping
-        {
-            get;
-            set;
-        }
+        public Shipping Shipping { get; set; }
 
         /// <summary>
         /// How long this payment request will remain valid, in seconds.
@@ -107,11 +70,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// Optional. After this payment request is submitted, the payment code returned
         /// will remain valid for the period specified here.
         /// </remarks>
-        public int? MaxAge
-        {
-            get;
-            set;
-        }
+        public int? MaxAge { get; set; }
 
         /// <summary>
         /// How many times the payment redirect uri returned by the payment web service can be accessed.
@@ -121,11 +80,7 @@ namespace Uol.PagSeguro.Domain.Direct
         /// the payment web service will remain valid for the number of uses specified here.
         ///
         /// </remarks>
-        public int? MaxUses
-        {
-            get;
-            set;
-        }
+        public int? MaxUses { get; set; }
 
         /// <summary>
         /// Determines for which url PagSeguro will send the order related notifications codes.
@@ -134,27 +89,15 @@ namespace Uol.PagSeguro.Domain.Direct
         /// to this url. You can use that for update the related order.
         /// </remarks>
         /// </summary>
-        public string NotificationURL
-        {
-            get;
-            set;
-        }
+        public string NotificationUrl { get; set; }
 
         /// <summary>
         /// Meta Data reference
         /// </summary>
         public MetaData MetaData
         {
-            get
-            {
-                if (this._metaData == null)
-                {
-                    this._metaData = new MetaData();
-                }
-                return this._metaData;
-            }
-
-            set { this._metaData = value; }
+            get => _metaData ?? (_metaData = new MetaData());
+            set => _metaData = value;
         }
 
         /// <summary>
@@ -162,23 +105,17 @@ namespace Uol.PagSeguro.Domain.Direct
         /// </summary>
         public Parameter Parameter
         {
-            get
-            {
-                if (this._parameter == null)
-                {
-                    this._parameter = new Parameter();
-                }
-                return this._parameter;
-            }
-            set { this._parameter = value; }
+            get => _parameter ?? (_parameter = new Parameter());
+            set => _parameter = value;
         }
 
         /// <summary>
         /// Initializes a new instance of the PaymentRequest class
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public Checkout()
         {
-            this.Currency = Uol.PagSeguro.Constants.Currency.Brl;
+            Currency = Constants.Currency.Brl;
         }
 
         /// <summary>
@@ -186,9 +123,10 @@ namespace Uol.PagSeguro.Domain.Direct
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
+        // ReSharper disable once UnusedMember.Global
         public void AddMetaData(string key, string value)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value));
+            MetaData.Items.Add(new MetaDataItem(key, value));
         }
 
         /// <summary>
@@ -197,9 +135,10 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="group"></param>
+        // ReSharper disable once UnusedMember.Global
         public void AddMetaData(string key, string value, int? group)
         {
-            this.MetaData.Items.Add(new MetaDataItem(key, value, group));
+            MetaData.Items.Add(new MetaDataItem(key, value, group));
         }
 
         /// <summary>
@@ -207,9 +146,10 @@ namespace Uol.PagSeguro.Domain.Direct
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
+        // ReSharper disable once UnusedMember.Global
         public void AddParameter(string key, string value)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value));
+            Parameter.Items.Add(new ParameterItem(key, value));
         }
 
         /// <summary>
@@ -218,9 +158,10 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="group"></param>
+        // ReSharper disable once UnusedMember.Global
         public void AddIndexedParameter(string key, string value, int? group)
         {
-            this.Parameter.Items.Add(new ParameterItem(key, value, group));
+            Parameter.Items.Add(new ParameterItem(key, value, group));
         }
 
         /// <summary>
@@ -229,10 +170,10 @@ namespace Uol.PagSeguro.Domain.Direct
         /// <returns></returns>
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append(this.GetType().Name).Append("(");
-            builder.Append("Reference=").Append(this.Reference).Append(", ");
-            string email = this.Sender == null ? null : this.Sender.Email;
+            var builder = new StringBuilder();
+            builder.Append(GetType().Name).Append("(");
+            builder.Append("Reference=").Append(Reference).Append(", ");
+            var email = Sender?.Email ?? string.Empty;
             builder.Append("Sender.Email=").Append(email).Append(")");
             return builder.ToString();
         }

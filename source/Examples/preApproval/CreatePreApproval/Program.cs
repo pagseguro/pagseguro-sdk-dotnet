@@ -73,7 +73,7 @@ namespace CreatePreApproval
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 Uri preApprovalRedirectUri = preApproval.Register(credentials);
 

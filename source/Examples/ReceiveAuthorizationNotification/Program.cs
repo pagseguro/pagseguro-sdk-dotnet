@@ -35,7 +35,7 @@ namespace ReceiveAuthorizationNotification
             try
             {
 
-                ApplicationCredentials credentials = PagSeguroConfiguration.ApplicationCredentials(isSandbox);
+                ApplicationCredentials credentials = PagSeguroConfiguration.GetApplicationCredentials(isSandbox);
 
                 // TODO: Substitute the code below with a notification code for your authorization. 
                 // You receive this notification code through a post on the URL that you specify

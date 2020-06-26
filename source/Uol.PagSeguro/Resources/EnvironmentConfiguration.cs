@@ -14,13 +14,8 @@
 
 using System;
 using System.Xml;
-using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.XmlParse;
-using System.Reflection;
-using System.Diagnostics;
-using System.Web;
 using System.Text.RegularExpressions;
-using Uol.PagSeguro.Exception;
+using Uol.PagSeguro.XmlParse;
 
 namespace Uol.PagSeguro.Resources
 {
@@ -29,56 +24,67 @@ namespace Uol.PagSeguro.Resources
     /// </summary>
     public static class EnvironmentConfiguration
     {
-        private const string pagseguroUrl = "pagseguro.uol";
-        private const string sandboxUrl = "sandbox.pagseguro.uol";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string PagseguroUrl = "pagseguro.uol";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string SandboxUrl = "sandbox.pagseguro.uol";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsSandbox { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
         public static void ChangeEnvironment(bool sandbox)
         {
+            var xmlConfigFile = PagSeguroConfiguration.XmlConfigFile;
 
-            string urlXmlConfiguration = PagSeguroConfiguration.UrlXmlConfiguration;
-
-            XmlDocument xml = new XmlDocument();
-            xml.Load(urlXmlConfiguration);
-            XmlNodeList elemList = xml.GetElementsByTagName("Link");
-            bool changed = false;
+            var xml = new XmlDocument();
+            xml.Load(xmlConfigFile);
+            var elemList = xml.GetElementsByTagName("Link");
+            var changed = false;
 
             try
             {
                 if (sandbox)
                 {
-                    for (int i = 0; i < elemList.Count; i++)
+                    for (var i = 0; i < elemList.Count; i++)
                     {
 
-                        Match match = Regex.Match(elemList[i].InnerText, sandboxUrl);
+                        var match = Regex.Match(elemList[i].InnerText, SandboxUrl);
+                        if (match.Success)
+                            continue;
 
-                        if (!match.Success)
-                        {
-                            elemList[i].InnerXml = elemList[i].InnerXml.Replace(pagseguroUrl, sandboxUrl);
-                            changed = true;
-                        }
+                        elemList[i].InnerXml = elemList[i].InnerXml.Replace(PagseguroUrl, SandboxUrl);
+                        changed = true;
                     }
                 }
                 else
                 {
-                    for (int i = 0; i < elemList.Count; i++)
+                    for (var i = 0; i < elemList.Count; i++)
                     {
-                        Match match = Regex.Match(elemList[i].InnerText, sandboxUrl);
+                        var match = Regex.Match(elemList[i].InnerText, SandboxUrl);
+                        if (!match.Success)
+                            continue;
 
-                        if (match.Success)
-                        {
-                            elemList[i].InnerXml = elemList[i].InnerXml.Replace(sandboxUrl, pagseguroUrl);
-                            changed = true;
-                        }
+                        elemList[i].InnerXml = elemList[i].InnerXml.Replace(SandboxUrl, PagseguroUrl);
+                        changed = true;
                     }
                 }
 
-                if (changed)
-                {
-                    xml.Save(urlXmlConfiguration);
-                }
+                IsSandbox = sandbox;
+                if (!changed)
+                    return;
+
+                xml.Save(xmlConfigFile);
+                PagSeguroConfigSerializer.ResetXmlConfig();
             }
             catch (FormatException exception)
             {

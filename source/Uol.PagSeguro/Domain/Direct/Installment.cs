@@ -1,53 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace Uol.PagSeguro.Domain.Direct
 {
-
     /// <summary>
     /// Represents the installment of a credit card payment
     /// </summary>
-    public class Installment {
-
+    public class Installment
+    {
         /// <summary>
         /// Quantity of installments
         /// </summary>
-        public int Quantity
-        {
-            get;
-            set;
-        }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Value of each installment
         /// </summary>
-        public decimal Value
-        {
-            get;
-            set;
-        }
+        public decimal Value { get; set; }
 
         /// <summary>
         /// No interest insallment quantity.
         /// </summary>
-        public int NoInterestInstallmentQuantity
-        {
-            get;
-            set;
-        }
+        public int NoInterestInstallmentQuantity { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the Installment Class
         /// </summary>
-        public Installment() { }
+        // ReSharper disable once UnusedMember.Global
+        public Installment() : this (default(int), default(decimal), default(int)) { }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the Installment Class
         /// </summary>
         /// <param name="quantity"></param>
         /// <param name="value"></param>
-        public Installment(int quantity, decimal value) : this (quantity, value, new int()) { }
+        // ReSharper disable once UnusedMember.Global
+        public Installment(int quantity, decimal value) : this (quantity, value, default(int)) { }
 
         /// <summary>
         /// Initializes a new instance of the Installment Class
@@ -66,8 +55,8 @@ namespace Uol.PagSeguro.Domain.Direct
         /// Returns a string that represents the current object
         /// </summary>
         /// <returns></returns>
-        public String ToString() {
-            StringBuilder builder = new StringBuilder();
+        public override string ToString() {
+            var builder = new StringBuilder();
             builder.Append("Installment(");
             builder.Append("quantity=" + Quantity);
             builder.Append(",value=" + Value);
@@ -75,6 +64,5 @@ namespace Uol.PagSeguro.Domain.Direct
             builder.Append(")");
             return builder.ToString();
         }
-
     }
 }

@@ -15,7 +15,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -23,19 +22,15 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public abstract class Credentials
     {
-        private Dictionary<string, string> attributeDictionary = new Dictionary<string, string>();
+        /// <summary>
+        /// </summary>
+        public bool IsSandbox { get; set; }
 
         /// <summary>
         /// Derived classes should add all of the credential "parts" as name value pairs
         /// in this dictionary. 
         /// </summary>
-        protected Dictionary<string, string> AttributeDictionary
-        {
-            get
-            {
-                return attributeDictionary;
-            }
-        }
+        protected Dictionary<string, string> AttributeDictionary { get; } = new Dictionary<string, string>();
 
         /// <summary>
         /// Returns a collection of name value pairs that compose this set of credentials
@@ -45,11 +40,10 @@ namespace Uol.PagSeguro.Domain
         {
             get
             {
-                List<CredentialsNameValuePair> list = new List<CredentialsNameValuePair>(attributeDictionary.Count);
-                foreach(KeyValuePair<string, string> kv in attributeDictionary)
-                {
+                var list = new List<CredentialsNameValuePair>(AttributeDictionary.Count);
+                foreach(var kv in AttributeDictionary)
                     list.Add(new CredentialsNameValuePair(kv.Key, kv.Value));
-                }
+
                 return list.AsReadOnly();
             }
         }

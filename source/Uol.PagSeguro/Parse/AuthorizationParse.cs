@@ -13,10 +13,7 @@
 //   limitations under the License.
 
 using System.Collections.Generic;
-using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Util;
 using Uol.PagSeguro.Domain.Authorization;
-using System;
 
 namespace Uol.PagSeguro.Parse
 {
@@ -25,7 +22,6 @@ namespace Uol.PagSeguro.Parse
     /// </summary>
     internal static class AuthorizationParse
     {
-        
         /// <summary>
         /// 
         /// </summary>
@@ -37,27 +33,19 @@ namespace Uol.PagSeguro.Parse
 
             // Reference
             if (authorizationRequest.Reference != null)
-            {
                 data["reference"] = authorizationRequest.Reference;
-            }
 
             // RedirectURL
             if (authorizationRequest.RedirectURL != null)
-            {
                 data["redirectURL"] = authorizationRequest.RedirectURL;
-            }
 
             // NotificationURL
             if (authorizationRequest.NotificationURL != null)
-            {
                 data["notificationURL"] = authorizationRequest.NotificationURL;
-            }
 
             // Permissions
             if (authorizationRequest.Permissions != null)
-            {
                 data["permissions"] = string.Join(",", authorizationRequest.Permissions.ToArray());
-            }
 
             return data;
         }

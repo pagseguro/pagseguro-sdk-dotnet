@@ -32,7 +32,6 @@
     <!-- urls for preApproval -->
     <PreApproval>
       <!-- urls for preApproval request service -->
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
       <PreApprovalRequest>
         <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
       </PreApprovalRequest>

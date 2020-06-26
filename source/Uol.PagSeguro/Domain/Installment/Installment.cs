@@ -1,92 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Uol.PagSeguro.Domain.Installment
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// </summary>
     public class Installment : IComparable<Installment>
     {
-
         /// <summary>
         /// Credit card brand
         /// </summary>
-        public String cardBrand
-        {
-            get;
-            set;
-        }
+        public string CardBrand { get; set; }
 
         /// <summary>
         /// Quantity of installments
         /// </summary>
-        public Int32 quantity
-        {
-            get;
-            set;
-        }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Value of each installment
         /// </summary>
-        public Decimal amount
-        {
-            get;
-            set;
-        }
+        public decimal Amount { get; set; }
 
         /// <summary>
         /// Total value of installments 
         /// </summary>
-        public Decimal totalAmount
-        {
-            get;
-            set;
-        }
+        public decimal TotalAmount { get; set; }
 
         /// <summary>
         /// Indicates if is an interest free transaction
         /// </summary>
-        public Boolean interestFree
-        {
-            get;
-            set;
-        }
+        public bool InterestFree { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the Installment class
         /// </summary>
-        /// <param name="cardBrand"></param>
-        /// <param name="quantity"></param>
-        /// <param name="amount"></param>
-        /// <param name="totalAmount"></param>
-        /// <param name="interestFree"></param>
+        // ReSharper disable once EmptyConstructor
         public Installment()
         {
         }
 
-        public String ToString() {
+        /// <inheritdoc />
+        public override string ToString() {
 
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
             builder.Append("Installment(");
-            builder.Append("cardBrand=" + cardBrand);
-            builder.Append(",quantity=" + quantity);
-            builder.Append(",amount=" + amount);
-            builder.Append(",totalAmount=" + totalAmount);
-            builder.Append(",interestFree=" + interestFree);
+            builder.Append("cardBrand=" + CardBrand);
+            builder.Append(",quantity=" + Quantity);
+            builder.Append(",amount=" + Amount);
+            builder.Append(",totalAmount=" + TotalAmount);
+            builder.Append(",interestFree=" + InterestFree);
             builder.Append(")");
 
             return builder.ToString();
         }
 
-
         int IComparable<Installment>.CompareTo(Installment other)
         {
             if (other == null)
-            {
                 return -1;
-            }
-            return quantity - other.quantity;
+
+            return Quantity - other.Quantity;
         }
     }
 }

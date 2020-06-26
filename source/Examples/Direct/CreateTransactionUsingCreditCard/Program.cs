@@ -20,14 +20,14 @@ using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
 
-namespace CreateTransactionUsingBoleto
+namespace CreateTransactionUsingCreditCard
 {
     class Program
     {
         static void Main(string[] args)
         {
 
-            PagSeguroConfiguration.UrlXmlConfiguration = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
+            PagSeguroConfiguration.XmlConfigFile = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
 
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
@@ -105,11 +105,11 @@ namespace CreateTransactionUsingBoleto
             checkout.Installment = new Installment(2, 25.00m, 2);
 
             // Sets the notification url
-            checkout.NotificationURL = "http://www.lojamodelo.com.br";
+            checkout.NotificationUrl = "http://www.lojamodelo.com.br";
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
                 Transaction result = TransactionService.CreateCheckout(credentials, checkout);
                 Console.WriteLine(result);
                 Console.ReadKey();

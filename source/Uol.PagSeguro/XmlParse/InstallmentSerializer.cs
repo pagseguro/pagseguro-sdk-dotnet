@@ -13,28 +13,13 @@
 //   limitation
 
 using System.Xml;
-using System;
 using Uol.PagSeguro.Constants;
-using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Installment;
-using System.IO;
-using System.Collections.Generic;
 
 namespace Uol.PagSeguro.XmlParse
 {
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static class InstallmentSerializer
+    internal static class InstallmentSerializer
     {
-
-        /// <summary>
-        /// Read a direct payment session request result
-        /// </summary>
-        /// <param name="streamReader"></param>
-        /// <param name="installments"></param>
         internal static void Read(XmlReader reader, Installment installment)
         {
 
@@ -60,23 +45,23 @@ namespace Uol.PagSeguro.XmlParse
                     switch (reader.Name)
                     {
                         case SerializerHelper.CreditCardBrand:
-                            installment.cardBrand = reader.ReadElementContentAsString();
+                            installment.CardBrand = reader.ReadElementContentAsString();
                             break;
 
                         case SerializerHelper.Quantity:
-                            installment.quantity = reader.ReadElementContentAsInt();
+                            installment.Quantity = reader.ReadElementContentAsInt();
                             break;
 
                         case SerializerHelper.Amount:
-                            installment.amount = reader.ReadElementContentAsDecimal();
+                            installment.Amount = reader.ReadElementContentAsDecimal();
                             break;
 
                         case SerializerHelper.TotalAmount:
-                            installment.totalAmount = reader.ReadElementContentAsDecimal();
+                            installment.TotalAmount = reader.ReadElementContentAsDecimal();
                             break;
 
                         case SerializerHelper.InterestFree:
-                            installment.interestFree = reader.ReadElementContentAsBoolean();
+                            installment.InterestFree = reader.ReadElementContentAsBoolean();
                             break;
 
                         default:

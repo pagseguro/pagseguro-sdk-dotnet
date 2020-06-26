@@ -33,7 +33,7 @@ namespace FindPreApprovalByInterval
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
                 PreApprovalSearchResult result = PreApprovalSearchService.SearchByInterval(credentials,  interval);
 
                 if (result.PreApprovals.Count <= 0)

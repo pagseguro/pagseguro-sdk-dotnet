@@ -47,7 +47,7 @@ namespace ChargePreApproval
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
                 String result = PreApprovalService.ChargePreApproval(credentials, payment);
 
                 Console.WriteLine(result);

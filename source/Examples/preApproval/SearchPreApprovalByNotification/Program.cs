@@ -32,7 +32,7 @@ namespace FindPreApprovalByNotification
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 PreApprovalTransaction result = PreApprovalSearchService.SearchByNofication(credentials, notificationCode);
 

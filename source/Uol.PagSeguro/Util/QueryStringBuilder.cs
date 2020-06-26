@@ -17,6 +17,7 @@ using System.Globalization;
 using System.Text;
 using System.Web;
 using Uol.PagSeguro.Domain;
+// ReSharper disable UnusedMember.Global
 
 namespace Uol.PagSeguro.Util
 {
@@ -27,11 +28,11 @@ namespace Uol.PagSeguro.Util
     {
         private const char Separator = '&';
         private const char Equal = '=';
-        private StringBuilder builder;
+        private readonly StringBuilder _builder;
 
         public QueryStringBuilder()
         {
-            builder = new StringBuilder();
+            _builder = new StringBuilder();
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Uol.PagSeguro.Util
         /// <param name="queryString"></param>
         public QueryStringBuilder(string queryString)
         {
-            builder = new StringBuilder(queryString);
+            _builder = new StringBuilder(queryString);
         }
 
         /// <summary>
@@ -51,18 +52,18 @@ namespace Uol.PagSeguro.Util
         private void AppendCore(string parameterName, string value)
         {
             if (parameterName == null)
-                throw new ArgumentNullException("parameterName");
+                throw new ArgumentNullException(nameof(parameterName));
 
             if (value == null)
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
 
-            if (builder.Length > 0)
+            if (_builder.Length > 0)
             {
-                builder.Append(QueryStringBuilder.Separator);
+                _builder.Append(Separator);
             }
-            builder.Append(HttpUtility.UrlEncode(parameterName));
-            builder.Append(QueryStringBuilder.Equal);
-            builder.Append(HttpUtility.UrlEncode(value));
+            _builder.Append(HttpUtility.UrlEncode(parameterName));
+            _builder.Append(Equal);
+            _builder.Append(HttpUtility.UrlEncode(value));
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace Uol.PagSeguro.Util
         /// <returns></returns>
         public QueryStringBuilder AppendToQuery(string value)
         {
-            this.builder.Append(value);
+            _builder.Append(value);
             return this;
         }
 
@@ -143,11 +144,11 @@ namespace Uol.PagSeguro.Util
         /// <returns></returns>
         public QueryStringBuilder EncodeCredentialsAsQueryString(Credentials credentials)
         {
-            foreach (CredentialsNameValuePair nv in credentials.Attributes)
+            foreach (var nv in credentials.Attributes)
             {
                 if (nv.Value.Length > 0)
                 {
-                    this.Append(nv.Name, nv.Value);
+                    Append(nv.Name, nv.Value);
                 }
             }
             return this;
@@ -161,7 +162,7 @@ namespace Uol.PagSeguro.Util
         /// <returns></returns>
         public QueryStringBuilder ReplaceValue(string oldValue, string newValue)
         {
-            this.builder.Replace(oldValue,newValue);
+            _builder.Replace(oldValue,newValue);
             return this;
         }
 
@@ -171,7 +172,7 @@ namespace Uol.PagSeguro.Util
         /// <returns></returns>
         public override string ToString()
         {
-            return this.builder.ToString();
+            return _builder.ToString();
         }
     }
 }

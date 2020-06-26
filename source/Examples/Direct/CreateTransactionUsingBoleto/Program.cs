@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Direct;
@@ -79,11 +78,11 @@ namespace CreateTransactionUsingBoleto
             checkout.Sender.Documents.Add(senderCPF);
 
             // Sets the notification url
-            checkout.NotificationURL = "http://www.lojamodelo.com.br";
+            checkout.NotificationUrl = "http://www.lojamodelo.com.br";
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
                 Transaction result = TransactionService.CreateCheckout(credentials, checkout);
                 Console.WriteLine(result);
                 Console.ReadKey();

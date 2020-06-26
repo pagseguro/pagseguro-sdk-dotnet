@@ -13,18 +13,15 @@
 //   limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using System.Xml;
 using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Log;
 using Uol.PagSeguro.Parse;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Util;
 using Uol.PagSeguro.XmlParse;
-using System.Web;
 
 namespace Uol.PagSeguro.Service
 {
@@ -44,37 +41,34 @@ namespace Uol.PagSeguro.Service
         /// <returns>The Uri to where the user needs to be redirected to in order to complete the payment process</returns>
         public static Uri CreateCheckoutRequest(Credentials credentials, PaymentRequest payment)
         {
-
-            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - begin", payment));
+            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - begin", payment));
 
             try
             {
-                using (HttpWebResponse response = HttpURLConnectionUtil.GetHttpPostConnection(
-                    PagSeguroConfiguration.PaymentUri.AbsoluteUri, BuildCheckoutUrl(credentials, payment)))
+                using (var response = HttpUrlConnectionUtil.GetHttpPostConnection(
+                    PagSeguroUris.GetPaymentUri(credentials).AbsoluteUri, BuildCheckoutUrl(credentials, payment)))
                 {
 
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
-                        using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+                        using (var reader = XmlReader.Create(response.GetResponseStream()))
                         {
-                            PaymentRequestResponse paymentResponse = new PaymentRequestResponse(PagSeguroConfiguration.PaymentRedirectUri);
+                            var paymentResponse = new PaymentRequestResponse(PagSeguroUris.GetPaymentRedirectUri(credentials));
                             PaymentSerializer.Read(reader, paymentResponse);
-                            PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - end {1}", payment, paymentResponse.PaymentRedirectUri));
+                            PagSeguroTrace.Info(string.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - end {1}", payment, paymentResponse.PaymentRedirectUri));
                             return paymentResponse.PaymentRedirectUri;
                         }
                     }
-                    else
-                    {
-                        PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException(response);
-                        PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - error {1}", payment, pse));
-                        throw pse;
-                    }
+
+                    var pse = HttpUrlConnectionUtil.CreatePagSeguroServiceException(response);
+                    PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - error {1}", payment, pse));
+                    throw pse;
                 }
             }
             catch (WebException exception)
             {
-                PagSeguroServiceException pse = HttpURLConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
-                PagSeguroTrace.Error(String.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - error {1}", payment, pse));
+                var pse = HttpUrlConnectionUtil.CreatePagSeguroServiceException((HttpWebResponse)exception.Response);
+                PagSeguroTrace.Error(string.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - error {1}", payment, pse));
                 throw pse;
             }
         }
@@ -87,16 +81,13 @@ namespace Uol.PagSeguro.Service
         /// <returns></returns>
         internal static string BuildCheckoutUrl(Credentials credentials, PaymentRequest payment)
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
-            IDictionary<string, string> data = PaymentParse.GetData(payment);
+            var builder = new QueryStringBuilder();
+            var data = PaymentParse.GetData(payment);
 
-            builder.
-                EncodeCredentialsAsQueryString(credentials);
+            builder.EncodeCredentialsAsQueryString(credentials);
             
-            foreach (KeyValuePair<string, string> pair in data)
-            {
+            foreach (var pair in data)
                 builder.Append(pair.Key, pair.Value);
-            }
 
             return builder.ToString();
         }

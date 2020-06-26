@@ -117,7 +117,7 @@ namespace DocExamples
 
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+            AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
             // Criando o código de requisição de pagamento
             // e obtendo a URL da página de pagamento
@@ -133,7 +133,7 @@ namespace DocExamples
 
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+            AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
             string notificationType = Request.Form["notificationType"];
             string notificationCode = Request.Form["notificationCode"];
@@ -154,7 +154,7 @@ namespace DocExamples
 
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+            AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
             string transactionCode = "59A13D84-52DA-4AB8-B365-1E7D893052B0";
 
@@ -265,7 +265,7 @@ namespace DocExamples
 
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+            AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
             // Código identificador da transação  
             string transactionCode = "59A13D84-52DA-4AB8-B365-1E7D893052B0";
@@ -287,7 +287,7 @@ namespace DocExamples
 
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
-            AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+            AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
             // Definindo a data de ínicio da consulta 
             DateTime initialDate = new DateTime(2011, 06, 1, 08, 50, 0);

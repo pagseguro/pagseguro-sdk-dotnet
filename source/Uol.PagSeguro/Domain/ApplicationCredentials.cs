@@ -12,12 +12,11 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
 using Uol.PagSeguro.Exception;
-using Uol.PagSeguro.Util;
 
 namespace Uol.PagSeguro.Domain
 {
+    /// <inheritdoc />
     /// <summary>
     /// Identifies a PagSeguro application
     /// </summary>
@@ -30,69 +29,57 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Initializes a new instance of the ApplicationCredentials class
         /// </summary>
+        /// <param name="isSandbox"></param>
         /// <param name="appId"></param>
         /// <param name="appKey"></param>
+        /// <param name="authorizationCode"></param>
         /// <remarks>
         /// A PagSeguro application is identified by an app identifier and a app key
         /// </remarks>
-        public ApplicationCredentials(string appId, string appKey, string authorizationCode = null)
+        public ApplicationCredentials(bool isSandbox, string appId, string appKey, string authorizationCode = null)
         {
             try
             {
-                this.AttributeDictionary[AppIdParameterName] = appId;
-                this.AttributeDictionary[AppKeyParameterName] = appKey;
+                IsSandbox = isSandbox;
+                AttributeDictionary[AppIdParameterName] = appId;
+                AttributeDictionary[AppKeyParameterName] = appKey;
             }
             catch (PagSeguroServiceException)
             {
                 throw new PagSeguroServiceException("Application Credentials not set correctly.");
             }
 
-            this.AttributeDictionary[AuthorizatinCodeParameterName] = !string.IsNullOrEmpty(authorizationCode) ? authorizationCode.ToString() : string.Empty;
+            AttributeDictionary[AuthorizatinCodeParameterName] = !string.IsNullOrEmpty(authorizationCode) ? authorizationCode : string.Empty;
         }
 
         /// <summary>
         /// Primary appId associated with this account
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public string AppId
         {
-            get
-            {
-                return this.AttributeDictionary[AppIdParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[AppIdParameterName] = value;
-            }
+            get => AttributeDictionary[AppIdParameterName];
+            set => AttributeDictionary[AppIdParameterName] = value;
         }
 
         /// <summary>
         /// PagSeguro app key
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public string AppKey
         {
-            get
-            {
-                return this.AttributeDictionary[AppKeyParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[AppKeyParameterName] = value;
-            }
+            get => AttributeDictionary[AppKeyParameterName];
+            set => AttributeDictionary[AppKeyParameterName] = value;
         }
 
         /// <summary>
         /// PagSeguro authorization code
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public string AuthorizationCode
         {
-            get
-            {
-                return this.AttributeDictionary[AuthorizatinCodeParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[AuthorizatinCodeParameterName] = value;
-            }
+            get => AttributeDictionary[AuthorizatinCodeParameterName];
+            set => AttributeDictionary[AuthorizatinCodeParameterName] = value;
         }
     }
 }

@@ -12,9 +12,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-using Uol.PagSeguro.Util;
-
 namespace Uol.PagSeguro.Domain
 {
     /// <summary>
@@ -22,6 +19,16 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class CreditorFees
     {
+        /// <summary>
+        /// Rate amount
+        /// </summary>
+        public decimal IntermediationRateAmount { get; set; }
+
+        /// <summary>
+        /// Fee amount
+        /// </summary>
+        public decimal IntermediationFeeAmount { get; set; }
+
         internal CreditorFees()
         {
         }
@@ -29,33 +36,11 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Initializes a new instance of the CreditorFees class
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="description"></param>
-        /// <param name="quantity"></param>
-        /// <param name="amount"></param>
+        // ReSharper disable once UnusedMember.Global
         public CreditorFees(decimal intermediationRateAmount, decimal intermediationFeeAmount)
         {
-            this.intermediationRateAmount = intermediationRateAmount;
-            this.intermediationFeeAmount = intermediationFeeAmount;
-        }
-
- 
-        /// <summary>
-        /// Rate amount
-        /// </summary>
-        public decimal intermediationRateAmount
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Fee amount
-        /// </summary>
-        public decimal intermediationFeeAmount
-        {
-            get;
-            set;
+            IntermediationRateAmount = intermediationRateAmount;
+            IntermediationFeeAmount = intermediationFeeAmount;
         }
     }
 }

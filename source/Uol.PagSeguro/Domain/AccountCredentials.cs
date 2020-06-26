@@ -12,11 +12,11 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System;
-using Uol.PagSeguro.Util;
+using Uol.PagSeguro.Resources;
 
 namespace Uol.PagSeguro.Domain
 {
+    /// <inheritdoc />
     /// <summary>
     /// Identifies a PagSeguro account
     /// </summary>
@@ -33,40 +33,47 @@ namespace Uol.PagSeguro.Domain
         /// <remarks>
         /// A PagSeguro account is identified by an email and a security token
         /// </remarks>
-        public  AccountCredentials(string email, string token)
+        public AccountCredentials(string email, string token)
         {
-            this.AttributeDictionary[EmailParameterName] = email;
-            this.AttributeDictionary[TokenParameterName] = token;
+            IsSandbox = EnvironmentConfiguration.IsSandbox;
+            AttributeDictionary[EmailParameterName] = email;
+            AttributeDictionary[TokenParameterName] = token;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AccountCredentials class
+        /// </summary>
+        /// <param name="isSandbox"></param>
+        /// <param name="email"></param>
+        /// <param name="token"></param>
+        /// <remarks>
+        /// A PagSeguro account is identified by an email and a security token
+        /// </remarks>
+        public AccountCredentials(bool isSandbox, string email, string token)
+        {
+            IsSandbox = isSandbox;
+            AttributeDictionary[EmailParameterName] = email;
+            AttributeDictionary[TokenParameterName] = token;
         }
 
         /// <summary>
         /// Primary email associated with this account
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public string Email
         {
-            get
-            {
-                return this.AttributeDictionary[EmailParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[EmailParameterName] = value;
-            }
+            get => AttributeDictionary[EmailParameterName];
+            set => AttributeDictionary[EmailParameterName] = value;
         }
 
         /// <summary>
         /// PagSeguro token
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public string Token
         {
-            get
-            {
-                return this.AttributeDictionary[TokenParameterName];
-            }
-            set
-            {
-                this.AttributeDictionary[TokenParameterName] = value;
-            }
+            get => AttributeDictionary[TokenParameterName];
+            set => AttributeDictionary[TokenParameterName] = value;
         }
     }
 }

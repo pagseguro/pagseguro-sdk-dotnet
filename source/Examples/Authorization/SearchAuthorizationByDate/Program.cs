@@ -39,7 +39,7 @@ namespace FindAuthorizationByDate
             try
             {
 
-                ApplicationCredentials credentials = PagSeguroConfiguration.ApplicationCredentials(isSandbox);
+                ApplicationCredentials credentials = PagSeguroConfiguration.GetApplicationCredentials(isSandbox);
 
                 AuthorizationSearchResult result = AuthorizationSearchService.SearchByDate(credentials, initialDate, finalDate, pageNumber, maxPageResults);
 

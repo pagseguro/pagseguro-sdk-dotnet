@@ -32,7 +32,7 @@ namespace SearchTransactionByCode
             try
             {
 
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 // TODO: Substitute the code below with a valid transaction code for your transaction
                 Transaction transaction = TransactionSearchService.SearchByCode(credentials, "59A13D84-52DA-4AB8-B365-1E7D893052B0");

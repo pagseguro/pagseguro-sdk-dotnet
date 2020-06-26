@@ -35,7 +35,7 @@ namespace FindAuthorizationByCode
 
             try
             {
-                ApplicationCredentials credentials = PagSeguroConfiguration.ApplicationCredentials(isSandbox);
+                ApplicationCredentials credentials = PagSeguroConfiguration.GetApplicationCredentials(isSandbox);
 
                 AuthorizationSummary result = AuthorizationSearchService.SearchByCode(credentials, authorizationCode);
 

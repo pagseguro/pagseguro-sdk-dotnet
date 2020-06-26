@@ -13,13 +13,9 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
-using System.Xml;
-using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
-using Uol.PagSeguro.XmlParse;
 
 namespace RequestTransactionRefund
 {
@@ -27,21 +23,20 @@ namespace RequestTransactionRefund
     {
         static void Main(string[] args)
         {
+            const bool isSandbox = false;
+            const string transactionCode = "F3D9490291B54FA59F39B22AB9E76799";
+            //const decimal refundValue = 150m;
 
-            bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
-
-            String transactionCode = "F3D9490291B54FA59F39B22AB9E76799";
-            Decimal refundValue = 150.00m;
 
             try
             {
 
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                var credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 // TODO: Substitute the code below with a valid transaction code for your transaction
-                RequestResponse result = RefundService.RequestRefund(credentials, transactionCode);
-                //RequestResponse result = RefundService.RequestRefund(credentials, transactionCode, refundValue);
+                var result = RefundService.RequestRefund(credentials, transactionCode);
+                //var result = RefundService.RequestRefund(credentials, transactionCode, refundValue);
 
                 Console.WriteLine(result.ToString());
 
@@ -51,7 +46,7 @@ namespace RequestTransactionRefund
             {
                 Console.WriteLine(exception.Message + "\n");
 
-                foreach (ServiceError element in exception.Errors)
+                foreach (var element in exception.Errors)
                 {
                     Console.WriteLine(element + "\n");
                 }

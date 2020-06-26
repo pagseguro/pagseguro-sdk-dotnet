@@ -29,34 +29,31 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Uol.PagSeguro.XML</DocumentationFile>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\Uol.PagSeguro.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -68,6 +65,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\AuthorizationElement.cs" />
+    <Compile Include="Configuration\TypedConfigurationElement.cs" />
+    <Compile Include="Configuration\CredentialElement.cs" />
+    <Compile Include="Configuration\DirectPaymentElement.cs" />
+    <Compile Include="Configuration\ITypedConfigValueProvider.cs" />
+    <Compile Include="Configuration\PagSeguroConfigurationElement.cs" />
+    <Compile Include="Configuration\PagSeguroConfigurationSection.cs" />
+    <Compile Include="Configuration\PreApprovalElement.cs" />
+    <Compile Include="Configuration\TextElement.cs" />
+    <Compile Include="Configuration\UrlElement.cs" />
+    <Compile Include="Configuration\UrlsElement.cs" />
     <Compile Include="Constants\ListPaymentMethodGroups.cs" />
     <Compile Include="Constants\ListPaymentMethodNames.cs" />
     <Compile Include="Constants\PaymentMethodConfigKeys.cs" />
@@ -77,7 +85,7 @@
     <Compile Include="Constants\PreApproval.cs" />
     <Compile Include="Constants\BankName.cs" />
     <Compile Include="Domain\AcceptedPaymentMethods.cs" />
-    <Compile Include="Domain\AcceptedPayments.cs" />
+    <Compile Include="Domain\IAcceptedPayments.cs" />
     <Compile Include="Domain\AcceptPaymentMethod.cs" />
     <Compile Include="Domain\ApplicationCredentials.cs" />
     <Compile Include="Domain\Authorization\AuthorizationAccount.cs" />
@@ -123,6 +131,7 @@
     <Compile Include="Domain\PaymentRequest.cs" />
     <Compile Include="Parse\AuthorizationParse.cs" />
     <Compile Include="Parse\TransactionParse.cs" />
+    <Compile Include="Resources\PagSeguroUris.cs" />
     <Compile Include="Service\AuthorizationSearchService .cs" />
     <Compile Include="Service\AuthorizationService.cs" />
     <Compile Include="Service\InstallmentService.cs" />

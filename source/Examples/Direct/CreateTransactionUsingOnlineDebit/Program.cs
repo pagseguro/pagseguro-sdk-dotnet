@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 using System;
-using System.Net;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Domain.Direct;
@@ -29,7 +28,7 @@ namespace CreateTransactionUsingOnlineDebit
         static void Main(string[] args)
         {
 
-            PagSeguroConfiguration.UrlXmlConfiguration = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
+            PagSeguroConfiguration.XmlConfigFile = ".../.../.../.../.../Configuration/PagSeguroConfig.xml";
 
             bool isSandbox = false;
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
@@ -80,14 +79,14 @@ namespace CreateTransactionUsingOnlineDebit
             checkout.Sender.Documents.Add(senderCPF);
 
             // Sets the notification url
-            checkout.NotificationURL = "http://www.lojamodelo.com.br";
+            checkout.NotificationUrl = "http://www.lojamodelo.com.br";
 
             // Sets the bank information
             checkout.BankName = BankName.Bradesco;
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
                 Transaction result = TransactionService.CreateCheckout(credentials, checkout);
 
                 Console.WriteLine(result);

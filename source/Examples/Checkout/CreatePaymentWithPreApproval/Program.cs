@@ -111,7 +111,7 @@ namespace CreatePaymentWithPreApproval
 
             try
             {
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+                AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
 
                 Uri paymentRedirectUri = payment.Register(credentials);
 
