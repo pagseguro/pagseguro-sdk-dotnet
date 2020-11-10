@@ -33,48 +33,48 @@ namespace Uol.PagSeguro.Parse
             IDictionary<string, string> data = new Dictionary<string, string>();
 
             // payment mode
-            if (checkout.PaymentMode != null)
+            if (checkout.PaymentMode)
                 data["paymentMode"] = checkout.PaymentMode;
 
             // receiver e-mail
-            if (checkout.ReceiverEmail != null)
+            if (checkout.ReceiverEmail)
                 data["receiverEmail"] = checkout.ReceiverEmail;
    
             // reference
-            if (checkout.Reference != null)
+            if (checkout.Reference)
                 data["reference"] = checkout.Reference;
 
             // sender
-            if (checkout.Sender != null)
+            if (checkout.Sender)
             {
-                if (checkout.Sender.Name != null)
+                if (checkout.Sender.Name)
                     data["senderName"] = checkout.Sender.Name;
 
-                if (checkout.Sender.Email != null)
+                if (checkout.Sender.Email)
                     data["senderEmail"] = checkout.Sender.Email;
 
-                if (checkout.Sender.Hash != null)
+                if (checkout.Sender.Hash)
                     data["senderHash"] = checkout.Sender.Hash;
 
                 // phone
-                if (checkout.Sender.Phone != null)
+                if (checkout.Sender.Phone)
                 {
-                    if (checkout.Sender.Phone.AreaCode != null)
+                    if (checkout.Sender.Phone.AreaCode)
                         data["senderAreaCode"] = checkout.Sender.Phone.AreaCode;
 
-                    if (checkout.Sender.Phone.Number != null)
+                    if (checkout.Sender.Phone.Number)
                         data["senderPhone"] = checkout.Sender.Phone.Number;
                 }
 
                 // documents
-                if (checkout.Sender.Documents != null)
+                if (checkout.Sender.Documents)
                 {
                     var documents = checkout.Sender.Documents;
                     if (documents.Count == 1)
                     {
                         foreach (var document in documents)
                         {
-                            if (document != null)
+                            if (document)
                             {
                                 if (document.Type.Equals("Cadastro de Pessoa Física"))
                                     data["senderCPF"] = document.Value;
@@ -87,7 +87,7 @@ namespace Uol.PagSeguro.Parse
             }
 
             // currency
-            if (checkout.Currency != null)
+            if (checkout.Currency)
                 data["currency"] = checkout.Currency;
 
             // items
@@ -99,29 +99,29 @@ namespace Uol.PagSeguro.Parse
                 {
                     i++;
 
-                    if (item.Id != null)
+                    if (item.Id)
                         data["itemId" + i] = item.Id;
 
-                    if (item.Description != null)
+                    if (item.Description)
                         data["itemDescription" + i] = item.Description;
 
                     data["itemQuantity" + i] = item.Quantity.ToString();
                     data["itemAmount" + i] = PagSeguroUtil.DecimalFormat(item.Amount);
 
-                    if (item.Weight != null)
+                    if (item.Weight)
                         data["itemWeight" + i] = item.Weight.ToString();
 
-                    if (item.ShippingCost != null)
+                    if (item.ShippingCost)
                         data["itemShippingCost" + i] = PagSeguroUtil.DecimalFormat((decimal)item.ShippingCost);
                 }
             }
 
             // extraAmount
-            if (checkout.ExtraAmount != null)
+            if (checkout.ExtraAmount)
                 data["extraAmount"] = PagSeguroUtil.DecimalFormat((decimal)checkout.ExtraAmount);
 
             // shipping
-            if (checkout.Shipping != null)
+            if (checkout.Shipping)
             {
                 if (checkout.Shipping.ShippingType.HasValue)
                     data["shippingType"] = checkout.Shipping.ShippingType.Value.ToString();
@@ -130,44 +130,44 @@ namespace Uol.PagSeguro.Parse
                     data["shippingCost"] = PagSeguroUtil.DecimalFormat(checkout.Shipping.Cost.Value);
 
                 // address
-                if (checkout.Shipping.Address != null)
+                if (checkout.Shipping.Address)
                 {
-                    if (checkout.Shipping.Address.Street != null)
+                    if (checkout.Shipping.Address.Street)
                         data["shippingAddressStreet"] = checkout.Shipping.Address.Street;
 
-                    if (checkout.Shipping.Address.Number != null)
+                    if (checkout.Shipping.Address.Number)
                         data["shippingAddressNumber"] = checkout.Shipping.Address.Number;
 
-                    if (checkout.Shipping.Address.Complement != null)
+                    if (checkout.Shipping.Address.Complement)
                         data["shippingAddressComplement"] = checkout.Shipping.Address.Complement;
 
-                    if (checkout.Shipping.Address.City != null)
+                    if (checkout.Shipping.Address.City)
                         data["shippingAddressCity"] = checkout.Shipping.Address.City;
 
-                    if (checkout.Shipping.Address.State != null)
+                    if (checkout.Shipping.Address.State)
                         data["shippingAddressState"] = checkout.Shipping.Address.State;
 
-                    if (checkout.Shipping.Address.District != null)
+                    if (checkout.Shipping.Address.District)
                         data["shippingAddressDistrict"] = checkout.Shipping.Address.District;
 
-                    if (checkout.Shipping.Address.PostalCode != null)
+                    if (checkout.Shipping.Address.PostalCode)
                         data["shippingAddressPostalCode"] = checkout.Shipping.Address.PostalCode;
 
-                    if (checkout.Shipping.Address.Country != null)
+                    if (checkout.Shipping.Address.Country)
                         data["shippingAddressCountry"] = checkout.Shipping.Address.Country;
                 }
             }
 
             // maxAge
-            if (checkout.MaxAge != null)
+            if (checkout.MaxAge)
                 data["maxAge"] = checkout.MaxAge.ToString();
 
             // maxUses
-            if (checkout.MaxUses != null)
+            if (checkout.MaxUses)
                 data["maxUses"] = checkout.MaxUses.ToString();
 
             // notificationURL
-            if (checkout.NotificationUrl != null)
+            if (checkout.NotificationUrlnull)
                 data["notificationURL"] = checkout.NotificationUrl;
 
             // metadata
@@ -198,7 +198,7 @@ namespace Uol.PagSeguro.Parse
                     if (PagSeguroUtil.IsEmpty(item.Key) || PagSeguroUtil.IsEmpty(item.Value))
                         continue;
 
-                    if (item.Group != null)
+                    if (item.Group)
                         data[item.Key + "" + item.Group] = item.Value;
                     else
                         data[item.Key] = item.Value;
@@ -212,63 +212,63 @@ namespace Uol.PagSeguro.Parse
                     // billing address
                     if (creditcard.Billing?.Address != null)
                     {
-                        if (creditcard.Billing.Address.Street != null)
+                        if (creditcard.Billing.Address.Street)
                             data["billingAddressStreet"] = creditcard.Billing.Address.Street;
 
-                        if (creditcard.Billing.Address.Number != null)
+                        if (creditcard.Billing.Address.Number)
                             data["billingAddressNumber"] = creditcard.Billing.Address.Number;
 
-                        if (creditcard.Billing.Address.Complement != null)
+                        if (creditcard.Billing.Address.Complement)
                             data["billingAddressComplement"] = creditcard.Billing.Address.Complement;
 
-                        if (creditcard.Billing.Address.City != null)
+                        if (creditcard.Billing.Address.City)
                             data["billingAddressCity"] = creditcard.Billing.Address.City;
 
-                        if (creditcard.Billing.Address.State != null)
+                        if (creditcard.Billing.Address.State)
                             data["billingAddressState"] = creditcard.Billing.Address.State;
 
-                        if (creditcard.Billing.Address.District != null)
+                        if (creditcard.Billing.Address.District)
                             data["billingAddressDistrict"] = creditcard.Billing.Address.District;
 
-                        if (creditcard.Billing.Address.PostalCode != null)
+                        if (creditcard.Billing.Address.PostalCode)
                             data["billingAddressPostalCode"] = creditcard.Billing.Address.PostalCode;
 
-                        if (creditcard.Billing.Address.Country != null)
+                        if (creditcard.Billing.Address.Country)
                             data["billingAddressCountry"] = creditcard.Billing.Address.Country;
                     }
 
                     // holder
-                    if (creditcard.Holder != null)
+                    if (creditcard.Holder)
                     {
                         //holder name
-                        if (creditcard.Holder.Name != null)
+                        if (creditcard.Holder.Name)
                             data["creditCardHolderName"] = creditcard.Holder.Name;
 
                         //holder phone
-                        if (creditcard.Holder.Phone != null)
+                        if (creditcard.Holder.Phone)
                         {
-                            if (creditcard.Holder.Phone.AreaCode != null)
+                            if (creditcard.Holder.Phone.AreaCode)
                                 data["creditCardHolderAreaCode"] = creditcard.Holder.Phone.AreaCode;
 
-                            if (creditcard.Holder.Phone.Number != null)
+                            if (creditcard.Holder.Phone.Number)
                                 data["creditCardHolderPhone"] = creditcard.Holder.Phone.Number;
                         }
 
                         //holder document
-                        if (creditcard.Holder.Document?.Value != null)
+                        if (creditcard.Holder.Document?.Value)
                             data["creditCardHolderCPF"] = creditcard.Holder.Document.Value;
 
                         //holder birth date
-                        if (creditcard.Holder.Birthdate != null)
+                        if (creditcard.Holder.Birthdate)
                             data["creditCardHolderBirthDate"] = creditcard.Holder.Birthdate;
                     }
 
                     // token
-                    if (creditcard.Token != null)
+                    if (creditcard.Token)
                         data["creditCardToken"] = creditcard.Token;
 
                     // installment
-                    if (creditcard.Installment != null)
+                    if (creditcard.Installment)
                     {
                         if (creditcard.Installment.Quantity > 0)
                             data["installmentQuantity"] = creditcard.Installment.Quantity.ToString();
@@ -281,7 +281,7 @@ namespace Uol.PagSeguro.Parse
                     }
 
                     // payment method
-                    if (creditcard.PaymentMethod != null)
+                    if (creditcard.PaymentMethod)
                         data["paymentMethod"] = creditcard.PaymentMethod;
 
                     break;
@@ -291,7 +291,7 @@ namespace Uol.PagSeguro.Parse
                     var boleto = (BoletoCheckout)checkout;
 
                     // payment method
-                    if (boleto.PaymentMethod != null)
+                    if (boleto.PaymentMethod)
                         data["paymentMethod"] = boleto.PaymentMethod;
 
                     break;
@@ -301,11 +301,11 @@ namespace Uol.PagSeguro.Parse
                     var onlineDebit = (OnlineDebitCheckout)checkout;
 
                     // payment method
-                    if (onlineDebit.PaymentMethod != null)
+                    if (onlineDebit.PaymentMethod)
                         data["paymentMethod"] = onlineDebit.PaymentMethod;
 
                     // bank name
-                    if (onlineDebit.BankName != null)
+                    if (onlineDebit.BankName)
                         data["bankName"] = onlineDebit.BankName;
 
                     break;
