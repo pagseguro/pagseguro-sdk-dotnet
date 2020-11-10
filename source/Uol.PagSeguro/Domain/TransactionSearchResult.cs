@@ -24,7 +24,7 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class TransactionSearchResult
     {
-        private List<TransactionSummary> transactions = new List<TransactionSummary>();
+        private readonly List<TransactionSummary> transactions = new List<TransactionSummary>();
 
         /// <summary>
         /// Date/time when this search was executed
