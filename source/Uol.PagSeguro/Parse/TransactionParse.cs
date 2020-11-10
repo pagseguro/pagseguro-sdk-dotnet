@@ -198,13 +198,13 @@ namespace Uol.PagSeguro.Parse
                     if (PagSeguroUtil.IsEmpty(item.Key) || PagSeguroUtil.IsEmpty(item.Value))
                         continue;
 
-                    if (item.Group)
-                        data[item.Key + "" + item.Group] = item.Value;
-                    else
-                        data[item.Key] = item.Value;
+                    {   if (item.Group)
+                            data[item.Key + "" + item.Group] = item.Value;
+                        else
+                            data[item.Key] = item.Value;
+                    }
                 }
             }
-
             switch (checkout)
             {
                 //Verify if exists the credit card checkout data
