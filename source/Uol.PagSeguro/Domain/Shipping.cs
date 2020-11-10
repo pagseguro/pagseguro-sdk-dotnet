@@ -41,8 +41,6 @@ namespace Uol.PagSeguro.Domain
         /// Initializes a new instance of the Shipping class
         /// </summary>
         // ReSharper disable once EmptyConstructor
-        public Shipping()
-        {
-        }
+       
     }
 }
