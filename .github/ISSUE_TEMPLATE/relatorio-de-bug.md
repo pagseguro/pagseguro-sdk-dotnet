@@ -17,10 +17,7 @@ _Este relatório deve ser usado **APENAS** para reportar bugs_
 ## Passos para reproduzir o bug
 <!--- Forneça um link para um exemplo ao vivo ou um conjunto de etapas -->
 <!--- reproduzir este bug. Incluir código para reproduzir, se relevante -->
-1.
-2.
-3.
-4.
+
 
 ## Descrição Detalhada
 <!--- Forneça uma descrição detalhada da alteração ou adição que você está propondo -->
