@@ -43,23 +43,20 @@ namespace FindAuthorizationByDate
 
                 AuthorizationSearchResult result = AuthorizationSearchService.SearchByDate(credentials, initialDate, finalDate, pageNumber, maxPageResults);
 
-                Console.WriteLine(result);
-                Console.ReadKey();
             } 
             catch (WebException exception) 
             {
-                Console.WriteLine(exception.Message + "\n");
-                Console.ReadKey();
+
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
+  
 
                 foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
+
                 }
-                Console.ReadKey();
+
             }
         }
     }

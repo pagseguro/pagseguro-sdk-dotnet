@@ -51,23 +51,23 @@ namespace CreateAuthorization
 
                 String result = authorization.Register(credentials);
 
-                Console.WriteLine("URL da autorização: " + result);
-                Console.ReadKey();
+           
+              
             }
             catch (WebException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
-                Console.ReadKey();
+             
+         
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
+        
 
                 foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
+           
                 }
-                Console.ReadKey();
+             
             }
         }
     }
