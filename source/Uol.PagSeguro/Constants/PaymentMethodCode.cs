@@ -27,42 +27,42 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// VISA
         /// </summary>
-        public readonly  int Visa = 101;
+        private  readonly  int Visa = 101;
 
         /// <summary>
         /// Mastercard
         /// </summary>
-        public readonly  int Mastercard = 102;
+        private  readonly  int Mastercard = 102;
 
         /// <summary>
         /// American Express
         /// </summary>
-        public readonly  int Amex = 103;
+        private  readonly  int Amex = 103;
 
         /// <summary>
         /// Diners
         /// </summary>
-        public readonly  int Diners = 104;
+        private  readonly  int Diners = 104;
 
         /// <summary>
         /// Hipercard
         /// </summary>
-        public static  int Hipercard = 105;
+        private  static  int Hipercard = 105;
 
         /// <summary>
         /// Aura
         /// </summary>
-        public static  int Aura = 106;
+        private  static  int Aura = 106;
 
         /// <summary>
         /// Elo
         /// </summary>
-        public readonly  int Elo = 107;
+        private  readonly  int Elo = 107;
 
         /// <summary>
         /// PLENOCard
         /// </summary>
-        public readonly  int PlenoCard = 108;
+        private  readonly  int PlenoCard = 108;
 
         /// <summary>
         /// PersonalCard
@@ -72,12 +72,12 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// JCB
         /// </summary>
-        public readonly  int Jcb = 110;
+        private  readonly  int Jcb = 110;
 
         /// <summary>
         /// Discover
         /// </summary>
-        public readonly  int Discover = 111;
+        private  readonly  int Discover = 111;
 
         /// <summary>
         /// BrasilCard
@@ -92,16 +92,16 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// CARDBAN
         /// </summary>
-        public readonly  int CardBan = 114;
+        private  readonly  int CardBan = 114;
         /// <summary>
         /// VALECARD
         /// </summary>
-        public readonly  int ValeCard = 115;
+        private  readonly  int ValeCard = 115;
 
         /// <summary>
         /// Cabal
         /// </summary>
-        public readonly  int Cabal = 116;
+        private  readonly  int Cabal = 116;
 
         /// <summary>
         /// Mais!
@@ -126,56 +126,56 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Santander boleto
         /// </summary>
-        public readonly  int SantanderBoleto = 202;
+        private  readonly  int SantanderBoleto = 202;
 
         /// <summary>
         /// Bradesco online transfer
         /// </summary>
-        public readonly  int BradescoOnlineTransfer = 301;
+        private  readonly  int BradescoOnlineTransfer = 301;
 
         /// <summary>
         /// Itau online transfer
         /// </summary>
-        public readonly  int ItauOnlineTransfer = 302;
+        private  readonly  int ItauOnlineTransfer = 302;
 
         /// <summary>
         /// Unibanco online transfer
         /// </summary>
-        public readonly  int UnibancoOnlineTransfer = 303;
+        private  readonly  int UnibancoOnlineTransfer = 303;
 
         /// <summary>
         /// Banco do Brasil online transfer
         /// </summary>
-        public readonly  int BancoBrasilOnlineTransfer = 304;
+        private  readonly  int BancoBrasilOnlineTransfer = 304;
 
         /// <summary>
         /// Banco Real online transfer
         /// </summary>
-        public readonly  int RealOnlineTransfer = 305;
+        private  readonly  int RealOnlineTransfer = 305;
         
         /// <summary>
         /// Banrisul online transfer
         /// </summary>
-        public readonly  int BanrisulOnlineTransfer = 306;
+        private  readonly  int BanrisulOnlineTransfer = 306;
 
         /// <summary>
         /// HSBC online transfer
         /// </summary>
-        public readonly  int HsbcOnlineTransfer = 307;
+        private  readonly  int HsbcOnlineTransfer = 307;
 
         /// <summary>
         /// PagSeguro account balance
         /// </summary>
-        public readonly  int PagSeguroBalance = 401;
+        private  readonly  int PagSeguroBalance = 401;
 
         /// <summary>
         /// OiPaggo
         /// </summary>
-        public readonly  int OiPaggo = 501;
+        private  readonly  int OiPaggo = 501;
 
         /// <summary>
         /// Banco do Brasil direct deposit
         /// </summary>
-        public readonly  int BancoBrasilDirectDeposit = 701;
+        private  readonly  int BancoBrasilDirectDeposit = 701;
     }
 }
