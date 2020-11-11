@@ -29,7 +29,7 @@ namespace Uol.PagSeguro.Constants
         public static string Bradesco
 
     {
-      get { return bradesco; }
+      get { return "bradesco"; }
     }
 
         /// <summary>
@@ -37,29 +37,29 @@ namespace Uol.PagSeguro.Constants
         /// </summary>
         public const string Itau
     {
-      get { return itau; }
+      get { return "itau"; }
     }
         /// <summary>
         /// Banco do Brasil
         /// </summary>
-        public const string BancoDoBrasil
+        public static string BancoDoBrasil
     {
-      get { return bancodobrasil; }
+      get { return "bancodobrasil"; }
     }
 
         /// <summary>
         /// Banrisul
         /// </summary>
-        public const string Banrisul
+        public static string Banrisul
       {
-      get { return banrisul; }
+      get { return "banrisul"; }
     }
       /// <summary>
         /// HSBC
         /// </summary>
-        public const string HSBC
+        public static string HSBC
     {
-      get { return hsbc; }
+      get { return "hsbc"; }
     }
       
     }

@@ -25,7 +25,7 @@ namespace Uol.PagSeguro.Constants
         /// </summary>
         public const string Brl
     {
-      get { return BRL; }
+      get { return "BRL"; }
     }
     }
 }
