@@ -27,22 +27,22 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// VISA
         /// </summary>
-        public static  int Visa = 101;
+        public readonly  int Visa = 101;
 
         /// <summary>
         /// Mastercard
         /// </summary>
-        public static  int Mastercard = 102;
+        public readonly  int Mastercard = 102;
 
         /// <summary>
         /// American Express
         /// </summary>
-        public static  int Amex = 103;
+        public readonly  int Amex = 103;
 
         /// <summary>
         /// Diners
         /// </summary>
-        public static  int Diners = 104;
+        public readonly  int Diners = 104;
 
         /// <summary>
         /// Hipercard
@@ -57,125 +57,125 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Elo
         /// </summary>
-        public static  int Elo = 107;
+        public readonly  int Elo = 107;
 
         /// <summary>
         /// PLENOCard
         /// </summary>
-        public static  int PlenoCard = 108;
+        public readonly  int PlenoCard = 108;
 
         /// <summary>
         /// PersonalCard
         /// </summary>
-        public static  int PersonalCard = 109;
+        public readonly  int PersonalCard = 109;
 
         /// <summary>
         /// JCB
         /// </summary>
-        public static  int Jcb = 110;
+        public readonly  int Jcb = 110;
 
         /// <summary>
         /// Discover
         /// </summary>
-        public static  int Discover = 111;
+        public readonly  int Discover = 111;
 
         /// <summary>
         /// BrasilCard
         /// </summary>
-        public static  int BrasilCard = 112;
+        public readonly  int BrasilCard = 112;
 
         /// <summary>
         /// FORTBRASIL
         /// </summary>
-        public static  int FortBrasil = 113;
+        public readonly  int FortBrasil = 113;
 
         /// <summary>
         /// CARDBAN
         /// </summary>
-        public static  int CardBan = 114;
+        public readonly  int CardBan = 114;
         /// <summary>
         /// VALECARD
         /// </summary>
-        public static  int ValeCard = 115;
+        public readonly  int ValeCard = 115;
 
         /// <summary>
         /// Cabal
         /// </summary>
-        public static  int Cabal = 116;
+        public readonly  int Cabal = 116;
 
         /// <summary>
         /// Mais!
         /// </summary>
-        public static  int Mais = 117;
+        public readonly  int Mais = 117;
 
         /// <summary>
         /// Avista
         /// </summary>
-        public static  int Avista = 118;
+        public readonly  int Avista = 118;
 
         /// <summary>
         /// GrandCard
         /// </summary>
-        public static  int GrandCard = 119;
+        public readonly  int GrandCard = 119;
 
         /// <summary>
         /// Bradesco boleto
         /// </summary>
-        public static  int BradescoBoleto = 201;
+        public readonly  int BradescoBoleto = 201;
 
         /// <summary>
         /// Santander boleto
         /// </summary>
-        public static  int SantanderBoleto = 202;
+        public readonly  int SantanderBoleto = 202;
 
         /// <summary>
         /// Bradesco online transfer
         /// </summary>
-        public static  int BradescoOnlineTransfer = 301;
+        public readonly  int BradescoOnlineTransfer = 301;
 
         /// <summary>
         /// Itau online transfer
         /// </summary>
-        public static  int ItauOnlineTransfer = 302;
+        public readonly  int ItauOnlineTransfer = 302;
 
         /// <summary>
         /// Unibanco online transfer
         /// </summary>
-        public static  int UnibancoOnlineTransfer = 303;
+        public readonly  int UnibancoOnlineTransfer = 303;
 
         /// <summary>
         /// Banco do Brasil online transfer
         /// </summary>
-        public static  int BancoBrasilOnlineTransfer = 304;
+        public readonly  int BancoBrasilOnlineTransfer = 304;
 
         /// <summary>
         /// Banco Real online transfer
         /// </summary>
-        public static  int RealOnlineTransfer = 305;
+        public readonly  int RealOnlineTransfer = 305;
         
         /// <summary>
         /// Banrisul online transfer
         /// </summary>
-        public static  int BanrisulOnlineTransfer = 306;
+        public readonly  int BanrisulOnlineTransfer = 306;
 
         /// <summary>
         /// HSBC online transfer
         /// </summary>
-        public static  int HsbcOnlineTransfer = 307;
+        public readonly  int HsbcOnlineTransfer = 307;
 
         /// <summary>
         /// PagSeguro account balance
         /// </summary>
-        public static  int PagSeguroBalance = 401;
+        public readonly  int PagSeguroBalance = 401;
 
         /// <summary>
         /// OiPaggo
         /// </summary>
-        public static  int OiPaggo = 501;
+        public readonly  int OiPaggo = 501;
 
         /// <summary>
         /// Banco do Brasil direct deposit
         /// </summary>
-        public static  int BancoBrasilDirectDeposit = 701;
+        public readonly  int BancoBrasilDirectDeposit = 701;
     }
 }
