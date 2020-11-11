@@ -38,19 +38,19 @@ namespace RequestTransactionRefund
                 var result = RefundService.RequestRefund(credentials, transactionCode);
                 //var result = RefundService.RequestRefund(credentials, transactionCode, refundValue);
 
-                Console.WriteLine(result.ToString());
+        
 
-                Console.ReadKey();
+             
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
+              
 
                 foreach (var element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
+                  
                 }
-                Console.ReadKey();
+          
             }
         }
     }

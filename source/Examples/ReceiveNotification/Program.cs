@@ -41,18 +41,17 @@ namespace ReceiveNotification
                 // Use notificationType to check if is PreApproval (preApproval or transaction)
                 Transaction transaction = NotificationService.CheckTransaction(credentials, "766B9C-AD4B044B04DA-77742F5FA653-E1AB24");
 
-                Console.WriteLine(transaction);
-                Console.ReadKey();
+               
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
+           
 
                 foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
+                  
                 }
-                Console.ReadKey();
+             
             }
         }
     }

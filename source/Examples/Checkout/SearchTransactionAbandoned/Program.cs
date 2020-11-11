@@ -58,28 +58,26 @@ namespace SearchTransactionAbandoned
 
                 if (result.Transactions.Count <= 0)
                 {
-                    Console.WriteLine("Nenhuma transação abandonada");
+                    e("Nenhuma transação abandonada");
                 }
 
                 foreach (TransactionSummary transaction in result.Transactions)
                 {
-                    Console.WriteLine("Começando listagem de transações abandonadas - \n");
-                    Console.WriteLine(transaction.ToString());
-                    Console.WriteLine(" - Terminando listagem de transações abandonadas");
+
                 }
 
-                Console.ReadKey();
+        
 
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
+              
 
                 foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
+                  
                 }
-                Console.ReadKey();
+     
             }
         }
     }

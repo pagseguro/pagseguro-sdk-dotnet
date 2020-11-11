@@ -41,18 +41,17 @@ namespace ReceiveAuthorizationNotification
                 // You receive this notification code through a post on the URL that you specify
                 AuthorizationSummary authorization = NotificationService.CheckAuthorization(credentials, nofiticationCode);
 
-                Console.WriteLine(authorization);
-                Console.ReadKey();
+          
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
+             
 
                 foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
+                  
                 }
-                Console.ReadKey();
+                
             }
         }
     }

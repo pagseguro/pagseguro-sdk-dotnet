@@ -37,19 +37,17 @@ namespace SearchTransactionByCode
                 // TODO: Substitute the code below with a valid transaction code for your transaction
                 Transaction transaction = TransactionSearchService.SearchByCode(credentials, "59A13D84-52DA-4AB8-B365-1E7D893052B0");
 
-                Console.WriteLine(transaction);
-                Console.ReadKey();
 
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
+           
 
                 foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
+    
                 }
-                Console.ReadKey();
+           
             }
         }
     }

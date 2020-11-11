@@ -82,18 +82,15 @@ namespace CreatePreApproval
 
                 Uri preApprovalRedirectUri = preApproval.Register(credentials);
 
-                Console.WriteLine("URL do pagamento : " + preApprovalRedirectUri);
-                Console.ReadKey();
+ 
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
-
                 foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
+                 
                 }
-                Console.ReadKey();
+           
             }
         }
     }

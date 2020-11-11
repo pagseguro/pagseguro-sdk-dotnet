@@ -88,8 +88,7 @@ namespace Uol.PagSeguro.Resources
             }
             catch (FormatException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
-                Console.ReadKey();
+    
             }
         }
     }

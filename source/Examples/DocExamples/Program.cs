@@ -39,12 +39,10 @@ namespace DocExamples
             paymentRequest.Sender = sender;
             if (paymentRequest.Sender != null)
             {
-                Console.WriteLine(paymentRequest.Sender.Name);
-                Console.WriteLine(paymentRequest.Sender.Email);
+
                 if (paymentRequest.Sender.Phone != null)
                 {
-                    Console.WriteLine(paymentRequest.Sender.Phone.AreaCode);
-                    Console.WriteLine(paymentRequest.Sender.Phone.Number);
+
                 }
             }
 
@@ -161,8 +159,7 @@ namespace DocExamples
             Transaction transaction =
                 TransactionSearchService.SearchByCode(credentials, transactionCode);
 
-            Console.WriteLine(transaction.TransactionStatus);
-            Console.WriteLine(transaction.GrossAmount);
+
         }
 
         static void PaymentMethodExample(Transaction transaction)
@@ -224,12 +221,10 @@ namespace DocExamples
         {
             if (transaction.Shipping != null)
             {
-                Console.WriteLine(transaction.Shipping.ShippingType);
-                Console.WriteLine(transaction.Shipping.Cost);
+
                 if (transaction.Shipping.Address != null)
                 {
-                    Console.WriteLine(transaction.Shipping.Address.Street);
-                    Console.WriteLine(transaction.Shipping.Address.Number);
+
                 }
             }
         }
@@ -252,10 +247,7 @@ namespace DocExamples
         {
             foreach (Item item in paymentRequest.Items)
             {
-                Console.WriteLine(item.Id);
-                Console.WriteLine(item.Description);
-                Console.WriteLine(item.Quantity);
-                Console.WriteLine(item.Amount);
+
             }
         }
 
@@ -278,7 +270,7 @@ namespace DocExamples
                     transactionCode);
 
             // Imprime o status da transação
-            Console.WriteLine(transaction.TransactionStatus);
+      
         }
 
         static void SearchByDateExample()

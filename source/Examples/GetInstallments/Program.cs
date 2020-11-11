@@ -43,24 +43,19 @@ namespace GetInstallments
 
                 Installments result = InstallmentService.GetInstallments(credentials, amount, creditCardBrand, maxInstallmentNoInterest);
 
-                Console.WriteLine("Começando listagem de parcelas - \n");
+       
                 foreach (Installment installment in result.Get())
                 { 
-                    Console.WriteLine(installment.ToString());
                 }
-                Console.WriteLine(" - Terminando listagem de parcelas ");
-
-                Console.ReadKey();
+               
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
+              
 
                 foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
                 }
-                Console.ReadKey();
 
             }
         }

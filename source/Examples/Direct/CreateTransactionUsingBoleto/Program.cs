@@ -84,17 +84,16 @@ namespace CreateTransactionUsingBoleto
             {
                 AccountCredentials credentials = PagSeguroConfiguration.GetAccountCredentials(isSandbox);
                 Transaction result = TransactionService.CreateCheckout(credentials, checkout);
-                Console.WriteLine(result);
-                Console.ReadKey();
+
             }
             catch (PagSeguroServiceException exception)
             {
-                Console.WriteLine(exception.Message + "\n");
+      
                 foreach (ServiceError element in exception.Errors)
                 {
-                    Console.WriteLine(element + "\n");
+     
                 }
-                Console.ReadKey();
+        
             }
         }
     }
