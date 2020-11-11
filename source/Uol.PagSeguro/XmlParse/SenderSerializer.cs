@@ -70,7 +70,8 @@ namespace Uol.PagSeguro.XmlParse
                             break;
                         default:
                             XMLParserUtils.SkipElement(reader);
-                            break;
+                            throw new InvalidOperationException("Unexpected value NodeType = " + reader.Name);    
+                            
                     }
                 }
                 else

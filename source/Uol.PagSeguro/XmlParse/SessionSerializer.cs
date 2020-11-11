@@ -42,6 +42,8 @@ namespace Uol.PagSeguro.XmlParse
                     case XmlNodeType.Text:
                         session.id = reader.Value;
                         break;
+                    default:
+                        throw new InvalidOperationException("Unexpected value NodeType = " + reader.NodeType);    
                 }
             }
         }

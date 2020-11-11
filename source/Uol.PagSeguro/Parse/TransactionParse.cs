@@ -235,6 +235,8 @@ namespace Uol.PagSeguro.Parse
 
                         if (creditcard.Billing.Address.Country)
                             data["billingAddressCountry"] = creditcard.Billing.Address.Country;
+                         default:
+                         throw new InvalidOperationException("Unexpected value foo = " + foo);    
                     }
 
                     // holder

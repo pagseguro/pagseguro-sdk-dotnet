@@ -61,6 +61,8 @@ namespace Uol.PagSeguro.XmlParse
                         case SerializerHelper.Date:
                             authorization.Date = reader.ReadElementContentAsDateTime();
                             break;
+                        default:
+                            throw new InvalidOperationException("Unexpected value foo = " + foo);
                     }
                 }
                 else
