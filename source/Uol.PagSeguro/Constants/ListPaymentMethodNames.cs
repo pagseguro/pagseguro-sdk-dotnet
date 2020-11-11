@@ -23,52 +23,52 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Bradesco debit
         /// </summary>
-        public const string DebitoBradesco = "DEBITO_BRADESCO";
+        public static  string DebitoBradesco = "DEBITO_BRADESCO";
 
         /// <summary>
         /// Itaú debit
         /// </summary>
-        public const string DebitoItau = "DEBITO_ITAU";
+        public static  string DebitoItau = "DEBITO_ITAU";
 
         /// <summary>
         /// Unibanco debit
         /// </summary>
-        public const string DebitoUnibanco = "DEBITO_UNIBANCO";
+        public static string DebitoUnibanco = "DEBITO_UNIBANCO";
 
         /// <summary>
         /// Banco do Brasil debit
         /// </summary>
-        public const string DebitoBancoDoBrasil = "DEBITO_BANCO_BRASIL";
+        public static string DebitoBancoDoBrasil = "DEBITO_BANCO_BRASIL";
 
         /// <summary>
         /// Banrisul debit
         /// </summary>
-        public const string DebitoBanrisul = "DEBITO_BANRISUL";
+        public static string DebitoBanrisul = "DEBITO_BANRISUL";
 
         /// <summary>
         /// HSBC bank debit
         /// </summary>
-        public const string DebitoHSBC = "DEBITO_HSBC";
+        public static string DebitoHSBC = "DEBITO_HSBC";
 
         /// <summary>
         /// Boleto
         /// </summary>
-        public const string Boleto = "BOLETO";
+        public static string Boleto = "BOLETO";
         
         /// <summary>
         /// Visa brand
         /// </summary>
-        public const string Visa = "VISA";
+        public static string Visa = "VISA";
         
         /// <summary>
         /// Mastercard brand
         /// </summary>
-        public const string Mastercard = "MASTERCARD";
+        public static string Mastercard = "MASTERCARD";
         
         /// <summary>
         /// Amex brand
         /// </summary>
-        public const string Amex = "AMEX";
+        public static string Amex = "AMEX";
         
         /// <summary>
         /// Diners brand
@@ -78,12 +78,12 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Hipercard brand
         /// </summary>
-        public const string Hipercard = "HIPERCARD";
+        public static string Hipercard = "HIPERCARD";
         
         /// <summary>
         /// Aura brand
         /// </summary>
-        public const string Aura = "AURA";
+        public static string Aura = "AURA";
 
         /// <summary>
         /// Elo brand
@@ -93,66 +93,66 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Aura brand
         /// </summary>
-        public const string Plenocard = "PLENOCARD";
+        public static string Plenocard = "PLENOCARD";
 
         /// <summary>
         /// Personalcard brand
         /// </summary>
-        public const string Personalcard = "PERSONALCARD";
+        public static string Personalcard = "PERSONALCARD";
 
         /// <summary>
         /// JCB brand
         /// </summary>
-        public const string JCB = "JCB";
+        public static string JCB = "JCB";
 
         /// <summary>
         /// Discover brand
         /// </summary>
-        public const string Discover = "DISCOVER";
+        public static string Discover = "DISCOVER";
 
         /// <summary>
         /// Brasilcard brand
         /// </summary>
-        public const string Brasilcard = "BRASILCARD";
+        public static string Brasilcard = "BRASILCARD";
 
         /// <summary>
         /// FortBrasil brand
         /// </summary>
-        public const string FortBrasil = "FORTBRASIL";
+        public static string FortBrasil = "FORTBRASIL";
 
         /// <summary>
         /// Cardban brand
         /// </summary>
-        public const string Cardban = "CARDBAN";
+        public static string Cardban = "CARDBAN";
 
         /// <summary>
         /// Valecard brand
         /// </summary>
-        public const string Valecard = "VALECARD";
+        public static string Valecard = "VALECARD";
 
         /// <summary>
         /// Cabal brand
         /// </summary>
-        public const string Cabal = "CABAL";
+        public static string Cabal = "CABAL";
 
         /// <summary>
         /// Mais brand
         /// </summary>
-        public const string Mais = "MAIS";
+        public static string Mais = "MAIS";
 
         /// <summary>
         /// AVista brand
         /// </summary>
-        public const string AVista = "AVISTA";
+        public static string AVista = "AVISTA";
 
         /// <summary>
         /// Grandcard brand
         /// </summary>
-        public const string Grandcard = "GRANDCARD";
+        public static string Grandcard = "GRANDCARD";
 
         /// <summary>
         /// Sorocred brand
         /// </summary>
-        public const string Sorocred = "SOROCRED";
+        public static string Sorocred = "SOROCRED";
     }
 }
