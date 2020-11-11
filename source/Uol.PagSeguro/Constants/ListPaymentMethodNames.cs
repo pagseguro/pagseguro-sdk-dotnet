@@ -23,136 +23,191 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Bradesco debit
         /// </summary>
-        public static  string DebitoBradesco = "DEBITO_BRADESCO";
-
+        public static  string DebitoBradesco
+    {
+      get { return "DEBITO_BRADESCO";}
+    }
         /// <summary>
         /// Itaú debit
         /// </summary>
-        public static  string DebitoItau = "DEBITO_ITAU";
-
+        public static  string DebitoItau
+    {
+      get { return "DEBITO_ITAU"; }
+    }
         /// <summary>
         /// Unibanco debit
         /// </summary>
-        public static string DebitoUnibanco = "DEBITO_UNIBANCO";
-
+        public static string DebitoUnibanco 
+    {
+      get { return "DEBITO_UNIBANCO"; }
+    }
         /// <summary>
         /// Banco do Brasil debit
         /// </summary>
-        public static string DebitoBancoDoBrasil = "DEBITO_BANCO_BRASIL";
-
+        public static string DebitoBancoDoBrasil
+    {
+      get { return "DEBITO_BANCO_BRASIL"; }
+    }
         /// <summary>
         /// Banrisul debit
         /// </summary>
-        public static string DebitoBanrisul = "DEBITO_BANRISUL";
-
+        public static string DebitoBanrisul
+    {
+      get { return "DEBITO_BANRISUL"; }
+    }
         /// <summary>
         /// HSBC bank debit
         /// </summary>
-        public static string DebitoHSBC = "DEBITO_HSBC";
-
+        public static string DebitoHSBC
+    {
+      get { return "DEBITO_HSBC"; }
+    }
         /// <summary>
         /// Boleto
         /// </summary>
-        public static string Boleto = "BOLETO";
-        
+        public static string Boleto
+     {
+      get { return "BOLETO"; }
+    }       
         /// <summary>
         /// Visa brand
         /// </summary>
-        public static string Visa = "VISA";
-        
+        public static string Visa
+    {
+      get { return "VISA"; }
+    }        
         /// <summary>
         /// Mastercard brand
         /// </summary>
-        public static string Mastercard = "MASTERCARD";
-        
+        public static string Mastercard
+     {
+      get { return "MASTERCARD"; }
+    }       
         /// <summary>
         /// Amex brand
         /// </summary>
-        public static string Amex = "AMEX";
-        
+        public static string Amex
+     {
+      get { return "AMEX"; }
+    }       
         /// <summary>
         /// Diners brand
         /// </summary>
-        public const string Diners = "DINERS";
-        
+        public const string Diners
+    {
+      get { return "DINERS"; }
+    }        
         /// <summary>
         /// Hipercard brand
         /// </summary>
-        public static string Hipercard = "HIPERCARD";
-        
+        public static string Hipercard
+    {
+      get { return "HIPERCARD"; }
+    }        
         /// <summary>
         /// Aura brand
         /// </summary>
-        public static string Aura = "AURA";
-
+        public static string Aura
+    {
+      get { return "AURA"; }
+    }
         /// <summary>
         /// Elo brand
         /// </summary>
-        public const string Elo = "ELO";
-
+        public const string Elo
+    {
+      get { return "ELO"; }
+    }
         /// <summary>
         /// Aura brand
         /// </summary>
-        public static string Plenocard = "PLENOCARD";
-
+        public static string Plenocard
+    {
+      get { return "PLENOCARD"; }
+    }
         /// <summary>
         /// Personalcard brand
         /// </summary>
-        public static string Personalcard = "PERSONALCARD";
-
+        public static string Personalcard
+    {
+      get { return "PERSONALCARD"; }
+    }
         /// <summary>
         /// JCB brand
         /// </summary>
-        public static string JCB = "JCB";
-
+        public static string JCB
+    {
+      get { return "JCB"; }
+    }
         /// <summary>
         /// Discover brand
         /// </summary>
-        public static string Discover = "DISCOVER";
-
+        public static string Discover
+    {
+      get { return "DISCOVER"; }
+    }
         /// <summary>
         /// Brasilcard brand
         /// </summary>
-        public static string Brasilcard = "BRASILCARD";
-
+        public static string Brasilcard
+    {
+      get { return "BRASILCARD"; }
+    }
         /// <summary>
         /// FortBrasil brand
         /// </summary>
-        public static string FortBrasil = "FORTBRASIL";
-
+        public static string FortBrasil
+    {
+      get { return "FORTBRASIL"; }
+    }
         /// <summary>
         /// Cardban brand
         /// </summary>
-        public static string Cardban = "CARDBAN";
-
+        public static string Cardban
+    {
+      get { return "CARDBAN"; }
+    }
         /// <summary>
         /// Valecard brand
         /// </summary>
-        public static string Valecard = "VALECARD";
-
+        public static string Valecard
+    {
+      get { return "VALECARD"; }
+    }
         /// <summary>
         /// Cabal brand
         /// </summary>
-        public static string Cabal = "CABAL";
-
+        public static string Cabal
+    {
+      get { return "CABAL"; }
+    }
         /// <summary>
         /// Mais brand
         /// </summary>
-        public static string Mais = "MAIS";
-
+        public static string Mais
+    {
+      get { return "MAIS"; }
+    }
         /// <summary>
         /// AVista brand
         /// </summary>
-        public static string AVista = "AVISTA";
-
+        public static string AVista
+    {
+      get { return "AVISTA"; }
+    }
         /// <summary>
         /// Grandcard brand
         /// </summary>
-        public static string Grandcard = "GRANDCARD";
-
+        public static string Grandcard
+    {
+      get { return "GRANDCARD"; }
+    }
         /// <summary>
         /// Sorocred brand
         /// </summary>
-        public static string Sorocred = "SOROCRED";
+        public static string Sorocred
+    {
+      get { return "SOROCRED"; }
+    }
     }
 }

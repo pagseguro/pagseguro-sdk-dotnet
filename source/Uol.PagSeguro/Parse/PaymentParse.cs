@@ -35,30 +35,30 @@ namespace Uol.PagSeguro.Parse
             IDictionary<string, string> data = new Dictionary<string, string>();
 
             // reference
-            if (payment.Reference != null)
+            if (payment.Reference)
                 data["reference"] = payment.Reference;
 
             // sender
-            if (payment.Sender != null)
+            if (payment.Sender)
             {
-                if (payment.Sender.Name != null)
+                if (payment.Sender.Name)
                     data["senderName"] = payment.Sender.Name;
 
-                if (payment.Sender.Email != null)
+                if (payment.Sender.Email)
                     data["senderEmail"] = payment.Sender.Email;
 
                 // phone
-                if (payment.Sender.Phone != null)
+                if (payment.Sender.Phone)
                 {
-                    if (payment.Sender.Phone.AreaCode != null)
+                    if (payment.Sender.Phone.AreaCode)
                         data["senderAreaCode"] = payment.Sender.Phone.AreaCode;
 
-                    if (payment.Sender.Phone.Number != null)
+                    if (payment.Sender.Phone.Number)
                         data["senderPhone"] = payment.Sender.Phone.Number;
                 }
 
                 // documents
-                if (payment.Sender.Documents != null)
+                if (payment.Sender.Documents)
                 {
                     var documents = payment.Sender.Documents;
                     if (documents.Count == 1)
@@ -78,7 +78,7 @@ namespace Uol.PagSeguro.Parse
             }
 
             // currency
-            if (payment.Currency != null)
+            if (payment.Currency)
                 data["currency"] = payment.Currency;
 
             // items
@@ -90,16 +90,16 @@ namespace Uol.PagSeguro.Parse
                 {
                     i++;
 
-                    if (item.Id != null)
+                    if (item.Id)
                         data["itemId" + i] = item.Id;
 
-                    if (item.Description != null)
+                    if (item.Description)
                         data["itemDescription" + i] = item.Description;
 
                     data["itemQuantity" + i] = item.Quantity.ToString();
                     data["itemAmount" + i] = PagSeguroUtil.DecimalFormat(item.Amount);
 
-                    if (item.Weight != null)
+                    if (item.Weight)
                         data["itemWeight" + i] = item.Weight.ToString();
 
                     if (item.ShippingCost.HasValue)
@@ -108,7 +108,7 @@ namespace Uol.PagSeguro.Parse
             }
 
             //preApproval
-            if (payment.PreApproval != null)
+            if (payment.PreApproval)
             {
                 data["preApprovalCharge"] = payment.PreApproval.Charge;
                 data["preApprovalName"] = payment.PreApproval.Name;
@@ -141,7 +141,7 @@ namespace Uol.PagSeguro.Parse
             }
 
             //preApproval payment
-            if (payment.PreApprovalCode != null)
+            if (payment.PreApprovalCode)
                 data["preApprovalCode"] = payment.PreApprovalCode;
 
             // extraAmount
@@ -149,7 +149,7 @@ namespace Uol.PagSeguro.Parse
                 data["extraAmount"] = PagSeguroUtil.DecimalFormat(payment.ExtraAmount.Value);
 
             // shipping
-            if (payment.Shipping != null)
+            if (payment.Shipping)
             {
                 if (payment.Shipping.ShippingType.HasValue)
                     data["shippingType"] = payment.Shipping.ShippingType.Value.ToString();
@@ -158,48 +158,48 @@ namespace Uol.PagSeguro.Parse
                     data["shippingCost"] = PagSeguroUtil.DecimalFormat(payment.Shipping.Cost.Value);
 
                 // address
-                if (payment.Shipping.Address != null)
+                if (payment.Shipping.Address)
                 {
-                    if (payment.Shipping.Address.Street != null)
+                    if (payment.Shipping.Address.Street)
                         data["shippingAddressStreet"] = payment.Shipping.Address.Street;
 
-                    if (payment.Shipping.Address.Number != null)
+                    if (payment.Shipping.Address.Number)
                         data["shippingAddressNumber"] = payment.Shipping.Address.Number;
 
-                    if (payment.Shipping.Address.Complement != null)
+                    if (payment.Shipping.Address.Complement)
                         data["shippingAddressComplement"] = payment.Shipping.Address.Complement;
 
-                    if (payment.Shipping.Address.City != null)
+                    if (payment.Shipping.Address.City)
                         data["shippingAddressCity"] = payment.Shipping.Address.City;
 
-                    if (payment.Shipping.Address.State != null)
+                    if (payment.Shipping.Address.State)
                         data["shippingAddressState"] = payment.Shipping.Address.State;
 
-                    if (payment.Shipping.Address.District != null)
+                    if (payment.Shipping.Address.District)
                         data["shippingAddressDistrict"] = payment.Shipping.Address.District;
 
-                    if (payment.Shipping.Address.PostalCode != null)
+                    if (payment.Shipping.Address.PostalCode)
                         data["shippingAddressPostalCode"] = payment.Shipping.Address.PostalCode;
 
-                    if (payment.Shipping.Address.Country != null)
+                    if (payment.Shipping.Address.Country)
                         data["shippingAddressCountry"] = payment.Shipping.Address.Country;
                 }
             }
 
             // maxAge
-            if (payment.MaxAge != null)
+            if (payment.MaxAge)
                 data["maxAge"] = payment.MaxAge.ToString();
 
             // maxUses
-            if (payment.MaxUses != null)
+            if (payment.MaxUses)
                 data["maxUses"] = payment.MaxUses.ToString();
 
             // redirectURL
-            if (payment.RedirectUri != null)
+            if (payment.RedirectUri)
                 data["redirectURL"] = payment.RedirectUri.ToString();
 
             // notificationURL
-            if (payment.NotificationUrl != null)
+            if (payment.NotificationUrl)
                 data["notificationURL"] = payment.NotificationUrl;
 
             // metadata
@@ -216,7 +216,7 @@ namespace Uol.PagSeguro.Parse
                     data["metadataItemKey" + i] = item.Key;
                     data["metadataItemValue" + i] = item.Value;
 
-                    if (item.Group != null)
+                    if (item.Group)
                         data["metadataItemGroup" + i] = item.Group.ToString();
                 }
             }
@@ -230,7 +230,7 @@ namespace Uol.PagSeguro.Parse
                     if (PagSeguroUtil.IsEmpty(item.Key) || PagSeguroUtil.IsEmpty(item.Value))
                         continue;
 
-                    if (item.Group != null)
+                    if (item.Group)
                         data[item.Key + "" + item.Group] = item.Value;
                     else
                         data[item.Key] = item.Value;
@@ -270,7 +270,7 @@ namespace Uol.PagSeguro.Parse
 
             foreach (var item in config)
             {
-                if (item.GetType() == typeof(AcceptPaymentMethod))
+                if (item.GetType() == typeof(AcceptPaymentMethod))  
                 {
                     if (!acceptGroupList.Contains(item.Group))
                         acceptGroupList.Add(item.Group);
