@@ -62,7 +62,7 @@ namespace Uol.PagSeguro.XmlParse
                             authorization.Date = reader.ReadElementContentAsDateTime();
                             break;
                         default:
-                            throw new InvalidOperationException("Unexpected value foo = " + foo);
+                            throw new InvalidOperationException("Unexpected value");
                     }
                 }
                 else

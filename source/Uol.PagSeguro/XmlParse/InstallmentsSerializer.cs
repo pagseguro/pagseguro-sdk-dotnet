@@ -51,7 +51,7 @@ namespace Uol.PagSeguro.XmlParse
                         
                         default:
                             XMLParserUtils.SkipElement(reader);
-                            break;
+                            throw new InvalidOperationException("Unexpected value");
                     }
                 }
                 else
