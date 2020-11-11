@@ -47,6 +47,9 @@ namespace Uol.PagSeguro.XmlParse
                     case XmlNodeType.Text:
                         result.Response = reader.Value;
                         break;
+                    default:
+                        throw new InvalidOperationException("Unexpected value");   
+
                 }
             }    
         }

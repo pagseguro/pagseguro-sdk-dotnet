@@ -235,8 +235,7 @@ namespace Uol.PagSeguro.Parse
 
                         if (creditcard.Billing.Address.Country)
                             data["billingAddressCountry"] = creditcard.Billing.Address.Country;
-                         default:
-                         throw new InvalidOperationException("Unexpected value foo = " + foo);    
+                             
                     }
 
                     // holder
@@ -287,6 +286,9 @@ namespace Uol.PagSeguro.Parse
                         data["paymentMethod"] = creditcard.PaymentMethod;
 
                     break;
+
+                default:
+                throw new InvalidOperationException("Unexpected value");    
 
                 //Verify if exists the boleto checkout data
                 case BoletoCheckout _:
