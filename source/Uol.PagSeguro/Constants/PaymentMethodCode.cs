@@ -47,12 +47,12 @@ namespace Uol.PagSeguro.Domain
         /// <summary>
         /// Hipercard
         /// </summary>
-        private  static  int Hipercard = 105;
+        private  readonly  int Hipercard = 105;
 
         /// <summary>
         /// Aura
         /// </summary>
-        private  static  int Aura = 106;
+        private  readonly  int Aura = 106;
 
         /// <summary>
         /// Elo
