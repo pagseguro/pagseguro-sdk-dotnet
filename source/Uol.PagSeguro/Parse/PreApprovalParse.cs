@@ -34,91 +34,91 @@ namespace Uol.PagSeguro.Parse
             IDictionary<string, string> data = new Dictionary<string, string>();
 
             // reference
-            if (preApproval.Reference != null)
+            if (preApproval.Reference)
                 data["reference"] = preApproval.Reference;
 
             // sender
-            if (preApproval.Sender != null)
+            if (preApproval.Sender)
             {
-                if (preApproval.Sender.Name != null)
+                if (preApproval.Sender.Name)
                     data["senderName"] = preApproval.Sender.Name;
 
-                if (preApproval.Sender.Email != null)
+                if (preApproval.Sender.Email)
                     data["senderEmail"] = preApproval.Sender.Email;
 
                 // phone
-                if (preApproval.Sender.Phone != null)
+                if (preApproval.Sender.Phone)
                 {
-                    if (preApproval.Sender.Phone.AreaCode != null)
+                    if (preApproval.Sender.Phone.AreaCode)
                         data["senderAreaCode"] = preApproval.Sender.Phone.AreaCode;
 
-                    if (preApproval.Sender.Phone.Number != null)
+                    if (preApproval.Sender.Phone.Number)
                         data["senderPhone"] = preApproval.Sender.Phone.Number;
                 }
 
                 // documents
-                if (preApproval.Sender.Documents != null)
+                if (preApproval.Sender.Documents)
                 {
                     var documents = preApproval.Sender.Documents;
                     if (documents.Count == 1)
                     {
                         foreach (var document in documents)
                         {
-                            if (document != null)
+                            if (document)
                                 data["senderCPF"] = document.Value;
                         }
                     }
                 }
 
                 // address
-                if (preApproval.Sender.Address != null)
+                if (preApproval.Sender.Address)
                 {
                     var address = preApproval.Sender.Address;
                     
                     // country
-                    if (address.Country != null)
+                    if (address.Country)
                     {
                         data["senderAddressCountry"] = address.Country;
                     }
 
                     // state
-                    if (address.State != null)
+                    if (address.State)
                     {
                         data["senderAddressState"] = address.State;
                     }
 
                     // city
-                    if (address.City != null)
+                    if (address.City)
                     {
                         data["senderAddressCity"] = address.City;
                     }
 
                     // PostalCode
-                    if (address.PostalCode != null)
+                    if (address.PostalCode)
                     {
                         data["senderAddressPostalCode"] = address.PostalCode;
                     }
 
                     // PostalCode
-                    if (address.District != null)
+                    if (address.District)
                     {
                         data["senderAddressDistrict"] = address.District;
                     }
 
                     // Complement
-                    if (address.Complement != null)
+                    if (address.Complement)
                     {
                         data["senderAddressComplement"] = address.Complement;
                     }
 
                     // Address Number
-                    if (address.Number != null)
+                    if (address.Number)
                     {
                         data["senderAddressNumber"] = address.Number;
                     }
 
                     // Street
-                    if (address.Street != null)
+                    if (address.Street)
                     {
                         data["senderAddressStreet"] = address.Street;
                     }
@@ -155,19 +155,19 @@ namespace Uol.PagSeguro.Parse
             }
 
             // currency
-            if (preApproval.Currency != null)
+            if (preApproval.Currency)
                 data["currency"] = preApproval.Currency;
 
             // redirectURL
-            if (preApproval.RedirectUri != null)
+            if (preApproval.RedirectUri)
                 data["redirectURL"] = preApproval.RedirectUri.ToString();
 
             // redirectURL
-            if (preApproval.ReviewUri != null)
+            if (preApproval.ReviewUri)
                 data["reviewUrl"] = preApproval.ReviewUri.ToString();
 
             // notificationURL
-            if (preApproval.NotificationURL != null)
+            if (preApproval.NotificationURL)
                 data["notificationURL"] = preApproval.NotificationURL;
 
             // metadata
@@ -184,7 +184,7 @@ namespace Uol.PagSeguro.Parse
                     data["metadataItemKey" + i] = item.Key;
                     data["metadataItemValue" + i] = item.Value;
 
-                    if (item.Group != null)
+                    if (item.Group)
                         data["metadataItemGroup" + i] = item.Group.ToString();
                 }
             }
@@ -199,7 +199,7 @@ namespace Uol.PagSeguro.Parse
                 if (PagSeguroUtil.IsEmpty(item.Key) || PagSeguroUtil.IsEmpty(item.Value))
                     continue;
 
-                if (item.Group != null)
+                if (item.Group)
                     data[item.Key + "" + item.Group] = item.Value;
                 else
                     data[item.Key] = item.Value;

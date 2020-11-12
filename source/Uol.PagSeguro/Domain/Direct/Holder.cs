@@ -58,11 +58,11 @@ namespace Uol.PagSeguro.Domain.Direct
             {
                 this.Name = name;
             }
-            if (phone != null)
+            if (phone)
             {
                 this.Phone = phone;
             }
-            if (document != null)
+            if (document)
             {
                 this.Document = document;
             }

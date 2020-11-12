@@ -184,7 +184,7 @@ namespace Uol.PagSeguro.Parse
                     data["metadataItemKey" + i] = item.Key;
                     data["metadataItemValue" + i] = item.Value;
 
-                    if (item.Group != null)
+                    if (item.Group)
                         data["metadataItemGroup" + i] = item.Group.ToString();
                 }
             }
@@ -210,7 +210,7 @@ namespace Uol.PagSeguro.Parse
                 //Verify if exists the credit card checkout data
                 case CreditCardCheckout creditcard:
                     // billing address
-                    if (creditcard.Billing?.Address != null)
+                    if (creditcard.Billing?.Address)
                     {
                         if (creditcard.Billing.Address.Street)
                             data["billingAddressStreet"] = creditcard.Billing.Address.Street;
